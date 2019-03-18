@@ -9,33 +9,45 @@ CMD_SRCS += \
 ../tm4c123gh6pm.cmd 
 
 C_SRCS += \
-../altitude.c \
-../main.c \
-../tm4c123gh6pm_startup_ccs.c 
+../ADCdemo2.c \
+../buttons4.c \
+../circBufT.c \
+../tm4c123gh6pm_startup_ccs.c \
+../ustdlib.c 
 
 C_DEPS += \
-./altitude.d \
-./main.d \
-./tm4c123gh6pm_startup_ccs.d 
+./ADCdemo2.d \
+./buttons4.d \
+./circBufT.d \
+./tm4c123gh6pm_startup_ccs.d \
+./ustdlib.d 
 
 OBJS += \
-./altitude.obj \
-./main.obj \
-./tm4c123gh6pm_startup_ccs.obj 
+./ADCdemo2.obj \
+./buttons4.obj \
+./circBufT.obj \
+./tm4c123gh6pm_startup_ccs.obj \
+./ustdlib.obj 
 
 OBJS__QUOTED += \
-"altitude.obj" \
-"main.obj" \
-"tm4c123gh6pm_startup_ccs.obj" 
+"ADCdemo2.obj" \
+"buttons4.obj" \
+"circBufT.obj" \
+"tm4c123gh6pm_startup_ccs.obj" \
+"ustdlib.obj" 
 
 C_DEPS__QUOTED += \
-"altitude.d" \
-"main.d" \
-"tm4c123gh6pm_startup_ccs.d" 
+"ADCdemo2.d" \
+"buttons4.d" \
+"circBufT.d" \
+"tm4c123gh6pm_startup_ccs.d" \
+"ustdlib.d" 
 
 C_SRCS__QUOTED += \
-"../altitude.c" \
-"../main.c" \
-"../tm4c123gh6pm_startup_ccs.c" 
+"../ADCdemo2.c" \
+"../buttons4.c" \
+"../circBufT.c" \
+"../tm4c123gh6pm_startup_ccs.c" \
+"../ustdlib.c" 
 
 

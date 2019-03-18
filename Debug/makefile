@@ -10,9 +10,18 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./altitude.obj" \
-"./main.obj" \
+"./ADCdemo2.obj" \
+"./buttons4.obj" \
+"./circBufT.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
+"./ustdlib.obj" \
+"./OrbitOLED/OrbitOLEDInterface.obj" \
+"./OrbitOLED/lib_OrbitOled/ChrFont0.obj" \
+"./OrbitOLED/lib_OrbitOled/FillPat.obj" \
+"./OrbitOLED/lib_OrbitOled/OrbitOled.obj" \
+"./OrbitOLED/lib_OrbitOled/OrbitOledChar.obj" \
+"./OrbitOLED/lib_OrbitOled/OrbitOledGrph.obj" \
+"./OrbitOLED/lib_OrbitOled/delay.obj" \
 "../tm4c123gh6pm.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -26,7 +35,11 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include OrbitOLED/subdir_vars.mk
+-include OrbitOLED/lib_OrbitOled/subdir_vars.mk
 -include subdir_rules.mk
+-include OrbitOLED/subdir_rules.mk
+-include OrbitOLED/lib_OrbitOled/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -143,7 +156,7 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 ence361-project.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: ARM Linker'
-	"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.9.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"ence361-project.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.9.LTS/lib" -i"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.9.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="ence361-project_linkInfo.xml" --rom_model -o "ence361-project.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.9.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"ence361-project.map" --heap_size=1024 --stack_size=512 -i"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.9.LTS/lib" -i"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.9.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="ence361-project_linkInfo.xml" --rom_model -o "ence361-project.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
@@ -157,8 +170,8 @@ ence361-project.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "altitude.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "altitude.d" "main.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "ADCdemo2.obj" "buttons4.obj" "circBufT.obj" "tm4c123gh6pm_startup_ccs.obj" "ustdlib.obj" "OrbitOLED\OrbitOLEDInterface.obj" "OrbitOLED\lib_OrbitOled\ChrFont0.obj" "OrbitOLED\lib_OrbitOled\FillPat.obj" "OrbitOLED\lib_OrbitOled\OrbitOled.obj" "OrbitOLED\lib_OrbitOled\OrbitOledChar.obj" "OrbitOLED\lib_OrbitOled\OrbitOledGrph.obj" "OrbitOLED\lib_OrbitOled\delay.obj" 
+	-$(RM) "ADCdemo2.d" "buttons4.d" "circBufT.d" "tm4c123gh6pm_startup_ccs.d" "ustdlib.d" "OrbitOLED\OrbitOLEDInterface.d" "OrbitOLED\lib_OrbitOled\ChrFont0.d" "OrbitOLED\lib_OrbitOled\FillPat.d" "OrbitOLED\lib_OrbitOled\OrbitOled.d" "OrbitOLED\lib_OrbitOled\OrbitOledChar.d" "OrbitOLED\lib_OrbitOled\OrbitOledGrph.d" "OrbitOLED\lib_OrbitOled\delay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
