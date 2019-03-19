@@ -25,12 +25,11 @@
 #include "OrbitOLED/OrbitOLEDInterface.h"
 #include "buttons4.h"
 
-
 //*****************************************************************************
 // Constants
 //*****************************************************************************
-#define BUF_SIZE 100
-#define SAMPLE_RATE_HZ 100
+#define BUF_SIZE 5
+#define SAMPLE_RATE_HZ 50
 
 #define ALTITUDE_DELTA 993
 
@@ -288,13 +287,14 @@ main(void)
 	    } else {
 
 	        displayCalibration();
-	        if (g_ulSampCnt > BUF_SIZE) {
+	        if (g_ulSampCnt > BUF_SIZE * 15) {
+	            updateAltitude();
 	            calibrate();
 	        }
 
 	    }
 
-		SysCtlDelay (SysCtlClockGet() / 24);  // Update display at ~ 8 Hz
+		// SysCtlDelay (SysCtlClockGet() / 24);  // Update display at ~ 8 Hz
 	}
 }
 
