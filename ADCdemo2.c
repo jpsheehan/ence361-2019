@@ -1,10 +1,17 @@
 //*****************************************************************************
+// ENCE361-S1 Milestone 1
+// Group 7: Student I.D.s 53366509, 81163265, 95140875
 //
+// Code incudes various ECE sources including ADC demo, week2 lab,
+// circ buffer, buttons
+// Last modifed: 22_03_2019 by Group 7
+//
+// ***************************************************************************
+// Original code:
 // ADCdemo1.c - Simple interrupt driven program which samples with AIN0
 //
 // Author:  P.J. Bones	UCECE
 // Last modified:	8.2.2018
-//
 //*****************************************************************************
 // Based on the 'convert' series from 2016
 //*****************************************************************************
@@ -48,11 +55,11 @@ static uint32_t g_latestAltitudePercentage;
 static bool g_hasBeenCalibrated = false;
 
 static uint8_t g_displayState = DISPLAY_PERCENT_ADC;
+static bool g_togglePB3 = false;
 
 //*****************************************************************************
 //
 // The interrupt handler for the for SysTick interrupt.
-//
 //*****************************************************************************
 void
 SysTickIntHandler(void)
@@ -68,7 +75,6 @@ SysTickIntHandler(void)
 //
 // The handler for the ADC conversion complete interrupt.
 // Writes to the circular buffer.
-//
 //*****************************************************************************
 void
 ADCIntHandler(void)
@@ -230,6 +236,23 @@ void calibrate() {
     g_hasBeenCalibrated = true;
 }
 
+void togglePB3() {
+
+    g_togglePB3 = !g_togglePB3;
+
+    if (g_togglePB3) {
+        GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_PIN_3);
+    } else {
+        GPIOPinWrite(GPIO_PORTB_BASE,  GPIO_PIN_3, 0x00);
+    }
+}
+
+void initPB3() {
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+    GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_STRENGTH_4MA, GPIO_PIN_TYPE_STD_WPD);
+    GPIODirModeSet(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_DIR_MODE_OUT);
+}
+
 int
 main(void)
 {
@@ -239,6 +262,7 @@ main(void)
 	initDisplay ();
 	initCircBuf (&g_inBuffer, BUF_SIZE);
 	initButtons();
+	initPB3();
 
     //
     // Enable interrupts to the processor.
@@ -280,7 +304,7 @@ main(void)
                 displayPercentADC();
                 break;
             case DISPLAY_OFF:
-                displayNone();
+                 displayNone();
                 break;
             }
 
@@ -294,7 +318,7 @@ main(void)
 
 	    }
 
-		// SysCtlDelay (SysCtlClockGet() / 24);  // Update display at ~ 8 Hz
+	    togglePB3();
 	}
 }
 
