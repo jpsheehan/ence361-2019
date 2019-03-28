@@ -35,8 +35,8 @@
 //*****************************************************************************
 // Constants
 //*****************************************************************************
-#define BUF_SIZE 5
-#define SAMPLE_RATE_HZ 50
+#define BUF_SIZE 32
+#define SAMPLE_RATE_HZ 256
 
 #define ALTITUDE_DELTA 993
 
