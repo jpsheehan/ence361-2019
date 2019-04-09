@@ -47,6 +47,8 @@
 
 #define SECOND_DELAY_COEFFICIENT 3
 
+#define DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE false
+
 //*****************************************************************************
 // Global variables
 //*****************************************************************************
@@ -170,7 +172,6 @@ updateAltitude()
 {
     int32_t sum;
     uint16_t i;
-    int32_t altitudePercentage;
 
     sum = 0;
     for (i = 0; i < BUF_SIZE; i++)
@@ -199,16 +200,18 @@ void displayMeanADC() {
 
 void displayPercentADC() {
     char string[17];  // 16 characters across the display
-    uint8_t clampedAltitudePercentage = clamp(g_latestAltitudePercentage, 0, 100);
-
-    OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
-    OLEDStringDraw ("                ", 0, 1);
-    OLEDStringDraw ("                ", 0, 3);
-
 
     // Form a new string for the line.  The maximum width specified for the
     //  number field ensures it is displayed right justified.
+#if DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE
+    uint8_t clampedAltitudePercentage = clamp(g_latestAltitudePercentage, 0, 100);
     usnprintf (string, sizeof(string), "Altitude = %3d%%", clampedAltitudePercentage);
+#else
+    usnprintf (string, sizeof(string), "Altitude = %3d%%", g_latestAltitudePercentage);
+#endif
+    OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
+    OLEDStringDraw ("                ", 0, 1);
+    OLEDStringDraw ("                ", 0, 3);
 
     // Update line on display.
     OLEDStringDraw (string, 0, 2);
