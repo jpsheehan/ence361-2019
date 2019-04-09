@@ -105,6 +105,9 @@ initClock (void)
     // Set the clock rate to 20 MHz
     SysCtlClockSet (SYSCTL_SYSDIV_10 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
                    SYSCTL_XTAL_16MHZ);
+}
+
+void initSysTick(void) {
     //
     // Set up the period for the SysTick timer.  The SysTick timer period is
     // set as a function of the system clock.
@@ -262,6 +265,7 @@ main(void)
 {
 	
 	initClock ();
+	initSysTick();
 	initADC ();
 	initDisplay ();
 	initCircBuf (&g_inBuffer, BUF_SIZE);
