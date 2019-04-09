@@ -202,7 +202,7 @@ void displayMeanADC() {
 void displayPercentADC() {
     char string[17];  // 16 characters across the display
 
-    OLEDStringDraw ("Helicopter Ctrl", 0, 0);
+    OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
     OLEDStringDraw ("                ", 0, 1);
     OLEDStringDraw ("                ", 0, 3);
 
@@ -224,10 +224,10 @@ void displayNone() {
 }
 
 void displayCalibration() {
-    OLEDStringDraw ("Helicopter Ctrl", 0, 0);
-    OLEDStringDraw ("                ", 0, 1);
-    OLEDStringDraw ("Please wait for", 0, 2);
-    OLEDStringDraw ("calibration...", 0, 3);
+    OLEDStringDraw ("ENCE361", 9, 0);
+    OLEDStringDraw ("mfb31", 0, 1);
+    OLEDStringDraw ("wgc22", 0, 2);
+    OLEDStringDraw ("jps111", 0, 3);
 }
 
 void calibrate() {
@@ -320,8 +320,8 @@ main(void)
 
 	        displayCalibration();
 
-	        // wait a 1 second
-	        waitForSeconds(1);
+	        // wait a 3 seconds
+	        waitForSeconds(3);
 
 	        // check that we have filled the buffer with data
 	        if (g_ulSampCnt > BUF_SIZE) {
