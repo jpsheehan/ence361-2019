@@ -31,6 +31,7 @@
 #include "circBufT.h"
 #include "OrbitOLED/OrbitOLEDInterface.h"
 #include "buttons4.h"
+#include "utils.h"
 
 //*****************************************************************************
 // Constants
@@ -43,6 +44,8 @@
 #define DISPLAY_OFF 0
 #define DISPLAY_PERCENT_ADC 1
 #define DISPLAY_MEAN_ADC 2
+
+#define SECOND_DELAY_COEFFICIENT 3
 
 //*****************************************************************************
 // Global variables
@@ -172,15 +175,8 @@ updateAltitude()
     g_latestAltitudeMean = (2 * sum + BUF_SIZE) / (2 * BUF_SIZE);
 
     altitudePercentage = ((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALTITUDE_DELTA);
-    if (altitudePercentage < 0) {
-        altitudePercentage = 0;
-    } else {
-        if (altitudePercentage > 100) {
-            altitudePercentage = 100;
-        }
-    }
 
-    g_latestAltitudePercentage = (uint8_t)altitudePercentage;
+    g_latestAltitudePercentage = (uint32_t)clamp(altitudePercentage, 0, 100);
 }
 
 void displayMeanADC() {
@@ -253,6 +249,14 @@ void initPB3() {
     GPIODirModeSet(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_DIR_MODE_OUT);
 }
 
+/**
+ * Does what it says on the tin.
+ */
+void waitForSeconds(uint32_t delay_s)
+{
+    SysCtlDelay((SysCtlClockGet() * delay_s) / SECOND_DELAY_COEFFICIENT);
+}
+
 int
 main(void)
 {
@@ -312,8 +316,8 @@ main(void)
 
 	        displayCalibration();
 
-	        // wait a bit
-	        SysCtlDelay (SysCtlClockGet());
+	        // wait a 1 second
+	        waitForSeconds(1);
 
 	        // check that we have filled the buffer with data
 	        if (g_ulSampCnt > BUF_SIZE) {
