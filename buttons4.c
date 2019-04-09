@@ -124,8 +124,8 @@ updateButtons (void)
 // checkButton: Function returns the new button logical state if the button
 // logical state (PUSHED or RELEASED) has changed since the last call,
 // otherwise returns NO_CHANGE.
-uint8_t
-checkButton (uint8_t butName)
+butStates_t
+checkButton (butNames_t butName)
 {
 	if (but_flag[butName])
 	{

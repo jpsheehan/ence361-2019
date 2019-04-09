@@ -278,7 +278,7 @@ main(void)
 
 	while (1)
 	{
-	    uint8_t butState;
+	    butStates_t butState;
 
 	    if (g_hasBeenCalibrated) {
 
