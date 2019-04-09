@@ -54,7 +54,7 @@ static circBuf_t g_inBuffer;		// Buffer of size BUF_SIZE integers (sample values
 static uint32_t g_ulSampCnt;	// Counter for the interrupts
 static uint16_t g_altitudeReference; // the reference value for calculating height.
 static uint32_t g_latestAltitudeMean; // the latest altitude value
-static uint32_t g_latestAltitudePercentage;
+static int32_t g_latestAltitudePercentage;
 static bool g_hasBeenCalibrated = false;
 
 static uint8_t g_displayState = DISPLAY_PERCENT_ADC;
@@ -177,9 +177,7 @@ updateAltitude()
         sum = sum + readCircBuf (&g_inBuffer);
     g_latestAltitudeMean = (2 * sum + BUF_SIZE) / (2 * BUF_SIZE);
 
-    altitudePercentage = ((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALTITUDE_DELTA);
-
-    g_latestAltitudePercentage = (uint32_t)clamp(altitudePercentage, 0, 100);
+    g_latestAltitudePercentage = ((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALTITUDE_DELTA);
 }
 
 void displayMeanADC() {
@@ -201,6 +199,7 @@ void displayMeanADC() {
 
 void displayPercentADC() {
     char string[17];  // 16 characters across the display
+    uint8_t clampedAltitudePercentage = clamp(g_latestAltitudePercentage, 0, 100);
 
     OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
     OLEDStringDraw ("                ", 0, 1);
@@ -209,7 +208,7 @@ void displayPercentADC() {
 
     // Form a new string for the line.  The maximum width specified for the
     //  number field ensures it is displayed right justified.
-    usnprintf (string, sizeof(string), "Altitude = %3d%%", g_latestAltitudePercentage);
+    usnprintf (string, sizeof(string), "Altitude = %3d%%", clampedAltitudePercentage);
 
     // Update line on display.
     OLEDStringDraw (string, 0, 2);
