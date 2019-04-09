@@ -1,3 +1,6 @@
 *.out
 *.obj
 *.d
+.jxbrowser-data/
+.metadata/
+RemoteSystemsTempFiles/
