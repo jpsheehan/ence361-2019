@@ -311,7 +311,12 @@ main(void)
 	    } else {
 
 	        displayCalibration();
-	        if (g_ulSampCnt > BUF_SIZE * 15) {
+
+	        // wait a bit
+	        SysCtlDelay (SysCtlClockGet());
+
+	        // check that we have filled the buffer with data
+	        if (g_ulSampCnt > BUF_SIZE) {
 	            updateAltitude();
 	            calibrate();
 	        }
