@@ -32,6 +32,7 @@
 #include "OrbitOLED/OrbitOLEDInterface.h"
 #include "buttons4.h"
 #include "utils.h"
+#include "quadrature.h"
 
 //*****************************************************************************
 // Constants
@@ -44,6 +45,7 @@
 #define DISPLAY_OFF 0
 #define DISPLAY_PERCENT_ADC 1
 #define DISPLAY_MEAN_ADC 2
+#define DISPLAY_YAW 3
 
 #define SECOND_DELAY_COEFFICIENT 3
 
@@ -59,7 +61,7 @@ static uint32_t g_latestAltitudeMean; // the latest altitude value
 static int32_t g_latestAltitudePercentage;
 static bool g_hasBeenCalibrated = false;
 
-static uint8_t g_displayState = DISPLAY_PERCENT_ADC;
+static uint8_t g_displayState = DISPLAY_YAW;
 static bool g_togglePB3 = false;
 
 //*****************************************************************************
@@ -160,6 +162,38 @@ initADC (void)
     ADCIntEnable(ADC0_BASE, 3);
 }
 
+void quadratureIntHandler(void)
+{
+    // read signal A
+    bool signal_a = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_0);
+
+    // read signal B
+    bool signal_b = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_1);
+
+    // update the quadrature stuff
+    updateQuadratureState(signal_a, signal_b);
+
+    GPIOIntClear(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1);
+}
+
+void initQuadraturePins(void)
+{
+    initQuadrature();
+
+    // setup the pins (PB0 is A, PB1 is B)
+
+    SysCtlPeripheralEnable (SYSCTL_PERIPH_GPIOB);
+    GPIOIntDisable(GPIO_PORTB_BASE, GPIO_INT_PIN_0 | GPIO_INT_PIN_1);
+    GPIOPinTypeGPIOInput (GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1);
+    GPIOPadConfigSet (GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1, GPIO_STRENGTH_2MA,
+       GPIO_PIN_TYPE_STD_WPD);
+    GPIOIntTypeSet(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1, GPIO_BOTH_EDGES);
+
+    GPIOIntRegister(GPIO_PORTB_BASE, quadratureIntHandler);
+    GPIOIntEnable(GPIO_PORTB_BASE, GPIO_INT_PIN_0 | GPIO_INT_PIN_1);
+
+}
+
 void
 initDisplay (void)
 {
@@ -218,6 +252,33 @@ void displayPercentADC() {
 
 }
 
+void displayYaw()
+{
+    QuadratureState state = getQuadratureState();
+
+    switch (state) {
+    case NOCHANGE:
+        OLEDStringDraw ("Dir: no change  ", 0, 2);
+        break;
+    case CLOCKWISE:
+        OLEDStringDraw ("Dir: clockwise  ", 0, 2);
+        break;
+    case ANTICLOCKWISE:
+        OLEDStringDraw ("Dir: c-clockwise", 0, 2);
+        break;
+    case INVALID:
+        OLEDStringDraw ("Dir: invalid    ", 0, 2);
+        break;
+    default:
+        OLEDStringDraw ("really invalid  ", 0, 2);
+        break;
+    }
+
+    OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
+    OLEDStringDraw ("                ", 0, 1);
+    OLEDStringDraw ("                ", 0, 3);
+}
+
 void displayNone() {
     OLEDStringDraw ("                ", 0, 0);
     OLEDStringDraw ("                ", 0, 1);
@@ -273,6 +334,7 @@ main(void)
 	initCircBuf (&g_inBuffer, BUF_SIZE);
 	initButtons();
 	initPB3();
+	initQuadraturePins();
 
     //
     // Enable interrupts to the processor.
@@ -299,7 +361,7 @@ main(void)
             // check for display state change
             butState = checkButton(UP);
             if (butState == PUSHED) {
-                if (++g_displayState > DISPLAY_MEAN_ADC) {
+                if (++g_displayState > DISPLAY_YAW) {
                     g_displayState = DISPLAY_OFF;
                 }
             }
@@ -315,6 +377,9 @@ main(void)
                 break;
             case DISPLAY_OFF:
                  displayNone();
+                break;
+            case DISPLAY_YAW:
+                displayYaw();
                 break;
             }
 
