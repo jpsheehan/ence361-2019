@@ -18,5 +18,7 @@ void initQuadrature(void);
 void updateQuadratureState(bool signal_a, bool signal_b);
 QuadratureState getQuadratureState(void);
 void quadratureIntHandler(void);
+uint8_t getSlotCount(void);
+uint16_t getYawDegrees(void);
 
 #endif /* QUADRATURE_H_ */
