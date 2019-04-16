@@ -27,12 +27,11 @@
 #include "driverlib/systick.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/debug.h"
-#include "utils/ustdlib.h"
+
 #include "circBufT.h"
-#include "OrbitOLED/OrbitOLEDInterface.h"
 #include "buttons4.h"
-#include "utils.h"
 #include "quadrature.h"
+#include "display.h"
 
 //*****************************************************************************
 // Constants
@@ -42,14 +41,8 @@
 
 #define ALTITUDE_DELTA 993
 
-#define DISPLAY_OFF 0
-#define DISPLAY_PERCENT_ADC 1
-#define DISPLAY_MEAN_ADC 2
-#define DISPLAY_YAW 3
-
 #define SECOND_DELAY_COEFFICIENT 3
 
-#define DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE false
 
 //*****************************************************************************
 // Global variables
@@ -61,8 +54,6 @@ static uint32_t g_latestAltitudeMean; // the latest altitude value
 static int32_t g_latestAltitudePercentage;
 static bool g_hasBeenCalibrated = false;
 
-static uint8_t g_displayState = DISPLAY_YAW;
-static uint8_t g_oldDisplayState = DISPLAY_YAW - 1;
 static bool g_togglePB3 = false;
 
 //*****************************************************************************
@@ -196,13 +187,6 @@ void initQuadraturePins(void)
 }
 
 void
-initDisplay (void)
-{
-    // intialise the Orbit OLED display
-    OLEDInitialise ();
-}
-
-void
 updateAltitude()
 {
     int32_t sum;
@@ -216,61 +200,7 @@ updateAltitude()
     g_latestAltitudePercentage = ((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALTITUDE_DELTA);
 }
 
-void displayMeanADC() {
-    char string[17];  // 16 characters across the display
 
-    // Form a new string for the line.  The maximum width specified for the
-    //  number field ensures it is displayed right justified.
-    usnprintf (string, sizeof(string), "Altitude = %4d", g_latestAltitudeMean);
-
-    // Update line on display.
-    OLEDStringDraw (string, 0, 2);
-
-}
-
-void displayPercentADC() {
-    char string[17];  // 16 characters across the display
-
-    // Form a new string for the line.  The maximum width specified for the
-    //  number field ensures it is displayed right justified.
-#if DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE
-    uint8_t clampedAltitudePercentage = clamp(g_latestAltitudePercentage, 0, 100);
-    usnprintf (string, sizeof(string), "Altitude = %3d%%", clampedAltitudePercentage);
-#else
-    usnprintf (string, sizeof(string), "Altitude = %3d%%", g_latestAltitudePercentage);
-#endif
-
-    // Update line on display.
-    OLEDStringDraw (string, 0, 2);
-
-}
-
-void displayYaw()
-{
-    QuadratureState state = getQuadratureState();
-
-    char string[17];
-    usnprintf (string, sizeof(string), "Yaw = %3d", getYawDegrees());
-    OLEDStringDraw (string, 0, 2);
-}
-
-void displayClear() {
-    OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
-    OLEDStringDraw ("                ", 0, 1);
-    OLEDStringDraw ("                ", 0, 2);
-    OLEDStringDraw ("                ", 0, 3);
-}
-
-void displayNone() {
-    OLEDStringDraw ("                ", 0, 0);
-}
-
-void displayCalibration() {
-    OLEDStringDraw ("ENCE361", 9, 0);
-    OLEDStringDraw ("mfb31", 0, 1);
-    OLEDStringDraw ("wgc22", 0, 2);
-    OLEDStringDraw ("jps111", 0, 3);
-}
 
 void calibrate() {
     g_altitudeReference = g_latestAltitudeMean;
@@ -309,7 +239,7 @@ main(void)
 	initClock ();
 	initSysTick();
 	initADC ();
-	initDisplay ();
+	displayInit();
 	initCircBuf (&g_inBuffer, BUF_SIZE);
 	initButtons();
 	initPB3();
@@ -340,36 +270,16 @@ main(void)
             // check for display state change
             butState = checkButton(UP);
             if (butState == PUSHED) {
-                if (++g_displayState > DISPLAY_YAW) {
-                    g_displayState = DISPLAY_OFF;
-                }
+                displayStateAdvance();
             }
 
             updateAltitude();
 
-            if (g_oldDisplayState != g_displayState) {
-                g_oldDisplayState = g_displayState;
-                displayClear();
-            }
-
-            switch (g_displayState) {
-            case DISPLAY_MEAN_ADC:
-                displayMeanADC();
-                break;
-            case DISPLAY_PERCENT_ADC:
-                displayPercentADC();
-                break;
-            case DISPLAY_OFF:
-                 displayNone();
-                break;
-            case DISPLAY_YAW:
-                displayYaw();
-                break;
-            }
+            displayRender();
 
 	    } else {
 
-	        displayCalibration();
+	        displayRender();
 
 	        // wait a 3 seconds
 	        waitForSeconds(3);
