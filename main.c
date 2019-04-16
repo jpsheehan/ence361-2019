@@ -40,6 +40,7 @@ static uint32_t g_ulSampCnt;    // Counter for the interrupts
 // Constants
 //*****************************************************************************
 
+#define SAMPLE_RATE_HZ 256
 #define SECOND_DELAY_COEFFICIENT 3
 
 
@@ -197,7 +198,7 @@ main(void)
 	        waitForSeconds(3);
 
 	        // check that we have filled the buffer with data
-	        if (g_ulSampCnt > BUF_SIZE) {
+	        if (g_ulSampCnt > ALT_BUF_SIZE) {
 	            alt_update();
 	            alt_calibrate();
 	            displayStateAdvance();

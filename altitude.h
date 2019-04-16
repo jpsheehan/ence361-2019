@@ -11,10 +11,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define BUF_SIZE 32
-#define SAMPLE_RATE_HZ 256
-
-#define ALTITUDE_DELTA 993
+#define ALT_BUF_SIZE 32
+#define ALT_DELTA 993
 
 void alt_init();
 void alt_update();

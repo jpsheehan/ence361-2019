@@ -27,8 +27,7 @@ static bool g_hasBeenCalibrated = false;
 // The handler for the ADC conversion complete interrupt.
 // Writes to the circular buffer.
 //*****************************************************************************
-void
-ADCIntHandler(void)
+void alt_ADCIntHandler(void)
 {
     uint32_t ulValue;
 
@@ -44,8 +43,7 @@ ADCIntHandler(void)
     ADCIntClear(ADC0_BASE, 3);
 }
 
-void
-initADC (void)
+void alt_initADC (void)
 {
     //
     // The ADC0 peripheral must be enabled for configuration and use.
@@ -74,7 +72,7 @@ initADC (void)
 
     //
     // Register the interrupt handler
-    ADCIntRegister (ADC0_BASE, 3, ADCIntHandler);
+    ADCIntRegister (ADC0_BASE, 3, alt_ADCIntHandler);
 
     //
     // Enable interrupts for ADC0 sequence 3 (clears any outstanding interrupts)
@@ -83,8 +81,8 @@ initADC (void)
 
 void alt_init()
 {
-    initADC();
-    initCircBuf (&g_inBuffer, BUF_SIZE);
+    alt_initADC();
+    initCircBuf (&g_inBuffer, ALT_BUF_SIZE);
 }
 
 void alt_update()
@@ -93,11 +91,11 @@ void alt_update()
     uint16_t i;
 
     sum = 0;
-    for (i = 0; i < BUF_SIZE; i++)
+    for (i = 0; i < ALT_BUF_SIZE; i++)
         sum = sum + readCircBuf (&g_inBuffer);
-    g_latestAltitudeMean = (2 * sum + BUF_SIZE) / (2 * BUF_SIZE);
+    g_latestAltitudeMean = (2 * sum + ALT_BUF_SIZE) / (2 * ALT_BUF_SIZE);
 
-    g_latestAltitudePercentage = ((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALTITUDE_DELTA);
+    g_latestAltitudePercentage = ((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALT_DELTA);
 }
 
 
