@@ -62,6 +62,7 @@ static int32_t g_latestAltitudePercentage;
 static bool g_hasBeenCalibrated = false;
 
 static uint8_t g_displayState = DISPLAY_YAW;
+static uint8_t g_oldDisplayState = DISPLAY_YAW - 1;
 static bool g_togglePB3 = false;
 
 //*****************************************************************************
@@ -107,7 +108,7 @@ void
 initClock (void)
 {
     // Set the clock rate to 20 MHz
-    SysCtlClockSet (SYSCTL_SYSDIV_10 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
+    SysCtlClockSet (SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
                    SYSCTL_XTAL_16MHZ);
 }
 
@@ -218,11 +219,6 @@ updateAltitude()
 void displayMeanADC() {
     char string[17];  // 16 characters across the display
 
-    OLEDStringDraw ("Helicopter Ctrl", 0, 0);
-    OLEDStringDraw ("                ", 0, 1);
-    OLEDStringDraw ("                ", 0, 3);
-
-
     // Form a new string for the line.  The maximum width specified for the
     //  number field ensures it is displayed right justified.
     usnprintf (string, sizeof(string), "Altitude = %4d", g_latestAltitudeMean);
@@ -243,9 +239,6 @@ void displayPercentADC() {
 #else
     usnprintf (string, sizeof(string), "Altitude = %3d%%", g_latestAltitudePercentage);
 #endif
-    OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
-    OLEDStringDraw ("                ", 0, 1);
-    OLEDStringDraw ("                ", 0, 3);
 
     // Update line on display.
     OLEDStringDraw (string, 0, 2);
@@ -256,36 +249,20 @@ void displayYaw()
 {
     QuadratureState state = getQuadratureState();
 
-//    switch (state) {
-//    case NOCHANGE:
-//        OLEDStringDraw ("Dir: no change  ", 0, 2);
-//        break;
-//    case CLOCKWISE:
-//        OLEDStringDraw ("Dir: clockwise  ", 0, 2);
-//        break;
-//    case ANTICLOCKWISE:
-//        OLEDStringDraw ("Dir: c-clockwise", 0, 2);
-//        break;
-//    case INVALID:
-//        OLEDStringDraw ("Dir: invalid    ", 0, 2);
-//        break;
-//    default:
-//        OLEDStringDraw ("really invalid  ", 0, 2);
-//        break;
-//    }
     char string[17];
     usnprintf (string, sizeof(string), "Yaw = %3d", getYawDegrees());
     OLEDStringDraw (string, 0, 2);
+}
+
+void displayClear() {
     OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
     OLEDStringDraw ("                ", 0, 1);
+    OLEDStringDraw ("                ", 0, 2);
     OLEDStringDraw ("                ", 0, 3);
 }
 
 void displayNone() {
     OLEDStringDraw ("                ", 0, 0);
-    OLEDStringDraw ("                ", 0, 1);
-    OLEDStringDraw ("                ", 0, 2);
-    OLEDStringDraw ("                ", 0, 3);
 }
 
 void displayCalibration() {
@@ -369,6 +346,11 @@ main(void)
             }
 
             updateAltitude();
+
+            if (g_oldDisplayState != g_displayState) {
+                g_oldDisplayState = g_displayState;
+                displayClear();
+            }
 
             switch (g_displayState) {
             case DISPLAY_MEAN_ADC:
