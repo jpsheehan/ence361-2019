@@ -10,9 +10,10 @@
 
 volatile static uint8_t g_previous_state;
 volatile static QuadratureState g_quadrature_state;
-volatile static uint8_t g_slot_count;
+volatile static uint16_t g_slot_count;
 
-#define DEGREES_PER_SLOT 360 / 112
+#define MAX_SLOT_COUNT 448 // because there are 112 teeth and 4 phases
+#define DEGREES_PER_SLOT 360 / MAX_SLOT_COUNT
 
 void initQuadrature(void)
 {
@@ -36,8 +37,8 @@ void updateQuadratureState(bool signal_a, bool signal_b)
                 (this_state == 3 && g_previous_state == 2)) {
 
             g_quadrature_state = ANTICLOCKWISE;
-            if (--g_slot_count > 111) {
-                g_slot_count = 111;
+            if (--g_slot_count > MAX_SLOT_COUNT - 1) {
+                g_slot_count = MAX_SLOT_COUNT - 1;
             }
 
         } else {
@@ -47,7 +48,7 @@ void updateQuadratureState(bool signal_a, bool signal_b)
                     (this_state == 2 && g_previous_state == 3) ||
                     (this_state == 3 && g_previous_state == 1)) {
                 g_quadrature_state = CLOCKWISE;
-                if (++g_slot_count > 111) {
+                if (++g_slot_count > MAX_SLOT_COUNT - 1) {
                     g_slot_count = 0;
                 }
             } else {

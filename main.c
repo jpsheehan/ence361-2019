@@ -256,24 +256,26 @@ void displayYaw()
 {
     QuadratureState state = getQuadratureState();
 
-    switch (state) {
-    case NOCHANGE:
-        OLEDStringDraw ("Dir: no change  ", 0, 2);
-        break;
-    case CLOCKWISE:
-        OLEDStringDraw ("Dir: clockwise  ", 0, 2);
-        break;
-    case ANTICLOCKWISE:
-        OLEDStringDraw ("Dir: c-clockwise", 0, 2);
-        break;
-    case INVALID:
-        OLEDStringDraw ("Dir: invalid    ", 0, 2);
-        break;
-    default:
-        OLEDStringDraw ("really invalid  ", 0, 2);
-        break;
-    }
-
+//    switch (state) {
+//    case NOCHANGE:
+//        OLEDStringDraw ("Dir: no change  ", 0, 2);
+//        break;
+//    case CLOCKWISE:
+//        OLEDStringDraw ("Dir: clockwise  ", 0, 2);
+//        break;
+//    case ANTICLOCKWISE:
+//        OLEDStringDraw ("Dir: c-clockwise", 0, 2);
+//        break;
+//    case INVALID:
+//        OLEDStringDraw ("Dir: invalid    ", 0, 2);
+//        break;
+//    default:
+//        OLEDStringDraw ("really invalid  ", 0, 2);
+//        break;
+//    }
+    char string[17];
+    usnprintf (string, sizeof(string), "Yaw = %3d", getYawDegrees());
+    OLEDStringDraw (string, 0, 2);
     OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
     OLEDStringDraw ("                ", 0, 1);
     OLEDStringDraw ("                ", 0, 3);
