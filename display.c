@@ -12,6 +12,7 @@
 #include "utils/ustdlib.h"
 
 #include "display.h"
+#include "altitude.h"
 #include "quadrature.h"
 #include "utils.h"
 
@@ -29,7 +30,7 @@ void displayMeanADC() {
 
     // Form a new string for the line.  The maximum width specified for the
     //  number field ensures it is displayed right justified.
-    usnprintf (string, sizeof(string), "Altitude = %4d", g_latestAltitudeMean);
+    usnprintf (string, sizeof(string), "Altitude = %4d", getAltitudeRaw());
 
     // Update line on display.
     OLEDStringDraw (string, 0, 2);
@@ -45,7 +46,7 @@ void displayPercentADC() {
     uint8_t clampedAltitudePercentage = clamp(g_latestAltitudePercentage, 0, 100);
     usnprintf (string, sizeof(string), "Altitude = %3d%%", clampedAltitudePercentage);
 #else
-    usnprintf (string, sizeof(string), "Altitude = %3d%%", g_latestAltitudePercentage);
+    usnprintf (string, sizeof(string), "Altitude = %3d%%", getAltitudePercentage());
 #endif
 
     // Update line on display.
@@ -83,8 +84,8 @@ void displayCalibration() {
 
 void displayStateAdvance()
 {
-    if (++g_displayState > DISPLAY_YAW) {
-        g_displayState = 0;
+    if (++g_displayState > DISPLAY_OFF) {
+        g_displayState = DISPLAY_CALIBRATION + 1;
     }
 }
 
@@ -107,6 +108,9 @@ void displayRender()
                     break;
                 case DISPLAY_YAW:
                     displayYaw();
+                    break;
+                case DISPLAY_CALIBRATION:
+                    displayCalibration();
                     break;
                 }
 }

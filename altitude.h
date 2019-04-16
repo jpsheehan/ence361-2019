@@ -9,19 +9,19 @@
 #define ALTITUDE_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
-void AltitudeSamplingInit();
-void AltitudeSamplingIntHandler();
+#define BUF_SIZE 32
+#define SAMPLE_RATE_HZ 256
 
-void AltitudeMeanInit();
-void AltitudeMeanIntHandler();
+#define ALTITUDE_DELTA 993
 
-void AltitudeCalculateMeans();
-void AltitudeCalibrate();
+void altitudeInit ();
+void updateAltitude();
+void calibrate();
 
-uint8_t AltitudeGetMeanRaw();
-uint8_t AltitudeGetMeanPercent();
-uint8_t AltitudeGetMeanFlag();
-uint8_t AltitudeResetMeanFlag();
+int32_t getAltitudePercentage();
+uint32_t getAltitudeRaw();
+bool getHasBeenCalibrated();
 
 #endif /* ALTITUDE_H_ */
