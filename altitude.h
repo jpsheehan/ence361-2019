@@ -16,12 +16,12 @@
 
 #define ALTITUDE_DELTA 993
 
-void altitudeInit ();
-void updateAltitude();
-void calibrate();
+void alt_init();
+void alt_update();
+void alt_calibrate();
 
-int32_t getAltitudePercentage();
-uint32_t getAltitudeRaw();
-bool getHasBeenCalibrated();
+int32_t alt_getPercent();
+uint32_t alt_getRaw();
+bool alt_getIsCalibrated();
 
 #endif /* ALTITUDE_H_ */

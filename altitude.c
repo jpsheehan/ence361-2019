@@ -81,14 +81,13 @@ initADC (void)
     ADCIntEnable(ADC0_BASE, 3);
 }
 
-void altitudeInit()
+void alt_init()
 {
     initADC();
     initCircBuf (&g_inBuffer, BUF_SIZE);
 }
 
-void
-updateAltitude()
+void alt_update()
 {
     int32_t sum;
     uint16_t i;
@@ -102,22 +101,22 @@ updateAltitude()
 }
 
 
-void calibrate() {
+void alt_calibrate() {
     g_altitudeReference = g_latestAltitudeMean;
     g_hasBeenCalibrated = true;
 }
 
-int32_t getAltitudePercentage()
+int32_t alt_getPercent()
 {
     return g_latestAltitudePercentage;
 }
 
-uint32_t getAltitudeRaw()
+uint32_t alt_getRaw()
 {
     return g_latestAltitudeMean;
 }
 
-bool getHasBeenCalibrated()
+bool alt_getIsCalibrated()
 {
     return g_hasBeenCalibrated;
 }

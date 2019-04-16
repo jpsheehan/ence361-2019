@@ -30,7 +30,7 @@ void displayMeanADC() {
 
     // Form a new string for the line.  The maximum width specified for the
     //  number field ensures it is displayed right justified.
-    usnprintf (string, sizeof(string), "Altitude = %4d", getAltitudeRaw());
+    usnprintf (string, sizeof(string), "Altitude = %4d", alt_getRaw());
 
     // Update line on display.
     OLEDStringDraw (string, 0, 2);
@@ -46,7 +46,7 @@ void displayPercentADC() {
     uint8_t clampedAltitudePercentage = clamp(g_latestAltitudePercentage, 0, 100);
     usnprintf (string, sizeof(string), "Altitude = %3d%%", clampedAltitudePercentage);
 #else
-    usnprintf (string, sizeof(string), "Altitude = %3d%%", getAltitudePercentage());
+    usnprintf (string, sizeof(string), "Altitude = %3d%%", alt_getPercent());
 #endif
 
     // Update line on display.
@@ -92,25 +92,25 @@ void displayStateAdvance()
 void displayRender()
 {
     if (g_oldDisplayState != g_displayState) {
-                    g_oldDisplayState = g_displayState;
-                    displayClear();
-                }
+        g_oldDisplayState = g_displayState;
+        displayClear();
+    }
 
-                switch (g_displayState) {
-                case DISPLAY_MEAN_ADC:
-                    displayMeanADC();
-                    break;
-                case DISPLAY_PERCENT_ADC:
-                    displayPercentADC();
-                    break;
-                case DISPLAY_OFF:
-                     displayNone();
-                    break;
-                case DISPLAY_YAW:
-                    displayYaw();
-                    break;
-                case DISPLAY_CALIBRATION:
-                    displayCalibration();
-                    break;
-                }
+    switch (g_displayState) {
+    case DISPLAY_MEAN_ADC:
+        displayMeanADC();
+        break;
+    case DISPLAY_PERCENT_ADC:
+        displayPercentADC();
+        break;
+    case DISPLAY_OFF:
+         displayNone();
+        break;
+    case DISPLAY_YAW:
+        displayYaw();
+        break;
+    case DISPLAY_CALIBRATION:
+        displayCalibration();
+        break;
+    }
 }

@@ -151,7 +151,7 @@ main(void)
 	
 	initClock ();
 	initSysTick();
-	altitudeInit ();
+	alt_init();
 	displayInit();
 	initButtons();
 	initPB3();
@@ -165,7 +165,7 @@ main(void)
 	{
 	    butStates_t butState;
 
-	    if (getHasBeenCalibrated()) {
+	    if (alt_getIsCalibrated()) {
 
             //
             // Background task: calculate the (approximate) mean of the values in the
@@ -176,7 +176,7 @@ main(void)
             // check for reference calibration
             butState = checkButton(LEFT);
             if (butState == PUSHED) {
-                calibrate();
+                alt_calibrate();
             }
 
             // check for display state change
@@ -185,7 +185,7 @@ main(void)
                 displayStateAdvance();
             }
 
-            updateAltitude();
+            alt_update();
 
             displayRender();
 
@@ -198,8 +198,8 @@ main(void)
 
 	        // check that we have filled the buffer with data
 	        if (g_ulSampCnt > BUF_SIZE) {
-	            updateAltitude();
-	            calibrate();
+	            alt_update();
+	            alt_calibrate();
 	            displayStateAdvance();
 	        }
 
