@@ -11,14 +11,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-enum quadrature_state { CLOCKWISE, ANTICLOCKWISE, NOCHANGE, INVALID };
+enum quadrature_state { QUAD_STATE_CLOCKWISE, QUAD_STATE_ANTICLOCKWISE, QUAD_STATE_NOCHANGE, QUAD_STATE_INVALID };
 typedef enum quadrature_state QuadratureState;
 
-void initQuadrature(void);
-void updateQuadratureState(bool signal_a, bool signal_b);
-QuadratureState getQuadratureState(void);
-void quadratureIntHandler(void);
-uint8_t getSlotCount(void);
-uint16_t getYawDegrees(void);
+void quad_init();
+uint8_t quad_getSlotCount();
+uint16_t quad_getYawDegrees();
 
 #endif /* QUADRATURE_H_ */
