@@ -5,6 +5,8 @@
  *      Author: jps111
  */
 
+#include <stdint.h>
+#include <stdbool.h>
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 #include "driverlib/adc.h"
@@ -43,11 +45,11 @@ void quad_init()
        GPIO_PIN_TYPE_STD_WPD);
     GPIOIntTypeSet(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1, GPIO_BOTH_EDGES);
 
-    GPIOIntRegister(GPIO_PORTB_BASE, quadratureIntHandler);
+    GPIOIntRegister(GPIO_PORTB_BASE, quad_intHandler);
     GPIOIntEnable(GPIO_PORTB_BASE, GPIO_INT_PIN_0 | GPIO_INT_PIN_1);
 }
 
-void quad_update_state(bool signal_a, bool signal_b)
+void quad_updateState(bool signal_a, bool signal_b)
 {
     // compare with previous state
     uint8_t this_state = (signal_a << 1) | signal_b;
