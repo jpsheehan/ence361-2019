@@ -56,23 +56,20 @@ typedef enum butStates butStates_t;
 // *******************************************************
 // initButtons: Initialise the variables associated with the set of buttons
 // defined by the constants above.
-void
-butt_init (void);
+void btn_init (void);
 
 // *******************************************************
 // updateButtons: Function designed to be called regularly. It polls all
 // buttons once and updates variables associated with the buttons if
 // necessary.  It is efficient enough to be part of an ISR, e.g. from
 // a SysTick interrupt.
-void
-butt_update (void);
+void btn_update (void);
 
 // *******************************************************
 // checkButton: Function returns the new button state if the button state
 // (PUSHED or RELEASED) has changed since the last call, otherwise returns
 // NO_CHANGE.  The argument butName should be one of constants in the
 // enumeration butStates, excluding 'NUM_BUTS'. Safe under interrupt.
-butStates_t
-butt_check (butNames_t butName);
+butStates_t btn_check (butNames_t butName);
 
 #endif /*BUTTONS_H_*/

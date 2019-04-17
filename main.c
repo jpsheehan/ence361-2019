@@ -50,7 +50,7 @@ int main(void)
 	clock_init();
 	alt_init();
 	disp_init();
-	butt_init();
+	btn_init();
 	pwm_init();
 	quad_init();
 
@@ -68,16 +68,16 @@ int main(void)
             // Background task: calculate the (approximate) mean of the values in the
             // circular buffer and display it, together with the sample number.
 
-            butt_update();
+            btn_update();
 
             // check for reference calibration
-            butState = butt_check(LEFT);
+            butState = btn_check(LEFT);
             if (butState == PUSHED) {
                 alt_calibrate();
             }
 
             // check for display state change
-            butState = butt_check(UP);
+            butState = btn_check(UP);
             if (butState == PUSHED) {
                 disp_advanceState();
             }

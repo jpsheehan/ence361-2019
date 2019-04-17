@@ -37,7 +37,7 @@ static bool but_normal[NUM_BUTS];   // Corresponds to the electrical state
 // *******************************************************
 // initButtons: Initialise the variables associated with the set of buttons
 // defined by the constants in the buttons2.h header file.
-void butt_init (void)
+void btn_init (void)
 {
 	int i;
 
@@ -90,7 +90,7 @@ void butt_init (void)
 // A state change occurs only after NUM_BUT_POLLS consecutive polls have
 // read the pin in the opposite condition, before the state changes and
 // a flag is set.  Set NUM_BUT_POLLS according to the polling rate.
-void butt_update (void)
+void btn_update (void)
 {
 	bool but_value[NUM_BUTS];
 	int i;
@@ -122,7 +122,7 @@ void butt_update (void)
 // checkButton: Function returns the new button logical state if the button
 // logical state (PUSHED or RELEASED) has changed since the last call,
 // otherwise returns NO_CHANGE.
-butStates_t butt_check (butNames_t butName)
+butStates_t btn_check (butNames_t butName)
 {
 	if (but_flag[butName])
 	{
