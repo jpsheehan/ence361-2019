@@ -5,6 +5,8 @@
  *      Author: jps111
  */
 
+#include <stdint.h>
+#include <stdbool.h>
 #include "driverlib/sysctl.h"
 
 #include "utils.h"
@@ -28,7 +30,7 @@ int32_t utils_clamp(int32_t value, int32_t min, int32_t max)
 /**
  * Does what it says on the tin.
  */
-void waitForSeconds(uint32_t delay_s)
+void utils_waitForSeconds(uint32_t delay_s)
 {
     SysCtlDelay((SysCtlClockGet() * delay_s) / SECOND_DELAY_COEFFICIENT);
 }
