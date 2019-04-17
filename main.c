@@ -18,15 +18,15 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "inc/hw_memmap.h"
-#include "inc/hw_types.h"
-#include "driverlib/adc.h"
-#include "driverlib/pwm.h"
-#include "driverlib/gpio.h"
+// #include "inc/hw_memmap.h"
+// #include "inc/hw_types.h"
+// #include "driverlib/adc.h"
+// #include "driverlib/pwm.h"
+// #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
-#include "driverlib/systick.h"
-#include "driverlib/interrupt.h"
-#include "driverlib/debug.h"
+// #include "driverlib/systick.h"
+// #include "driverlib/interrupt.h"
+// #include "driverlib/debug.h"
 
 #include "circBufT.h"
 #include "buttons4.h"
@@ -50,7 +50,7 @@ int main(void)
 	clock_init();
 	alt_init();
 	disp_init();
-	initButtons();
+	butt_init();
 	pwm_init();
 	quad_init();
 
@@ -68,16 +68,16 @@ int main(void)
             // Background task: calculate the (approximate) mean of the values in the
             // circular buffer and display it, together with the sample number.
 
-            updateButtons();
+            butt_update();
 
             // check for reference calibration
-            butState = checkButton(LEFT);
+            butState = butt_check(LEFT);
             if (butState == PUSHED) {
                 alt_calibrate();
             }
 
             // check for display state change
-            butState = checkButton(UP);
+            butState = butt_check(UP);
             if (butState == PUSHED) {
                 disp_advanceState();
             }
