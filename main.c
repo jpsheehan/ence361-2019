@@ -121,7 +121,7 @@ main(void)
 	initClock ();
 	initSysTick();
 	alt_init();
-	displayInit();
+	disp_init();
 	initButtons();
 	initPB3();
 	quad_init();
@@ -151,16 +151,16 @@ main(void)
             // check for display state change
             butState = checkButton(UP);
             if (butState == PUSHED) {
-                displayStateAdvance();
+                disp_stateAdvance();
             }
 
             alt_update();
 
-            displayRender();
+            disp_render();
 
 	    } else {
 
-	        displayRender();
+	        disp_render();
 
 	        // wait a 3 seconds
 	        waitForSeconds(3);
@@ -169,7 +169,7 @@ main(void)
 	        if (g_ulSampCnt > ALT_BUF_SIZE) {
 	            alt_update();
 	            alt_calibrate();
-	            displayStateAdvance();
+	            disp_stateAdvance();
 	        }
 
 	    }

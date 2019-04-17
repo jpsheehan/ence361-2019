@@ -16,16 +16,21 @@
 #include "quadrature.h"
 #include "utils.h"
 
-static uint8_t g_displayState = DISPLAY_CALIBRATION;
-static uint8_t g_oldDisplayState = DISPLAY_OFF;
+#define DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE false
 
-void displayInit()
+enum disp_state { DISP_STATE_CALIBRATION, DISP_STATE_PERCENT_ALT, DISP_STATE_RAW_ALT, DISP_STATE_YAW, DISP_STATE_OFF, DISP_STATE_TOTAL };
+typedef enum disp_state DisplayState;
+
+static uint8_t g_displayState = DISP_STATE_CALIBRATION;
+static uint8_t g_oldDisplayState = DISP_STATE_OFF;
+
+void disp_init()
 {
     // intialise the Orbit OLED display
     OLEDInitialise ();
 }
 
-void displayMeanADC() {
+void disp_rawAlt() {
     char string[17];  // 16 characters across the display
 
     // Form a new string for the line.  The maximum width specified for the
@@ -37,7 +42,7 @@ void displayMeanADC() {
 
 }
 
-void displayPercentADC() {
+void disp_percentAlt() {
     char string[17];  // 16 characters across the display
 
     // Form a new string for the line.  The maximum width specified for the
@@ -54,27 +59,27 @@ void displayPercentADC() {
 
 }
 
-void displayYaw()
+void disp_yaw()
 {
-    QuadratureState state = getQuadratureState();
+    QuadratureState state = quad_getState();
 
     char string[17];
-    usnprintf (string, sizeof(string), "Yaw = %3d", getYawDegrees());
+    usnprintf (string, sizeof(string), "Yaw = %3d", quad_getYawDegrees());
     OLEDStringDraw (string, 0, 2);
 }
 
-void displayClear() {
+void disp_clear() {
     OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
     OLEDStringDraw ("                ", 0, 1);
     OLEDStringDraw ("                ", 0, 2);
     OLEDStringDraw ("                ", 0, 3);
 }
 
-void displayNone() {
+void disp_none() {
     OLEDStringDraw ("                ", 0, 0);
 }
 
-void displayCalibration() {
+void disp_calibration() {
     OLEDStringDraw ("ENCE361", 9, 0);
     OLEDStringDraw ("mfb31", 0, 1);
     OLEDStringDraw ("wgc22", 0, 2);
@@ -82,35 +87,35 @@ void displayCalibration() {
 }
 
 
-void displayStateAdvance()
+void disp_stateAdvance()
 {
-    if (++g_displayState > DISPLAY_OFF) {
-        g_displayState = DISPLAY_CALIBRATION + 1;
+    if (++g_displayState >= DISP_STATE_TOTAL) {
+        g_displayState = DISP_STATE_CALIBRATION + 1;
     }
 }
 
-void displayRender()
+void disp_render()
 {
     if (g_oldDisplayState != g_displayState) {
         g_oldDisplayState = g_displayState;
-        displayClear();
+        disp_clear();
     }
 
     switch (g_displayState) {
-    case DISPLAY_MEAN_ADC:
-        displayMeanADC();
+    case DISP_STATE_RAW_ALT:
+        disp_rawAlt();
         break;
-    case DISPLAY_PERCENT_ADC:
-        displayPercentADC();
+    case DISP_STATE_PERCENT_ALT:
+        disp_percentAlt();
         break;
-    case DISPLAY_OFF:
-         displayNone();
+    case DISP_STATE_OFF:
+         disp_none();
         break;
-    case DISPLAY_YAW:
-        displayYaw();
+    case DISP_STATE_YAW:
+        disp_yaw();
         break;
-    case DISPLAY_CALIBRATION:
-        displayCalibration();
+    case DISP_STATE_CALIBRATION:
+        disp_calibration();
         break;
     }
 }

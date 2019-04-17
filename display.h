@@ -8,18 +8,8 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
-#include <stdint.h>
-
-#define DISPLAY_CALIBRATION 0
-#define DISPLAY_PERCENT_ADC 1
-#define DISPLAY_MEAN_ADC 2
-#define DISPLAY_YAW 3
-#define DISPLAY_OFF 4
-
-#define DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE false
-
-void displayInit();
-void displayStateAdvance();
-void displayRender();
+void disp_init();
+void disp_stateAdvance();
+void disp_render();
 
 #endif /* DISPLAY_H_ */
