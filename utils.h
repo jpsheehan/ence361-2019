@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 
-int32_t clamp(int32_t value, int32_t min, int32_t max);
+int32_t utils_clamp(int32_t value, int32_t min, int32_t max);
+void utils_waitForSeconds(uint32_t delay_s);
 
 #endif /* UTILS_H_ */

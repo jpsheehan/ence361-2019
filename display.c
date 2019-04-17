@@ -48,7 +48,7 @@ void disp_percentAlt() {
     // Form a new string for the line.  The maximum width specified for the
     //  number field ensures it is displayed right justified.
 #if DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE
-    uint8_t clampedAltitudePercentage = clamp(g_latestAltitudePercentage, 0, 100);
+    uint8_t clampedAltitudePercentage = utils_clamp(g_latestAltitudePercentage, 0, 100);
     usnprintf (string, sizeof(string), "Altitude = %3d%%", clampedAltitudePercentage);
 #else
     usnprintf (string, sizeof(string), "Altitude = %3d%%", alt_getPercent());

@@ -5,10 +5,14 @@
  *      Author: jps111
  */
 
+#include "driverlib/sysctl.h"
+
 #include "utils.h"
 
+// depends on the clock speed
+#define SECOND_DELAY_COEFFICIENT 6
 
-int32_t clamp(int32_t value, int32_t min, int32_t max)
+int32_t utils_clamp(int32_t value, int32_t min, int32_t max)
 {
     if (value < min) {
         return min;
@@ -21,3 +25,10 @@ int32_t clamp(int32_t value, int32_t min, int32_t max)
     return value;
 }
 
+/**
+ * Does what it says on the tin.
+ */
+void waitForSeconds(uint32_t delay_s)
+{
+    SysCtlDelay((SysCtlClockGet() * delay_s) / SECOND_DELAY_COEFFICIENT);
+}

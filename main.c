@@ -41,7 +41,6 @@ static uint32_t g_ulSampCnt;    // Counter for the interrupts
 //*****************************************************************************
 
 #define SAMPLE_RATE_HZ 256
-#define SECOND_DELAY_COEFFICIENT 3
 
 
 //*****************************************************************************
@@ -106,14 +105,6 @@ void initPB3() {
     GPIODirModeSet(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_DIR_MODE_OUT);
 }
 
-/**
- * Does what it says on the tin.
- */
-void waitForSeconds(uint32_t delay_s)
-{
-    SysCtlDelay((SysCtlClockGet() * delay_s) / SECOND_DELAY_COEFFICIENT);
-}
-
 int
 main(void)
 {
@@ -163,7 +154,7 @@ main(void)
 	        disp_render();
 
 	        // wait a 3 seconds
-	        waitForSeconds(3);
+	        utils_waitForSeconds(3);
 
 	        // check that we have filled the buffer with data
 	        if (g_ulSampCnt > ALT_BUF_SIZE) {
