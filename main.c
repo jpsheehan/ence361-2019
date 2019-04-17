@@ -28,8 +28,7 @@
 // #include "driverlib/interrupt.h"
 // #include "driverlib/debug.h"
 
-#include "circBufT.h"
-#include "buttons4.h"
+#include "button.h"
 #include "quadrature.h"
 #include "display.h"
 #include "altitude.h"
