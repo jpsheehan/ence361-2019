@@ -11,9 +11,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define ALT_BUF_SIZE 32
-#define ALT_DELTA 993
-
 void alt_init();
 void alt_update();
 void alt_calibrate();
@@ -21,5 +18,6 @@ void alt_calibrate();
 int32_t alt_getPercent();
 uint32_t alt_getRaw();
 bool alt_getIsCalibrated();
+bool alt_getIsBufferFull();
 
 #endif /* ALTITUDE_H_ */

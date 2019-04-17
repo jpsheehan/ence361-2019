@@ -34,13 +34,10 @@
 #include "display.h"
 #include "altitude.h"
 
-uint32_t g_ulSampCnt;    // Counter for the interrupts
-
 //*****************************************************************************
 // Constants
 //*****************************************************************************
 
-#define SAMPLE_RATE_HZ 256
 
 
 //*****************************************************************************
@@ -130,7 +127,7 @@ main(void)
 	        utils_waitForSeconds(3);
 
 	        // check that we have filled the buffer with data
-	        if (g_ulSampCnt > ALT_BUF_SIZE) {
+	        if (alt_getIsBufferFull()) {
 	            alt_update();
 	            alt_calibrate();
 	            disp_advanceState();

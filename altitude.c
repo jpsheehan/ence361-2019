@@ -13,14 +13,18 @@
 #include "driverlib/debug.h"
 
 #include "circBufT.h"
-
 #include "altitude.h"
+
+#define ALT_SAMPLE_RATE_HZ 256
+#define ALT_BUF_SIZE 32
+#define ALT_DELTA 993
 
 static circBuf_t g_inBuffer;        // Buffer of size BUF_SIZE integers (sample values)
 static uint16_t g_altitudeReference; // the reference value for calculating height.
 static uint32_t g_latestAltitudeMean; // the latest altitude value
 static int32_t g_latestAltitudePercentage;
 static bool g_hasBeenCalibrated = false;
+static uint32_t g_ulSampCnt;    // Counter for the interrupts
 
 //*****************************************************************************
 //
@@ -97,7 +101,7 @@ void alt_initSysTick(void) {
     //
     // Set up the period for the SysTick timer.  The SysTick timer period is
     // set as a function of the system clock.
-    SysTickPeriodSet(SysCtlClockGet() / SAMPLE_RATE_HZ);
+    SysTickPeriodSet(SysCtlClockGet() / ALT_SAMPLE_RATE_HZ);
     //
     // Register the interrupt handler
     SysTickIntRegister(alt_SysTickIntHandler);
@@ -146,4 +150,9 @@ uint32_t alt_getRaw()
 bool alt_getIsCalibrated()
 {
     return g_hasBeenCalibrated;
+}
+
+bool alt_getIsBufferFull()
+{
+    return (g_ulSampCnt > ALT_SAMPLE_RATE_HZ);
 }
