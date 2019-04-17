@@ -34,7 +34,7 @@
 #include "display.h"
 #include "altitude.h"
 
-static uint32_t g_ulSampCnt;    // Counter for the interrupts
+uint32_t g_ulSampCnt;    // Counter for the interrupts
 
 //*****************************************************************************
 // Constants
@@ -49,19 +49,7 @@ static uint32_t g_ulSampCnt;    // Counter for the interrupts
 
 static bool g_togglePB3 = false;
 
-//*****************************************************************************
-//
-// The interrupt handler for the for SysTick interrupt.
-//*****************************************************************************
-void
-SysTickIntHandler(void)
-{
-    //
-    // Initiate a conversion
-    //
-    ADCProcessorTrigger(ADC0_BASE, 3); 
-    g_ulSampCnt++;
-}
+
 
 //*****************************************************************************
 // Initialisation functions for the clock (incl. SysTick), ADC, display
@@ -72,20 +60,6 @@ initClock (void)
     // Set the clock rate to 20 MHz
     SysCtlClockSet (SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
                    SYSCTL_XTAL_16MHZ);
-}
-
-void initSysTick(void) {
-    //
-    // Set up the period for the SysTick timer.  The SysTick timer period is
-    // set as a function of the system clock.
-    SysTickPeriodSet(SysCtlClockGet() / SAMPLE_RATE_HZ);
-    //
-    // Register the interrupt handler
-    SysTickIntRegister(SysTickIntHandler);
-    //
-    // Enable interrupt and device
-    SysTickIntEnable();
-    SysTickEnable();
 }
 
 void togglePB3() {
@@ -110,7 +84,6 @@ main(void)
 {
 	
 	initClock ();
-	initSysTick();
 	alt_init();
 	disp_init();
 	initButtons();

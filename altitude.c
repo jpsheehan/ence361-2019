@@ -79,8 +79,37 @@ void alt_initADC (void)
     ADCIntEnable(ADC0_BASE, 3);
 }
 
+//*****************************************************************************
+//
+// The interrupt handler for the for SysTick interrupt.
+//*****************************************************************************
+void
+alt_SysTickIntHandler(void)
+{
+    //
+    // Initiate a conversion
+    //
+    ADCProcessorTrigger(ADC0_BASE, 3); 
+    g_ulSampCnt++;
+}
+
+void alt_initSysTick(void) {
+    //
+    // Set up the period for the SysTick timer.  The SysTick timer period is
+    // set as a function of the system clock.
+    SysTickPeriodSet(SysCtlClockGet() / SAMPLE_RATE_HZ);
+    //
+    // Register the interrupt handler
+    SysTickIntRegister(alt_SysTickIntHandler);
+    //
+    // Enable interrupt and device
+    SysTickIntEnable();
+    SysTickEnable();
+}
+
 void alt_init()
 {
+    alt_initSysTick();
     alt_initADC();
     initCircBuf (&g_inBuffer, ALT_BUF_SIZE);
 }
