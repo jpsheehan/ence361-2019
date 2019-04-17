@@ -9,7 +9,7 @@
 #define DISPLAY_H_
 
 void disp_init();
-void disp_stateAdvance();
+void disp_advanceState();
 void disp_render();
 
 #endif /* DISPLAY_H_ */

@@ -87,7 +87,7 @@ void disp_calibration() {
 }
 
 
-void disp_stateAdvance()
+void disp_advanceState()
 {
     if (++g_displayState >= DISP_STATE_TOTAL) {
         g_displayState = DISP_STATE_CALIBRATION + 1;

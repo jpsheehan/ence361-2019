@@ -151,7 +151,7 @@ main(void)
             // check for display state change
             butState = checkButton(UP);
             if (butState == PUSHED) {
-                disp_stateAdvance();
+                disp_advanceState();
             }
 
             alt_update();
@@ -169,7 +169,7 @@ main(void)
 	        if (g_ulSampCnt > ALT_BUF_SIZE) {
 	            alt_update();
 	            alt_calibrate();
-	            disp_stateAdvance();
+	            disp_advanceState();
 	        }
 
 	    }
