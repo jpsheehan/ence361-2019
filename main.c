@@ -58,7 +58,7 @@ int main(void)
     // Enable interrupts to the processor.
     IntMasterEnable();
 
-	while (1)
+	while (true)
 	{
 	    butStates_t butState;
 

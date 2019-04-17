@@ -61,8 +61,6 @@ void disp_percentAlt() {
 
 void disp_yaw()
 {
-    QuadratureState state = quad_getState();
-
     char string[17];
     usnprintf (string, sizeof(string), "Yaw = %3d", quad_getYawDegrees());
     OLEDStringDraw (string, 0, 2);
@@ -80,7 +78,7 @@ void disp_none() {
 }
 
 void disp_calibration() {
-    OLEDStringDraw ("ENCE361", 9, 0);
+    OLEDStringDraw ("         ENCE361", 0, 0);
     OLEDStringDraw ("mfb31", 0, 1);
     OLEDStringDraw ("wgc22", 0, 2);
     OLEDStringDraw ("jps111", 0, 3);
