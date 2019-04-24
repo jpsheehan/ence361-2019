@@ -18,7 +18,7 @@
 
 #define DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE false
 
-enum disp_state { DISP_STATE_CALIBRATION, DISP_STATE_PERCENT_ALT, DISP_STATE_RAW_ALT, DISP_STATE_YAW, DISP_STATE_OFF, DISP_STATE_TOTAL };
+enum disp_state { DISP_STATE_CALIBRATION, DISP_STATE_ALL, DISP_STATE_PERCENT_ALT, DISP_STATE_RAW_ALT, DISP_STATE_YAW, DISP_STATE_OFF, DISP_STATE_TOTAL };
 typedef enum disp_state DisplayState;
 
 static uint8_t g_displayState = DISP_STATE_CALIBRATION;
@@ -92,6 +92,23 @@ void disp_advanceState()
     }
 }
 
+void disp_all()
+{
+    char string[17];
+
+    usnprintf (string, sizeof(string), "Altitude = %4d%%", alt_getPercent());
+    OLEDStringDraw (string, 0, 2);
+
+    usnprintf (string, sizeof(string), "     Yaw = %4d", quad_getYawDegrees());
+    OLEDStringDraw (string, 0, 3);
+}
+
+void disp_unknown()
+{
+    OLEDStringDraw("Unknown display", 0, 2);
+    OLEDStringDraw("state!", 0, 3);
+}
+
 void disp_render()
 {
     if (g_oldDisplayState != g_displayState) {
@@ -114,6 +131,12 @@ void disp_render()
         break;
     case DISP_STATE_CALIBRATION:
         disp_calibration();
+        break;
+    case DISP_STATE_ALL:
+        disp_all();
+        break;
+    default:
+        disp_unknown();
         break;
     }
 }
