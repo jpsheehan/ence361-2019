@@ -17,6 +17,7 @@
 #include "utils.h"
 
 #define DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE false
+#define DISP_SYMBOL_DEGREES 0x60
 
 enum disp_state { DISP_STATE_CALIBRATION, DISP_STATE_ALL, DISP_STATE_PERCENT_ALT, DISP_STATE_RAW_ALT, DISP_STATE_YAW, DISP_STATE_OFF, DISP_STATE_TOTAL };
 typedef enum disp_state DisplayState;
@@ -62,7 +63,7 @@ void disp_percentAlt() {
 void disp_yaw()
 {
     char string[17];
-    usnprintf (string, sizeof(string), "Yaw = %3d", quad_getYawDegrees());
+    usnprintf (string, sizeof(string), "Yaw = %3d%c", quad_getYawDegrees(), DISP_SYMBOL_DEGREES);
     OLEDStringDraw (string, 0, 2);
 }
 
@@ -96,10 +97,10 @@ void disp_all()
 {
     char string[17];
 
-    usnprintf (string, sizeof(string), "Altitude = %4d%%", alt_getPercent());
+    usnprintf (string, sizeof(string), "     Yaw = %4d%c", quad_getYawDegrees(), DISP_SYMBOL_DEGREES);
     OLEDStringDraw (string, 0, 2);
 
-    usnprintf (string, sizeof(string), "     Yaw = %4d", quad_getYawDegrees());
+    usnprintf (string, sizeof(string), "Altitude = %4d%%", alt_getPercent());
     OLEDStringDraw (string, 0, 3);
 }
 
