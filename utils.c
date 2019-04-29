@@ -1,9 +1,20 @@
-/*
+/*******************************************************************************
+ * 
  * utils.c
- *
- *  Created on: 10/04/2019
- *      Author: jps111
- */
+ * 
+ * ENEL361 Helicopter Project
+ * Friday Morning, Group 7
+ * 
+ * Written by:
+ *  - Manu Hamblyn  <mfb31<@uclive.ac.nz>   95140875
+ *  - Will Cowper   <wgc22@uclive.ac.nz>    81163265
+ *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
+ * 
+ * Description:
+ * This module contains simple functions used in several places throughout this
+ * project.
+ * 
+ ******************************************************************************/
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -11,26 +22,33 @@
 
 #include "utils.h"
 
-// depends on the clock speed
-#define SECOND_DELAY_COEFFICIENT 6
+/**
+ * This macro depends upon the clock speed. For example:
+ * - 40 MHz = 6
+ * - 20 MHz = 3
+ * - etc...
+ */
+#define UTILS_SECOND_DELAY_COEFFICIENT 6
 
-int32_t utils_clamp(int32_t value, int32_t min, int32_t max)
+int32_t utils_clamp(int32_t t_value, int32_t t_min, int32_t t_max)
 {
-    if (value < min) {
-        return min;
+    // if the value is less than the minimum, return the minimum
+    if (t_value < t_min)
+    {
+        return t_min;
     }
 
-    if (value > max) {
-        return max;
+    // if the value is greater than the maximum, return the maximum
+    if (t_value > t_max)
+    {
+        return t_max;
     }
 
-    return value;
+    // otherwise, return the value
+    return t_value;
 }
 
-/**
- * Does what it says on the tin.
- */
-void utils_waitForSeconds(uint32_t delay_s)
+void utils_waitForSeconds(uint32_t t_delay)
 {
-    SysCtlDelay((SysCtlClockGet() * delay_s) / SECOND_DELAY_COEFFICIENT);
+    SysCtlDelay((SysCtlClockGet() * t_delay) / UTILS_SECOND_DELAY_COEFFICIENT);
 }
