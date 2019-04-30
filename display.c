@@ -20,6 +20,7 @@
  * When true clamps percentage between 0 and 100%
  */
 #define DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE false
+
 /**
  * Bytecode for rendering degree symbol on the display
  */
@@ -36,6 +37,7 @@ typedef enum disp_state DisplayState;
  * Current display state
  */
 static uint8_t g_displayState = DISP_STATE_CALIBRATION;
+
 /**
  * Previous display state. Before rendering the display is cleared if this differs from current display state
  */
@@ -43,7 +45,7 @@ static uint8_t g_oldDisplayState = DISP_STATE_OFF;
 
 void disp_init()
 {
-    // intialise the Orbit OLED display
+    // Intialise the Orbit OLED display
     OLEDInitialise ();
 }
 
@@ -78,7 +80,7 @@ void disp_percentAlt() {
     usnprintf (string, sizeof(string), "Altitude = %3d%%", alt_getPercent());
 #endif
 
-    // Update line on display.
+    // Draw string on display at character column x axis and row y axis.
     OLEDStringDraw (string, 0, 2);
 
 }

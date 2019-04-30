@@ -40,7 +40,7 @@
 //*****************************************************************************
 void clock_init (void)
 {
-    // Set the clock rate to 20 MHz
+    // Set the clock rate to 40 MHz
     SysCtlClockSet (SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
                    SYSCTL_XTAL_16MHZ);
 }
@@ -76,18 +76,18 @@ int main(void)
 
             btn_update();
 
-            // check for reference calibration button press
+            // Check for reference calibration button press
             butState = btn_check(LEFT);
             if (butState == PUSHED) {
                 alt_calibrate();
             }
 
-            // check for display state change
+            // Check for display state change
             butState = btn_check(UP);
             if (butState == PUSHED) {
                 disp_advanceState();
             }
-
+            // Calculate altitude from mean average of buffer contents
             alt_update();
 
             // Render display state to the display
@@ -97,7 +97,7 @@ int main(void)
 	        // Render splash screen while we wait for buffer to fill
 	        disp_render();
 
-	        // wait a 3 seconds
+	        // Wait a 3 seconds
 	        utils_waitForSeconds(3);
 
 	        // check that we have filled the buffer with data
