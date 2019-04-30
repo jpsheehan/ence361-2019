@@ -14,7 +14,11 @@
  */
 void disp_init();
 
-
+/**
+ * Used to cycle through the valid display states
+ * Wraps back to state 0 when all states exhausted
+ *
+ */
 void disp_advanceState();
 
 /**
