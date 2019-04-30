@@ -45,8 +45,12 @@ void clock_init (void)
                    SYSCTL_XTAL_16MHZ);
 }
 
+/**
+ * main loop
+ */
 int main(void)
 {
+    // Setup all required modules
 	clock_init();
 	alt_init();
 	disp_init();
@@ -60,8 +64,10 @@ int main(void)
 
 	while (true)
 	{
+	    // Button state
 	    butStates_t butState;
 
+	    // Ensure buffer is filled and adc has settled from inital power on.
 	    if (alt_getIsCalibrated()) {
 
             //
@@ -70,7 +76,7 @@ int main(void)
 
             btn_update();
 
-            // check for reference calibration
+            // check for reference calibration button press
             butState = btn_check(LEFT);
             if (butState == PUSHED) {
                 alt_calibrate();
@@ -84,10 +90,11 @@ int main(void)
 
             alt_update();
 
+            // Render display state to the display
             disp_render();
 
 	    } else {
-
+	        // Render splash screen while we wait for buffer to fill
 	        disp_render();
 
 	        // wait a 3 seconds
@@ -101,7 +108,8 @@ int main(void)
 	        }
 
 	    }
-
+	    // Used for tracking the speed of the loop.
+	    // Toggles PWM on/off each loop
 	    pwm_toggle();
 	}
 }
