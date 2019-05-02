@@ -19,7 +19,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
   - [x] Calculate yaw in degrees relative to the initial position
   - [x] The yaw (in degrees) should be displayed along with the averaged altitude
 
-- [x] **Milestone 3**
+- [ ] **Milestone 3**
 
 ## Hardware Setup:
 
@@ -31,4 +31,5 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
 | White          | Altitude      | PE4            | J1-05          |
 | Purple         | Yaw (Phase A) | PB0            | J1-03          |
 | Grey           | Yaw (Phase B) | PB1            | J1-04          |
+| N/A            | Yaw Reference | PC4            | J4-04          |
 
