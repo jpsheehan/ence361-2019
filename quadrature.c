@@ -56,7 +56,7 @@ volatile static uint16_t g_slot_count;
 #define QUAD_DEGREES_PER_SLOT 360 / QUAD_MAX_SLOT_COUNT
 
 // prototypes
-void quad_update_state(bool signal_a, bool signal_b);
+void quad_update_state(bool t_signal_a, bool t_signal_b);
 void quad_intHandler(void);
 QuadratureState quad_getState(void);
 
@@ -91,11 +91,13 @@ void quad_init(void)
 
 /**
 * Updates the current state of the Quadrature FSM.
+* The general thinking is explained in the following document:
+* https://cdn.sparkfun.com/datasheets/Robotics/How%20to%20use%20a%20quadrature%20encoder.pdf
 */
-void quad_updateState(bool signal_a, bool signal_b)
+void quad_updateState(bool t_signal_a, bool t_signal_b)
 {
     // compare with previous state
-    uint8_t this_state = (signal_a << 1) | signal_b;
+    uint8_t this_state = (t_signal_a << 1) | t_signal_b;
 
     // update g_quadrature_state depending on the previous state
     if (this_state == g_previous_state) {
