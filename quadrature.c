@@ -1,9 +1,24 @@
-/*
+/*******************************************************************************
+ * 
  * quadrature.c
- *
- *  Created on: 10/04/2019
- *      Author: jps111
- */
+ * 
+ * ENEL361 Helicopter Project
+ * Friday Morning, Group 7
+ * 
+ * Written by:
+ *  - Manu Hamblyn  <mfb31<@uclive.ac.nz>   95140875
+ *  - Will Cowper   <wgc22@uclive.ac.nz>    81163265
+ *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
+ * 
+ * Created on: 10/04/2019
+ * 
+ * Description:
+ * This module contains functionality required for calculating the mean altitude
+ * as a raw value and as a percentage of the overall height.
+ * Functions are provided to initialise, calibrate, update and return
+ * the altitude values.
+ * 
+ ******************************************************************************/
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -19,11 +34,26 @@
 
 #include "quadrature.h"
 
+/**
+ * Holds the previous state of the Quadrature FSM
+ */
 volatile static uint8_t g_previous_state;
+
+/**
+ * Holds the current state of the Quadrature FSM
+ */
 volatile static QuadratureState g_quadrature_state;
+
+/**
+ * Holds the slot count (i.e. number of teeth moved).
+ */
 volatile static uint16_t g_slot_count;
 
-#define QUAD_MAX_SLOT_COUNT 448 // because there are 112 teeth and 4 phases
+/**
+ * For calculating the yaw in degrees.
+ * 112 teeth over 4 phases gives 448
+ */
+#define QUAD_MAX_SLOT_COUNT 448
 #define QUAD_DEGREES_PER_SLOT 360 / QUAD_MAX_SLOT_COUNT
 
 // prototypes
@@ -37,18 +67,32 @@ void quad_init()
     g_quadrature_state = QUAD_STATE_NOCHANGE;
     
     // setup the pins (PB0 is A, PB1 is B)
-
     SysCtlPeripheralEnable (SYSCTL_PERIPH_GPIOB);
+	
+	// disable interrupts for safety
     GPIOIntDisable(GPIO_PORTB_BASE, GPIO_INT_PIN_0 | GPIO_INT_PIN_1);
+	
+	// Set the GPIO pins as inputs
     GPIOPinTypeGPIOInput (GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1);
+	
+	// Set the GPIO pins Weak Pull Down, 2mA
     GPIOPadConfigSet (GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1, GPIO_STRENGTH_2MA,
        GPIO_PIN_TYPE_STD_WPD);
+	   
+	// Set the GPIO pins to generate interrupts on both rising and falling edges
     GPIOIntTypeSet(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1, GPIO_BOTH_EDGES);
 
+	// Register the interrupt handler
     GPIOIntRegister(GPIO_PORTB_BASE, quad_intHandler);
+	
+	// Enable interrupts on GPIO Port B Pins 0,1 for Yaw channels A and B
+	// (clears any outstanding interrupts)
     GPIOIntEnable(GPIO_PORTB_BASE, GPIO_INT_PIN_0 | GPIO_INT_PIN_1);
 }
 
+/**
+* Updates the current state of the Quadrature FSM.
+*/
 void quad_updateState(bool signal_a, bool signal_b)
 {
     // compare with previous state
@@ -83,13 +127,15 @@ void quad_updateState(bool signal_a, bool signal_b)
                 g_quadrature_state = QUAD_STATE_INVALID;
             }
         }
-
     }
 
-    // update g_previous_raw_quadrature_state to this
+    // update g_previous_raw_quadrature_state to this state
     g_previous_state = this_state;
 }
 
+/**
+* Returns the current state of the Quadrature FSM.
+*/
 QuadratureState quad_getState()
 {
     QuadratureState temp_state = g_quadrature_state;
@@ -107,6 +153,9 @@ uint16_t quad_getYawDegrees()
     return g_slot_count * QUAD_DEGREES_PER_SLOT;
 }
 
+/**
+ * The interrupt handler for the for Quadrature interrupt.
+ */
 void quad_intHandler()
 {
     // read signal A
@@ -118,5 +167,6 @@ void quad_intHandler()
     // update the quadrature stuff
     quad_updateState(signal_a, signal_b);
 
+	// clear the interrup flag
     GPIOIntClear(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1);
 }
