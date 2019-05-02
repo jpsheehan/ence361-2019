@@ -1,10 +1,21 @@
-/*
+/*******************************************************************************
+ *
  * display.c
  *
- *  Created on: 17/04/2019
- *      Author: wgc22
- */
-
+ * ENEL361 Helicopter Project
+ * Friday Morning, Group 7
+ *
+ * Written by:
+ *  - Manu Hamblyn  <mfb31<@uclive.ac.nz>   95140875
+ *  - Will Cowper   <wgc22@uclive.ac.nz>    81163265
+ *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
+ *
+ * Created on: 10/04/2019
+ *
+ * Description:
+ * This module contains functions for initialising and updating the display.
+ *
+ ******************************************************************************/
 
 #include <stdint.h>
 
@@ -43,7 +54,7 @@ static uint8_t g_displayState = DISP_STATE_CALIBRATION;
  */
 static uint8_t g_oldDisplayState = DISP_STATE_OFF;
 
-void disp_init()
+void disp_init(void)
 {
     // Intialise the Orbit OLED display
     OLEDInitialise ();
@@ -53,7 +64,7 @@ void disp_init()
 /**
  * Display raw 12-bit adc reading to the display
  */
-void disp_rawAlt() {
+void disp_rawAlt(void) {
     char string[17];  // 16 characters across the display
 
     // Form a new string for the line.  The maximum width specified for the
@@ -68,7 +79,7 @@ void disp_rawAlt() {
  * Display the adc reading as a percentage
  * Only clamped between 0-100 if DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE is TRUE
  */
-void disp_percentAlt() {
+void disp_percentAlt(void) {
     char string[17];  // 16 characters across the display
 
     // Form a new string for the line.  The maximum width specified for the
@@ -90,7 +101,7 @@ void disp_percentAlt() {
  * Display yaw reading to the display between 0-359
  * Positive yaw is CW.
  */
-void disp_yaw()
+void disp_yaw(void)
 {
     char string[17];
     usnprintf (string, sizeof(string), "Yaw = %3d%c", quad_getYawDegrees(), DISP_SYMBOL_DEGREES);
@@ -99,7 +110,7 @@ void disp_yaw()
 /**
  * Display raw 12-bit adc reading to the display
  */
-void disp_clear() {
+void disp_clear(void) {
     OLEDStringDraw ("Helicopter Ctrl ", 0, 0);
     OLEDStringDraw ("                ", 0, 1);
     OLEDStringDraw ("                ", 0, 2);
@@ -108,13 +119,13 @@ void disp_clear() {
 /**
  * Display a blank line to the display, clearing any previous render.
  */
-void disp_none() {
+void disp_none(void) {
     OLEDStringDraw ("                ", 0, 0);
 }
 /**
  * Splash screen used during initial calibration while waiting for buffer to fill
  */
-void disp_calibration() {
+void disp_calibration(void) {
     OLEDStringDraw ("         ENCE361", 0, 0);
     OLEDStringDraw ("mfb31", 0, 1);
     OLEDStringDraw ("wgc22", 0, 2);
@@ -124,7 +135,7 @@ void disp_calibration() {
 /**
  * Advance display state when BTN2 is pressed
  */
-void disp_advanceState()
+void disp_advanceState(void)
 {
     if (++g_displayState >= DISP_STATE_TOTAL) {
         g_displayState = DISP_STATE_CALIBRATION + 1;
@@ -133,7 +144,7 @@ void disp_advanceState()
 /**
  * Display yaw and altitude percentage at the same time
  */
-void disp_all()
+void disp_all(void)
 {
     char string[17];
 
@@ -147,13 +158,13 @@ void disp_all()
 /**
  * Unknown display state fail-safe
  */
-void disp_unknown()
+void disp_unknown(void)
 {
     OLEDStringDraw("Unknown display", 0, 2);
     OLEDStringDraw("state!", 0, 3);
 }
 
-void disp_render()
+void disp_render(void)
 {
     // Clear display if old state differs from new.
     // Prevents artifacts from previous state showing on new render.
