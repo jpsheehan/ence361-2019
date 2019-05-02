@@ -13,10 +13,9 @@
  * Created on: 10/04/2019
  * 
  * Description:
- * This module contains functionality required for calculating the mean altitude
- * as a raw value and as a percentage of the overall height.
- * Functions are provided to initialise, calibrate, update and return
- * the altitude values.
+ * This module contains function prototypes required for calculating the slot
+ *  count, yaw values, and initialising the quadrature state machine.
+ * The states for the quadrature state machine are also defined.
  * 
  ******************************************************************************/
 
@@ -58,10 +57,10 @@ volatile static uint16_t g_slot_count;
 
 // prototypes
 void quad_update_state(bool signal_a, bool signal_b);
-void quad_intHandler();
-QuadratureState quad_getState();
+void quad_intHandler(void);
+QuadratureState quad_getState(void);
 
-void quad_init()
+void quad_init(void)
 {
     g_previous_state = 0b00;
     g_quadrature_state = QUAD_STATE_NOCHANGE;
@@ -136,19 +135,19 @@ void quad_updateState(bool signal_a, bool signal_b)
 /**
 * Returns the current state of the Quadrature FSM.
 */
-QuadratureState quad_getState()
+QuadratureState quad_getState(void)
 {
     QuadratureState temp_state = g_quadrature_state;
     g_quadrature_state = QUAD_STATE_NOCHANGE;
     return temp_state;
 }
 
-uint8_t quad_getSlotCount()
+uint8_t quad_getSlotCount(void)
 {
     return g_slot_count;
 }
 
-uint16_t quad_getYawDegrees()
+uint16_t quad_getYawDegrees(void)
 {
     return g_slot_count * QUAD_DEGREES_PER_SLOT;
 }
@@ -156,7 +155,7 @@ uint16_t quad_getYawDegrees()
 /**
  * The interrupt handler for the for Quadrature interrupt.
  */
-void quad_intHandler()
+void quad_intHandler(void)
 {
     // read signal A
     bool signal_a = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_0);

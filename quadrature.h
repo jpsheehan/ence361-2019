@@ -1,6 +1,6 @@
 /*******************************************************************************
  * 
- * quadrature_enc.h
+ * quadrature.h
  * 
  * ENEL361 Helicopter Project
  * Friday Morning, Group 7
@@ -35,18 +35,18 @@ typedef enum quadrature_state QuadratureState;
  * Initialises the quadrature module.
  * This must be called before any other functions in the quadrature module.
  */
-void quad_init();
+void quad_init(void);
 
 /**
  * Returns the number of slots counted due to the current movement.
  * There are 112 slots per full (360 degrees) rotation.
  */
-uint8_t quad_getSlotCount();
+uint8_t quad_getSlotCount(void);
 
 /**
  * Returns the current yaw value in degrees.
  * This is a bearing the range 0 - 359 degrees.
  */
-uint16_t quad_getYawDegrees();
+uint16_t quad_getYawDegrees(void);
 
 #endif /* QUADRATURE_H_ */

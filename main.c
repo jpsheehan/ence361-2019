@@ -1,20 +1,22 @@
-//*****************************************************************************
-// ENCE361-S1 Milestone 1
-// Group 7: Student I.D.s 53366509, 81163265, 95140875
-//
-// Code incudes various ECE sources including ADC demo, week2 lab,
-// circ buffer, buttons
-// Last modifed: 22_03_2019 by Group 7
-//
-// ***************************************************************************
-// Original code:
-// ADCdemo1.c - Simple interrupt driven program which samples with AIN0
-//
-// Author:  P.J. Bones	UCECE
-// Last modified:	8.2.2018
-//*****************************************************************************
-// Based on the 'convert' series from 2016
-//*****************************************************************************
+/*******************************************************************************
+ *
+ * main.c
+ *
+ * ENEL361 Helicopter Project
+ * Friday Morning, Group 7
+ *
+ * Written by:
+ *  - Manu Hamblyn  <mfb31<@uclive.ac.nz>   95140875
+ *  - Will Cowper   <wgc22@uclive.ac.nz>    81163265
+ *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
+ *
+ * This file contains portions of code that written by P.J. Bones. These portions are noted in the comments.
+ *
+ * Description:
+ * This module contains the main entry point for the program. It also contains
+ * a function to initialise the system clock.
+ *
+ ******************************************************************************/
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -35,9 +37,10 @@
 #include "pwm.h"
 #include "utils.h"
 
-//*****************************************************************************
-// Initialisation functions for the clock (incl. SysTick), ADC, display
-//*****************************************************************************
+/**
+ * (Original Code by P.J. Bones)
+ * Initialisation functions for the clock (incl. SysTick), ADC, display
+ */
 void clock_init (void)
 {
     // Set the clock rate to 40 MHz
@@ -46,7 +49,8 @@ void clock_init (void)
 }
 
 /**
- * main loop
+ * The main loop of the program.
+ * Responsible for initialising all the modules, responding to input and rendering text on the screen.
  */
 int main(void)
 {
