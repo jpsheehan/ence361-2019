@@ -12,11 +12,14 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
   - [x] The "LEFT" button should recalibrate the altitude reference
   - [x] The "UP" button should cycle through the display states (percentage altitude > mean ADC value > off)
   - [x] The source should be pushed to the GitLab on the day of lab
+
 - [x] **Milestone 2**
   - [x] All tasks from Milestone 1
   - [x] Continuous yaw monitoring
   - [x] Calculate yaw in degrees relative to the initial position
   - [x] The yaw (in degrees) should be displayed along with the averaged altitude
+
+- [x] **Milestone 3**
 
 ## Hardware Setup:
 
