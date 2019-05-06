@@ -48,7 +48,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [x] The actual altitude (percentage of maximum alt.).
       - [ ] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
       - [ ] The current operating mode.
-  - [ ] The program should use the pin-map as outlined [below](#pinmap).
+  - [ ] The program should use the pin-map as outlined [below](#pin-map).
 
 ## Hardware Setup:
 
@@ -61,7 +61,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
 | Purple         | Yaw (Phase A) | PB0            | J1-03          |
 | Grey           | Yaw (Phase B) | PB1            | J1-04          |
 
-### <a name="pinmap"></a> Pin Map:
+### Pin Map:
 
 | **Tiva Pin** | **Tiva Function** | **In/Out** | **Helicopter Signal** | **Notes**                                              |
 | ------------ | ----------------- | ---------- | --------------------- | ------------------------------------------------------ |
