@@ -24,20 +24,20 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
   - [ ] At the start of the sortie, the helicopter should rotate to a known reference position, indicated by a HIGH input from the independent yaw reference signal.
   - [ ] A reference minimum altitude reading should be taken before take-off.
   - [ ] Two output PWM signals should be generated. The PWM signals should be in the range from 150 Hz to 300 Hz:
-    - [ ] One for the main rotor (module 0, PWM 7).
-    - [ ] One for the tail rotor (module 1, PWM 5).
-    - [ ] The duty cycles (as percentages) for each motor should be displayed on the OLED display.
+      - [ ] One for the main rotor (module 0, PWM 7).
+      - [ ] One for the tail rotor (module 1, PWM 5).
+      - [ ] The duty cycles (as percentages) for each motor should be displayed on the OLED display.
   - [ ] The SW1 slider switch on the Orbit board should control the mode of the helicopter (DOWN position = landed/in the process of landing, changing from DOWN to UP when the helicopter is landed should cause the helicopter to take off).
-    - [ ] The helicopter should land smoothly, facing the reference orientation. When landing is complete, the rotors should stop.
-    - [ ] At take off the rotors should start and the helicopter should rotate to the reference orientation.
-    - [ ] While the helicopter is landing, any change to the switch position should be ignored until landing is complete.
-    - [ ] When the program is started/restarted/reset, the helicopter should be landed with the motors off regardless of the SW1 position.
+      - [ ] The helicopter should land smoothly, facing the reference orientation. When landing is complete, the rotors should stop.
+      - [ ] At take off the rotors should start and the helicopter should rotate to the reference orientation.
+      - [ ] While the helicopter is landing, any change to the switch position should be ignored until landing is complete.
+      - [ ] When the program is started/restarted/reset, the helicopter should be landed with the motors off regardless of the SW1 position.
   - [ ] The four buttons on the Tiva-Orbit board should be programmed to interactively control the altitude and yaw of the helicopter:
-    - [ ] UP button: Increase altitude by 10% of its total vertical range. If the helicopter is already within 10% of its maximum altitude, pressing the UP button should take it to its maximum altitude. When the helicopter is at its maximum altitude, any UP presses should be ignored.
-    - [ ] DOWN button: Decrease altitude by 10%. If within 10% of minumum altitude, pushing the DOWN button should take the helicopter to its minimum vertical range. DOWN button presses when already at minumum range should be ignored.
-    - [ ] LEFT button: Rotate the helicopter counter clockwise 15 degrees.
-    - [ ] RIGHT button: Rotate the helicopter clockwise 15 degrees.
-    - [ ] Pressing LEFT/RIGHT buttons should not affect the altitude.
+      - [ ] UP button: Increase altitude by 10% of its total vertical range. If the helicopter is already within 10% of its maximum altitude, pressing the UP button should take it to its maximum altitude. When the helicopter is at its maximum altitude, any UP presses should be ignored.
+      - [ ] DOWN button: Decrease altitude by 10%. If within 10% of minumum altitude, pushing the DOWN button should take the helicopter to its minimum vertical range. DOWN button presses when already at minumum range should be ignored.
+      - [ ] LEFT button: Rotate the helicopter counter clockwise 15 degrees.
+      - [ ] RIGHT button: Rotate the helicopter clockwise 15 degrees.
+      - [ ] Pressing LEFT/RIGHT buttons should not affect the altitude.
   - [ ] The virtual button signals from the web interface are asserted for 200 ms. The virtual slider UP position is HIGH.
   - [ ] The program should have a real-time foreground/background kernel operating on a round-robin basis. Robust behaviour should be maintained at all times.
   - [ ] A PI (preferred) or PID (acceptable) controller should be used to acheive flight.
