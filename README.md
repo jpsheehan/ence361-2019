@@ -49,6 +49,17 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [ ] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
       - [ ] The current operating mode.
   - [ ] The program should use the pin-map as outlined [below](#pin-map).
+- [ ] Report
+- [ ] Code
+
+## Deadlines:
+
+| **Assessment** | **Date** | **Mark** |
+| Milestone 1    | 22/03/19 | 100%     |
+| Milestone 2    | 03/05/19 |          |
+| Demonstration  | 24/05/19 |          |
+| Report         | 02/06/19 |          |
+| Code           | 02/06/19 |          |
 
 ## Hardware Setup:
 
