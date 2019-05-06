@@ -55,6 +55,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
 ## Deadlines:
 
 | **Assessment** | **Date** | **Mark** |
+| -------------- | -------- | -------- |
 | Milestone 1    | 22/03/19 | 100%     |
 | Milestone 2    | 03/05/19 |          |
 | Demonstration  | 24/05/19 |          |
