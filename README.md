@@ -42,12 +42,12 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
   - [ ] The program should have a real-time foreground/background kernel operating on a round-robin basis. Robust behaviour should be maintained at all times.
   - [ ] A PI (preferred) or PID (acceptable) controller should be used to acheive flight.
   - [ ] Information on the status of the helicopter should be transmitted via a serial link from UART0 at 9600 baud, with 1 stop bit and no parity bit in each transmitted byte. The information should be concise but in an easily readable format that is compatible with the scrolling display of the remote lab web page. Updates should be transmitted regularly at least 4 times per second. Status information should include:
-    - [ ] The desired yaw (degrees).
-    - [ ] The actual yaw (degrees).
-    - [ ] The desired altitude (percentage of maximum alt.).
-    - [ ] The actual altitude (percentage of maximum alt.).
-    - [ ] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
-    - [ ] The current operating mode.
+      - [ ] The desired yaw (degrees).
+      - [x] The actual yaw (degrees).
+      - [ ] The desired altitude (percentage of maximum alt.).
+      - [x] The actual altitude (percentage of maximum alt.).
+      - [ ] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
+      - [ ] The current operating mode.
   - [ ] The program should use the pin-map as outlined [below](#pinmap).
 
 ## Hardware Setup:

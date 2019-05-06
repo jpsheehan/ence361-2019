@@ -36,6 +36,7 @@
 #include "altitude.h"
 #include "pwm.h"
 #include "utils.h"
+#include "uart.h"
 
 /**
  * (Original Code by P.J. Bones)
@@ -61,6 +62,7 @@ int main(void)
 	btn_init();
 	pwm_init();
 	quad_init();
+	uart_init();
 
     //
     // Enable interrupts to the processor.
@@ -115,6 +117,7 @@ int main(void)
 	    // Used for tracking the speed of the loop.
 	    // Toggles PWM on/off each loop
 	    pwm_toggle();
+	    uart_update();
 	}
 }
 
