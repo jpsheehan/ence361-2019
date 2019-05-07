@@ -57,7 +57,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
 | **Assessment** | **Date** | **Mark** |
 | -------------- | -------- | -------- |
 | Milestone 1    | 22/03/19 | 100%     |
-| Milestone 2    | 03/05/19 |          |
+| Milestone 2    | 03/05/19 | 100%     |
 | Demonstration  | 24/05/19 |          |
 | Report         | 02/06/19 |          |
 | Code           | 02/06/19 |          |
