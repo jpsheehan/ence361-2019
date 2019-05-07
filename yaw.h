@@ -19,8 +19,8 @@
  * 
  ******************************************************************************/
 
-#ifndef QUADRATURE_H_
-#define QUADRATURE_H_
+#ifndef YAW_H_
+#define YAW_H_
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -35,28 +35,28 @@ typedef enum quadrature_state QuadratureState;
  * Initialises the quadrature module.
  * This must be called before any other functions in the quadrature module.
  */
-void quad_init(void);
+void yaw_init(void);
 
 /**
  * Returns the number of slots counted due to the current movement.
  * There are 112 slots per full (360 degrees) rotation.
  */
-uint8_t quad_getSlotCount(void);
+uint8_t yaw_getSlotCount(void);
 
 /**
  * Returns the current yaw value in degrees.
  * This is a bearing the range 0 - 359 degrees.
  */
-uint16_t quad_getYawDegrees(void);
+uint16_t yaw_getDegrees(void);
 
 /**
  * Sets the calibration state to false.
  */
-void quad_resetCalibrationState(void);
+void yaw_resetCalibrationState(void);
 
 /**
  * Returns true if the yaw has been calibrated to its reference.
  */
-bool quad_hasBeenCalibrated(void);
+bool yaw_hasBeenCalibrated(void);
 
-#endif /* QUADRATURE_H_ */
+#endif /* YAW_H_ */

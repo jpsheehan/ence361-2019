@@ -33,8 +33,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+#include "yaw.h"
 #include "uart.h"
-#include "quadrature.h"
 #include "altitude.h"
 
 #define BAUD_RATE 9600
@@ -84,7 +84,7 @@ void uart_send(const char* t_buffer)
 void uart_update(void)
 {
     uint16_t target_yaw = 0; // TODO: Add target yaw
-    uint16_t actual_yaw = quad_getYawDegrees();
+    uint16_t actual_yaw = yaw_getDegrees();
 
     int16_t target_altitude = 0; // TODO: Add target altitude
     int32_t actual_altitude = alt_getPercent(); // TODO: maybe change this to int16_t in the altitude module?

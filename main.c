@@ -31,12 +31,12 @@
 #include "driverlib/debug.h"
 
 #include "button.h"
-#include "quadrature.h"
 #include "display.h"
 #include "altitude.h"
 #include "pwm.h"
 #include "utils.h"
 #include "uart.h"
+#include "yaw.h"
 
 /**
  * (Original Code by P.J. Bones)
@@ -61,7 +61,7 @@ int main(void)
 	disp_init();
 	btn_init();
 	pwm_init();
-	quad_init();
+	yaw_init();
 	uart_init();
 
     //

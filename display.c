@@ -24,8 +24,8 @@
 
 #include "display.h"
 #include "altitude.h"
-#include "quadrature.h"
 #include "utils.h"
+#include "yaw.h"
 
 /**
  * When true clamps percentage between 0 and 100%
@@ -104,7 +104,7 @@ void disp_percentAlt(void) {
 void disp_yaw(void)
 {
     char string[17];
-    usnprintf (string, sizeof(string), "Yaw = %3d%c", quad_getYawDegrees(), DISP_SYMBOL_DEGREES);
+    usnprintf (string, sizeof(string), "Yaw = %3d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
     OLEDStringDraw (string, 0, 2);
 }
 /**
@@ -148,7 +148,7 @@ void disp_all(void)
 {
     char string[17];
 
-    usnprintf (string, sizeof(string), "     Yaw = %4d%c", quad_getYawDegrees(), DISP_SYMBOL_DEGREES);
+    usnprintf (string, sizeof(string), "     Yaw = %4d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
     OLEDStringDraw (string, 0, 2);
 
     usnprintf (string, sizeof(string), "Altitude = %4d%%", alt_getPercent());
