@@ -49,4 +49,14 @@ uint8_t quad_getSlotCount(void);
  */
 uint16_t quad_getYawDegrees(void);
 
+/**
+ * Sets the calibration state to false.
+ */
+void quad_resetCalibrationState(void);
+
+/**
+ * Returns true if the yaw has been calibrated to its reference.
+ */
+bool quad_hasBeenCalibrated(void);
+
 #endif /* QUADRATURE_H_ */

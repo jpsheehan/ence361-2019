@@ -49,6 +49,11 @@ volatile static QuadratureState g_quadrature_state;
 volatile static uint16_t g_slot_count;
 
 /**
+ * Indicates if the yaw has been calibrated.
+ */
+static bool g_has_been_calibrated;
+
+/**
  * For calculating the yaw in degrees.
  * 112 teeth over 4 phases gives 448
  */
@@ -58,12 +63,14 @@ volatile static uint16_t g_slot_count;
 // prototypes
 void quad_update_state(bool t_signal_a, bool t_signal_b);
 void quad_intHandler(void);
+void quad_referenceIntHandler(void);
 QuadratureState quad_getState(void);
 
 void quad_init(void)
 {
     g_previous_state = 0b00;
     g_quadrature_state = QUAD_STATE_NOCHANGE;
+    g_has_been_calibrated = false;
     
     // setup the pins (PB0 is A, PB1 is B)
     SysCtlPeripheralEnable (SYSCTL_PERIPH_GPIOB);
@@ -87,6 +94,27 @@ void quad_init(void)
 	// Enable interrupts on GPIO Port B Pins 0,1 for Yaw channels A and B
 	// (clears any outstanding interrupts)
     GPIOIntEnable(GPIO_PORTB_BASE, GPIO_INT_PIN_0 | GPIO_INT_PIN_1);
+
+    // PC4 is the yaw reference, set it up as an input with a falling edge interrupt trigger
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
+    GPIOIntDisable(GPIO_PORTC_BASE, GPIO_INT_PIN_4);
+    GPIOPinTypeGPIOInput(GPIO_PORTC_BASE, GPIO_PIN_4);
+    GPIOPadConfigSet(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPD);
+    GPIOIntTypeSet(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_FALLING_EDGE);
+    GPIOIntRegister(GPIO_PORTC_BASE, quad_referenceIntHandler);
+    GPIOIntEnable(GPIO_PORTC_BASE, GPIO_INT_PIN_4);
+}
+
+/**
+ * The interrupt handler for the yaw reference.
+ */
+void quad_referenceIntHandler(void)
+{
+    g_has_been_calibrated = true;
+    g_slot_count = 0;
+
+    // clear the interrupt flag
+    GPIOIntClear(GPIO_PORTC_BASE, GPIO_PIN_4);
 }
 
 /**
@@ -168,6 +196,16 @@ void quad_intHandler(void)
     // update the quadrature stuff
     quad_updateState(signal_a, signal_b);
 
-	// clear the interrup flag
+	// clear the interrupt flag
     GPIOIntClear(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1);
+}
+
+void quad_resetCalibrationState(void)
+{
+    g_has_been_calibrated = false;
+}
+
+bool quad_hasBeenCalibrated(void)
+{
+    return g_has_been_calibrated;
 }
