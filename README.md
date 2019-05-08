@@ -32,19 +32,19 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [ ] At take off the rotors should start and the helicopter should rotate to the reference orientation.
       - [ ] While the helicopter is landing, any change to the switch position should be ignored until landing is complete.
       - [ ] When the program is started/restarted/reset, the helicopter should be landed with the motors off regardless of the SW1 position.
-  - [ ] The four buttons on the Tiva-Orbit board should be programmed to interactively control the altitude and yaw of the helicopter:
-      - [ ] UP button: Increase altitude by 10% of its total vertical range. If the helicopter is already within 10% of its maximum altitude, pressing the UP button should take it to its maximum altitude. When the helicopter is at its maximum altitude, any UP presses should be ignored.
-      - [ ] DOWN button: Decrease altitude by 10%. If within 10% of minumum altitude, pushing the DOWN button should take the helicopter to its minimum vertical range. DOWN button presses when already at minumum range should be ignored.
-      - [ ] LEFT button: Rotate the helicopter counter clockwise 15 degrees.
-      - [ ] RIGHT button: Rotate the helicopter clockwise 15 degrees.
-      - [ ] Pressing LEFT/RIGHT buttons should not affect the altitude.
+  - [x] The four buttons on the Tiva-Orbit board should be programmed to interactively control the altitude and yaw of the helicopter:
+      - [x] UP button: Increase altitude by 10% of its total vertical range. If the helicopter is already within 10% of its maximum altitude, pressing the UP button should take it to its maximum altitude. When the helicopter is at its maximum altitude, any UP presses should be ignored.
+      - [x] DOWN button: Decrease altitude by 10%. If within 10% of minumum altitude, pushing the DOWN button should take the helicopter to its minimum vertical range. DOWN button presses when already at minumum range should be ignored.
+      - [x] LEFT button: Rotate the helicopter counter clockwise 15 degrees.
+      - [x] RIGHT button: Rotate the helicopter clockwise 15 degrees.
+      - [x] Pressing LEFT/RIGHT buttons should not affect the altitude.
   - [ ] The virtual button signals from the web interface are asserted for 200 ms. The virtual slider UP position is HIGH.
   - [ ] The program should have a real-time foreground/background kernel operating on a round-robin basis. Robust behaviour should be maintained at all times.
   - [ ] A PI (preferred) or PID (acceptable) controller should be used to acheive flight.
   - [ ] Information on the status of the helicopter should be transmitted via a serial link from UART0 at 9600 baud, with 1 stop bit and no parity bit in each transmitted byte. The information should be concise but in an easily readable format that is compatible with the scrolling display of the remote lab web page. Updates should be transmitted regularly at least 4 times per second. Status information should include:
-      - [ ] The desired yaw (degrees).
+      - [x] The desired yaw (degrees).
       - [x] The actual yaw (degrees).
-      - [ ] The desired altitude (percentage of maximum alt.).
+      - [x] The desired altitude (percentage of maximum alt.).
       - [x] The actual altitude (percentage of maximum alt.).
       - [ ] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
       - [ ] The current operating mode.
