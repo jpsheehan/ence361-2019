@@ -37,11 +37,8 @@
 #include "utils.h"
 #include "uart.h"
 #include "yaw.h"
-<<<<<<< HEAD
 #include "pwmGen.h"
-=======
 #include "setpoint.h"
->>>>>>> e6112ac854db74285fb72de75744e1b4f89eeeba
 
 /**
  * (Original Code by P.J. Bones)
@@ -140,6 +137,7 @@ int main(void)
 	    // Toggles PWM on/off each loop
 	    //pwm_toggle();
 	    uart_update();
+	    setPWM (200, 40);
 	}
 }
 

@@ -57,7 +57,6 @@
  *      Local prototypes
  *******************************************/
 
-void setPWM (uint32_t u32Freq, uint32_t u32Duty);
 
 /*********************************************************
  * initialisePWM
