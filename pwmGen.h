@@ -30,7 +30,10 @@
 
 void initialisePWM (void);
 
-
+/**
+ * Set PWM frequency and duty cycle.
+ */
+void setPWM (uint32_t u32Freq, uint32_t u32Duty);
 
 
 #endif
