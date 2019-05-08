@@ -21,6 +21,9 @@
 
 #include <stdint.h>
 
+#define min(a, b) (a < b ? a : b)
+#define max(a, b) (a > b ? a : b)
+
 /**
  * "Clamps" the `value` between `min` and `max` inclusive.
  */
