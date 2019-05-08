@@ -37,7 +37,11 @@
 #include "utils.h"
 #include "uart.h"
 #include "yaw.h"
+<<<<<<< HEAD
 #include "pwmGen.h"
+=======
+#include "setpoint.h"
+>>>>>>> e6112ac854db74285fb72de75744e1b4f89eeeba
 
 /**
  * (Original Code by P.J. Bones)
@@ -66,6 +70,7 @@ int main(void)
 	uart_init();
 	initialisePWM();
 
+	setpoint_init();
 
     //
     // Enable interrupts to the processor.
@@ -86,17 +91,30 @@ int main(void)
 
             btn_update();
 
-            // Check for reference calibration button press
+            // Check for counter-clockwise rotation button press
             butState = btn_check(LEFT);
             if (butState == PUSHED) {
-                alt_calibrate();
+                setpoint_decrement_yaw();
             }
 
-            // Check for display state change
+            // Check for clockwise rotation button press
+            butState = btn_check(RIGHT);
+            if (butState == PUSHED) {
+                setpoint_increment_yaw();
+            }
+
+            // Check for increase altitude button press
             butState = btn_check(UP);
             if (butState == PUSHED) {
-                disp_advanceState();
+                setpoint_increment_altitude();
             }
+
+            // Check for decrease altitude button press
+            butState = btn_check(DOWN);
+            if (butState == PUSHED) {
+                setpoint_decrement_altitude();
+            }
+
             // Calculate altitude from mean average of buffer contents
             alt_update();
 
