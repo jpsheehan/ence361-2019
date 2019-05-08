@@ -151,16 +151,16 @@ void disp_all(void)
 {
     char string[17];
 
-    usnprintf (string, sizeof(string), "    Main = %4d%%", 0); // TODO: Replace with actual main rotor duty cycle
+    usnprintf (string, sizeof(string), "Main Duty %4d%%", 0); // TODO: Replace with actual main rotor duty cycle
     OLEDStringDraw (string, 0, 0);
 
-    usnprintf (string, sizeof(string), "    Tail = %4d%%", 0); // TODO: Replace with actual tail rotor duty cycle
+    usnprintf (string, sizeof(string), "Tail Duty %4d%%", 0); // TODO: Replace with actual tail rotor duty cycle
     OLEDStringDraw (string, 0, 1);
 
-    usnprintf (string, sizeof(string), "     Yaw = %4d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
+    usnprintf (string, sizeof(string), "      Yaw %4d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
     OLEDStringDraw (string, 0, 2);
 
-    usnprintf (string, sizeof(string), "Altitude = %4d%%", alt_getPercent());
+    usnprintf (string, sizeof(string), " Altitude %4d%%", alt_getPercent());
     OLEDStringDraw (string, 0, 3);
 }
 
