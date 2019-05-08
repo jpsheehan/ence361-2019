@@ -23,7 +23,7 @@
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 #include "driverlib/adc.h"
-#include "driverlib/pwm.h"
+//#include "driverlib/pwm.h"
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/systick.h"
@@ -33,10 +33,11 @@
 #include "button.h"
 #include "display.h"
 #include "altitude.h"
-#include "pwm.h"
+//#include "pwm.h"
 #include "utils.h"
 #include "uart.h"
 #include "yaw.h"
+#include "pwmGen.h"
 
 /**
  * (Original Code by P.J. Bones)
@@ -60,13 +61,16 @@ int main(void)
 	alt_init();
 	disp_init();
 	btn_init();
-	pwm_init();
+	//pwm_init();
 	yaw_init();
 	uart_init();
+	initialisePWM();
+
 
     //
     // Enable interrupts to the processor.
     IntMasterEnable();
+
 
 	while (true)
 	{
@@ -116,7 +120,7 @@ int main(void)
 	    }
 	    // Used for tracking the speed of the loop.
 	    // Toggles PWM on/off each loop
-	    pwm_toggle();
+	    //pwm_toggle();
 	    uart_update();
 	}
 }
