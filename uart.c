@@ -36,6 +36,7 @@
 #include "yaw.h"
 #include "uart.h"
 #include "altitude.h"
+#include "setpoint.h"
 
 #define BAUD_RATE 9600
 #define UART_USB_BASE           UART0_BASE
@@ -83,10 +84,10 @@ void uart_send(const char* t_buffer)
 
 void uart_update(void)
 {
-    uint16_t target_yaw = 0; // TODO: Add target yaw
+    uint16_t target_yaw = setpoint_get_yaw();
     uint16_t actual_yaw = yaw_getDegrees();
 
-    int16_t target_altitude = 0; // TODO: Add target altitude
+    int16_t target_altitude = setpoint_get_altitude();
     int32_t actual_altitude = alt_getPercent(); // TODO: maybe change this to int16_t in the altitude module?
     uint8_t main_rotor_duty = 0; // TODO: Add main rotor duty
     uint8_t tail_rotor_duty = 0; // TODO: Add tail rotor duty
