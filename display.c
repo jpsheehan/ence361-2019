@@ -96,7 +96,6 @@ void disp_percentAlt(void) {
 
 }
 
-
 /**
  * Display yaw reading to the display between 0-359
  * Positive yaw is CW.
@@ -107,6 +106,7 @@ void disp_yaw(void)
     usnprintf (string, sizeof(string), "Yaw = %3d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
     OLEDStringDraw (string, 0, 2);
 }
+
 /**
  * Display raw 12-bit adc reading to the display
  */
@@ -116,12 +116,14 @@ void disp_clear(void) {
     OLEDStringDraw ("                ", 0, 2);
     OLEDStringDraw ("                ", 0, 3);
 }
+
 /**
  * Display a blank line to the display, clearing any previous render.
  */
 void disp_none(void) {
     OLEDStringDraw ("                ", 0, 0);
 }
+
 /**
  * Splash screen used during initial calibration while waiting for buffer to fill
  */
@@ -141,12 +143,19 @@ void disp_advanceState(void)
         g_displayState = DISP_STATE_CALIBRATION + 1;
     }
 }
+
 /**
  * Display yaw and altitude percentage at the same time
  */
 void disp_all(void)
 {
     char string[17];
+
+    usnprintf (string, sizeof(string), "    Main = %4d%%", 0); // TODO: Replace with actual main rotor duty cycle
+    OLEDStringDraw (string, 0, 0);
+
+    usnprintf (string, sizeof(string), "    Tail = %4d%%", 0); // TODO: Replace with actual tail rotor duty cycle
+    OLEDStringDraw (string, 0, 1);
 
     usnprintf (string, sizeof(string), "     Yaw = %4d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
     OLEDStringDraw (string, 0, 2);
