@@ -26,6 +26,7 @@
 #include "altitude.h"
 #include "utils.h"
 #include "yaw.h"
+#include "pwmGen.h"
 
 /**
  * When true clamps percentage between 0 and 100%
@@ -86,10 +87,10 @@ void disp_all(void)
 {
     char string[17];
 
-    usnprintf (string, sizeof(string), "Main Duty: %4d%%", 0); // TODO: Replace with actual main rotor duty cycle
+    usnprintf (string, sizeof(string), "Main Duty: %4d%%", pwm_get_main_duty());
     OLEDStringDraw (string, 0, 0);
 
-    usnprintf (string, sizeof(string), "Tail Duty: %4d%%", 0); // TODO: Replace with actual tail rotor duty cycle
+    usnprintf (string, sizeof(string), "Tail Duty: %4d%%", pwm_get_tail_duty());
     OLEDStringDraw (string, 0, 1);
 
     usnprintf (string, sizeof(string), "      Yaw: %4d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
