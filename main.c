@@ -51,6 +51,62 @@ void clock_init (void)
                    SYSCTL_XTAL_16MHZ);
 }
 
+void startup_sequence(void)
+{
+    // Render splash screen while we wait for buffer to fill
+    disp_render();
+
+    // Wait a 3 seconds
+    utils_waitForSeconds(3);
+
+    while (!alt_getIsCalibrated())
+    {
+
+        // check that we have filled the buffer with data
+        if (alt_getIsBufferFull()) {
+            alt_update();
+            alt_calibrate();
+            disp_advanceState();
+        }
+    }
+}
+
+void process_inputs(void)
+{
+    // Button state
+    butStates_t butState;
+
+    //
+    // Background task: calculate the (approximate) mean of the values in the
+    // circular buffer and display it, together with the sample number.
+
+    btn_update();
+
+    // Check for counter-clockwise rotation button press
+    butState = btn_check(LEFT);
+    if (butState == PUSHED) {
+        setpoint_decrement_yaw();
+    }
+
+    // Check for clockwise rotation button press
+    butState = btn_check(RIGHT);
+    if (butState == PUSHED) {
+        setpoint_increment_yaw();
+    }
+
+    // Check for increase altitude button press
+    butState = btn_check(UP);
+    if (butState == PUSHED) {
+        setpoint_increment_altitude();
+    }
+
+    // Check for decrease altitude button press
+    butState = btn_check(DOWN);
+    if (butState == PUSHED) {
+        setpoint_decrement_altitude();
+    }
+}
+
 /**
  * The main loop of the program.
  * Responsible for initialising all the modules, responding to input and rendering text on the screen.
@@ -68,6 +124,7 @@ int main(void)
 	kernel_init();
 	setpoint_init();
 
+	kernel_add_task(&process_inputs);
 	kernel_add_task(&alt_update);
 	kernel_add_task(&disp_render);
 	kernel_add_task(&uart_update);
@@ -78,62 +135,11 @@ int main(void)
 
     pwm_set_tail_duty(20);
 
+    startup_sequence();
 
 	while (true)
 	{
-	    // Button state
-	    butStates_t butState;
-
-	    // Ensure buffer is filled and adc has settled from inital power on.
-	    if (alt_getIsCalibrated()) {
-
-            //
-            // Background task: calculate the (approximate) mean of the values in the
-            // circular buffer and display it, together with the sample number.
-
-            btn_update();
-
-            // Check for counter-clockwise rotation button press
-            butState = btn_check(LEFT);
-            if (butState == PUSHED) {
-                setpoint_decrement_yaw();
-            }
-
-            // Check for clockwise rotation button press
-            butState = btn_check(RIGHT);
-            if (butState == PUSHED) {
-                setpoint_increment_yaw();
-            }
-
-            // Check for increase altitude button press
-            butState = btn_check(UP);
-            if (butState == PUSHED) {
-                setpoint_increment_altitude();
-            }
-
-            // Check for decrease altitude button press
-            butState = btn_check(DOWN);
-            if (butState == PUSHED) {
-                setpoint_decrement_altitude();
-            }
-
-            kernel_run();
-
-	    } else {
-	        // Render splash screen while we wait for buffer to fill
-	        disp_render();
-
-	        // Wait a 3 seconds
-	        utils_waitForSeconds(3);
-
-	        // check that we have filled the buffer with data
-	        if (alt_getIsBufferFull()) {
-	            alt_update();
-	            alt_calibrate();
-	            disp_advanceState();
-	        }
-
-	    }
+        kernel_run();
 	}
 }
 
