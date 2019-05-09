@@ -33,7 +33,6 @@
 #include "button.h"
 #include "display.h"
 #include "altitude.h"
-//#include "pwm.h"
 #include "utils.h"
 #include "uart.h"
 #include "yaw.h"
@@ -62,7 +61,6 @@ int main(void)
 	alt_init();
 	disp_init();
 	btn_init();
-	//pwm_init();
 	yaw_init();
 	uart_init();
 	initialisePWM();
