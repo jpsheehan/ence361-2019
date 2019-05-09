@@ -133,6 +133,8 @@ int main(void)
 	    }
 
 	    uart_update();
+	    pwm_set_main_duty(65);
+	    pwm_set_tail_duty(45);
 	}
 }
 
