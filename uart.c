@@ -32,6 +32,7 @@
 #include "utils/ustdlib.h"
 #include "stdio.h"
 #include "stdlib.h"
+#include <string.h>
 
 #include "yaw.h"
 #include "uart.h"
@@ -46,6 +47,13 @@
 #define UART_USB_GPIO_PIN_RX    GPIO_PIN_0
 #define UART_USB_GPIO_PIN_TX    GPIO_PIN_1
 #define UART_USB_GPIO_PINS      UART_USB_GPIO_PIN_RX | UART_USB_GPIO_PIN_TX
+
+#define UART_INPUT_BUFFER_SIZE 40
+#define UART_ALLOW_COMMANDS true
+
+static char g_buffer[UART_INPUT_BUFFER_SIZE];
+
+static int g_remove_me = 0;
 
 void uart_init(void)
 {
@@ -82,6 +90,42 @@ void uart_send(const char* t_buffer)
     }
 }
 
+void uart_process_command(const char* buffer, size_t buffer_len)
+{
+    // find the next equals sign
+    char* equals = strchr(buffer, '=');
+
+    if (equals != NULL)
+    {
+        // clobber the equals sign so we can use strcmp
+        *equals = '\0';
+
+        // the value to be read is the string starting at the character after the equals sign
+        char* value_str = equals + 1;
+        char* end_ptr;
+
+        int value = strtod(value_str, &end_ptr);
+
+        if (end_ptr != NULL)
+        {
+            // update gains here!
+//            if (strcmp(buffer, "kp") == 0)
+//            {
+//                 kp = value;
+//            }
+//            else if (strcmp(buffer, "ki") == 0)
+//            {
+//                 ki = value;
+//            }
+//            else if (strcmp(buffer, "kd") == 0)
+//            {
+//                kd = value;
+//            }
+
+        }
+    }
+}
+
 void uart_update(void)
 {
     uint16_t target_yaw = setpoint_get_yaw();
@@ -91,12 +135,43 @@ void uart_update(void)
     int32_t actual_altitude = alt_getPercent(); // TODO: maybe change this to int16_t in the altitude module?
     uint8_t main_rotor_duty = 0; // TODO: Add main rotor duty
     uint8_t tail_rotor_duty = 0; // TODO: Add tail rotor duty
-    uint8_t operating_mode = 0; // TODO: Add operating mode
+    uint8_t operating_mode = g_remove_me; // TODO: Add operating mode
 
     // format the outgoing data
-    char buffer[40] = {0};
-    usprintf(buffer, "Y%d\ty%d\tA%d\ta%d\tm%d\tt%d\to%d\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
+    usprintf(g_buffer, "Y%d\ty%d\tA%d\ta%d\tm%d\tt%d\to%d\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
 
     // send it
-    uart_send(buffer);
+    uart_send(g_buffer);
+
+#if UART_ALLOW_COMMANDS
+    // check if there are any characters to be read
+    if (UARTCharsAvail(UART_USB_BASE))
+    {
+        uint8_t read = 0;
+
+        while (read < UART_INPUT_BUFFER_SIZE)
+        {
+            int32_t c = UARTCharGetNonBlocking(UART_USB_BASE);
+
+            if (c == -1)
+            {
+                break;
+            }
+
+            g_buffer[read++] = (char)c;
+        }
+
+        // put null characters in special places
+        if (read < UART_INPUT_BUFFER_SIZE)
+        {
+            g_buffer[read] = '\0';
+        }
+        g_buffer[UART_INPUT_BUFFER_SIZE - 1] = '\0';
+
+        if (read > 0)
+        {
+            uart_process_command(g_buffer, UART_INPUT_BUFFER_SIZE);
+        }
+    }
+#endif
 }
