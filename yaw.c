@@ -1,6 +1,6 @@
 /*******************************************************************************
  * 
- * quadrature.c
+ * yaw.c
  * 
  * ENEL361 Helicopter Project
  * Friday Morning, Group 7
