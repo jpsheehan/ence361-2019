@@ -41,6 +41,11 @@ static uint8_t g_current_task;
 static KernelTask* g_tasks;
 
 /**
+ * Stores the number of times kernel_run was called.
+ */
+static uint32_t g_run_count;
+
+/**
  * Is true when memory allocation was successful.
  */
 static bool g_init_ok = false;
@@ -49,6 +54,7 @@ void kernel_init(void)
 {
     g_task_total = 0;
     g_current_task = 0;
+    g_run_count = 0;
 
     // allocate the memory for the arrays
     g_tasks = malloc(sizeof(KernelTask) * MAX_TASKS);
@@ -70,11 +76,16 @@ void kernel_run(void)
 {
     if (g_task_total > 0)
     {
-        ((void(*)(void))(g_tasks[g_current_task].function))();
+        KernelTask task = g_tasks[g_current_task];
+
+        ((void(*)(void))(task.function))();
         if (++g_current_task >= g_task_total)
         {
             g_current_task = 0;
         }
+
+        // increment the run count
+        g_run_count++;
     }
 }
 
