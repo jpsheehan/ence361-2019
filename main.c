@@ -38,6 +38,7 @@
 #include "yaw.h"
 #include "pwmGen.h"
 #include "setpoint.h"
+#include "kernel.h"
 
 /**
  * (Original Code by P.J. Bones)
@@ -64,12 +65,18 @@ int main(void)
 	yaw_init();
 	uart_init();
 	pwm_init();
-
+	kernel_init();
 	setpoint_init();
+
+	kernel_add_task(&alt_update);
+	kernel_add_task(&disp_render);
+	kernel_add_task(&uart_update);
 
     //
     // Enable interrupts to the processor.
     IntMasterEnable();
+
+    pwm_set_tail_duty(20);
 
 
 	while (true)
@@ -110,11 +117,7 @@ int main(void)
                 setpoint_decrement_altitude();
             }
 
-            // Calculate altitude from mean average of buffer contents
-            alt_update();
-
-            // Render display state to the display
-            disp_render();
+            kernel_run();
 
 	    } else {
 	        // Render splash screen while we wait for buffer to fill
@@ -131,10 +134,6 @@ int main(void)
 	        }
 
 	    }
-
-	    uart_update();
-	    pwm_set_main_duty(65);
-	    pwm_set_tail_duty(45);
 	}
 }
 
