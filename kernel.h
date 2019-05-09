@@ -21,6 +21,17 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+struct kernel_task_s
+{
+    void* function;
+    uint8_t priority;
+};
+
+/**
+ * Stores information about a schedulable task.
+ */
+typedef struct kernel_task_s KernelTask;
+
 /**
  * Initialises the kernel.
  */
@@ -29,7 +40,7 @@ void kernel_init(void);
 /**
  * Adds a task with a priority level (higher is lower priority) to the kernel.
  */
-void kernel_add_task(void (*t_task)(void), uint8_t t_priority);
+void kernel_add_task(KernelTask t_task);
 
 /**
  * Runs the next kernel task.

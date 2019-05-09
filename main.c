@@ -124,10 +124,10 @@ int main(void)
 	kernel_init();
 	setpoint_init();
 
-	kernel_add_task(&process_inputs, 0);
-	kernel_add_task(&alt_update, 0);
-	kernel_add_task(&disp_render, 0);
-	kernel_add_task(&uart_update, 0);
+	kernel_add_task((KernelTask){ &process_inputs });
+	kernel_add_task((KernelTask){ &alt_update });
+	kernel_add_task((KernelTask){ &disp_render });
+	kernel_add_task((KernelTask){ &uart_update });
 
     //
     // Enable interrupts to the processor.

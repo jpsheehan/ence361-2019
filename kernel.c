@@ -38,12 +38,7 @@ static uint8_t g_current_task;
 /**
  * The array of tasks (to be allocated in kernel_init)
  */
-static void** g_tasks;
-
-/**
- * The array of priorities (to be allocated in kernel_init)
- */
-static uint8_t* g_priorities;
+static KernelTask* g_tasks;
 
 /**
  * Is true when memory allocation was successful.
@@ -56,19 +51,17 @@ void kernel_init(void)
     g_current_task = 0;
 
     // allocate the memory for the arrays
-    g_tasks = malloc(sizeof(void*) * MAX_TASKS);
-    g_priorities = malloc(sizeof(uint8_t) * MAX_TASKS);
+    g_tasks = malloc(sizeof(KernelTask) * MAX_TASKS);
 
     // set g_init_ok if memory was allocated
-    g_init_ok = g_tasks != NULL && g_priorities != NULL;
+    g_init_ok = g_tasks != NULL;
 }
 
-void kernel_add_task(void (*t_task)(void), uint8_t t_priority)
+void kernel_add_task(KernelTask t_task)
 {
     if (g_task_total < MAX_TASKS && g_init_ok)
     {
-        g_tasks[g_task_total] = (void*)t_task;
-        g_priorities[g_task_total] = t_priority;
+        g_tasks[g_task_total] = t_task;
         g_task_total++;
     }
 }
@@ -77,7 +70,7 @@ void kernel_run(void)
 {
     if (g_task_total > 0)
     {
-        ((void(*)(void))(g_tasks[g_current_task]))();
+        ((void(*)(void))(g_tasks[g_current_task].function))();
         if (++g_current_task >= g_task_total)
         {
             g_current_task = 0;
