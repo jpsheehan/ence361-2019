@@ -23,11 +23,7 @@
 
 #define min(a, b) (a < b ? a : b)
 #define max(a, b) (a > b ? a : b)
-
-/**
- * "Clamps" the `value` between `min` and `max` inclusive.
- */
-int32_t utils_clamp(int32_t t_value, int32_t t_min, int32_t t_max);
+#define clamp(val, mn, mx) (max(min(val, mx), mn))
 
 /**
  * Waits for `t_delay` seconds before returning. Note that this is

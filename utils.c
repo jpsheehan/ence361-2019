@@ -30,24 +30,6 @@
  */
 #define UTILS_SECOND_DELAY_COEFFICIENT 6
 
-int32_t utils_clamp(int32_t t_value, int32_t t_min, int32_t t_max)
-{
-    // if the value is less than the minimum, return the minimum
-    if (t_value < t_min)
-    {
-        return t_min;
-    }
-
-    // if the value is greater than the maximum, return the maximum
-    if (t_value > t_max)
-    {
-        return t_max;
-    }
-
-    // otherwise, return the value
-    return t_value;
-}
-
 void utils_waitForSeconds(uint32_t t_delay)
 {
     SysCtlDelay((SysCtlClockGet() * t_delay) / UTILS_SECOND_DELAY_COEFFICIENT);
