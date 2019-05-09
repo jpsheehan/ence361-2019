@@ -77,7 +77,7 @@
 #define PWM_TAIL_BASE        PWM1_BASE
 #define PWM_TAIL_GEN         PWM_GEN_2
 #define PWM_TAIL_OUTNUM      PWM_OUT_5              //outputs 5 (& 4) correspond to GEN_2
-#define PWM_TAIL_OUTBIT      PWM_OUT_7_BIT
+#define PWM_TAIL_OUTBIT      PWM_OUT_5_BIT
 #define PWM_TAIL_PERIPH_PWM  SYSCTL_PERIPH_PWM1     //PWM module 1
 #define PWM_TAIL_PERIPH_GPIO SYSCTL_PERIPH_GPIOF
 #define PWM_TAIL_GPIO_BASE   GPIO_PORTF_BASE        //GPIO port
