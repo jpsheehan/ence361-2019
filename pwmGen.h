@@ -28,12 +28,17 @@
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 
-void initialisePWM (void);
+void pwm_init (void);
 
 /**
  * Set PWM frequency and duty cycle.
  */
-void setPWM (uint32_t u32Freq, uint32_t u32Duty);
+void pwm_set_main_duty (int8_t t_duty);
 
+int8_t pwm_get_main_duty(void);
+
+void pwm_set_tail_duty (int8_t t_duty);
+
+int8_t pwm_get_tail_duty(void);
 
 #endif

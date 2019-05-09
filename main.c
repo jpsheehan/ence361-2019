@@ -63,7 +63,7 @@ int main(void)
 	btn_init();
 	yaw_init();
 	uart_init();
-	initialisePWM();
+	pwm_init();
 
 	setpoint_init();
 
@@ -131,11 +131,8 @@ int main(void)
 	        }
 
 	    }
-	    // Used for tracking the speed of the loop.
-	    // Toggles PWM on/off each loop
-	    //pwm_toggle();
+
 	    uart_update();
-	    setPWM (200, 40);
 	}
 }
 
