@@ -26,7 +26,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
   - [ ] Two output PWM signals should be generated. The PWM signals should be in the range from 150 Hz to 300 Hz:
       - [ ] One for the main rotor (module 0, PWM 7).
       - [ ] One for the tail rotor (module 1, PWM 5).
-      - [ ] The duty cycles (as percentages) for each motor should be displayed on the OLED display.
+      - [x] The duty cycles (as percentages) for each motor should be displayed on the OLED display.
   - [ ] The SW1 slider switch on the Orbit board should control the mode of the helicopter (DOWN position = landed/in the process of landing, changing from DOWN to UP when the helicopter is landed should cause the helicopter to take off).
       - [ ] The helicopter should land smoothly, facing the reference orientation. When landing is complete, the rotors should stop.
       - [ ] At take off the rotors should start and the helicopter should rotate to the reference orientation.
@@ -46,7 +46,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [x] The actual yaw (degrees).
       - [x] The desired altitude (percentage of maximum alt.).
       - [x] The actual altitude (percentage of maximum alt.).
-      - [ ] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
+      - [x] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
       - [ ] The current operating mode.
   - [ ] The program should use the pin-map as outlined [below](#pin-map).
 - [ ] **Report**
