@@ -38,6 +38,7 @@
 #include "uart.h"
 #include "altitude.h"
 #include "setpoint.h"
+#include "pwmGen.h"
 
 #define BAUD_RATE 9600
 #define UART_USB_BASE           UART0_BASE
@@ -133,8 +134,8 @@ void uart_update(void)
 
     int16_t target_altitude = setpoint_get_altitude();
     int32_t actual_altitude = alt_getPercent(); // TODO: maybe change this to int16_t in the altitude module?
-    uint8_t main_rotor_duty = 0; // TODO: Add main rotor duty
-    uint8_t tail_rotor_duty = 0; // TODO: Add tail rotor duty
+    uint8_t main_rotor_duty = pwm_get_main_duty();
+    uint8_t tail_rotor_duty = pwm_get_tail_duty();
     uint8_t operating_mode = g_remove_me; // TODO: Add operating mode
 
     // format the outgoing data
