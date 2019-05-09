@@ -38,6 +38,7 @@
 #include "yaw.h"
 #include "pwmGen.h"
 #include "setpoint.h"
+#include "kernel.h"
 
 /**
  * (Original Code by P.J. Bones)
@@ -48,6 +49,62 @@ void clock_init (void)
     // Set the clock rate to 40 MHz
     SysCtlClockSet (SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
                    SYSCTL_XTAL_16MHZ);
+}
+
+void startup_sequence(void)
+{
+    // Render splash screen while we wait for buffer to fill
+    disp_render();
+
+    // Wait a 3 seconds
+    utils_waitForSeconds(3);
+
+    while (!alt_getIsCalibrated())
+    {
+
+        // check that we have filled the buffer with data
+        if (alt_getIsBufferFull()) {
+            alt_update();
+            alt_calibrate();
+            disp_advanceState();
+        }
+    }
+}
+
+void process_inputs(void)
+{
+    // Button state
+    butStates_t butState;
+
+    //
+    // Background task: calculate the (approximate) mean of the values in the
+    // circular buffer and display it, together with the sample number.
+
+    btn_update();
+
+    // Check for counter-clockwise rotation button press
+    butState = btn_check(LEFT);
+    if (butState == PUSHED) {
+        setpoint_decrement_yaw();
+    }
+
+    // Check for clockwise rotation button press
+    butState = btn_check(RIGHT);
+    if (butState == PUSHED) {
+        setpoint_increment_yaw();
+    }
+
+    // Check for increase altitude button press
+    butState = btn_check(UP);
+    if (butState == PUSHED) {
+        setpoint_increment_altitude();
+    }
+
+    // Check for decrease altitude button press
+    butState = btn_check(DOWN);
+    if (butState == PUSHED) {
+        setpoint_decrement_altitude();
+    }
 }
 
 /**
@@ -64,77 +121,25 @@ int main(void)
 	yaw_init();
 	uart_init();
 	pwm_init();
-
+	kernel_init();
 	setpoint_init();
+
+	kernel_add_task((KernelTask){ &process_inputs });
+	kernel_add_task((KernelTask){ &alt_update });
+	kernel_add_task((KernelTask){ &disp_render });
+	kernel_add_task((KernelTask){ &uart_update });
 
     //
     // Enable interrupts to the processor.
     IntMasterEnable();
 
+    pwm_set_tail_duty(20);
+
+    startup_sequence();
 
 	while (true)
 	{
-	    // Button state
-	    butStates_t butState;
-
-	    // Ensure buffer is filled and adc has settled from inital power on.
-	    if (alt_getIsCalibrated()) {
-
-            //
-            // Background task: calculate the (approximate) mean of the values in the
-            // circular buffer and display it, together with the sample number.
-
-            btn_update();
-
-            // Check for counter-clockwise rotation button press
-            butState = btn_check(LEFT);
-            if (butState == PUSHED) {
-                setpoint_decrement_yaw();
-            }
-
-            // Check for clockwise rotation button press
-            butState = btn_check(RIGHT);
-            if (butState == PUSHED) {
-                setpoint_increment_yaw();
-            }
-
-            // Check for increase altitude button press
-            butState = btn_check(UP);
-            if (butState == PUSHED) {
-                setpoint_increment_altitude();
-            }
-
-            // Check for decrease altitude button press
-            butState = btn_check(DOWN);
-            if (butState == PUSHED) {
-                setpoint_decrement_altitude();
-            }
-
-            // Calculate altitude from mean average of buffer contents
-            alt_update();
-
-            // Render display state to the display
-            disp_render();
-
-	    } else {
-	        // Render splash screen while we wait for buffer to fill
-	        disp_render();
-
-	        // Wait a 3 seconds
-	        utils_waitForSeconds(3);
-
-	        // check that we have filled the buffer with data
-	        if (alt_getIsBufferFull()) {
-	            alt_update();
-	            alt_calibrate();
-	            disp_advanceState();
-	        }
-
-	    }
-
-	    uart_update();
-	    pwm_set_main_duty(65);
-	    pwm_set_tail_duty(45);
+        kernel_run();
 	}
 }
 
