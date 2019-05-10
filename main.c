@@ -97,7 +97,7 @@ void process_inputs(void)
     // Check for increase altitude button press
     butState = btn_check(UP);
     if (butState == PUSHED) {
-        setpoint_increment_altitude();
+		setpoint_increment_altitude();
     }
 
     // Check for decrease altitude button press
@@ -105,6 +105,35 @@ void process_inputs(void)
     if (butState == PUSHED) {
         setpoint_decrement_altitude();
     }
+	
+	// Check for slider switch
+	/*
+	butState = btn_check(MODE);
+	if (butState == PUSHED) {						//We are LANDED, want TAKE_OFF
+		
+		if (opMode_get_current == LANDED) {
+			opMode_set_current(TAKE_OFF);
+			setpoint_increment_altitude();			//Some altitude to find yaw reference? Some altitdiue will help yaw (counter torque). Could just make zero if not needed.
+			setpoint_decrement_yaw();				//Work out which wa yheli yaws in reponse to main and assist this.
+		}
+	if (butState == RELEASED) {						//We are IN_FLIGHT, want take LANDING
+		
+		if (opMode_get_current == IN_FLIGHT) {
+			opMode_set_current(LANDING);
+			// TO DO
+				//set altitude = zero
+				//set yaw = zero
+		}
+	}
+	
+	if (opMode_get_current == TAKE_OFF) && (g_has_been_calibrated) {
+		opMode_set_current(IN_FLIGHT);
+	}
+	
+	if (opMode_get_current == LANDING) && ((altitude == zero) && (yaw == zero)) ) {
+		opMode_set_current(LANDED);
+	}
+	*/
 }
 
 /**
@@ -123,6 +152,7 @@ int main(void)
 	pwm_init();
 	kernel_init();
 	setpoint_init();
+	opMode_init();
 
 	kernel_add_task((KernelTask){ &process_inputs });
 	kernel_add_task((KernelTask){ &alt_update });
