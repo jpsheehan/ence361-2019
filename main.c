@@ -39,6 +39,7 @@
 #include "pwmGen.h"
 #include "setpoint.h"
 #include "kernel.h"
+#include "slider.h"
 
 /**
  * (Original Code by P.J. Bones)
@@ -105,6 +106,23 @@ void process_inputs(void)
     if (butState == PUSHED) {
         setpoint_decrement_altitude();
     }
+
+    // check sw1
+    slider_update();
+    SliderState sw1_state = slider_check(SLIDER_SW1);
+    bool sw1_changed = slider_changed(SLIDER_SW1);
+
+    if (sw1_state == SLIDER_DOWN)
+    {
+        // slider is in the down position
+    }
+    else
+    {
+        if (sw1_state == SLIDER_UP && sw1_changed)
+        {
+            // slider has been changed into the up position
+        }
+    }
 	
 	// Check for slider switch
 	/*
@@ -153,6 +171,7 @@ int main(void)
 	kernel_init();
 	setpoint_init();
 	opMode_init();
+	slider_init();
 
 	kernel_add_task((KernelTask){ &process_inputs });
 	kernel_add_task((KernelTask){ &alt_update });
