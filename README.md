@@ -38,8 +38,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [x] LEFT button: Rotate the helicopter counter clockwise 15 degrees.
       - [x] RIGHT button: Rotate the helicopter clockwise 15 degrees.
       - [x] Pressing LEFT/RIGHT buttons should not affect the altitude.
-  - [ ] The virtual button signals from the web interface are asserted for 200 ms. The virtual slider UP position is HIGH.
-  - [ ] The program should have a real-time foreground/background kernel operating on a round-robin basis. Robust behaviour should be maintained at all times.
+  - [x] The program should have a real-time foreground/background kernel operating on a round-robin basis. Robust behaviour should be maintained at all times.
   - [ ] A PI (preferred) or PID (acceptable) controller should be used to acheive flight.
   - [ ] Information on the status of the helicopter should be transmitted via a serial link from UART0 at 9600 baud, with 1 stop bit and no parity bit in each transmitted byte. The information should be concise but in an easily readable format that is compatible with the scrolling display of the remote lab web page. Updates should be transmitted regularly at least 4 times per second. Status information should include:
       - [x] The desired yaw (degrees).
