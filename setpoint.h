@@ -43,6 +43,11 @@ void setpoint_decrement_yaw(void);
 int16_t setpoint_get_yaw(void);
 
 /**
+ * Sets the yaw to a specific angle (in degrees).
+ */
+void setpoint_set_yaw(int16_t t_yaw);
+
+/**
  * Increments the target altitude by a certain amount.
  */
 void setpoint_increment_altitude(void);
@@ -56,5 +61,10 @@ void setpoint_decrement_altitude(void);
  * Returns the target altitude (expressed as a percentage of the total height).
  */
 int16_t setpoint_get_altitude(void);
+
+/**
+ * Sets the altitude to a specific value (as a percentage).
+ */
+void setpoint_set_altitude(int16_t t_altitude);
 
 #endif /* SETPOINT_H_ */

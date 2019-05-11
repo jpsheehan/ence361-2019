@@ -71,6 +71,12 @@ int16_t setpoint_get_yaw(void)
     return g_desired_yaw;
 }
 
+
+void setpoint_set_yaw(int16_t t_yaw)
+{
+    g_desired_yaw = clamp(t_yaw, 0, 359);
+}
+
 void setpoint_increment_altitude(void)
 {
     // increment the altitude and then clamp if necessary
@@ -86,4 +92,9 @@ void setpoint_decrement_altitude(void)
 int16_t setpoint_get_altitude(void)
 {
     return g_desired_altitude;
+}
+
+void setpoint_set_altitude(int16_t t_altitude)
+{
+    g_desired_altitude = clamp(t_altitude, 0, 100);
 }
