@@ -21,7 +21,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "opStausFSM.h"
+#include "opStatusFSM.h"
 
 
 /**
@@ -37,7 +37,7 @@ volatile static OperatingMode opMode_current_state;
 /**
  * Initialise operating mode (a.k.a. flight status), state machine.
  */
-void init_OpMode(void)
+void init_OpMode(void);
 
 /**
  * Get current operating mode (a.k.a. flight status), state machine.

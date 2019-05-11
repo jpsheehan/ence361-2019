@@ -35,7 +35,7 @@ typedef enum operating_mode OperatingMode;
 /**
  * Initialise operating mode (a.k.a. flight status), state machine.
  */
-void opMode_init(void)
+void opMode_init(void);
 
 /**
  * Get current operating mode (a.k.a. flight status), state machine.

@@ -46,17 +46,17 @@ void opMode_init(void)
 /**
  * Get current operating mode (a.k.a. flight status), state machine.
  */
-OperatingMode opMode_get_current(void);
-    {
+OperatingMode opMode_get_current(void)
+{
     return (opMode_current_state);
-    }
+}
 
 /**
  * Set operating mode (a.k.a. flight status), state machine..
  */
-void opMode_set_current(OperatingMode opMode_new);
-    {
+void opMode_set_current(OperatingMode opMode_new)
+{
     //opMode_previous_state = opMode_current_state;
     opMode_current_state = opMode_new;
-    }
+}
 
