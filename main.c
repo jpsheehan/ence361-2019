@@ -170,7 +170,7 @@ int main(void)
 	pwm_init();
 	kernel_init();
 	setpoint_init();
-	opMode_init();
+//	opMode_init();
 	slider_init();
 
 	kernel_add_task((KernelTask){ &process_inputs });

@@ -70,8 +70,8 @@ void slider_update(void)
         g_previous_state[i] = g_current_state[i];
     }
 
-    g_current_state[SLIDER_SW1] = GPIOPinRead(SW1_PORT_BASE, SW1_PORT_PIN) == SW1_PORT_PIN;
-    g_current_state[SLIDER_SW2] = GPIOPinRead(SW2_PORT_BASE, SW2_PORT_PIN) == SW2_PORT_PIN;
+    g_current_state[(unsigned int)SLIDER_SW1] = GPIOPinRead(SW1_PORT_BASE, SW1_PORT_PIN) == SW1_PORT_PIN;
+    g_current_state[(unsigned int)SLIDER_SW2] = GPIOPinRead(SW2_PORT_BASE, SW2_PORT_PIN) == SW2_PORT_PIN;
 }
 
 SliderState slider_check(SliderSwitch t_switch)
