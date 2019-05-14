@@ -38,11 +38,6 @@
 #include "altitude.h"
 
 /**
- * The sample rate of the ADC. This is how many times per second the alt_ADCIntHandler is called.
- */
-#define ALT_SAMPLE_RATE_HZ 256
-
-/**
  * The size of the buffer used to store the raw ADC values. This needs to be big enough that outliers in the data cannot affect the calculated mean in an adverse way.
  */
 #define ALT_BUF_SIZE 32
@@ -229,4 +224,9 @@ bool alt_getIsCalibrated(void)
 bool alt_getIsBufferFull(void)
 {
     return (g_ulSampCnt > ALT_SAMPLE_RATE_HZ);
+}
+
+uint32_t alt_getIntCount(void)
+{
+    return g_ulSampCnt;
 }

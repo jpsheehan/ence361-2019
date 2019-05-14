@@ -25,6 +25,11 @@
 #include <stdbool.h>
 
 /**
+ * The sample rate of the ADC. This is how many times per second the alt_ADCIntHandler is called.
+ */
+#define ALT_SAMPLE_RATE_HZ 256
+
+/**
  * Initialises the altitude module.
  * This must be called before any other functions in the altitude module.
  */
@@ -60,5 +65,11 @@ bool alt_getIsCalibrated(void);
  * Returns `true` if the circular buffer is full and ready to be calculated.
  */
 bool alt_getIsBufferFull(void);
+
+/**
+ * Returns the number of times the SysTick interrupt handler has been called.
+ * TODO: Move this somewhere else? Doesn't really fit here.
+ */
+uint32_t alt_getIntCount(void);
 
 #endif
