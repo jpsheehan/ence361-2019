@@ -76,7 +76,7 @@ static uint32_t g_latestAltitudeMean;
 /**
  * The mean altitude as a percentage of full height. This is updated when the `void alt_update()` function is called.
  */
-static int32_t g_latestAltitudePercentage;
+static int16_t g_latestAltitudePercentage;
 
 /**
  * Indicates if the altitude has been calibrated yet. This is set when calling the `void alt_calibrate()` function and returned when calling the `bool alt_getIsCalibrated()` function.
@@ -202,7 +202,7 @@ void alt_update(void)
     g_latestAltitudeMean = (2 * sum + ALT_BUF_SIZE) / (2 * ALT_BUF_SIZE);
 
     // calculate the percentage mean
-    g_latestAltitudePercentage = ((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALT_DELTA);
+    g_latestAltitudePercentage = (int16_t)((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALT_DELTA);
 }
 
 void alt_calibrate(void)
@@ -211,7 +211,7 @@ void alt_calibrate(void)
     g_hasBeenCalibrated = true;
 }
 
-int32_t alt_getPercent(void)
+int16_t alt_getPercent(void)
 {
     return g_latestAltitudePercentage;
 }
