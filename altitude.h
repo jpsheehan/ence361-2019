@@ -67,9 +67,8 @@ bool alt_getIsCalibrated(void);
 bool alt_getIsBufferFull(void);
 
 /**
- * Returns the number of times the SysTick interrupt handler has been called.
- * TODO: Move this somewhere else? Doesn't really fit here.
+ * Performs an ADC conversion.
  */
-uint32_t alt_getIntCount(void);
+void alt_process_adc(void);
 
 #endif

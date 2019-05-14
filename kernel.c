@@ -17,10 +17,13 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+#include "driverlib/sysctl.h"
+#include "driverlib/systick.h"
 
 #include "kernel.h"
 #include "utils.h"
-#include "altitude.h" // for the alt_getIntCount and ALT_SAMPLE_RATE_HZ
 
 /**
  * The maximum amount of tasks that can be scheduled.
@@ -38,31 +41,80 @@ static uint8_t g_task_total;
 static KernelTask* g_tasks;
 
 /**
- * Stores the number of times the SysTickIntHandler has been called.
+ * Stores the number of times the SysTickIntHandler has been called when
+ * kernel_run was last called.
  */
 static uint32_t g_last_count;
+
+/**
+ * Stores the number of times the SysTickIntHandler has been called.
+ */
+static uint32_t g_systick_count;
+
+/**
+ * The frequency that the kernel runs at.
+ */
+static uint32_t g_kernel_frequency;
 
 /**
  * Is true when memory allocation was successful.
  */
 static bool g_init_ok = false;
 
-void kernel_init(void)
+/**
+ * The SysTick event handler. Simply increments a global static variable.
+ */
+void kernel_systick_int_handler(void)
+{
+    g_systick_count++;
+}
+
+/**
+ * (Original code by P.J. Bones)
+ * Intialises the system tick interrupt handler.
+ */
+void kernel_init_systick(void)
+{
+    //
+    // Set up the period for the SysTick timer.  The SysTick timer period is
+    // set as a function of the system clock.
+    SysTickPeriodSet(SysCtlClockGet() / g_kernel_frequency);
+    //
+    // Register the interrupt handler
+    SysTickIntRegister(kernel_systick_int_handler);
+    //
+    // Enable interrupt and device
+    SysTickIntEnable();
+    SysTickEnable();
+}
+
+void kernel_init(uint32_t t_frequency)
 {
     g_task_total = 0;
+    g_systick_count = 0;
     g_last_count = 0;
+    g_kernel_frequency = t_frequency;
 
     // allocate the memory for the arrays
     g_tasks = malloc(sizeof(KernelTask) * MAX_TASKS);
 
     // set g_init_ok if memory was allocated
     g_init_ok = g_tasks != NULL;
+
+    kernel_init_systick();
 }
 
 void kernel_add_task(KernelTask t_task)
 {
     if (g_task_total < MAX_TASKS && g_init_ok)
     {
+        // if the frequency is too high for the kernel
+        // to support, make the task run every time.
+        if (t_task.frequency > g_kernel_frequency)
+        {
+            t_task.frequency = 0;
+        }
+
         g_tasks[g_task_total] = t_task;
         g_task_total++;
     }
@@ -72,7 +124,7 @@ void kernel_run(void)
 {
     if (g_task_total > 0)
     {
-        uint32_t this_count = alt_getIntCount();
+        uint32_t this_count = g_systick_count;
         if (g_last_count != this_count)
         {
             // iterate through each task and see if it needs to be
@@ -83,7 +135,7 @@ void kernel_run(void)
                 KernelTask task = g_tasks[i];
                 uint32_t count_delta = this_count - task.int_count;
 
-                if (task.frequency == 0 || (((float)count_delta / ALT_SAMPLE_RATE_HZ) > (1.0f / task.frequency)))
+                if (task.frequency == 0 || (((float)count_delta / g_kernel_frequency) > (1.0f / task.frequency)))
                 {
                     ((void(*)(void))(task.function))();
                     g_tasks[i].int_count = this_count;
@@ -93,6 +145,16 @@ void kernel_run(void)
             g_last_count = this_count;
         }
     }
+}
+
+uint32_t kernel_get_systick_count(void)
+{
+    return g_systick_count;
+}
+
+uint32_t kernel_get_frequency(void)
+{
+    return g_kernel_frequency;
 }
 
 bool kernel_ready(void)

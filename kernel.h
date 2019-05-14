@@ -36,7 +36,7 @@ typedef struct kernel_task_s KernelTask;
 /**
  * Initialises the kernel.
  */
-void kernel_init(void);
+void kernel_init(uint32_t t_frequency);
 
 /**
  * Adds a task with a priority level (higher is lower priority) to the kernel.
@@ -52,5 +52,15 @@ void kernel_run(void);
  * Returns true if memory was allocated ok. Nothing will run if this returns false.
  */
 bool kernel_ready(void);
+
+/**
+ * Returns the number of times the SysTick interrupt was called.
+ */
+uint32_t kernel_get_systick_count(void);
+
+/**
+ * Returns the frequency the kernel was initialised with.
+ */
+uint32_t kernel_get_frequency(void);
 
 #endif /* KERNEL_H_ */

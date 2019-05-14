@@ -36,6 +36,7 @@
 
 #include "circBufT.h"
 #include "altitude.h"
+#include "kernel.h"
 
 /**
  * The size of the buffer used to store the raw ADC values. This needs to be big enough that outliers in the data cannot affect the calculated mean in an adverse way.
@@ -77,11 +78,6 @@ static int16_t g_latestAltitudePercentage;
  * Indicates if the altitude has been calibrated yet. This is set when calling the `void alt_calibrate()` function and returned when calling the `bool alt_getIsCalibrated()` function.
  */
 static bool g_hasBeenCalibrated = false;
-
-/**
- * Used as a counter for the number of samples taken. This is set whenever a conversion is initiated and is used by the `alt_getIsBufferFull()` function.
- */
-static uint32_t g_ulSampCnt;
 
 /**
  * (Original Code by P.J. Bones)
@@ -148,37 +144,16 @@ void alt_initADC(void)
  * (Original code by P.J. Bones)
  * The interrupt handler for the for SysTick interrupt.
  */
-void alt_SysTickIntHandler(void)
+void alt_process_adc(void)
 {
     //
     // Initiate a conversion
     //
     ADCProcessorTrigger(ADC0_BASE, 3);
-    g_ulSampCnt++;
-}
-
-/**
- * (Original code by P.J. Bones)
- * Intialises the system tick interrupt handler.
- */
-void alt_initSysTick(void)
-{
-    //
-    // Set up the period for the SysTick timer.  The SysTick timer period is
-    // set as a function of the system clock.
-    SysTickPeriodSet(SysCtlClockGet() / ALT_SAMPLE_RATE_HZ);
-    //
-    // Register the interrupt handler
-    SysTickIntRegister(alt_SysTickIntHandler);
-    //
-    // Enable interrupt and device
-    SysTickIntEnable();
-    SysTickEnable();
 }
 
 void alt_init(void)
 {
-    alt_initSysTick();
     alt_initADC();
     initCircBuf(&g_inBuffer, ALT_BUF_SIZE);
 }
@@ -223,10 +198,5 @@ bool alt_getIsCalibrated(void)
 
 bool alt_getIsBufferFull(void)
 {
-    return (g_ulSampCnt > ALT_SAMPLE_RATE_HZ);
-}
-
-uint32_t alt_getIntCount(void)
-{
-    return g_ulSampCnt;
+    return (kernel_get_systick_count() > ALT_SAMPLE_RATE_HZ);
 }
