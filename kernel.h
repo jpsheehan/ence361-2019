@@ -24,7 +24,8 @@
 struct kernel_task_s
 {
     void* function;
-    uint8_t priority;
+    uint16_t frequency;
+    uint32_t int_count;
 };
 
 /**
