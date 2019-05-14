@@ -46,6 +46,8 @@
 #define ALTITUDE_YAW_REF 5       //Altitude % to hover at while finding yaw reference
 #define PWM_TAIL_DUTY_YAW_REF 65 //Duty cycle % to apply to Tail while finding reference
 
+static const int KERNEL_FREQUENCY = 256;
+
 /**
  * (Original Code by P.J. Bones)
  * Initialisation functions for the clock (incl. SysTick), ADC, display
@@ -62,11 +64,9 @@ void startup_sequence(void)
     // Render splash screen while we wait for buffer to fill
     disp_render();
 
-    // Wait a 3 seconds
-    utils_waitForSeconds(3);
-
     while (!alt_getIsCalibrated())
     {
+        alt_process_adc();
 
         // check that we have filled the buffer with data
         if (alt_getIsBufferFull())
@@ -76,8 +76,10 @@ void startup_sequence(void)
             disp_advanceState();
         }
     }
-    flightMode_set_next(); //altitude calibrated so move to landed
+//    flightMode_set_next(); //altitude calibrated so move to landed
 }
+
+//#define flightMode_get_mode() IN_FLIGHT
 
 void process_inputs(void)
 {
@@ -131,27 +133,27 @@ void process_inputs(void)
     }
 
     // check sw1
-    slider_update();
-    SliderState sw1_state = slider_check(SLIDER_SW1);
-    bool sw1_changed = slider_changed(SLIDER_SW1);
-
-    if (sw1_state == SLIDER_DOWN)
-    {
-        if (flightMode_get_mode == IN_FLIGHT)
-        {
-            flightMode_set_next(); //were flying, change to landing
-        }
-    }
-    else
-    {
-        if (sw1_state == SLIDER_UP && sw1_changed)
-        {
-            // slider has been changed into the up position
-            if (flightMode_get_mode == LANDED)
-            {
-                flightMode_set_next(); //were landed, change to take off
-            }
-        }
+//    slider_update();
+//    SliderState sw1_state = slider_check(SLIDER_SW1);
+//    bool sw1_changed = slider_changed(SLIDER_SW1);
+//
+//    if (sw1_state == SLIDER_DOWN)
+//    {
+//        if (flightMode_get_mode == IN_FLIGHT)
+//        {
+//            flightMode_set_next(); //were flying, change to landing
+//        }
+//    }
+//    else
+//    {
+//        if (sw1_state == SLIDER_UP && sw1_changed)
+//        {
+//            // slider has been changed into the up position
+//            if (flightMode_get_mode == LANDED)
+//            {
+//                flightMode_set_next(); //were landed, change to take off
+//            }
+//        }
 
         /*
 		if (flightMode_get_current == TAKE_OFF) {
@@ -176,9 +178,10 @@ void process_inputs(void)
             setpoint_set_altitude(0);
             flightMode_set_next();                   //were landing, now landed
 		}
-	}
-	*/
-    }
+		*/
+//    }
+
+}
 
     /**
  * The main loop of the program.
@@ -194,7 +197,7 @@ void process_inputs(void)
         yaw_init();
         uart_init();
         pwm_init();
-        kernel_init();
+        kernel_init(KERNEL_FREQUENCY);
         setpoint_init();
         //	flightMode_init();
         slider_init();
@@ -202,12 +205,13 @@ void process_inputs(void)
             (ControlGains){1.0f, 1.0f, 1.0f},
             (ControlGains){1.0f, 1.0f, 1.0f});
 
-        kernel_add_task((KernelTask){&process_inputs});
-        kernel_add_task((KernelTask){&alt_update});
-        kernel_add_task((KernelTask){&disp_render});
-        kernel_add_task((KernelTask){&uart_update});
-        kernel_add_task((KernelTask){&control_update_altitude});
-        kernel_add_task((KernelTask){&control_update_yaw});
+        kernel_add_task((KernelTask){&process_inputs, 0}); // always process input
+        kernel_add_task((KernelTask){&alt_process_adc, 0}); // always process ADC stuff
+        kernel_add_task((KernelTask){&alt_update, 0}); // always update the altitude
+        kernel_add_task((KernelTask){&disp_render, 1}); // update the screen once per second
+        kernel_add_task((KernelTask){&uart_update, 4}); // update the UART four times per second
+        kernel_add_task((KernelTask){&control_update_altitude, 10}); // perform control stuff 10 times per second
+        kernel_add_task((KernelTask){&control_update_yaw, 10});
 
         //
         // Enable interrupts to the processor.
