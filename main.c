@@ -40,6 +40,11 @@
 #include "setpoint.h"
 #include "kernel.h"
 #include "slider.h"
+#include "flightMode.h>"
+
+
+#define ALTITUDE_YAW_REF 5          //Altitude % to hover at while finding yaw reference
+#define PWM_TAIL_DUTY_YAW_REF 65    //Duty cycle % to apply to Tail while finding reference
 
 /**
  * (Original Code by P.J. Bones)
@@ -70,6 +75,7 @@ void startup_sequence(void)
             disp_advanceState();
         }
     }
+    flightMode_set_next();          //altitude calibrated so move to landed
 }
 
 void process_inputs(void)
@@ -86,25 +92,33 @@ void process_inputs(void)
     // Check for counter-clockwise rotation button press
     butState = btn_check(LEFT);
     if (butState == PUSHED) {
-        setpoint_decrement_yaw();
+        if (flightMode_get_mode () == IN_FLIGHT) {
+            setpoint_decrement_yaw();
+        }
     }
 
     // Check for clockwise rotation button press
     butState = btn_check(RIGHT);
     if (butState == PUSHED) {
-        setpoint_increment_yaw();
+        if (flightMode_get_mode () == IN_FLIGHT) {
+            setpoint_increment_yaw();
+        }
     }
 
     // Check for increase altitude button press
     butState = btn_check(UP);
     if (butState == PUSHED) {
-		setpoint_increment_altitude();
+        if (flightMode_get_mode () == IN_FLIGHT) {
+            setpoint_increment_altitude();
+        }
     }
 
     // Check for decrease altitude button press
     butState = btn_check(DOWN);
     if (butState == PUSHED) {
-        setpoint_decrement_altitude();
+        if (flightMode_get_mode () == IN_FLIGHT) {
+            setpoint_decrement_altitude();
+        }
     }
 
     // check sw1
@@ -114,42 +128,43 @@ void process_inputs(void)
 
     if (sw1_state == SLIDER_DOWN)
     {
-        // slider is in the down position
+        if (flightMode_get_mode == IN_FLIGHT) {
+            flightMode_set_next();              //were flying, change to landing
+        }
     }
     else
     {
         if (sw1_state == SLIDER_UP && sw1_changed)
         {
             // slider has been changed into the up position
+            if (flightMode_get_mode == LANDED) {
+                flightMode_set_next();              //were landed, change to take off
         }
     }
 	
-	// Check for slider switch
 	/*
-	butState = btn_check(MODE);
-	if (butState == PUSHED) {						//We are LANDED, want TAKE_OFF
-		
-		if (opMode_get_current == LANDED) {
-			opMode_set_current(TAKE_OFF);
-			setpoint_increment_altitude();			//Some altitude to find yaw reference? Some altitdiue will help yaw (counter torque). Could just make zero if not needed.
-			setpoint_decrement_yaw();				//Work out which wa yheli yaws in reponse to main and assist this.
+		if (flightMode_get_current == TAKE_OFF) {
+			setpoint_set_altitude(ALTITUDE_YAW_REF);	    //Some altitude to find yaw reference? (counter torque could assist). Could just make zero if not needed.
+			pwm_set_tail_duty(PWM_TAIL_DUTY_YAW_REF);       //directly drive the TAIL until we get yaw reference
+			                                                //Work out yaw direction in response to Main and assist this.
+		    while !( yaw_hasBeenCalibrated() ) {
+		        continue;
+		    }
+            flightMode_set_next();          //were in TAKE_OFF, move to in flight
+            setpoint_set_yaw(0);            //hold at zero yaw with PID
+            //TO DO
+            //start Tail PID                //careful with the order!!
 		}
-	if (butState == RELEASED) {						//We are IN_FLIGHT, want take LANDING
-		
-		if (opMode_get_current == IN_FLIGHT) {
-			opMode_set_current(LANDING);
-			// TO DO
-				//set altitude = zero
-				//set yaw = zero
+
+		if (flightMode_get_current == LANDING) {
+            setpoint_set_altitude(ALTITUDE_YAW_REF);               //hold some altitude until at yaw reference
+            setpoint_set_yaw(0);
+            while !( (yaw_getDegrees() >= 358) && (yaw_getDegrees() <= 2) ) { //error margin = +/- min resolution. CHECK!!
+                continue;
+            }
+            setpoint_set_altitude(0);
+            flightMode_set_next();                   //were landing, now landed
 		}
-	}
-	
-	if (opMode_get_current == TAKE_OFF) && (g_has_been_calibrated) {
-		opMode_set_current(IN_FLIGHT);
-	}
-	
-	if (opMode_get_current == LANDING) && ((altitude == zero) && (yaw == zero)) ) {
-		opMode_set_current(LANDED);
 	}
 	*/
 }
@@ -170,7 +185,7 @@ int main(void)
 	pwm_init();
 	kernel_init();
 	setpoint_init();
-//	opMode_init();
+//	flightMode_init();
 	slider_init();
 
 	kernel_add_task((KernelTask){ &process_inputs });
@@ -178,12 +193,11 @@ int main(void)
 	kernel_add_task((KernelTask){ &disp_render });
 	kernel_add_task((KernelTask){ &uart_update });
 
+
     //
     // Enable interrupts to the processor.
     IntMasterEnable();
-
     pwm_set_tail_duty(20);
-
     startup_sequence();
 
 	while (true)
@@ -191,4 +205,3 @@ int main(void)
         kernel_run();
 	}
 }
-
