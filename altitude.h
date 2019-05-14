@@ -44,7 +44,7 @@ void alt_calibrate(void);
 /**
  * Returns the mean altitude as a percentage (usually from 0 - 100). This value can be less than 0 or greater than 100.
  */
-int32_t alt_getPercent(void);
+int16_t alt_getPercent(void);
 
 /**
  * Returns the mean altitude. This is a value between 0 and 4095 (inclusive).
