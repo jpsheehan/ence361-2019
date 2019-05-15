@@ -206,7 +206,7 @@ void process_inputs(void)
             (ControlGains){1.0f, 1.0f, 1.0f});
 
         kernel_add_task((KernelTask){&process_inputs, 0}); // always process input
-        kernel_add_task((KernelTask){&alt_process_adc, 0}); // always process ADC stuff
+        kernel_add_task((KernelTask){&alt_process_adc, 256}); // always process ADC stuff
         kernel_add_task((KernelTask){&alt_update, 0}); // always update the altitude
         kernel_add_task((KernelTask){&disp_render, 1}); // update the screen once per second
         kernel_add_task((KernelTask){&uart_update, 4}); // update the UART four times per second
