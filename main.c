@@ -30,7 +30,6 @@
 #include "driverlib/interrupt.h"
 #include "driverlib/debug.h"
 
-#include "button.h"
 #include "display.h"
 #include "altitude.h"
 #include "utils.h"
@@ -39,9 +38,9 @@
 #include "pwmGen.h"
 #include "setpoint.h"
 #include "kernel.h"
-#include "slider.h"
 #include "flightMode.h"
 #include "control.h"
+#include "input.h"
 
 #define ALTITUDE_YAW_REF 5       //Altitude % to hover at while finding yaw reference
 #define PWM_TAIL_DUTY_YAW_REF 65 //Duty cycle % to apply to Tail while finding reference
@@ -78,110 +77,26 @@ void startup_sequence(void)
     }
 //    flightMode_set_next(); //altitude calibrated so move to landed
 }
-
-//#define flightMode_get_mode() IN_FLIGHT
-
-void process_inputs(void)
-{
-    // Button state
-    butStates_t butState;
-
-    //
-    // Background task: calculate the (approximate) mean of the values in the
-    // circular buffer and display it, together with the sample number.
-
-    btn_update();
-
-    // Check for counter-clockwise rotation button press
-    butState = btn_check(LEFT);
-    if (butState == PUSHED)
-    {
-        if (flightMode_get_mode() == IN_FLIGHT)
-        {
-            setpoint_decrement_yaw();
-        }
-    }
-
-    // Check for clockwise rotation button press
-    butState = btn_check(RIGHT);
-    if (butState == PUSHED)
-    {
-        if (flightMode_get_mode() == IN_FLIGHT)
-        {
-            setpoint_increment_yaw();
-        }
-    }
-
-    // Check for increase altitude button press
-    butState = btn_check(UP);
-    if (butState == PUSHED)
-    {
-        if (flightMode_get_mode() == IN_FLIGHT)
-        {
-            setpoint_increment_altitude();
-        }
-    }
-
-    // Check for decrease altitude button press
-    butState = btn_check(DOWN);
-    if (butState == PUSHED)
-    {
-        if (flightMode_get_mode() == IN_FLIGHT)
-        {
-            setpoint_decrement_altitude();
-        }
-    }
-
-    // check sw1
-//    slider_update();
-//    SliderState sw1_state = slider_check(SLIDER_SW1);
-//    bool sw1_changed = slider_changed(SLIDER_SW1);
 //
-//    if (sw1_state == SLIDER_DOWN)
+//void foo(void)
+//{
+//    if (flight_mode == TAKE_OFF)
 //    {
-//        if (flightMode_get_mode == IN_FLIGHT)
-//        {
-//            flightMode_set_next(); //were flying, change to landing
+//        if (conditions have been met) {
+//            advance state
+//             setpoint_set_altitude(5);
+//             setpoint_set_yaw(0);
 //        }
 //    }
-//    else
+//
+//    if (flighT_mode == LANDING)
 //    {
-//        if (sw1_state == SLIDER_UP && sw1_changed)
+//        if conditions have been met
 //        {
-//            // slider has been changed into the up position
-//            if (flightMode_get_mode == LANDED)
-//            {
-//                flightMode_set_next(); //were landed, change to take off
-//            }
+//            advance state
 //        }
-
-        /*
-		if (flightMode_get_current == TAKE_OFF) {
-			setpoint_set_altitude(ALTITUDE_YAW_REF);	    //Some altitude to find yaw reference? (counter torque could assist). Could just make zero if not needed.
-			pwm_set_tail_duty(PWM_TAIL_DUTY_YAW_REF);       //directly drive the TAIL until we get yaw reference
-			                                                //Work out yaw direction in response to Main and assist this.
-		    while !( yaw_hasBeenCalibrated() ) {
-		        continue;
-		    }
-            flightMode_set_next();          //were in TAKE_OFF, move to in flight
-            setpoint_set_yaw(0);            //hold at zero yaw with PID
-            //TO DO
-            //start Tail PID                //careful with the order!!
-		}
-
-		if (flightMode_get_current == LANDING) {
-            setpoint_set_altitude(ALTITUDE_YAW_REF);               //hold some altitude until at yaw reference
-            setpoint_set_yaw(0);
-            while !( (yaw_getDegrees() >= 358) && (yaw_getDegrees() <= 2) ) { //error margin = +/- min resolution. CHECK!!
-                continue;
-            }
-            setpoint_set_altitude(0);
-            flightMode_set_next();                   //were landing, now landed
-		}
-		*/
 //    }
-
-}
+//}
 
     /**
  * The main loop of the program.
@@ -193,20 +108,19 @@ void process_inputs(void)
         clock_init();
         alt_init();
         disp_init();
-        btn_init();
         yaw_init();
         uart_init();
+        input_init();
         pwm_init();
         kernel_init(KERNEL_FREQUENCY);
         setpoint_init();
         //	flightMode_init();
-        slider_init();
         control_init(
             (ControlGains){1.0f, 1.0f, 1.0f},
             (ControlGains){1.0f, 1.0f, 1.0f});
 
-        kernel_add_task((KernelTask){&process_inputs, 0}); // always process input
-        kernel_add_task((KernelTask){&alt_process_adc, 256}); // always process ADC stuff
+        kernel_add_task((KernelTask){&input_update, 0}); // always process input
+        kernel_add_task((KernelTask){&alt_process_adc, 256}); // process ADC stuff 256 times per second
         kernel_add_task((KernelTask){&alt_update, 0}); // always update the altitude
         kernel_add_task((KernelTask){&disp_render, 1}); // update the screen once per second
         kernel_add_task((KernelTask){&uart_update, 4}); // update the UART four times per second
