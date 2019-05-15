@@ -18,6 +18,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #include "driverlib/sysctl.h"
 #include "driverlib/systick.h"
@@ -133,7 +134,18 @@ void kernel_run(void)
             for (i = 0; i < g_task_total; i++)
             {
                 KernelTask task = g_tasks[i];
-                uint32_t count_delta = this_count - task.int_count;
+                uint32_t count_delta;
+
+                if (this_count < g_last_count)
+                {
+                    // an overflow has occurred and the count_delta
+                    // must be calculated using UINT_MAX also
+                    count_delta = UINT_MAX - g_last_count + this_count - task.int_count;
+                }
+                else
+                {
+                    count_delta = this_count - task.int_count;
+                }
 
                 if (task.frequency == 0 || (((float)count_delta / g_kernel_frequency) > (1.0f / task.frequency)))
                 {
@@ -143,6 +155,18 @@ void kernel_run(void)
             }
 
             g_last_count = this_count;
+
+            // we can also keep track of the time taken to perform a task
+//            uint32_t end_count = g_systick_count;
+//            uint32_t task_duration;
+//            if (end_count < this_count)
+//            {
+//                task_duration = UINT_MAX - this_count + end_count;
+//            }
+//            else
+//            {
+//                task_duration = end_count - this_count;
+//            }
         }
     }
 }
