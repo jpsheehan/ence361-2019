@@ -1,6 +1,8 @@
 #ifndef CONTROL_H_
 #define CONTROL_H_
 
+#include <stdbool.h>
+
 struct control_state_s
 {
   /**
@@ -9,6 +11,7 @@ struct control_state_s
   float kp;
   float ki;
   float kd;
+  uint8_t duty;
 
   // add other things that will be required for control stuff
 };
@@ -44,5 +47,15 @@ void control_update_altitude(void);
  * Updates the yaw control system based on any new data.
  */
 void control_update_yaw(void);
+
+/**
+ * Enables or disables the altitude controller.
+ */
+void control_altitude_enabled(bool t_enabled);
+
+/**
+ * Enables or disables the yaw controller.
+ */
+void control_yaw_enabled(bool t_enabled);
 
 #endif

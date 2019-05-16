@@ -21,7 +21,8 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "opStatusFSM.h"
+#include "flightMode.h"
+#include "yaw.h"
 
 
 /**
@@ -32,31 +33,65 @@
 /**
  * Holds the current state of the Operating mode (or FLight Status) Finite Sate Machine
  */
-volatile static OperatingMode opMode_current_state;
+volatile static OperatingMode g_mode;
 
-/**
- * Initialise operating mode (a.k.a. flight status), state machine.
- */
-void opMode_init(void)
-    {
-    opMode_current_state = LANDED;
-    //opMode_previous_state = LANDED;
-    }
-
-/**
- * Get current operating mode (a.k.a. flight status), state machine.
- */
-OperatingMode opMode_get_current(void)
+void flightMode_init(void)
 {
-    return (opMode_current_state);
+    g_mode = LANDED;
+    //opMode_previous_state = LANDED;
 }
 
-/**
- * Set operating mode (a.k.a. flight status), state machine..
- */
-void opMode_set_current(OperatingMode opMode_new)
+OperatingMode flightMode_get_mode(void)
 {
-    //opMode_previous_state = opMode_current_state;
-    opMode_current_state = opMode_new;
+    return g_mode;
+}
+
+void flightMode_set_current(OperatingMode t_mode)
+{
+    g_mode = t_mode;
+}
+
+void flightMode_set_next(void)
+{
+    switch (g_mode)
+    {
+    case LANDED:
+        g_mode = TAKE_OFF;
+        break;
+    case TAKE_OFF:
+        g_mode = IN_FLIGHT;
+        break;
+    case IN_FLIGHT:
+        g_mode = LANDING;
+        break;
+    case LANDING:
+        g_mode = LANDED;
+        break;
+    }
+}
+
+void flightMode_update(void)
+{
+    if (g_mode == TAKE_OFF)
+    {
+        if (yaw_hasBeenCalibrated())
+        {
+            flightMode_set_next();
+            control_enable_yaw();
+            control_enable_altitude();
+        }
+        else
+        {
+            pwm_set_tail_duty(50);
+        }
+    }
+
+//    if (g_mode == LANDING)
+//    {
+//        if conditions have been met
+//        {
+//            advance state
+//        }
+//    }
 }
 

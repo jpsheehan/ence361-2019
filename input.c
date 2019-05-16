@@ -12,8 +12,6 @@ void input_init(void)
     slider_init();
 }
 
-#define flightMode_get_mode() IN_FLIGHT
-
 void input_update(void)
 {
     // Button state
@@ -72,7 +70,7 @@ void input_update(void)
 
     if (sw1_state == SLIDER_DOWN)
     {
-        if (flightMode_get_mode == IN_FLIGHT)
+        if (flightMode_get_mode() == IN_FLIGHT)
         {
             flightMode_set_next(); //were flying, change to landing
         }
@@ -82,7 +80,7 @@ void input_update(void)
         if (sw1_state == SLIDER_UP && sw1_changed)
         {
             // slider has been changed into the up position
-            if (flightMode_get_mode == LANDED)
+            if (flightMode_get_mode() == LANDED)
             {
                 flightMode_set_next(); //were landed, change to take off
             }
@@ -110,5 +108,5 @@ void input_update(void)
         }
         */
 //    }
-
+    }
 }

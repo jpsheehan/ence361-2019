@@ -77,26 +77,6 @@ void startup_sequence(void)
     }
 //    flightMode_set_next(); //altitude calibrated so move to landed
 }
-//
-//void foo(void)
-//{
-//    if (flight_mode == TAKE_OFF)
-//    {
-//        if (conditions have been met) {
-//            advance state
-//             setpoint_set_altitude(5);
-//             setpoint_set_yaw(0);
-//        }
-//    }
-//
-//    if (flighT_mode == LANDING)
-//    {
-//        if conditions have been met
-//        {
-//            advance state
-//        }
-//    }
-//}
 
     /**
  * The main loop of the program.
@@ -114,7 +94,7 @@ void startup_sequence(void)
         pwm_init();
         kernel_init(KERNEL_FREQUENCY);
         setpoint_init();
-        //	flightMode_init();
+        flightMode_init();
         control_init(
             (ControlGains){1.0f, 1.0f, 1.0f},
             (ControlGains){1.0f, 1.0f, 1.0f});
@@ -126,6 +106,7 @@ void startup_sequence(void)
         kernel_add_task((KernelTask){&uart_update, 4}); // update the UART four times per second
         kernel_add_task((KernelTask){&control_update_altitude, 10}); // perform control stuff 10 times per second
         kernel_add_task((KernelTask){&control_update_yaw, 10});
+        kernel_add_task((KernelTask){&flightMode_update, 20}); // run state checking 20 times per sec
 
         //
         // Enable interrupts to the processor.
