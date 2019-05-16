@@ -144,7 +144,7 @@ void alt_initADC(void)
  * (Original code by P.J. Bones)
  * The interrupt handler for the for SysTick interrupt.
  */
-void alt_process_adc(void)
+void alt_process_adc(uint32_t t_time_diff_micro)
 {
     //
     // Initiate a conversion
@@ -158,7 +158,7 @@ void alt_init(void)
     initCircBuf(&g_inBuffer, ALT_BUF_SIZE);
 }
 
-void alt_update(void)
+void alt_update(uint32_t t_time_diff_micro)
 {
     int32_t sum;
     uint16_t i;

@@ -136,20 +136,15 @@ void kernel_run(void)
                 KernelTask task = g_tasks[i];
                 uint32_t count_delta;
 
-                if (this_count < g_last_count)
-                {
-                    // an overflow has occurred and the count_delta
-                    // must be calculated using UINT_MAX also
-                    count_delta = UINT_MAX - g_last_count + this_count - task.int_count;
-                }
-                else
-                {
-                    count_delta = this_count - task.int_count;
-                }
+                // NOTE: There is a case when this_count overflows and becomes less than task.int_count
+                // which causes the count_delta to be off by around 1%. TODO: Fix in future, not a
+                // huge problem right now.
+                count_delta = this_count - task.int_count;
 
                 if (task.frequency == 0 || (((float)count_delta / g_kernel_frequency) > (1.0f / task.frequency)))
                 {
-                    ((void(*)(void))(task.function))();
+                    uint32_t elapsed_micros = ((count_delta - 1) * 1000000) / g_kernel_frequency;
+                    ((void(*)(uint32_t))(task.function))(elapsed_micros);
                     g_tasks[i].int_count = this_count;
                 }
             }

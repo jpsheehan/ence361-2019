@@ -57,7 +57,7 @@ void flightMode_set_next(void);
 /**
  * Called by the kernel. Checks conditions and advances state.
  */
-void flightMode_update(void);
+void flightMode_update(uint32_t t_time_diff_micro);
 
 
 #endif /* OPSTATUSFSM_H_ */

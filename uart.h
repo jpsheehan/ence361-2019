@@ -19,6 +19,8 @@
 #ifndef UART_H_
 #define UART_H_
 
+#include <stdint.h>
+
 /**
  * (Original Code by P.J. Bones)
  * initialiseUSB_UART - 8 bits, 1 stop bit, no parity
@@ -28,6 +30,6 @@ void uart_init(void);
 /**
  * Transmits the helicopter status via UART.
  */
-void uart_update(void);
+void uart_update(uint32_t t_time_diff_micro);
 
 #endif /* UART_H_ */

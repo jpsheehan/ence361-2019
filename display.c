@@ -109,7 +109,7 @@ void disp_unknown(void)
     OLEDStringDraw("state!", 0, 3);
 }
 
-void disp_render(void)
+void disp_render(uint32_t t_time_diff_micro)
 {
     switch (g_displayState) {
     case DISP_STATE_CALIBRATION:

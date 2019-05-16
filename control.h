@@ -1,6 +1,7 @@
 #ifndef CONTROL_H_
 #define CONTROL_H_
 
+#include <stdint.h>
 #include <stdbool.h>
 
 struct control_state_s
@@ -41,12 +42,12 @@ void control_init(ControlGains t_altitude_gains, ControlGains t_yaw_gains);
 /**
  * Updates the altitude control system based on the any new data.
  */
-void control_update_altitude(void);
+void control_update_altitude(uint32_t t_time_diff_micro);
 
 /**
  * Updates the yaw control system based on any new data.
  */
-void control_update_yaw(void);
+void control_update_yaw(uint32_t t_time_diff_micro);
 
 /**
  * Enables or disables the altitude controller.

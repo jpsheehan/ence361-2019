@@ -1,9 +1,9 @@
+#include <stdint.h>
 
 #include "button.h"
 #include "slider.h"
 #include "flightMode.h"
 #include "setpoint.h"
-
 #include "input.h"
 
 void input_init(void)
@@ -12,7 +12,7 @@ void input_init(void)
     slider_init();
 }
 
-void input_update(void)
+void input_update(uint32_t t_time_diff_micro)
 {
     // Button state
     butStates_t butState;

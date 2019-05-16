@@ -23,8 +23,24 @@
 
 struct kernel_task_s
 {
+    /**
+     * A function pointer. The function must return void and accept one parameter
+     * of type uint32_t that describes how many microseconds have passed since the
+     * task was last run.
+     */
     void* function;
+
+    /**
+     * The frequency of the task in HZ. This must be less than or equal to the
+     * kernel frequency.
+     */
     uint16_t frequency;
+
+    /**
+     * Used internally to store the amount of ticks that had elapsed last time
+     * the task was run.
+     * DO NOT MODIFY OUTSIDE THE KERNEL MODULE!!!!
+     */
     uint32_t int_count;
 };
 

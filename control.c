@@ -32,7 +32,7 @@ void control_init(ControlGains t_altitude_gains, ControlGains t_yaw_gains)
   g_control_yaw = control_get_state_from_gains(t_yaw_gains);
 }
 
-void control_update_altitude(void)
+void control_update_altitude(uint32_t t_time_diff_micro)
 {
     if (!g_enable_altitude)
     {
@@ -47,7 +47,7 @@ void control_update_altitude(void)
     // call pwm_set_main_duty
 }
 
-void control_update_yaw(void)
+void control_update_yaw(uint32_t t_time_diff_micro)
 {
     if (!g_enable_yaw)
     {

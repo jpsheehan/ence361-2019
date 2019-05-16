@@ -38,7 +38,7 @@ void alt_init(void);
 /**
  * Calculates the mean value of the altitude, both the raw resolution and the percentage values. This should be called before one wants to use the altitude values in any other calculations.
  */
-void alt_update(void);
+void alt_update(uint32_t t_time_diff_micro);
 
 /**
  * Calibrates the altitude to the current mean value.
@@ -69,6 +69,6 @@ bool alt_getIsBufferFull(void);
 /**
  * Performs an ADC conversion.
  */
-void alt_process_adc(void);
+void alt_process_adc(uint32_t t_time_diff_micro);
 
 #endif

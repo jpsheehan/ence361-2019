@@ -43,9 +43,9 @@
 #include "input.h"
 
 #define ALTITUDE_YAW_REF 5       //Altitude % to hover at while finding yaw reference
-#define PWM_TAIL_DUTY_YAW_REF 65 //Duty cycle % to apply to Tail while finding reference
+#define PWM_TAIL_DUTY_YAW_REF 50 //Duty cycle % to apply to Tail while finding reference
 
-static const int KERNEL_FREQUENCY = 256;
+static const int KERNEL_FREQUENCY = 1024;
 
 /**
  * (Original Code by P.J. Bones)
@@ -61,16 +61,16 @@ void clock_init(void)
 void startup_sequence(void)
 {
     // Render splash screen while we wait for buffer to fill
-    disp_render();
+    disp_render(0);
 
     while (!alt_getIsCalibrated())
     {
-        alt_process_adc();
+        alt_process_adc(0);
 
         // check that we have filled the buffer with data
         if (alt_getIsBufferFull())
         {
-            alt_update();
+            alt_update(0);
             alt_calibrate();
             disp_advanceState();
         }
@@ -103,7 +103,7 @@ void startup_sequence(void)
         kernel_add_task((KernelTask){&alt_process_adc, 256}); // process ADC stuff 256 times per second
         kernel_add_task((KernelTask){&alt_update, 0}); // always update the altitude
         kernel_add_task((KernelTask){&disp_render, 1}); // update the screen once per second
-        kernel_add_task((KernelTask){&uart_update, 4}); // update the UART four times per second
+        kernel_add_task((KernelTask){&uart_update, 8}); // update the UART four times per second
         kernel_add_task((KernelTask){&control_update_altitude, 10}); // perform control stuff 10 times per second
         kernel_add_task((KernelTask){&control_update_yaw, 10});
         kernel_add_task((KernelTask){&flightMode_update, 20}); // run state checking 20 times per sec

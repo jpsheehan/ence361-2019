@@ -70,7 +70,7 @@ void flightMode_set_next(void)
     }
 }
 
-void flightMode_update(void)
+void flightMode_update(uint32_t t_time_diff_micro)
 {
     if (g_mode == TAKE_OFF)
     {
@@ -82,15 +82,27 @@ void flightMode_update(void)
         }
         else
         {
+            pwm_set_main_duty(5);
             pwm_set_tail_duty(50);
         }
     }
 
 //    if (g_mode == LANDING)
 //    {
-//        if conditions have been met
+//      conditions have been met
+//      if (get_yaw == 0)
 //        {
-//            advance state
+//          setpoint_altitude(0);
+//          //
+//          control_enable_yaw(false);
+//          control_enable_altitude(false);
+//          flightMode_set_next();
+//        }
+//    else
+//            {
+//              setpoint_yaw(0);
+//              setpoint_altitude(5);
+//            }
 //        }
 //    }
 }
