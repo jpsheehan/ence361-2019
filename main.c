@@ -55,7 +55,7 @@ void clock_init(void)
 {
     // Set the clock rate to 40 MHz
     SysCtlClockSet(SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
-                   SYSCTL_XTAL_16MHZ);
+    SYSCTL_XTAL_16MHZ);
 }
 
 void startup_sequence(void)
@@ -78,44 +78,43 @@ void startup_sequence(void)
 //    flightMode_set_next(); //altitude calibrated so move to landed
 }
 
-    /**
+/**
  * The main loop of the program.
  * Responsible for initialising all the modules, responding to input and rendering text on the screen.
  */
-    int main(void)
+int main(void)
+{
+    // Setup all required modules
+    clock_init();
+    alt_init();
+    disp_init();
+    yaw_init();
+    uart_init();
+    input_init();
+    pwm_init();
+    kernel_init(KERNEL_FREQUENCY);
+    setpoint_init();
+    flightMode_init();
+    control_init((ControlGains ) { 1.0f, 1.0f, 1.0f },
+                 (ControlGains ) { 1.0f, 1.0f, 1.0f });
+
+    kernel_add_task((KernelTask ) { &input_update, 0 }); // always process input
+    kernel_add_task((KernelTask ) { &alt_process_adc, 256 }); // process ADC stuff 256 times per second
+    kernel_add_task((KernelTask ) { &alt_update, 0 }); // always update the altitude
+    kernel_add_task((KernelTask ) { &disp_render, 1 }); // update the screen once per second
+    kernel_add_task((KernelTask ) { &uart_update, 4 }); // update the UART four times per second
+    kernel_add_task((KernelTask ) { &control_update_altitude, 10 }); // perform control stuff 10 times per second
+    kernel_add_task((KernelTask ) { &control_update_yaw, 10 });
+    kernel_add_task((KernelTask ) { &flightMode_update, 20 }); // run state checking 20 times per sec
+
+    //
+    // Enable interrupts to the processor.
+    IntMasterEnable();
+
+    startup_sequence();
+
+    while (true)
     {
-        // Setup all required modules
-        clock_init();
-        alt_init();
-        disp_init();
-        yaw_init();
-        uart_init();
-        input_init();
-        pwm_init();
-        kernel_init(KERNEL_FREQUENCY);
-        setpoint_init();
-        flightMode_init();
-        control_init(
-            (ControlGains){1.0f, 1.0f, 1.0f},
-            (ControlGains){1.0f, 1.0f, 1.0f});
-
-        kernel_add_task((KernelTask){&input_update, 0}); // always process input
-        kernel_add_task((KernelTask){&alt_process_adc, 256}); // process ADC stuff 256 times per second
-        kernel_add_task((KernelTask){&alt_update, 0}); // always update the altitude
-        kernel_add_task((KernelTask){&disp_render, 1}); // update the screen once per second
-        kernel_add_task((KernelTask){&uart_update, 4}); // update the UART four times per second
-        kernel_add_task((KernelTask){&control_update_altitude, 10}); // perform control stuff 10 times per second
-        kernel_add_task((KernelTask){&control_update_yaw, 10});
-        kernel_add_task((KernelTask){&flightMode_update, 20}); // run state checking 20 times per sec
-
-        //
-        // Enable interrupts to the processor.
-        IntMasterEnable();
-        pwm_set_tail_duty(20);
-        startup_sequence();
-
-        while (true)
-        {
-            kernel_run();
-        }
+        kernel_run();
     }
+}

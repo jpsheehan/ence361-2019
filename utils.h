@@ -24,6 +24,7 @@
 #define min(a, b) (a < b ? a : b)
 #define max(a, b) (a > b ? a : b)
 #define clamp(val, mn, mx) (max(min(val, mx), mn))
+#define range(val, mn, mx) (val >= mn && val <= mx)
 
 /**
  * Waits for `t_delay` seconds before returning. Note that this is

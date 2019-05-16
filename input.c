@@ -85,28 +85,5 @@ void input_update(uint32_t t_time_diff_micro)
                 flightMode_set_next(); //were landed, change to take off
             }
         }
-
-        /*
-        if (flightMode_get_current == TAKE_OFF) {
-            setpoint_set_altitude(ALTITUDE_YAW_REF);        //Some altitude to find yaw reference? (counter torque could assist). Could just make zero if not needed.
-            pwm_set_tail_duty(PWM_TAIL_DUTY_YAW_REF);       //directly drive the TAIL until we get yaw reference
-
-            flightMode_set_next();          //were in TAKE_OFF, move to in flight
-            setpoint_set_yaw(0);            //hold at zero yaw with PID
-            //TO DO
-            //start Tail PID                //careful with the order!!
-        }
-
-        if (flightMode_get_current == LANDING) {
-            setpoint_set_altitude(ALTITUDE_YAW_REF);               //hold some altitude until at yaw reference
-            setpoint_set_yaw(0);
-            while !( (yaw_getDegrees() >= 358) && (yaw_getDegrees() <= 2) ) { //error margin = +/- min resolution. CHECK!!
-                continue;
-            }
-            setpoint_set_altitude(0);
-            flightMode_set_next();                   //were landing, now landed
-        }
-        */
-//    }
     }
 }

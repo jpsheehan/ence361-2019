@@ -21,9 +21,14 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "flightMode.h"
+
 #include "yaw.h"
 #include "control.h"
+#include "setpoint.h"
+#include "pwmGen.h"
+#include "altitude.h"
+#include "flightMode.h"
+#include "utils.h"
 
 /**
  * Holds the previous state of the Operating mode (or FLight Status) Finite Sate Machine
@@ -82,28 +87,36 @@ void flightMode_update(uint32_t t_time_diff_micro)
         }
         else
         {
+            // find the 0 calibration point for yaw
             pwm_set_main_duty(5);
             pwm_set_tail_duty(50);
         }
     }
 
-//    if (g_mode == LANDING)
-//    {
-//      conditions have been met
-//      if (get_yaw == 0)
-//        {
-//          setpoint_altitude(0);
-//          //
-//          control_enable_yaw(false);
-//          control_enable_altitude(false);
-//          flightMode_set_next();
-//        }
-//    else
-//            {
-//              setpoint_yaw(0);
-//              setpoint_altitude(5);
-//            }
-//        }
-//    }
+    if (g_mode == LANDING)
+    {
+        uint16_t angle = (yaw_getDegrees() + 180) % 360;
+        if (range(angle, 180 - 5, 180 + 5))
+        {
+            if (alt_getPercent() <= 0)
+            {
+                control_enable_yaw(false);
+                control_enable_altitude(false);
+                yaw_resetCalibrationState();
+                setpoint_set_yaw(0);
+                setpoint_set_altitude(0);
+                flightMode_set_next();
+            }
+            else
+            {
+                setpoint_set_altitude(0);
+            }
+        }
+        else
+        {
+            setpoint_set_yaw(0);
+            setpoint_set_altitude(5);
+        }
+    }
 }
 

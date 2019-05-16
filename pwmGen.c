@@ -41,7 +41,6 @@
 #include "driverlib/pwm.h"
 #include "pwmGen.h"
 
-
 /**********************************************************
  * Generates a single PWM signal on Tiva board pin J4-05 =
  * PC5 (M0PWM7).  This is the same PWM output as the
@@ -56,7 +55,7 @@
 
 // PWM configuration
 #define PWM_RATE           200
-#define PWM_FIXED_DUTY     50
+#define PWM_INITIAL_DUTY   0
 #define PWM_DIVIDER_CODE   SYSCTL_PWMDIV_8  //40MHz system clk
 #define PWM_DIVIDER        8
 
@@ -87,13 +86,11 @@
 static int8_t g_main_duty;
 static int8_t g_tail_duty;
 
-
 /*********************************************************
  * initialisePWM
  * M0PWM7 (J4-05, PC5) is used for the main rotor motor
  *********************************************************/
-void
-pwm_init (void)
+void pwm_init(void)
 {
     SysCtlPWMClockSet(PWM_DIVIDER_CODE);
 
@@ -105,9 +102,9 @@ pwm_init (void)
     GPIOPinTypePWM(PWM_MAIN_GPIO_BASE, PWM_MAIN_GPIO_PIN);
 
     PWMGenConfigure(PWM_MAIN_BASE, PWM_MAIN_GEN,
-                    PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
+    PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
     // Set the initial PWM parameters
-    pwm_set_main_duty (PWM_FIXED_DUTY);
+    pwm_set_main_duty(PWM_INITIAL_DUTY);
 
     PWMGenEnable(PWM_MAIN_BASE, PWM_MAIN_GEN);
 
@@ -121,9 +118,9 @@ pwm_init (void)
     GPIOPinTypePWM(PWM_TAIL_GPIO_BASE, PWM_TAIL_GPIO_PIN);
 
     PWMGenConfigure(PWM_TAIL_BASE, PWM_TAIL_GEN,
-                    PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
+    PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
     // Set the initial PWM parameters
-    pwm_set_tail_duty (PWM_FIXED_DUTY);
+    pwm_set_tail_duty(PWM_INITIAL_DUTY);
 
     PWMGenEnable(PWM_TAIL_BASE, PWM_TAIL_GEN);
 
@@ -133,18 +130,16 @@ pwm_init (void)
 /********************************************************
  * Function to set the duty cycle of main PWM - M0PWM7
  ********************************************************/
-void
-pwm_set_main_duty (int8_t t_duty)
+void pwm_set_main_duty(int8_t t_duty)
 {
     g_main_duty = t_duty;
 
     // Calculate the PWM period corresponding to the freq.
-    uint32_t ui32Period =
-        SysCtlClockGet() / PWM_DIVIDER / PWM_RATE;
+    uint32_t ui32Period = SysCtlClockGet() / PWM_DIVIDER / PWM_RATE;
 
     PWMGenPeriodSet(PWM_MAIN_BASE, PWM_MAIN_GEN, ui32Period);
-    PWMPulseWidthSet(PWM_MAIN_BASE, PWM_MAIN_OUTNUM, 
-        ui32Period * g_main_duty / 100);
+    PWMPulseWidthSet(PWM_MAIN_BASE, PWM_MAIN_OUTNUM,
+                     ui32Period * g_main_duty / 100);
 }
 
 int8_t pwm_get_main_duty(void)
@@ -155,20 +150,17 @@ int8_t pwm_get_main_duty(void)
 /********************************************************
  * Function to set the duty cycle of tail PWM - M1PWM5
  ********************************************************/
-void
-pwm_set_tail_duty (int8_t t_duty)
+void pwm_set_tail_duty(int8_t t_duty)
 {
     g_tail_duty = t_duty;
 
     // Calculate the PWM period corresponding to the freq.
-    uint32_t ui32Period =
-        SysCtlClockGet() / PWM_DIVIDER / PWM_RATE;
+    uint32_t ui32Period = SysCtlClockGet() / PWM_DIVIDER / PWM_RATE;
 
     PWMGenPeriodSet(PWM_TAIL_BASE, PWM_TAIL_GEN, ui32Period);
     PWMPulseWidthSet(PWM_TAIL_BASE, PWM_TAIL_OUTNUM,
                      ui32Period * g_tail_duty / 100);
 }
-
 
 int8_t pwm_get_tail_duty(void)
 {
