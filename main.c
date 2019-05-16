@@ -103,7 +103,7 @@ void startup_sequence(void)
         kernel_add_task((KernelTask){&alt_process_adc, 256}); // process ADC stuff 256 times per second
         kernel_add_task((KernelTask){&alt_update, 0}); // always update the altitude
         kernel_add_task((KernelTask){&disp_render, 1}); // update the screen once per second
-        kernel_add_task((KernelTask){&uart_update, 8}); // update the UART four times per second
+        kernel_add_task((KernelTask){&uart_update, 4}); // update the UART four times per second
         kernel_add_task((KernelTask){&control_update_altitude, 10}); // perform control stuff 10 times per second
         kernel_add_task((KernelTask){&control_update_yaw, 10});
         kernel_add_task((KernelTask){&flightMode_update, 20}); // run state checking 20 times per sec
