@@ -21,11 +21,11 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
 
 - [ ] **Milestone 3**
   - [x] Helicopter yaw should be processed by interrupt-driven or polled decoding.
-  - [ ] At the start of the sortie, the helicopter should rotate to a known reference position, indicated by a HIGH input from the independent yaw reference signal.
-  - [ ] A reference minimum altitude reading should be taken before take-off.
-  - [ ] Two output PWM signals should be generated. The PWM signals should be in the range from 150 Hz to 300 Hz:
-      - [ ] One for the main rotor (module 0, PWM 7).
-      - [ ] One for the tail rotor (module 1, PWM 5).
+  - [x] At the start of the sortie, the helicopter should rotate to a known reference position, indicated by a HIGH input from the independent yaw reference signal.
+  - [x] A reference minimum altitude reading should be taken before take-off.
+  - [x] Two output PWM signals should be generated. The PWM signals should be in the range from 150 Hz to 300 Hz:
+      - [x] One for the main rotor (module 0, PWM 7).
+      - [x] One for the tail rotor (module 1, PWM 5).
       - [x] The duty cycles (as percentages) for each motor should be displayed on the OLED display.
   - [ ] The SW1 slider switch on the Orbit board should control the mode of the helicopter (DOWN position = landed/in the process of landing, changing from DOWN to UP when the helicopter is landed should cause the helicopter to take off).
       - [ ] The helicopter should land smoothly, facing the reference orientation. When landing is complete, the rotors should stop.
@@ -40,14 +40,14 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [x] Pressing LEFT/RIGHT buttons should not affect the altitude.
   - [x] The program should have a real-time foreground/background kernel operating on a round-robin basis. Robust behaviour should be maintained at all times.
   - [ ] A PI (preferred) or PID (acceptable) controller should be used to acheive flight.
-  - [ ] Information on the status of the helicopter should be transmitted via a serial link from UART0 at 9600 baud, with 1 stop bit and no parity bit in each transmitted byte. The information should be concise but in an easily readable format that is compatible with the scrolling display of the remote lab web page. Updates should be transmitted regularly at least 4 times per second. Status information should include:
+  - [x] Information on the status of the helicopter should be transmitted via a serial link from UART0 at 9600 baud, with 1 stop bit and no parity bit in each transmitted byte. The information should be concise but in an easily readable format that is compatible with the scrolling display of the remote lab web page. Updates should be transmitted regularly at least 4 times per second. Status information should include:
       - [x] The desired yaw (degrees).
       - [x] The actual yaw (degrees).
       - [x] The desired altitude (percentage of maximum alt.).
       - [x] The actual altitude (percentage of maximum alt.).
       - [x] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
-      - [ ] The current operating mode.
-  - [ ] The program should use the pin-map as outlined [below](#pin-map).
+      - [x] The current operating mode.
+  - [x] The program should use the pin-map as outlined [below](#pin-map).
 - [ ] **Report**
 - [ ] **Code**
 
