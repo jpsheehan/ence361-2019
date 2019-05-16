@@ -138,8 +138,8 @@ void uart_update(uint32_t t_time_diff_micro)
     uint8_t operating_mode = flightMode_get_mode();
 
     // format the outgoing data
-//    usprintf(g_buffer, "Y%d\ty%d\tA%d\ta%d\tm%d\tt%d\to%d\r\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
-    usprintf(g_buffer, "dt=%d\r\n", t_time_diff_micro);
+    usprintf(g_buffer, "Y%d\ty%d\tA%d\ta%d\tm%d\tt%d\to%d\r\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
+
     // send it
     uart_send(g_buffer);
 
