@@ -62,7 +62,7 @@ void control_update_yaw(void)
     // pwm_set_tail_duty
 }
 
-void control_yaw_enabled(bool t_enabled)
+void control_enable_yaw(bool t_enabled)
 {
     g_enable_yaw = t_enabled;
     if (!g_enable_yaw)
@@ -75,7 +75,7 @@ void control_yaw_enabled(bool t_enabled)
     }
 }
 
-void control_altitude_enabled(bool t_enabled)
+void control_enable_altitude(bool t_enabled)
 {
     g_enable_altitude = t_enabled;
     if (!g_enable_altitude)

@@ -51,11 +51,11 @@ void control_update_yaw(void);
 /**
  * Enables or disables the altitude controller.
  */
-void control_altitude_enabled(bool t_enabled);
+void control_enable_altitude(bool t_enabled);
 
 /**
  * Enables or disables the yaw controller.
  */
-void control_yaw_enabled(bool t_enabled);
+void control_enable_yaw(bool t_enabled);
 
 #endif

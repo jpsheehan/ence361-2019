@@ -23,7 +23,7 @@
 #include <stdbool.h>
 #include "flightMode.h"
 #include "yaw.h"
-
+#include "control.h"
 
 /**
  * Holds the previous state of the Operating mode (or FLight Status) Finite Sate Machine
@@ -77,8 +77,8 @@ void flightMode_update(void)
         if (yaw_hasBeenCalibrated())
         {
             flightMode_set_next();
-            control_enable_yaw();
-            control_enable_altitude();
+            control_enable_yaw(true);
+            control_enable_altitude(true);
         }
         else
         {
