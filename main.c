@@ -92,8 +92,8 @@ int main(void)
     kernel_init(KERNEL_FREQUENCY);
     setpoint_init();
     flight_mode_init();
-    control_init((ControlGains){1.0f, 1.0f, 1.0f},
-                 (ControlGains){1.0f, 1.0f, 1.0f});
+    control_init((ControlGains ) { 1.0f, 0.01f, 1.0f },
+                 (ControlGains ) { 0.5f, 0.01f, 1.0f });
 
     kernel_add_task(&alt_process_adc, 256, 1);        // process ADC stuff 256 times per second
     kernel_add_task(&alt_update, 0, 1);               // always update the altitude

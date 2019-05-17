@@ -12,7 +12,10 @@ struct control_state_s
   float kp;
   float ki;
   float kd;
+  uint32_t lastError;
+  uint32_t cumulative;
   uint8_t duty;
+
 
   // add other things that will be required for control stuff
 };

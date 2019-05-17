@@ -39,12 +39,35 @@ void control_update_altitude(uint32_t t_time_diff_micro)
         return;
     }
 
+    float Pgain = 0;
+    float Igain = 0;
+    float Dgain = 0;
+
+
     // the difference between what we want and what we have (as a percentage)
     int16_t error = setpoint_get_altitude() - alt_get();
 
-    // do control system stuff...
+    // P control
+    Pgain = error*g_control_altitude.kp;
 
-    // call pwm_set_main_duty
+    // I control
+    g_control_altitude.cumulative += error;
+    Igain = g_control_altitude.cumulative * g_control_altitude.ki;
+    //Igain = 0;
+
+    // D control
+    //Dgain = (error - g_control_altitude.lastError) / t_time_diff_micro;
+    Dgain = 0;
+    g_control_altitude.lastError = error;
+
+
+    g_control_altitude.duty = Pgain + Igain + Dgain;
+
+    if (g_control_altitude.duty > 100) {
+        g_control_altitude.duty = 100;
+    }
+
+    pwm_set_main_duty(g_control_altitude.duty);
 }
 
 void control_update_yaw(uint32_t t_time_diff_micro)
@@ -54,12 +77,32 @@ void control_update_yaw(uint32_t t_time_diff_micro)
         return;
     }
 
+    float Pgain = 0;
+    float Igain = 0;
+    float Dgain = 0;
+
     // the difference between what we want and what we have (in degrees)
     int16_t error = setpoint_get_yaw() - yaw_get();
 
-    // do control system stuff...
+    // P control
+    // Pgain = error*g_control_yaw.kp;
+    Pgain = g_control_altitude.duty;
 
-    // pwm_set_tail_duty
+    // I control
+    Igain = 0;
+    g_control_yaw.cumulative += error;
+
+    // D control
+    Dgain = 0;
+    g_control_yaw.lastError = error;
+
+    g_control_yaw.duty = Pgain + Igain + Dgain;
+
+    if (g_control_yaw.duty > 100) {
+         g_control_yaw.duty = 100;
+     }
+
+    pwm_set_tail_duty(Pgain + Igain + Dgain);
 }
 
 void control_enable_yaw(bool t_enabled)
