@@ -1,3 +1,21 @@
+/*******************************************************************************
+ *
+ * input.c
+ *
+ * ENEL361 Helicopter Project
+ * Friday Morning, Group 7
+ *
+ * Written by:
+ *  - Manu Hamblyn  <mfb31<@uclive.ac.nz>   95140875
+ *  - Will Cowper   <wgc22@uclive.ac.nz>    81163265
+ *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
+ *
+ * Description:
+ * This module contains logic for initialising and processing inputs from the
+ * Orbit Booster Pack slider switches and buttons.
+ *
+ ******************************************************************************/
+
 #include <stdint.h>
 
 #include "button.h"
