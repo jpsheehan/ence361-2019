@@ -63,6 +63,11 @@ static uint32_t g_kernel_frequency;
 static bool g_init_ok = false;
 
 /**
+ * True when all the tasks are sorted in order of priority.
+ */
+static bool g_tasks_are_sorted = true;
+
+/**
  * The SysTick event handler. Simply increments a global static variable.
  */
 void kernel_systick_int_handler(void)
@@ -105,19 +110,36 @@ void kernel_init(uint32_t t_frequency)
     kernel_init_systick();
 }
 
-void kernel_add_task(KernelTask t_task)
+/**
+ * The compare function to be plugged into stdlib's qsort.
+ */
+int kernel_task_compare(const void * t_task_a, const void * t_task_b)
+{
+    return ((KernelTask*)t_task_a)->priority - ((KernelTask*)t_task_b)->priority;
+}
+
+void kernel_add_task(void* t_func_ptr, uint16_t t_frequency, uint8_t t_priority)
 {
     if (g_task_total < MAX_TASKS && g_init_ok)
     {
+        KernelTask task = (KernelTask){
+            t_func_ptr,
+            t_frequency,
+            t_priority,
+            0
+        };
+
         // if the frequency is too high for the kernel
         // to support, make the task run every time.
-        if (t_task.frequency > g_kernel_frequency)
+        if (task.frequency > g_kernel_frequency)
         {
-            t_task.frequency = 0;
+            task.frequency = 0;
         }
 
-        g_tasks[g_task_total] = t_task;
+        g_tasks[g_task_total] = task;
         g_task_total++;
+
+        g_tasks_are_sorted = false;
     }
 }
 
@@ -125,6 +147,12 @@ void kernel_run(void)
 {
     if (g_task_total > 0)
     {
+        if (!g_tasks_are_sorted) {
+            // sort the tasks in place
+            qsort(g_tasks, g_task_total, sizeof(KernelTask), kernel_task_compare);
+            g_tasks_are_sorted = true;
+        }
+
         uint32_t this_count = g_systick_count;
         if (g_last_count != this_count)
         {

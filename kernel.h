@@ -37,6 +37,12 @@ struct kernel_task_s
     uint16_t frequency;
 
     /**
+     * The priority of the task. By default all tasks will have a priority of 0,
+     * which is the highest.
+     */
+    uint8_t priority;
+
+    /**
      * Used internally to store the amount of ticks that had elapsed last time
      * the task was run.
      * DO NOT MODIFY OUTSIDE THE KERNEL MODULE!!!!
@@ -57,7 +63,7 @@ void kernel_init(uint32_t t_frequency);
 /**
  * Adds a task with a priority level (higher is lower priority) to the kernel.
  */
-void kernel_add_task(KernelTask t_task);
+void kernel_add_task(void* t_func_ptr, uint16_t t_frequency, uint8_t t_priority);
 
 /**
  * Runs the next kernel task.

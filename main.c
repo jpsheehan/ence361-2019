@@ -95,14 +95,14 @@ int main(void)
     control_init((ControlGains){1.0f, 1.0f, 1.0f},
                  (ControlGains){1.0f, 1.0f, 1.0f});
 
-    kernel_add_task((KernelTask){&input_update, 0});             // always process input
-    kernel_add_task((KernelTask){&alt_process_adc, 256});        // process ADC stuff 256 times per second
-    kernel_add_task((KernelTask){&alt_update, 0});               // always update the altitude
-    kernel_add_task((KernelTask){&disp_render, 1});              // update the screen once per second
-    kernel_add_task((KernelTask){&uart_update, 4});              // update the UART four times per second
-    kernel_add_task((KernelTask){&control_update_altitude, 10}); // perform control stuff 10 times per second
-    kernel_add_task((KernelTask){&control_update_yaw, 10});
-    kernel_add_task((KernelTask){&flight_mode_update, 20}); // run state checking 20 times per sec
+    kernel_add_task(&alt_process_adc, 256, 1);        // process ADC stuff 256 times per second
+    kernel_add_task(&alt_update, 0, 1);               // always update the altitude
+    kernel_add_task(&input_update, 0, 2);             // always process input
+    kernel_add_task(&control_update_altitude, 10, 10); // perform control stuff 10 times per second
+    kernel_add_task(&control_update_yaw, 10, 10);
+    kernel_add_task(&flight_mode_update, 20, 10); // run state checking 20 times per sec
+    kernel_add_task(&disp_render, 1, 100);              // update the screen once per second
+    kernel_add_task(&uart_update, 4, 100);              // update the UART four times per second
 
     //
     // Enable interrupts to the processor.
