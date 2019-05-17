@@ -41,7 +41,7 @@
 /**
  * The size of the buffer used to store the raw ADC values. This needs to be big enough that outliers in the data cannot affect the calculated mean in an adverse way.
  */
-#define ALT_BUF_SIZE 32
+static const int ALT_BUF_SIZE = 32;
 
 /**
  * The ideal resolution delta for a helicopter rig. This value may change depending on which helicopter rig is used. The ideal value is calculated as follows:
@@ -52,7 +52,7 @@
  * 
  * Hence the difference in 0.8 V corresponds to 4095 * 0.8 / 3.3 (993).
  */
-#define ALT_DELTA 993
+static const int ALT_DELTA = 993;
 
 /**
  * The circular buffer used to store the raw ADC values for calculating the mean.
@@ -84,7 +84,7 @@ static bool g_hasBeenCalibrated = false;
  * The handler for the ADC conversion complete interrupt.
  * Writes to the circular buffer.
  */
-void alt_ADCIntHandler(void)
+void alt_adc_int_handler(void)
 {
     uint32_t ulValue;
 
@@ -105,7 +105,7 @@ void alt_ADCIntHandler(void)
  * Initialises the ADC module on the Tivaboard.
  * TODO: Give more information about the ADC we are using to perform the conversion.
  */
-void alt_initADC(void)
+void alt_init_adc(void)
 {
     //
     // The ADC0 peripheral must be enabled for configuration and use.
@@ -154,7 +154,7 @@ void alt_process_adc(uint32_t t_time_diff_micro)
 
 void alt_init(void)
 {
-    alt_initADC();
+    alt_init_adc();
     initCircBuf(&g_inBuffer, ALT_BUF_SIZE);
 }
 
@@ -181,22 +181,17 @@ void alt_calibrate(void)
     g_hasBeenCalibrated = true;
 }
 
-int16_t alt_getPercent(void)
+int16_t alt_get(void)
 {
     return g_latestAltitudePercentage;
 }
 
-uint32_t alt_getRaw(void)
-{
-    return g_latestAltitudeMean;
-}
-
-bool alt_getIsCalibrated(void)
+bool alt_get_is_calibrated(void)
 {
     return g_hasBeenCalibrated;
 }
 
-bool alt_getIsBufferFull(void)
+bool alt_get_is_buffer_full(void)
 {
     return (kernel_get_systick_count() > ALT_SAMPLE_RATE_HZ);
 }

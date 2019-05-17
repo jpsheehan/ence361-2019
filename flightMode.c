@@ -98,7 +98,7 @@ void flightMode_update(uint32_t t_time_diff_micro)
         uint16_t angle = (yaw_getDegrees() + 180) % 360;
         if (range(angle, 180 - 5, 180 + 5))
         {
-            if (alt_getPercent() <= 0)
+            if (alt_get() <= 0)
             {
                 control_enable_yaw(false);
                 control_enable_altitude(false);
@@ -119,4 +119,3 @@ void flightMode_update(uint32_t t_time_diff_micro)
         }
     }
 }
-

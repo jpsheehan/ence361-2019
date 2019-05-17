@@ -25,11 +25,6 @@
 #include <stdbool.h>
 
 /**
- * The sample rate of the ADC. This is how many times per second the alt_ADCIntHandler is called.
- */
-#define ALT_SAMPLE_RATE_HZ 256
-
-/**
  * Initialises the altitude module.
  * This must be called before any other functions in the altitude module.
  */
@@ -49,22 +44,17 @@ void alt_calibrate(void);
 /**
  * Returns the mean altitude as a percentage (usually from 0 - 100). This value can be less than 0 or greater than 100.
  */
-int16_t alt_getPercent(void);
-
-/**
- * Returns the mean altitude. This is a value between 0 and 4095 (inclusive).
- */
-uint32_t alt_getRaw(void);
+int16_t alt_get(void);
 
 /**
  * Returns `true` if the altitude has been calibrated.
  */
-bool alt_getIsCalibrated(void);
+bool alt_get_is_calibrated(void);
 
 /**
  * Returns `true` if the circular buffer is full and ready to be calculated.
  */
-bool alt_getIsBufferFull(void);
+bool alt_get_is_buffer_full(void);
 
 /**
  * Performs an ADC conversion.

@@ -38,11 +38,15 @@
  */
 #define DISP_SYMBOL_DEGREES 0x60
 
-
 /**
  * Enum of all states the display can be in. Cycled by pressing BTN2
  */
-enum disp_state { DISP_STATE_CALIBRATION, DISP_STATE_ALL, DISP_STATE_TOTAL };
+enum disp_state
+{
+    DISP_STATE_CALIBRATION,
+    DISP_STATE_ALL,
+    DISP_STATE_TOTAL
+};
 typedef enum disp_state DisplayState;
 
 /**
@@ -53,21 +57,23 @@ static uint8_t g_displayState = DISP_STATE_CALIBRATION;
 /**
  * Display raw 12-bit adc reading to the display
  */
-void disp_clear(void) {
-    OLEDStringDraw ("                ", 0, 0);
-    OLEDStringDraw ("                ", 0, 1);
-    OLEDStringDraw ("                ", 0, 2);
-    OLEDStringDraw ("                ", 0, 3);
+void disp_clear(void)
+{
+    OLEDStringDraw("                ", 0, 0);
+    OLEDStringDraw("                ", 0, 1);
+    OLEDStringDraw("                ", 0, 2);
+    OLEDStringDraw("                ", 0, 3);
 }
 
 /**
  * Splash screen used during initial calibration while waiting for buffer to fill
  */
-void disp_calibration(void) {
-    OLEDStringDraw ("         ENCE361", 0, 0);
-    OLEDStringDraw ("mfb31", 0, 1);
-    OLEDStringDraw ("wgc22", 0, 2);
-    OLEDStringDraw ("jps111", 0, 3);
+void disp_calibration(void)
+{
+    OLEDStringDraw("         ENCE361", 0, 0);
+    OLEDStringDraw("mfb31", 0, 1);
+    OLEDStringDraw("wgc22", 0, 2);
+    OLEDStringDraw("jps111", 0, 3);
 }
 
 /**
@@ -75,7 +81,8 @@ void disp_calibration(void) {
  */
 void disp_advanceState(void)
 {
-    if (++g_displayState >= DISP_STATE_TOTAL) {
+    if (++g_displayState >= DISP_STATE_TOTAL)
+    {
         g_displayState = DISP_STATE_CALIBRATION + 1;
     }
 }
@@ -87,17 +94,17 @@ void disp_all(void)
 {
     char string[17];
 
-    usnprintf (string, sizeof(string), "Main Duty: %4d%%", pwm_get_main_duty());
-    OLEDStringDraw (string, 0, 0);
+    usnprintf(string, sizeof(string), "Main Duty: %4d%%", pwm_get_main_duty());
+    OLEDStringDraw(string, 0, 0);
 
-    usnprintf (string, sizeof(string), "Tail Duty: %4d%%", pwm_get_tail_duty());
-    OLEDStringDraw (string, 0, 1);
+    usnprintf(string, sizeof(string), "Tail Duty: %4d%%", pwm_get_tail_duty());
+    OLEDStringDraw(string, 0, 1);
 
-    usnprintf (string, sizeof(string), "      Yaw: %4d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
-    OLEDStringDraw (string, 0, 2);
+    usnprintf(string, sizeof(string), "      Yaw: %4d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
+    OLEDStringDraw(string, 0, 2);
 
-    usnprintf (string, sizeof(string), " Altitude: %4d%%", alt_getPercent());
-    OLEDStringDraw (string, 0, 3);
+    usnprintf(string, sizeof(string), " Altitude: %4d%%", alt_get());
+    OLEDStringDraw(string, 0, 3);
 }
 
 /**
@@ -111,7 +118,8 @@ void disp_unknown(void)
 
 void disp_render(uint32_t t_time_diff_micro)
 {
-    switch (g_displayState) {
+    switch (g_displayState)
+    {
     case DISP_STATE_CALIBRATION:
         disp_calibration();
         break;
@@ -127,6 +135,6 @@ void disp_render(uint32_t t_time_diff_micro)
 void disp_init(void)
 {
     // Intialise the Orbit OLED display
-    OLEDInitialise ();
+    OLEDInitialise();
     disp_clear();
 }

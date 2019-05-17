@@ -18,18 +18,18 @@ static bool g_enable_yaw;
  */
 ControlState control_get_state_from_gains(ControlGains t_gains)
 {
-  return (ControlState){
-      t_gains.kp,
-      t_gains.ki,
-      t_gains.kd,
-      0};
+    return (ControlState){
+        t_gains.kp,
+        t_gains.ki,
+        t_gains.kd,
+        0};
 }
 
 void control_init(ControlGains t_altitude_gains, ControlGains t_yaw_gains)
 {
-  // initialise the control states of the altitude and yaw
-  g_control_altitude = control_get_state_from_gains(t_altitude_gains);
-  g_control_yaw = control_get_state_from_gains(t_yaw_gains);
+    // initialise the control states of the altitude and yaw
+    g_control_altitude = control_get_state_from_gains(t_altitude_gains);
+    g_control_yaw = control_get_state_from_gains(t_yaw_gains);
 }
 
 void control_update_altitude(uint32_t t_time_diff_micro)
@@ -40,7 +40,7 @@ void control_update_altitude(uint32_t t_time_diff_micro)
     }
 
     // the difference between what we want and what we have (as a percentage)
-    int16_t error = setpoint_get_altitude() - alt_getPercent();
+    int16_t error = setpoint_get_altitude() - alt_get();
 
     // do control system stuff...
 

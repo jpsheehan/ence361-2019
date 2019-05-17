@@ -42,13 +42,13 @@
 #include "flightMode.h"
 
 #define BAUD_RATE 9600
-#define UART_USB_BASE           UART0_BASE
-#define UART_USB_PERIPH_UART    SYSCTL_PERIPH_UART0
-#define UART_USB_PERIPH_GPIO    SYSCTL_PERIPH_GPIOA
-#define UART_USB_GPIO_BASE      GPIO_PORTA_BASE
-#define UART_USB_GPIO_PIN_RX    GPIO_PIN_0
-#define UART_USB_GPIO_PIN_TX    GPIO_PIN_1
-#define UART_USB_GPIO_PINS      UART_USB_GPIO_PIN_RX | UART_USB_GPIO_PIN_TX
+#define UART_USB_BASE UART0_BASE
+#define UART_USB_PERIPH_UART SYSCTL_PERIPH_UART0
+#define UART_USB_PERIPH_GPIO SYSCTL_PERIPH_GPIOA
+#define UART_USB_GPIO_BASE GPIO_PORTA_BASE
+#define UART_USB_GPIO_PIN_RX GPIO_PIN_0
+#define UART_USB_GPIO_PIN_TX GPIO_PIN_1
+#define UART_USB_GPIO_PINS UART_USB_GPIO_PIN_RX | UART_USB_GPIO_PIN_TX
 
 #define UART_INPUT_BUFFER_SIZE 40
 #define UART_ALLOW_COMMANDS true
@@ -66,12 +66,12 @@ void uart_init(void)
     // Select the alternate (UART) function for these pins.
     //
     GPIOPinTypeUART(UART_USB_GPIO_BASE, UART_USB_GPIO_PINS);
-    GPIOPinConfigure (GPIO_PA0_U0RX);
-    GPIOPinConfigure (GPIO_PA1_U0TX);
+    GPIOPinConfigure(GPIO_PA0_U0RX);
+    GPIOPinConfigure(GPIO_PA1_U0TX);
 
     UARTConfigSetExpClk(UART_USB_BASE, SysCtlClockGet(), BAUD_RATE,
-            UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
-            UART_CONFIG_PAR_NONE);
+                        UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
+                            UART_CONFIG_PAR_NONE);
     UARTFIFOEnable(UART_USB_BASE);
     UARTEnable(UART_USB_BASE);
 }
@@ -80,7 +80,7 @@ void uart_init(void)
  * (Original Code by P.J. Bones)
  * Formats the string to send via UART and then sends it
  */
-void uart_send(const char* t_buffer)
+void uart_send(const char *t_buffer)
 {
     // write the buffer out
     while (*t_buffer)
@@ -90,10 +90,10 @@ void uart_send(const char* t_buffer)
     }
 }
 
-void uart_process_command(const char* buffer, size_t buffer_len)
+void uart_process_command(const char *buffer, size_t buffer_len)
 {
     // find the next equals sign
-    char* equals = strchr(buffer, '=');
+    char *equals = strchr(buffer, '=');
 
     if (equals != NULL)
     {
@@ -101,27 +101,26 @@ void uart_process_command(const char* buffer, size_t buffer_len)
         *equals = '\0';
 
         // the value to be read is the string starting at the character after the equals sign
-        char* value_str = equals + 1;
-        char* end_ptr;
+        char *value_str = equals + 1;
+        char *end_ptr;
 
         int value = strtod(value_str, &end_ptr);
 
         if (end_ptr != NULL)
         {
             // update gains here!
-//            if (strcmp(buffer, "kp") == 0)
-//            {
-//                 kp = value;
-//            }
-//            else if (strcmp(buffer, "ki") == 0)
-//            {
-//                 ki = value;
-//            }
-//            else if (strcmp(buffer, "kd") == 0)
-//            {
-//                kd = value;
-//            }
-
+            //            if (strcmp(buffer, "kp") == 0)
+            //            {
+            //                 kp = value;
+            //            }
+            //            else if (strcmp(buffer, "ki") == 0)
+            //            {
+            //                 ki = value;
+            //            }
+            //            else if (strcmp(buffer, "kd") == 0)
+            //            {
+            //                kd = value;
+            //            }
         }
     }
 }
@@ -132,7 +131,7 @@ void uart_update(uint32_t t_time_diff_micro)
     uint16_t actual_yaw = yaw_getDegrees();
 
     int16_t target_altitude = setpoint_get_altitude();
-    int32_t actual_altitude = alt_getPercent(); // TODO: maybe change this to int16_t in the altitude module?
+    int16_t actual_altitude = alt_get();
     uint8_t main_rotor_duty = pwm_get_main_duty();
     uint8_t tail_rotor_duty = pwm_get_tail_duty();
     uint8_t operating_mode = flightMode_get_mode();
