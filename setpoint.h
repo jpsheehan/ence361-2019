@@ -21,6 +21,7 @@
 #define SETPOINT_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /**
  * Initialises the setpoint values to 0.
@@ -66,5 +67,25 @@ int16_t setpoint_get_altitude(void);
  * Sets the altitude to a specific value (as a percentage).
  */
 void setpoint_set_altitude(int16_t t_altitude);
+
+/**
+ * Returns true if the yaw has changed since the last call to setpoint_reset_yaw_changed();
+ */
+bool setpoint_get_yaw_changed(void);
+
+/**
+ * Returns true if the altitude has changed since the last call to setpoint_reset_altitude_changed();
+ */
+bool setpoint_get_altitude_changed(void);
+
+/**
+ * Resets the altitude changed flag.
+ */
+void setpoint_reset_yaw_changed(void);
+
+/**
+ * Resets the yaw changed flag.
+ */
+void setpoint_reset_altitude_changed(void);
 
 #endif /* SETPOINT_H_ */

@@ -40,6 +40,16 @@ static int16_t g_desired_yaw = 0;
  */
 static int16_t g_desired_altitude = 0;
 
+/**
+ * True if the yaw has been changed.
+ */
+static bool g_yaw_changed = false;
+
+/**
+ * True if the altitude has been changed.
+ */
+static bool g_altitude_changed = false;
+
 void setpoint_init(void)
 {
     g_desired_yaw = 0;
@@ -54,6 +64,7 @@ void setpoint_increment_yaw(void)
     {
         g_desired_yaw -= 360;
     }
+    g_yaw_changed = true;
 }
 
 void setpoint_decrement_yaw(void)
@@ -64,6 +75,7 @@ void setpoint_decrement_yaw(void)
     {
         g_desired_yaw += 360;
     }
+    g_yaw_changed = true;
 }
 
 int16_t setpoint_get_yaw(void)
@@ -75,18 +87,21 @@ int16_t setpoint_get_yaw(void)
 void setpoint_set_yaw(int16_t t_yaw)
 {
     g_desired_yaw = clamp(t_yaw, 0, 359);
+    g_yaw_changed = true;
 }
 
 void setpoint_increment_altitude(void)
 {
     // increment the altitude and then clamp if necessary
     g_desired_altitude = min(g_desired_altitude + ALTITUDE_DELTA, 100);
+    g_altitude_changed = true;
 }
 
 void setpoint_decrement_altitude(void)
 {
     // decrement the altitude and then clamp if necessary
     g_desired_altitude = max(g_desired_altitude - ALTITUDE_DELTA, 0);
+    g_altitude_changed = true;
 }
 
 int16_t setpoint_get_altitude(void)
@@ -97,4 +112,25 @@ int16_t setpoint_get_altitude(void)
 void setpoint_set_altitude(int16_t t_altitude)
 {
     g_desired_altitude = clamp(t_altitude, 0, 100);
+    g_altitude_changed = true;
+}
+
+bool setpoint_get_yaw_changed(void)
+{
+    return g_yaw_changed;
+}
+
+bool setpoint_get_altitude_changed(void)
+{
+    return g_altitude_changed;
+}
+
+void setpoint_reset_yaw_changed(void)
+{
+    g_yaw_changed = false;
+}
+
+void setpoint_reset_altitude_changed(void)
+{
+    g_altitude_changed = false;
 }
