@@ -31,6 +31,6 @@
  * approximately correct but will not be exact and should not be used as a 
  * reliable timer.
  */
-void utils_waitForSeconds(uint32_t t_delay);
+void utils_wait_for_seconds(uint32_t t_delay);
 
 #endif /* UTILS_H_ */

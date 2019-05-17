@@ -30,7 +30,7 @@
  */
 #define UTILS_SECOND_DELAY_COEFFICIENT 6
 
-void utils_waitForSeconds(uint32_t t_delay)
+void utils_wait_for_seconds(uint32_t t_delay)
 {
     SysCtlDelay((SysCtlClockGet() * t_delay) / UTILS_SECOND_DELAY_COEFFICIENT);
 }
