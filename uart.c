@@ -39,7 +39,7 @@
 #include "altitude.h"
 #include "setpoint.h"
 #include "pwm.h"
-#include "flightMode.h"
+#include "flight_mode.h"
 
 #define BAUD_RATE 9600
 #define UART_USB_BASE UART0_BASE

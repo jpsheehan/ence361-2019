@@ -18,9 +18,9 @@
  * This module contains the definitions for the Operating mode (or FLight Status) Finite Sate Machine
  *
  *********************************************************************************************/
- 
-#ifndef OPSTATUSFSM_H_
-#define OPSTATUSFSM_H_
+
+#ifndef FLIGHT_MODE_H_
+#define FLIGHT_MODE_H_
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -29,35 +29,37 @@
  * Defines the possible states for the operating mode (a.k.a. flight status), state machine.
  * Finding yaw reference is part of take off, Setting altitude occurs at start-up up so CAL start may not be needed. 
  */
-enum operating_mode_e { LANDED, TAKE_OFF, IN_FLIGHT, LANDING };
-typedef enum operating_mode_e OperatingMode;
+static enum flight_mode_state_e { LANDED,
+                                  TAKE_OFF,
+                                  IN_FLIGHT,
+                                  LANDING };
+typedef enum flight_mode_state_e FlightModeState;
 
 /**
  * Initialise operating mode (a.k.a. flight status), state machine.
  */
-void flightMode_init(void);
+void flight_mode_init(void);
 
 /**
  * Get current operating mode (a.k.a. flight status), state machine.
  */
-OperatingMode flightMode_get_mode(void);
+FlightModeState flight_mode_get(void);
 
 /**
  * Set operating mode (a.k.a. flight status), state machine..
  * SHOULDN'T BE USED!!!
  */
-void flightMode_set_current(OperatingMode t_mode);
+void flight_mode_set_current(FlightModeState t_mode);
 
 /**
  * Advance the state.
  */
-void flightMode_set_next(void);
-
+void flight_mode_set_next(void);
 
 /**
+ * KERNEL TASK.
  * Called by the kernel. Checks conditions and advances state.
  */
-void flightMode_update(uint32_t t_time_diff_micro);
-
+void flight_mode_update(uint32_t t_time_diff_micro);
 
 #endif /* OPSTATUSFSM_H_ */

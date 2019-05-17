@@ -20,7 +20,7 @@
 
 #include "button.h"
 #include "slider.h"
-#include "flightMode.h"
+#include "flight_mode.h"
 #include "setpoint.h"
 #include "input.h"
 

@@ -27,31 +27,25 @@
 #include "setpoint.h"
 #include "pwm.h"
 #include "altitude.h"
-#include "flightMode.h"
+#include "flight_mode.h"
 #include "utils.h"
-
-/**
- * Holds the previous state of the Operating mode (or FLight Status) Finite Sate Machine
- */
-//volatile static OperatingMode opMode_previous_state;
 
 /**
  * Holds the current state of the Operating mode (or FLight Status) Finite Sate Machine
  */
-volatile static OperatingMode g_mode;
+volatile static FlightModeState g_mode;
 
 void flightMode_init(void)
 {
     g_mode = LANDED;
-    //opMode_previous_state = LANDED;
 }
 
-OperatingMode flightMode_get_mode(void)
+FlightModeState flightMode_get_mode(void)
 {
     return g_mode;
 }
 
-void flightMode_set_current(OperatingMode t_mode)
+void flightMode_set_current(FlightModeState t_mode)
 {
     g_mode = t_mode;
 }

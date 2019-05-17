@@ -5,7 +5,7 @@
 #include "altitude.h"
 #include "yaw.h"
 #include "pwm.h"
-#include "flightMode.h"
+#include "flight_mode.h"
 
 static ControlState g_control_altitude;
 static ControlState g_control_yaw;

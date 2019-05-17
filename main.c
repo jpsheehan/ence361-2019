@@ -38,12 +38,9 @@
 #include "pwm.h"
 #include "setpoint.h"
 #include "kernel.h"
-#include "flightMode.h"
+#include "flight_mode.h"
 #include "control.h"
 #include "input.h"
-
-#define ALTITUDE_YAW_REF 5       //Altitude % to hover at while finding yaw reference
-#define PWM_TAIL_DUTY_YAW_REF 50 //Duty cycle % to apply to Tail while finding reference
 
 static const int KERNEL_FREQUENCY = 1024;
 
