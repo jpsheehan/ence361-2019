@@ -44,6 +44,11 @@
 static const int ALT_BUF_SIZE = 32;
 
 /**
+ * Figure out a way to have this but also not repeat it in main.c!!! This is the frequency of the adc stuff
+ */
+static const int ALT_SAMPLE_RATE_HZ = 256;
+
+/**
  * The ideal resolution delta for a helicopter rig. This value may change depending on which helicopter rig is used. The ideal value is calculated as follows:
  * 
  * When the helicopter changes its height from landed (0% altitude) to full height (100% altitude) there is a voltage drop of 0.8 V. 
@@ -133,7 +138,7 @@ void alt_init_adc(void)
 
     //
     // Register the interrupt handler
-    ADCIntRegister(ADC0_BASE, 3, alt_ADCIntHandler);
+    ADCIntRegister(ADC0_BASE, 3, alt_adc_int_handler);
 
     //
     // Enable interrupts for ADC0 sequence 3 (clears any outstanding interrupts)

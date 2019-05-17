@@ -7,8 +7,8 @@
 #include "pwm.h"
 #include "flight_mode.h"
 
-static ControlState g_control_altitude;
-static ControlState g_control_yaw;
+ControlState g_control_altitude;
+ControlState g_control_yaw;
 
 static bool g_enable_altitude;
 static bool g_enable_yaw;

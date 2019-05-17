@@ -45,7 +45,7 @@ void input_update(uint32_t t_time_diff_micro)
     butState = btn_check(LEFT);
     if (butState == PUSHED)
     {
-        if (flightMode_get_mode() == IN_FLIGHT)
+        if (flight_mode_get() == IN_FLIGHT)
         {
             setpoint_decrement_yaw();
         }
@@ -55,7 +55,7 @@ void input_update(uint32_t t_time_diff_micro)
     butState = btn_check(RIGHT);
     if (butState == PUSHED)
     {
-        if (flightMode_get_mode() == IN_FLIGHT)
+        if (flight_mode_get() == IN_FLIGHT)
         {
             setpoint_increment_yaw();
         }
@@ -65,7 +65,7 @@ void input_update(uint32_t t_time_diff_micro)
     butState = btn_check(UP);
     if (butState == PUSHED)
     {
-        if (flightMode_get_mode() == IN_FLIGHT)
+        if (flight_mode_get() == IN_FLIGHT)
         {
             setpoint_increment_altitude();
         }
@@ -75,7 +75,7 @@ void input_update(uint32_t t_time_diff_micro)
     butState = btn_check(DOWN);
     if (butState == PUSHED)
     {
-        if (flightMode_get_mode() == IN_FLIGHT)
+        if (flight_mode_get() == IN_FLIGHT)
         {
             setpoint_decrement_altitude();
         }
@@ -88,9 +88,9 @@ void input_update(uint32_t t_time_diff_micro)
 
     if (sw1_state == SLIDER_DOWN)
     {
-        if (flightMode_get_mode() == IN_FLIGHT)
+        if (flight_mode_get() == IN_FLIGHT)
         {
-            flightMode_set_next(); //were flying, change to landing
+            flight_mode_advance(); //were flying, change to landing
         }
     }
     else
@@ -98,9 +98,9 @@ void input_update(uint32_t t_time_diff_micro)
         if (sw1_state == SLIDER_UP && sw1_changed)
         {
             // slider has been changed into the up position
-            if (flightMode_get_mode() == LANDED)
+            if (flight_mode_get() == LANDED)
             {
-                flightMode_set_next(); //were landed, change to take off
+                flight_mode_advance(); //were landed, change to take off
             }
         }
     }

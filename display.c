@@ -35,12 +35,12 @@ static const int DISP_SYMBOL_DEGREES = 0x60;
 /**
  * Enum of all states the display can be in. Cycled by pressing BTN2
  */
-static enum disp_state {
+enum disp_state {
     DISP_STATE_CALIBRATION,
     DISP_STATE_ALL,
     DISP_STATE_TOTAL
 };
-static typedef enum disp_state DisplayState;
+typedef enum disp_state DisplayState;
 
 /**
  * Current display state

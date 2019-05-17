@@ -29,7 +29,7 @@
  * Defines the possible states for the operating mode (a.k.a. flight status), state machine.
  * Finding yaw reference is part of take off, Setting altitude occurs at start-up up so CAL start may not be needed. 
  */
-static enum flight_mode_state_e { LANDED,
+enum flight_mode_state_e { LANDED,
                                   TAKE_OFF,
                                   IN_FLIGHT,
                                   LANDING };
@@ -46,15 +46,9 @@ void flight_mode_init(void);
 FlightModeState flight_mode_get(void);
 
 /**
- * Set operating mode (a.k.a. flight status), state machine..
- * SHOULDN'T BE USED!!!
- */
-void flight_mode_set_current(FlightModeState t_mode);
-
-/**
  * Advance the state.
  */
-void flight_mode_set_next(void);
+void flight_mode_advance(void);
 
 /**
  * KERNEL TASK.

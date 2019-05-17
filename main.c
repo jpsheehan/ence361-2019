@@ -91,7 +91,7 @@ int main(void)
     pwm_init();
     kernel_init(KERNEL_FREQUENCY);
     setpoint_init();
-    flightMode_init();
+    flight_mode_init();
     control_init((ControlGains){1.0f, 1.0f, 1.0f},
                  (ControlGains){1.0f, 1.0f, 1.0f});
 
@@ -102,7 +102,7 @@ int main(void)
     kernel_add_task((KernelTask){&uart_update, 4});              // update the UART four times per second
     kernel_add_task((KernelTask){&control_update_altitude, 10}); // perform control stuff 10 times per second
     kernel_add_task((KernelTask){&control_update_yaw, 10});
-    kernel_add_task((KernelTask){&flightMode_update, 20}); // run state checking 20 times per sec
+    kernel_add_task((KernelTask){&flight_mode_update, 20}); // run state checking 20 times per sec
 
     //
     // Enable interrupts to the processor.

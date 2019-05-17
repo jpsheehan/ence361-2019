@@ -35,22 +35,17 @@
  */
 volatile static FlightModeState g_mode;
 
-void flightMode_init(void)
+void flight_mode_init(void)
 {
     g_mode = LANDED;
 }
 
-FlightModeState flightMode_get_mode(void)
+FlightModeState flight_mode_get(void)
 {
     return g_mode;
 }
 
-void flightMode_set_current(FlightModeState t_mode)
-{
-    g_mode = t_mode;
-}
-
-void flightMode_set_next(void)
+void flight_mode_advance(void)
 {
     switch (g_mode)
     {
@@ -69,13 +64,13 @@ void flightMode_set_next(void)
     }
 }
 
-void flightMode_update(uint32_t t_time_diff_micro)
+void flight_mode_update(uint32_t t_time_diff_micro)
 {
     if (g_mode == TAKE_OFF)
     {
         if (yaw_hasBeenCalibrated())
         {
-            flightMode_set_next();
+            flight_mode_advance();
             control_enable_yaw(true);
             control_enable_altitude(true);
         }
@@ -99,7 +94,7 @@ void flightMode_update(uint32_t t_time_diff_micro)
                 yaw_resetCalibrationState();
                 setpoint_set_yaw(0);
                 setpoint_set_altitude(0);
-                flightMode_set_next();
+                flight_mode_advance();
             }
             else
             {
