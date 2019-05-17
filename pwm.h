@@ -18,27 +18,34 @@
  * 
  ******************************************************************************/
 
-#ifndef pwmGen_H_
-#define pwmGen_H_
+#ifndef PWM_H_
+#define PWM_H_
 
 #include <stdint.h>
-#include <stdbool.h>
-
-#include "inc/hw_memmap.h"
-#include "driverlib/gpio.h"
-#include "driverlib/sysctl.h"
-
-void pwm_init (void);
 
 /**
- * Set PWM frequency and duty cycle.
+ * Initialises the PWM module. Sets the duty cycles to 0 by default.
  */
-void pwm_set_main_duty (int8_t t_duty);
+void pwm_init(void);
 
+/**
+ * Set duty cycle of the main rotor.
+ */
+void pwm_set_main_duty(int8_t t_duty);
+
+/**
+ * Returns the duty cycle of the main rotor.
+ */
 int8_t pwm_get_main_duty(void);
 
-void pwm_set_tail_duty (int8_t t_duty);
+/**
+ * Sets the duty cycle of the tail rotor.
+ */
+void pwm_set_tail_duty(int8_t t_duty);
 
+/**
+ * Returns the duty cycle of the tail rotor.
+ */
 int8_t pwm_get_tail_duty(void);
 
 #endif

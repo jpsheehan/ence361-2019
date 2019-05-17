@@ -25,7 +25,7 @@
 #include "yaw.h"
 #include "control.h"
 #include "setpoint.h"
-#include "pwmGen.h"
+#include "pwm.h"
 #include "altitude.h"
 #include "flightMode.h"
 #include "utils.h"

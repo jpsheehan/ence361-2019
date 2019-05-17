@@ -4,7 +4,7 @@
 #include "setpoint.h"
 #include "altitude.h"
 #include "yaw.h"
-#include "pwmGen.h"
+#include "pwm.h"
 #include "flightMode.h"
 
 static ControlState g_control_altitude;

@@ -26,7 +26,7 @@
 #include "altitude.h"
 #include "utils.h"
 #include "yaw.h"
-#include "pwmGen.h"
+#include "pwm.h"
 
 /**
  * When true clamps percentage between 0 and 100%

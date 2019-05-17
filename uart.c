@@ -38,7 +38,7 @@
 #include "uart.h"
 #include "altitude.h"
 #include "setpoint.h"
-#include "pwmGen.h"
+#include "pwm.h"
 #include "flightMode.h"
 
 #define BAUD_RATE 9600

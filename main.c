@@ -35,7 +35,7 @@
 #include "utils.h"
 #include "uart.h"
 #include "yaw.h"
-#include "pwmGen.h"
+#include "pwm.h"
 #include "setpoint.h"
 #include "kernel.h"
 #include "flightMode.h"
