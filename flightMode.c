@@ -30,6 +30,8 @@
 #include "flightMode.h"
 #include "utils.h"
 
+#define PWM_TAIL_DUTY_YAW_REF 20 //Duty cycle % to apply to Tail while finding reference
+
 /**
  * Holds the previous state of the Operating mode (or FLight Status) Finite Sate Machine
  */
@@ -88,8 +90,8 @@ void flightMode_update(uint32_t t_time_diff_micro)
         else
         {
             // find the 0 calibration point for yaw
-            pwm_set_main_duty(5);
-            pwm_set_tail_duty(50);
+            pwm_set_main_duty(0);
+            pwm_set_tail_duty(PWM_TAIL_DUTY_YAW_REF);
         }
     }
 

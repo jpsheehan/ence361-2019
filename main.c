@@ -42,9 +42,6 @@
 #include "control.h"
 #include "input.h"
 
-#define ALTITUDE_YAW_REF 5       //Altitude % to hover at while finding yaw reference
-#define PWM_TAIL_DUTY_YAW_REF 50 //Duty cycle % to apply to Tail while finding reference
-
 static const int KERNEL_FREQUENCY = 1024;
 
 /**
@@ -95,8 +92,8 @@ int main(void)
     kernel_init(KERNEL_FREQUENCY);
     setpoint_init();
     flightMode_init();
-    control_init((ControlGains ) { 1.0f, 1.0f, 1.0f },
-                 (ControlGains ) { 1.0f, 1.0f, 1.0f });
+    control_init((ControlGains ) { 1.0f, 0.01f, 1.0f },
+                 (ControlGains ) { 0.5f, 0.01f, 1.0f });
 
     kernel_add_task((KernelTask ) { &input_update, 0 }); // always process input
     kernel_add_task((KernelTask ) { &alt_process_adc, 256 }); // process ADC stuff 256 times per second
