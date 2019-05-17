@@ -72,7 +72,7 @@ void startup_sequence(void)
         {
             alt_update(0);
             alt_calibrate();
-            disp_advanceState();
+            disp_advance_state();
         }
     }
     //    flightMode_set_next(); //altitude calibrated so move to landed

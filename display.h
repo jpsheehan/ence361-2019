@@ -33,7 +33,7 @@ void disp_init(void);
  * Wraps back to state 0 when all states exhausted
  *
  */
-void disp_advanceState(void);
+void disp_advance_state(void);
 
 /**
  * Clears the display if g_displayState differs from the previous time disp_render() was called

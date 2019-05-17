@@ -18,10 +18,9 @@
  ******************************************************************************/
 
 #include <stdint.h>
-
-#include "OrbitOLED/OrbitOLEDInterface.h"
 #include "utils/ustdlib.h"
 
+#include "OrbitOLED/OrbitOLEDInterface.h"
 #include "display.h"
 #include "altitude.h"
 #include "utils.h"
@@ -29,25 +28,19 @@
 #include "pwm.h"
 
 /**
- * When true clamps percentage between 0 and 100%
- */
-#define DISPLAY_CLAMPED_PERCENTAGE_ALTITUDE false
-
-/**
  * Bytecode for rendering degree symbol on the display
  */
-#define DISP_SYMBOL_DEGREES 0x60
+static const int DISP_SYMBOL_DEGREES = 0x60;
 
 /**
  * Enum of all states the display can be in. Cycled by pressing BTN2
  */
-enum disp_state
-{
+static enum disp_state {
     DISP_STATE_CALIBRATION,
     DISP_STATE_ALL,
     DISP_STATE_TOTAL
 };
-typedef enum disp_state DisplayState;
+static typedef enum disp_state DisplayState;
 
 /**
  * Current display state
@@ -79,7 +72,7 @@ void disp_calibration(void)
 /**
  * Advance display state when BTN2 is pressed
  */
-void disp_advanceState(void)
+void disp_advance_state(void)
 {
     if (++g_displayState >= DISP_STATE_TOTAL)
     {
