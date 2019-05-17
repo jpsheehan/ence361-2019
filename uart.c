@@ -128,7 +128,7 @@ void uart_process_command(const char *buffer, size_t buffer_len)
 void uart_update(uint32_t t_time_diff_micro)
 {
     uint16_t target_yaw = setpoint_get_yaw();
-    uint16_t actual_yaw = yaw_getDegrees();
+    uint16_t actual_yaw = yaw_get();
 
     int16_t target_altitude = setpoint_get_altitude();
     int16_t actual_altitude = alt_get();

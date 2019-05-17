@@ -38,25 +38,19 @@ typedef enum quadrature_state QuadratureState;
 void yaw_init(void);
 
 /**
- * Returns the number of slots counted due to the current movement.
- * There are 112 slots per full (360 degrees) rotation.
- */
-uint8_t yaw_getSlotCount(void);
-
-/**
  * Returns the current yaw value in degrees.
  * This is a bearing the range 0 - 359 degrees.
  */
-uint16_t yaw_getDegrees(void);
+uint16_t yaw_get(void);
 
 /**
  * Sets the calibration state to false.
  */
-void yaw_resetCalibrationState(void);
+void yaw_reset_calibration_state(void);
 
 /**
  * Returns true if the yaw has been calibrated to its reference.
  */
-bool yaw_hasBeenCalibrated(void);
+bool yaw_has_been_calibrated(void);
 
 #endif /* YAW_H_ */

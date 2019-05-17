@@ -63,9 +63,9 @@ static bool g_has_been_calibrated;
 
 // prototypes
 void yaw_update_state(bool t_signal_a, bool t_signal_b);
-void yaw_intHandler(void);
-void yaw_referenceIntHandler(void);
-QuadratureState yaw_getState(void);
+void yaw_int_handler(void);
+void yaw_reference_int_handler(void);
+QuadratureState yaw_get_state(void);
 
 void yaw_init(void)
 {
@@ -90,7 +90,7 @@ void yaw_init(void)
     GPIOIntTypeSet(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1, GPIO_BOTH_EDGES);
 
 	// Register the interrupt handler
-    GPIOIntRegister(GPIO_PORTB_BASE, yaw_intHandler);
+    GPIOIntRegister(GPIO_PORTB_BASE, yaw_int_handler);
 	
 	// Enable interrupts on GPIO Port B Pins 0,1 for Yaw channels A and B
 	// (clears any outstanding interrupts)
@@ -102,14 +102,14 @@ void yaw_init(void)
     GPIOPinTypeGPIOInput(GPIO_PORTC_BASE, GPIO_PIN_4);
     GPIOPadConfigSet(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPD);
     GPIOIntTypeSet(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_FALLING_EDGE);
-    GPIOIntRegister(GPIO_PORTC_BASE, yaw_referenceIntHandler);
+    GPIOIntRegister(GPIO_PORTC_BASE, yaw_reference_int_handler);
     GPIOIntEnable(GPIO_PORTC_BASE, GPIO_INT_PIN_4);
 }
 
 /**
  * The interrupt handler for the yaw reference.
  */
-void yaw_referenceIntHandler(void)
+void yaw_reference_int_handler(void)
 {
     g_has_been_calibrated = true;
     g_slot_count = 0;
@@ -123,7 +123,7 @@ void yaw_referenceIntHandler(void)
 * The general thinking is explained in the following document:
 * https://cdn.sparkfun.com/datasheets/Robotics/How%20to%20use%20a%20quadrature%20encoder.pdf
 */
-void yaw_updateState(bool t_signal_a, bool t_signal_b)
+void yaw_update_state(bool t_signal_a, bool t_signal_b)
 {
     // compare with previous state
     uint8_t this_state = (t_signal_a << 1) | t_signal_b;
@@ -166,19 +166,14 @@ void yaw_updateState(bool t_signal_a, bool t_signal_b)
 /**
 * Returns the current state of the Quadrature FSM.
 */
-QuadratureState yaw_getState(void)
+QuadratureState yaw_get_state(void)
 {
     QuadratureState temp_state = g_quadrature_state;
     g_quadrature_state = QUAD_STATE_NOCHANGE;
     return temp_state;
 }
 
-uint8_t yaw_getSlotCount(void)
-{
-    return g_slot_count;
-}
-
-uint16_t yaw_getDegrees(void)
+uint16_t yaw_get(void)
 {
     return g_slot_count * YAW_DEGREES_PER_SLOT;
 }
@@ -186,7 +181,7 @@ uint16_t yaw_getDegrees(void)
 /**
  * The interrupt handler for the for Quadrature interrupt.
  */
-void yaw_intHandler(void)
+void yaw_int_handler(void)
 {
     // read signal A
     bool signal_a = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_0);
@@ -195,18 +190,18 @@ void yaw_intHandler(void)
     bool signal_b = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_1);
 
     // update the quadrature stuff
-    yaw_updateState(signal_a, signal_b);
+    yaw_update_state(signal_a, signal_b);
 
 	// clear the interrupt flag
     GPIOIntClear(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1);
 }
 
-void yaw_resetCalibrationState(void)
+void yaw_reset_calibration_state(void)
 {
     g_has_been_calibrated = false;
 }
 
-bool yaw_hasBeenCalibrated(void)
+bool yaw_has_been_calibrated(void)
 {
     return g_has_been_calibrated;
 }

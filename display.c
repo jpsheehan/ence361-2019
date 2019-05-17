@@ -93,7 +93,7 @@ void disp_all(void)
     usnprintf(string, sizeof(string), "Tail Duty: %4d%%", pwm_get_tail_duty());
     OLEDStringDraw(string, 0, 1);
 
-    usnprintf(string, sizeof(string), "      Yaw: %4d%c", yaw_getDegrees(), DISP_SYMBOL_DEGREES);
+    usnprintf(string, sizeof(string), "      Yaw: %4d%c", yaw_get(), DISP_SYMBOL_DEGREES);
     OLEDStringDraw(string, 0, 2);
 
     usnprintf(string, sizeof(string), " Altitude: %4d%%", alt_get());

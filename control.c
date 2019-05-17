@@ -55,7 +55,7 @@ void control_update_yaw(uint32_t t_time_diff_micro)
     }
 
     // the difference between what we want and what we have (in degrees)
-    int16_t error = setpoint_get_yaw() - yaw_getDegrees();
+    int16_t error = setpoint_get_yaw() - yaw_get();
 
     // do control system stuff...
 

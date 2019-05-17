@@ -68,7 +68,7 @@ void flight_mode_update(uint32_t t_time_diff_micro)
 {
     if (g_mode == TAKE_OFF)
     {
-        if (yaw_hasBeenCalibrated())
+        if (yaw_has_been_calibrated())
         {
             flight_mode_advance();
             control_enable_yaw(true);
@@ -84,14 +84,14 @@ void flight_mode_update(uint32_t t_time_diff_micro)
 
     if (g_mode == LANDING)
     {
-        uint16_t angle = (yaw_getDegrees() + 180) % 360;
+        uint16_t angle = (yaw_get() + 180) % 360;
         if (range(angle, 180 - 5, 180 + 5))
         {
             if (alt_get() <= 0)
             {
                 control_enable_yaw(false);
                 control_enable_altitude(false);
-                yaw_resetCalibrationState();
+                yaw_reset_calibration_state();
                 setpoint_set_yaw(0);
                 setpoint_set_altitude(0);
                 flight_mode_advance();
