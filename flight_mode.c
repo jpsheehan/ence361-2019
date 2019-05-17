@@ -45,7 +45,7 @@ FlightModeState flight_mode_get(void)
     return g_mode;
 }
 
-void flight_mode_advance(void)
+void flight_mode_advance_state(void)
 {
     switch (g_mode)
     {
@@ -70,7 +70,7 @@ void flight_mode_update(uint32_t t_time_diff_micro)
     {
         if (yaw_has_been_calibrated())
         {
-            flight_mode_advance();
+            flight_mode_advance_state();
             control_enable_yaw(true);
             control_enable_altitude(true);
         }
@@ -94,7 +94,7 @@ void flight_mode_update(uint32_t t_time_diff_micro)
                 yaw_reset_calibration_state();
                 setpoint_set_yaw(0);
                 setpoint_set_altitude(0);
-                flight_mode_advance();
+                flight_mode_advance_state();
             }
             else
             {

@@ -90,7 +90,7 @@ void input_update(uint32_t t_time_diff_micro)
     {
         if (flight_mode_get() == IN_FLIGHT)
         {
-            flight_mode_advance(); //were flying, change to landing
+            flight_mode_advance_state(); //were flying, change to landing
         }
     }
     else
@@ -100,7 +100,7 @@ void input_update(uint32_t t_time_diff_micro)
             // slider has been changed into the up position
             if (flight_mode_get() == LANDED)
             {
-                flight_mode_advance(); //were landed, change to take off
+                flight_mode_advance_state(); //were landed, change to take off
             }
         }
     }

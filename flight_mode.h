@@ -48,7 +48,7 @@ FlightModeState flight_mode_get(void);
 /**
  * Advance the state.
  */
-void flight_mode_advance(void);
+void flight_mode_advance_state(void);
 
 /**
  * KERNEL TASK.
