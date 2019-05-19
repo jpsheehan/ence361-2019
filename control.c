@@ -101,27 +101,24 @@ void control_update_yaw(uint32_t t_time_diff_micro)
         // flip whatever direction we were going in originally
         clockWise = !clockWise;
     }
+    //
+    if (!clockWise) {
+        error = -error;
+    }
 
     // P control
      Pgain = error*g_control_yaw.kp;
     //Pgain = g_control_altitude.duty;
 
     // I control
-    //Igain = 0;
     g_control_yaw.cumulative += error; // Control is called with fixed frequency so time delta can be ignored.
     Igain = g_control_yaw.cumulative*g_control_yaw.ki;
 
     // D control
-    //Dgain = 0;
     Dgain = (error - g_control_yaw.lastError); // Control is called with fixed frequency so time delta can be ignored.
     g_control_yaw.lastError = error;
 
-    if (clockWise) {
-        newGain = g_control_altitude.duty + (Pgain + Igain + Dgain);
-    }
-    else {
-        newGain = g_control_altitude.duty - (Pgain + Igain + Dgain);
-    }
+    newGain = g_control_altitude.duty + (Pgain + Igain + Dgain);
 
     newGain = clamp(newGain, 0, 100);
 
