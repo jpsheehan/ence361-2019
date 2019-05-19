@@ -33,6 +33,16 @@
 #define PWM_TAIL_DUTY_YAW_REF 25 ///Duty cycle % to apply to Tail while finding reference
 
 /**
+ * The percentage altitude to hover on take-off and landing before finding the reference.
+ */
+static const int HOVER_ALTITUDE = 5;
+
+/**
+ * The angle of acceptable error in degrees for detecting reference when landing.
+ */
+static const int YAW_TOLERANCE = 3;
+
+/**
  * Holds the current state of the Operating mode (or FLight Status) Finite Sate Machine
  */
 volatile static FlightModeState g_mode;
@@ -87,7 +97,7 @@ void flight_mode_update(uint32_t t_time_diff_micro)
     if (g_mode == LANDING)
     {
         uint16_t angle = (yaw_get() + 180) % 360;
-        if (range(angle, 180 - 3, 180 + 3))
+        if (range(angle, 180 - YAW_TOLERANCE, 180 + YAW_TOLERANCE))
         {
             if (alt_get() <= 0)
             {
@@ -100,13 +110,20 @@ void flight_mode_update(uint32_t t_time_diff_micro)
             }
             else
             {
-                setpoint_set_altitude(0);
+                if (alt_get() <= HOVER_ALTITUDE)
+                {
+                    setpoint_set_altitude(0);
+                }
+                else
+                {
+                    setpoint_set_altitude(HOVER_ALTITUDE);
+                }
             }
         }
         else
         {
             setpoint_set_yaw(0);
-            setpoint_set_altitude(5);
+            setpoint_set_altitude(HOVER_ALTITUDE);
         }
     }
 }
