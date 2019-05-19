@@ -8,7 +8,8 @@
 #include "flight_mode.h"
 #include "utils.h"
 
-#define MINMOTORDUTY 25 // Maximum duty % that can be changed each time a control update is called
+// Min speed of main rotor, allows for proper anti-clockwise yaw control
+#define MINMOTORDUTY 15
 
 ControlState g_control_altitude;
 ControlState g_control_yaw;
@@ -56,11 +57,11 @@ void control_update_altitude(uint32_t t_time_diff_micro)
 
     // I control
     g_control_altitude.cumulative += error;
-    Igain = g_control_altitude.cumulative * g_control_altitude.ki; // Control is called with fixed frequency so time delta can be ignored.
+    Igain = g_control_altitude.cumulative * g_control_altitude.ki;
     //Igain = 0;
 
     // D control
-    Dgain = (error - g_control_altitude.lastError); // Control is called with fixed frequency so time delta can be ignored.
+    Dgain = (error - g_control_altitude.lastError);
     //Dgain = 0;
     g_control_altitude.lastError = error;
 
@@ -101,7 +102,7 @@ void control_update_yaw(uint32_t t_time_diff_micro)
         // flip whatever direction we were going in originally
         clockWise = !clockWise;
     }
-    //
+    // Add duty to rotate CW, subtract duty to rotate CCW
     if (!clockWise) {
         error = -error;
     }
