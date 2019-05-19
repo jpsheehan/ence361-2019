@@ -26,6 +26,8 @@ ControlState control_get_state_from_gains(ControlGains t_gains)
         t_gains.kp,
         t_gains.ki,
         t_gains.kd,
+        0,
+        0,
         0};
 }
 
