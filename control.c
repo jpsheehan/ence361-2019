@@ -6,6 +6,9 @@
 #include "yaw.h"
 #include "pwm.h"
 #include "flight_mode.h"
+#include "utils.h"
+
+#define MINMOTORDUTY 25 // Maximum duty % that can be changed each time a control update is called
 
 ControlState g_control_altitude;
 ControlState g_control_yaw;
@@ -42,6 +45,7 @@ void control_update_altitude(uint32_t t_time_diff_micro)
     float Pgain = 0;
     float Igain = 0;
     float Dgain = 0;
+    int32_t newGain = 0;
 
 
     // the difference between what we want and what we have (as a percentage)
@@ -52,22 +56,22 @@ void control_update_altitude(uint32_t t_time_diff_micro)
 
     // I control
     g_control_altitude.cumulative += error;
-    Igain = g_control_altitude.cumulative * g_control_altitude.ki;
+    Igain = g_control_altitude.cumulative * g_control_altitude.ki; // Control is called with fixed frequency so time delta can be ignored.
     //Igain = 0;
 
     // D control
-    //Dgain = (error - g_control_altitude.lastError) / t_time_diff_micro;
-    Dgain = 0;
+    Dgain = (error - g_control_altitude.lastError); // Control is called with fixed frequency so time delta can be ignored.
+    //Dgain = 0;
     g_control_altitude.lastError = error;
 
+    // Calculate new motor duty
+    newGain = MINMOTORDUTY + Pgain + Igain + Dgain;
+    newGain = clamp(newGain, MINMOTORDUTY, 100);
 
-    g_control_altitude.duty = Pgain + Igain + Dgain;
-
-    if (g_control_altitude.duty > 100) {
-        g_control_altitude.duty = 100;
-    }
+    g_control_altitude.duty = newGain;
 
     pwm_set_main_duty(g_control_altitude.duty);
+
 }
 
 void control_update_yaw(uint32_t t_time_diff_micro)
@@ -80,29 +84,50 @@ void control_update_yaw(uint32_t t_time_diff_micro)
     float Pgain = 0;
     float Igain = 0;
     float Dgain = 0;
+    bool clockWise = true;
+    int32_t newGain = 0;
 
     // the difference between what we want and what we have (in degrees)
-    int16_t error = setpoint_get_yaw() - yaw_get();
+    int16_t error = (setpoint_get_yaw() - yaw_get());
+
+    // negative error implies set point is behind us (CCW direction)
+    if (error < 0) {
+        clockWise = false;
+        error = abs(error);
+    }
+    // An error over 180 will always be further than going in the opposite direction
+    if (error > 180) {
+        error = (360 - error);
+        // flip whatever direction we were going in originally
+        clockWise = !clockWise;
+    }
 
     // P control
-    // Pgain = error*g_control_yaw.kp;
-    Pgain = g_control_altitude.duty;
+     Pgain = error*g_control_yaw.kp;
+    //Pgain = g_control_altitude.duty;
 
     // I control
-    Igain = 0;
-    g_control_yaw.cumulative += error;
+    //Igain = 0;
+    g_control_yaw.cumulative += error; // Control is called with fixed frequency so time delta can be ignored.
+    Igain = g_control_yaw.cumulative*g_control_yaw.ki;
 
     // D control
-    Dgain = 0;
+    //Dgain = 0;
+    Dgain = (error - g_control_yaw.lastError); // Control is called with fixed frequency so time delta can be ignored.
     g_control_yaw.lastError = error;
 
-    g_control_yaw.duty = Pgain + Igain + Dgain;
+    if (clockWise) {
+        newGain = g_control_altitude.duty + (Pgain + Igain + Dgain);
+    }
+    else {
+        newGain = g_control_altitude.duty - (Pgain + Igain + Dgain);
+    }
 
-    if (g_control_yaw.duty > 100) {
-         g_control_yaw.duty = 100;
-     }
+    newGain = clamp(newGain, 0, 100);
 
-    pwm_set_tail_duty(Pgain + Igain + Dgain);
+    g_control_yaw.duty = newGain;
+
+    pwm_set_tail_duty(g_control_yaw.duty);
 }
 
 void control_enable_yaw(bool t_enabled)
@@ -114,7 +139,7 @@ void control_enable_yaw(bool t_enabled)
     }
     else
     {
-        pwm_set_tail_duty(g_control_yaw.duty);
+        pwm_set_tail_duty(g_control_altitude.duty);
     }
 }
 

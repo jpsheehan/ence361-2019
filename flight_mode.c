@@ -30,7 +30,7 @@
 #include "flight_mode.h"
 #include "utils.h"
 
-#define PWM_TAIL_DUTY_YAW_REF 20 //Duty cycle % to apply to Tail while finding reference
+#define PWM_TAIL_DUTY_YAW_REF 25 ///Duty cycle % to apply to Tail while finding reference
 
 /**
  * Holds the current state of the Operating mode (or FLight Status) Finite Sate Machine
@@ -87,7 +87,7 @@ void flight_mode_update(uint32_t t_time_diff_micro)
     if (g_mode == LANDING)
     {
         uint16_t angle = (yaw_get() + 180) % 360;
-        if (range(angle, 180 - 5, 180 + 5))
+        if (range(angle, 180 - 3, 180 + 3))
         {
             if (alt_get() <= 0)
             {

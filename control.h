@@ -12,8 +12,8 @@ struct control_state_s
   float kp;
   float ki;
   float kd;
-  uint32_t lastError;
-  uint32_t cumulative;
+  int16_t lastError;
+  int16_t cumulative;
   uint8_t duty;
 
 
