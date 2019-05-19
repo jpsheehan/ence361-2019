@@ -40,6 +40,7 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/pwm.h"
 
+#include "utils.h"
 #include "pwm.h"
 
 /**********************************************************
@@ -133,7 +134,7 @@ void pwm_init(void)
  ********************************************************/
 void pwm_set_main_duty(int8_t t_duty)
 {
-    g_main_duty = t_duty;
+    g_main_duty = clamp(t_duty, 0, 100);
 
     // Calculate the PWM period corresponding to the freq.
     uint32_t ui32Period = SysCtlClockGet() / PWM_DIVIDER / PWM_RATE;
@@ -153,7 +154,7 @@ int8_t pwm_get_main_duty(void)
  ********************************************************/
 void pwm_set_tail_duty(int8_t t_duty)
 {
-    g_tail_duty = t_duty;
+    g_tail_duty = clamp(t_duty, 0, 100);
 
     // Calculate the PWM period corresponding to the freq.
     uint32_t ui32Period = SysCtlClockGet() / PWM_DIVIDER / PWM_RATE;
