@@ -92,9 +92,9 @@ int main(void)
     kernel_init(KERNEL_FREQUENCY);
     setpoint_init();
     flight_mode_init();
-    // Yaw is in degrees not percentage so K coefficients are much lower
+    // Main rotor and yaw rotor gains, respectively
     control_init((ControlGains ) { 0.3f, 0.03f, 0.1f },
-                 (ControlGains ) { 0.0008f, 0.0010f, 0.001f });
+                 (ControlGains ) { 0.3f, 0.005f, 0.03f });
 
     kernel_add_task(&alt_process_adc, 256, 1);        // process ADC stuff 256 times per second
     kernel_add_task(&alt_update, 0, 1);               // always update the altitude
