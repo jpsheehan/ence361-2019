@@ -93,8 +93,8 @@ int main(void)
     setpoint_init();
     flight_mode_init();
     // Main rotor and yaw rotor gains, respectively
-    control_init((ControlGains ) { 0.55f, 0.04f, 0.05f },
-                 (ControlGains ) { 0.4f, 0.03f, 0.15f });
+    control_init((ControlGains ) { 0.55f, 0.04f, 0.05f }, // P, I and D gains for main rotor
+                 (ControlGains ) { 0.4f, 0.03f, 0.15f }); // P, I and D gains for tail rotor
 
     kernel_add_task(&alt_process_adc, 256, 1);        // process ADC stuff 256 times per second
     kernel_add_task(&alt_update, 0, 1);               // always update the altitude
