@@ -135,6 +135,9 @@ void control_enable_yaw(bool t_enabled)
     g_enable_yaw = t_enabled;
     if (!g_enable_yaw)
     {
+        g_control_yaw.cumulative = 0;
+        g_control_yaw.duty = 0;
+        g_control_yaw.lastError = 0;
         pwm_set_tail_duty(0);
     }
     else
@@ -148,6 +151,9 @@ void control_enable_altitude(bool t_enabled)
     g_enable_altitude = t_enabled;
     if (!g_enable_altitude)
     {
+        g_control_altitude.cumulative = 0;
+        g_control_altitude.duty = 0;
+        g_control_altitude.lastError = 0;
         pwm_set_main_duty(0);
     }
     else
