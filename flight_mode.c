@@ -108,9 +108,13 @@ void flight_mode_update(uint32_t t_time_diff_micro)
             {
                 control_enable_yaw(false);
                 control_enable_altitude(false);
+
                 yaw_reset_calibration_state();
+                alt_reset_calibration_state();
+
                 setpoint_set_yaw(0);
                 setpoint_set_altitude(0);
+
                 flight_mode_advance_state();
             }
             else
