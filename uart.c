@@ -41,22 +41,21 @@
 #include "pwm.h"
 #include "flight_mode.h"
 
-#define BAUD_RATE 9600
-#define UART_USB_BASE UART0_BASE
-#define UART_USB_PERIPH_UART SYSCTL_PERIPH_UART0
-#define UART_USB_PERIPH_GPIO SYSCTL_PERIPH_GPIOA
-#define UART_USB_GPIO_BASE GPIO_PORTA_BASE
-#define UART_USB_GPIO_PIN_RX GPIO_PIN_0
-#define UART_USB_GPIO_PIN_TX GPIO_PIN_1
-#define UART_USB_GPIO_PINS UART_USB_GPIO_PIN_RX | UART_USB_GPIO_PIN_TX
+static const int UART_BAUD_RATE = 9600;
+static const int UART_USB_BASE = UART0_BASE;
+static const int UART_USB_PERIPH_UART = SYSCTL_PERIPH_UART0;
+static const int UART_USB_PERIPH_GPIO = SYSCTL_PERIPH_GPIOA;
+static const int UART_USB_GPIO_BASE = GPIO_PORTA_BASE;
+static const int UART_USB_GPIO_PIN_RX = GPIO_PIN_0;
+static const int UART_USB_GPIO_PIN_TX = GPIO_PIN_1;
 
-#define UART_INPUT_BUFFER_SIZE 40
-#define UART_ALLOW_COMMANDS true
-
-static char g_buffer[UART_INPUT_BUFFER_SIZE];
+static const int  UART_INPUT_BUFFER_SIZE = 40;
+static char *g_buffer;
 
 void uart_init(void)
 {
+    g_buffer = malloc(UART_INPUT_BUFFER_SIZE);
+
     //
     // Enable GPIO port A which is used for UART0 pins.
     //
@@ -65,11 +64,11 @@ void uart_init(void)
     //
     // Select the alternate (UART) function for these pins.
     //
-    GPIOPinTypeUART(UART_USB_GPIO_BASE, UART_USB_GPIO_PINS);
+    GPIOPinTypeUART(UART_USB_GPIO_BASE, UART_USB_GPIO_PIN_RX | UART_USB_GPIO_PIN_TX);
     GPIOPinConfigure(GPIO_PA0_U0RX);
     GPIOPinConfigure(GPIO_PA1_U0TX);
 
-    UARTConfigSetExpClk(UART_USB_BASE, SysCtlClockGet(), BAUD_RATE,
+    UARTConfigSetExpClk(UART_USB_BASE, SysCtlClockGet(), UART_BAUD_RATE,
                         UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
                             UART_CONFIG_PAR_NONE);
     UARTFIFOEnable(UART_USB_BASE);
@@ -90,41 +89,6 @@ void uart_send(const char *t_buffer)
     }
 }
 
-void uart_process_command(const char *buffer, size_t buffer_len)
-{
-    // find the next equals sign
-    char *equals = strchr(buffer, '=');
-
-    if (equals != NULL)
-    {
-        // clobber the equals sign so we can use strcmp
-        *equals = '\0';
-
-        // the value to be read is the string starting at the character after the equals sign
-        char *value_str = equals + 1;
-        char *end_ptr;
-
-        int value = strtod(value_str, &end_ptr);
-
-        if (end_ptr != NULL)
-        {
-            // update gains here!
-            //            if (strcmp(buffer, "kp") == 0)
-            //            {
-            //                 kp = value;
-            //            }
-            //            else if (strcmp(buffer, "ki") == 0)
-            //            {
-            //                 ki = value;
-            //            }
-            //            else if (strcmp(buffer, "kd") == 0)
-            //            {
-            //                kd = value;
-            //            }
-        }
-    }
-}
-
 void uart_update(uint32_t t_time_diff_micro)
 {
     uint16_t target_yaw = setpoint_get_yaw();
@@ -141,36 +105,4 @@ void uart_update(uint32_t t_time_diff_micro)
 
     // send it
     uart_send(g_buffer);
-
-#if UART_ALLOW_COMMANDS
-    // check if there are any characters to be read
-    if (UARTCharsAvail(UART_USB_BASE))
-    {
-        uint8_t read = 0;
-
-        while (read < UART_INPUT_BUFFER_SIZE)
-        {
-            int32_t c = UARTCharGetNonBlocking(UART_USB_BASE);
-
-            if (c == -1)
-            {
-                break;
-            }
-
-            g_buffer[read++] = (char)c;
-        }
-
-        // put null characters in special places
-        if (read < UART_INPUT_BUFFER_SIZE)
-        {
-            g_buffer[read] = '\0';
-        }
-        g_buffer[UART_INPUT_BUFFER_SIZE - 1] = '\0';
-
-        if (read > 0)
-        {
-            uart_process_command(g_buffer, UART_INPUT_BUFFER_SIZE);
-        }
-    }
-#endif
 }
