@@ -86,6 +86,7 @@ int main(void)
     control_init((ControlGains ) { 0.55f, 0.04f, 0.05f }, // P, I and D gains for main rotor
                  (ControlGains ) { 0.4f, 0.03f, 0.15f }); // P, I and D gains for tail rotor
 
+    // add tasks to the kernel
     kernel_add_task(&alt_process_adc, 256, 1);        // process ADC stuff 256 times per second
     kernel_add_task(&alt_update, 0, 1);               // always update the altitude
     kernel_add_task(&input_update, 0, 2);             // always process input
@@ -95,7 +96,6 @@ int main(void)
     kernel_add_task(&disp_render, 1, 100);              // update the screen once per second
     kernel_add_task(&uart_update, 4, 100);              // update the UART four times per second
 
-    //
     // Enable interrupts to the processor.
     IntMasterEnable();
 
