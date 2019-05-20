@@ -60,19 +60,9 @@ void startup_sequence(void)
     // Render splash screen while we wait for buffer to fill
     disp_render(0);
 
-    while (!alt_get_is_calibrated())
-    {
-        alt_process_adc(0);
+    utils_wait_for_seconds(3);
 
-        // check that we have filled the buffer with data
-        if (alt_get_is_buffer_full())
-        {
-            alt_update(0);
-            alt_calibrate();
-            disp_advance_state();
-        }
-    }
-    //    flightMode_set_next(); //altitude calibrated so move to landed
+    disp_advance_state();
 }
 
 /**

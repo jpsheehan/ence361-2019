@@ -191,7 +191,7 @@ int16_t alt_get(void)
     return g_latestAltitudePercentage;
 }
 
-bool alt_get_is_calibrated(void)
+bool alt_has_been_calibrated(void)
 {
     return g_hasBeenCalibrated;
 }
@@ -199,4 +199,9 @@ bool alt_get_is_calibrated(void)
 bool alt_get_is_buffer_full(void)
 {
     return (kernel_get_systick_count() > ALT_SAMPLE_RATE_HZ);
+}
+
+void alt_reset_calibration_state(void)
+{
+    g_hasBeenCalibrated = false;
 }

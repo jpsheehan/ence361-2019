@@ -80,7 +80,7 @@ void flight_mode_update(uint32_t t_time_diff_micro)
 {
     if (g_mode == TAKE_OFF)
     {
-        if (yaw_has_been_calibrated())
+        if (yaw_has_been_calibrated() && alt_has_been_calibrated())
         {
             flight_mode_advance_state();
             control_enable_yaw(true);
@@ -91,6 +91,11 @@ void flight_mode_update(uint32_t t_time_diff_micro)
             // find the 0 calibration point for yaw
             pwm_set_main_duty(0);
             pwm_set_tail_duty(PWM_TAIL_DUTY_YAW_REF);
+
+            if (alt_get_is_buffer_full())
+            {
+                alt_calibrate();
+            }
         }
     }
 

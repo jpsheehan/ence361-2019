@@ -49,7 +49,7 @@ int16_t alt_get(void);
 /**
  * Returns `true` if the altitude has been calibrated.
  */
-bool alt_get_is_calibrated(void);
+bool alt_has_been_calibrated(void);
 
 /**
  * Returns `true` if the circular buffer is full and ready to be calculated.
@@ -60,5 +60,10 @@ bool alt_get_is_buffer_full(void);
  * Performs an ADC conversion.
  */
 void alt_process_adc(uint32_t t_time_diff_micro);
+
+/**
+ * Resets the calibration state of the altitude.
+ */
+void alt_reset_calibration_state(void);
 
 #endif
