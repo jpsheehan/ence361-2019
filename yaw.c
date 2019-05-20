@@ -111,8 +111,11 @@ void yaw_init(void)
  */
 void yaw_reference_int_handler(void)
 {
-    g_has_been_calibrated = true;
-    g_slot_count = 0;
+    if (!g_has_been_calibrated)
+    {
+        g_has_been_calibrated = true;
+        g_slot_count = 0;
+    }
 
     // clear the interrupt flag
     GPIOIntClear(GPIO_PORTC_BASE, GPIO_PIN_4);

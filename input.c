@@ -17,6 +17,8 @@
  ******************************************************************************/
 
 #include <stdint.h>
+#include <stdbool.h>
+#include "driverlib/sysctl.h"
 
 #include "button.h"
 #include "slider.h"
@@ -34,6 +36,8 @@ void input_update(uint32_t t_time_diff_micro)
 {
     // Button state
     butStates_t butState;
+    SliderState sw_state;
+    bool sw_changed;
 
     //
     // Background task: calculate the (approximate) mean of the values in the
@@ -81,12 +85,13 @@ void input_update(uint32_t t_time_diff_micro)
         }
     }
 
-    // check sw1
     slider_update();
-    SliderState sw1_state = slider_check(SLIDER_SW1);
-    bool sw1_changed = slider_changed(SLIDER_SW1);
 
-    if (sw1_state == SLIDER_DOWN)
+    // check sw1
+    sw_state = slider_check(SLIDER_SW1);
+    sw_changed = slider_changed(SLIDER_SW1);
+
+    if (sw_state == SLIDER_DOWN)
     {
         if (flight_mode_get() == IN_FLIGHT)
         {
@@ -95,7 +100,7 @@ void input_update(uint32_t t_time_diff_micro)
     }
     else
     {
-        if (sw1_state == SLIDER_UP && sw1_changed)
+        if (sw_state == SLIDER_UP && sw_changed)
         {
             // slider has been changed into the up position
             if (flight_mode_get() == LANDED)
@@ -104,4 +109,14 @@ void input_update(uint32_t t_time_diff_micro)
             }
         }
     }
+
+    sw_state = slider_check(SLIDER_SW2);
+    sw_changed = slider_changed(SLIDER_SW2);
+
+    if (sw_state == SLIDER_UP && sw_changed)
+    {
+        SysCtlReset();
+    }
+
+
 }
