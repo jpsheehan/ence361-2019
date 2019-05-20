@@ -33,19 +33,24 @@
 
 #include "yaw.h"
 
+/**
+ * Defines the possible sates for the quadrature state machine.
+ */
+enum quadrature_state { QUAD_STATE_CLOCKWISE, QUAD_STATE_ANTICLOCKWISE, QUAD_STATE_NOCHANGE, QUAD_STATE_INVALID };
+typedef enum quadrature_state QuadratureState;
 
 /**
  * Holds the previous state of the Quadrature FSM
  */
-volatile static uint8_t g_previous_state;
+static uint8_t g_previous_state;
 
 /**
  * Holds the current state of the Quadrature FSM
  */
-volatile static QuadratureState g_quadrature_state;
+static QuadratureState g_quadrature_state;
 
 /**
- * Holds the slot count (i.e. number of teeth moved).
+ * Holds the slot count (i.e. number of teeth moved from reference).
  */
 volatile static uint16_t g_slot_count;
 
@@ -58,10 +63,9 @@ static bool g_has_been_calibrated;
  * For calculating the yaw in degrees.
  * 112 teeth over 4 phases gives 448
  */
-#define YAW_MAX_SLOT_COUNT 448
-#define YAW_DEGREES_PER_SLOT 360 / YAW_MAX_SLOT_COUNT
+static const int YAW_MAX_SLOT_COUNT = 448;
 
-// prototypes
+// prototypes for functions local to the yaw module
 void yaw_update_state(bool t_signal_a, bool t_signal_b);
 void yaw_int_handler(void);
 void yaw_reference_int_handler(void);
@@ -72,6 +76,7 @@ void yaw_init(void)
     g_previous_state = 0b00;
     g_quadrature_state = QUAD_STATE_NOCHANGE;
     g_has_been_calibrated = false;
+    g_slot_count = 0;
     
     // setup the pins (PB0 is A, PB1 is B)
     SysCtlPeripheralEnable (SYSCTL_PERIPH_GPIOB);
@@ -97,12 +102,26 @@ void yaw_init(void)
     GPIOIntEnable(GPIO_PORTB_BASE, GPIO_INT_PIN_0 | GPIO_INT_PIN_1);
 
     // PC4 is the yaw reference, set it up as an input with a falling edge interrupt trigger
+
+    // enable the peripheral
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
+
+    // disable interrups
     GPIOIntDisable(GPIO_PORTC_BASE, GPIO_INT_PIN_4);
+
+    // set it up as an input
     GPIOPinTypeGPIOInput(GPIO_PORTC_BASE, GPIO_PIN_4);
+
+    // configure it to be a weak pull down
     GPIOPadConfigSet(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPD);
+
+    // configure the interrupt to be falling edge only
     GPIOIntTypeSet(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_FALLING_EDGE);
+
+    // register the interrupt handler
     GPIOIntRegister(GPIO_PORTC_BASE, yaw_reference_int_handler);
+
+    // enable interrupts on this pin
     GPIOIntEnable(GPIO_PORTC_BASE, GPIO_INT_PIN_4);
 }
 
@@ -178,7 +197,7 @@ QuadratureState yaw_get_state(void)
 
 uint16_t yaw_get(void)
 {
-    return g_slot_count * YAW_DEGREES_PER_SLOT;
+    return g_slot_count * 360.0f / YAW_MAX_SLOT_COUNT;
 }
 
 /**

@@ -26,12 +26,6 @@
 #include <stdbool.h>
 
 /**
- * Defines the possible sates for the quadrature state machine.
- */
-enum quadrature_state { QUAD_STATE_CLOCKWISE, QUAD_STATE_ANTICLOCKWISE, QUAD_STATE_NOCHANGE, QUAD_STATE_INVALID };
-typedef enum quadrature_state QuadratureState;
-
-/**
  * Initialises the quadrature module.
  * This must be called before any other functions in the quadrature module.
  */
