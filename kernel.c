@@ -85,7 +85,7 @@ static uint32_t g_last_count;
 /**
  * Stores the number of times the SysTickIntHandler has been called.
  */
-static uint32_t g_systick_count;
+static volatile uint32_t g_systick_count;
 
 /**
  * The frequency that the kernel runs at.

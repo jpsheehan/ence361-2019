@@ -42,22 +42,22 @@ typedef enum quadrature_state QuadratureState;
 /**
  * Holds the previous state of the Quadrature FSM
  */
-static uint8_t g_previous_state;
+static volatile uint8_t g_previous_state;
 
 /**
  * Holds the current state of the Quadrature FSM
  */
-static QuadratureState g_quadrature_state;
+static volatile QuadratureState g_quadrature_state;
 
 /**
  * Holds the slot count (i.e. number of teeth moved from reference).
  */
-volatile static uint16_t g_slot_count;
+static volatile uint16_t g_slot_count;
 
 /**
  * Indicates if the yaw has been calibrated.
  */
-static bool g_has_been_calibrated;
+static volatile bool g_has_been_calibrated;
 
 /**
  * For calculating the yaw in degrees.
