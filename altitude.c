@@ -62,27 +62,27 @@ static const int ALT_DELTA = 993;
 /**
  * The circular buffer used to store the raw ADC values for calculating the mean.
  */
-static circBuf_t g_inBuffer;
+static circBuf_t g_circ_buffer;
 
 /**
  * The reference altitude. This is updated when calling the alt_calibrate function. This is required for calculating the altitude as a percentage.
  */
-static uint16_t g_altitudeReference;
+static uint16_t g_alt_ref;
 
 /**
  * The mean altitude. This is updated when the `void alt_update()` function is called.
  */
-static uint32_t g_latestAltitudeMean;
+static uint32_t g_alt_raw;
 
 /**
  * The mean altitude as a percentage of full height. This is updated when the `void alt_update()` function is called.
  */
-static int16_t g_latestAltitudePercentage;
+static int16_t g_alt_percent;
 
 /**
  * Indicates if the altitude has been calibrated yet. This is set when calling the `void alt_calibrate()` function and returned when calling the `bool alt_getIsCalibrated()` function.
  */
-static bool g_hasBeenCalibrated = false;
+static bool g_has_been_calibrated = false;
 
 /**
  * (Original Code by P.J. Bones)
@@ -91,15 +91,15 @@ static bool g_hasBeenCalibrated = false;
  */
 void alt_adc_int_handler(void)
 {
-    uint32_t ulValue;
+    uint32_t value;
 
     //
     // Get the single sample from ADC0.  ADC_BASE is defined in
     // inc/hw_memmap.h
-    ADCSequenceDataGet(ADC0_BASE, 3, &ulValue);
+    ADCSequenceDataGet(ADC0_BASE, 3, &value);
     //
     // Place it in the circular buffer (advancing write index)
-    writeCircBuf(&g_inBuffer, ulValue);
+    writeCircBuf(&g_circ_buffer, value);
     //
     // Clean up, clearing the interrupt
     ADCIntClear(ADC0_BASE, 3);
@@ -160,7 +160,7 @@ void alt_process_adc(uint32_t t_time_diff_micro)
 void alt_init(void)
 {
     alt_init_adc();
-    initCircBuf(&g_inBuffer, ALT_BUF_SIZE);
+    initCircBuf(&g_circ_buffer, ALT_BUF_SIZE);
 }
 
 void alt_update(uint32_t t_time_diff_micro)
@@ -171,29 +171,29 @@ void alt_update(uint32_t t_time_diff_micro)
     // add up all the values in the circular buffer
     sum = 0;
     for (i = 0; i < ALT_BUF_SIZE; i++)
-        sum = sum + readCircBuf(&g_inBuffer);
+        sum = sum + readCircBuf(&g_circ_buffer);
 
     // calculate the mean of the data in the circular buffer
-    g_latestAltitudeMean = (2 * sum + ALT_BUF_SIZE) / (2 * ALT_BUF_SIZE);
+    g_alt_raw = (2 * sum + ALT_BUF_SIZE) / (2 * ALT_BUF_SIZE);
 
     // calculate the percentage mean
-    g_latestAltitudePercentage = (int16_t)((((int32_t)g_altitudeReference - (int32_t)g_latestAltitudeMean) * (int32_t)100) / (int32_t)ALT_DELTA);
+    g_alt_percent = (int16_t)((((int32_t)g_alt_ref - (int32_t)g_alt_raw) * (int32_t)100) / (int32_t)ALT_DELTA);
 }
 
 void alt_calibrate(void)
 {
-    g_altitudeReference = g_latestAltitudeMean;
-    g_hasBeenCalibrated = true;
+    g_alt_ref = g_alt_raw;
+    g_has_been_calibrated = true;
 }
 
 int16_t alt_get(void)
 {
-    return g_latestAltitudePercentage;
+    return g_alt_percent;
 }
 
 bool alt_has_been_calibrated(void)
 {
-    return g_hasBeenCalibrated;
+    return g_has_been_calibrated;
 }
 
 bool alt_get_is_buffer_full(void)
@@ -203,5 +203,5 @@ bool alt_get_is_buffer_full(void)
 
 void alt_reset_calibration_state(void)
 {
-    g_hasBeenCalibrated = false;
+    g_has_been_calibrated = false;
 }
