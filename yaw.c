@@ -111,7 +111,7 @@ void yaw_init(void)
  */
 void yaw_reference_int_handler(void)
 {
-    if (g_has_been_calibrated)
+    if (!g_has_been_calibrated)
     {
         g_has_been_calibrated = true;
         g_slot_count = 0;
