@@ -55,16 +55,6 @@ void clock_init(void)
                    SYSCTL_XTAL_16MHZ);
 }
 
-void startup_sequence(void)
-{
-    // Render splash screen while we wait for buffer to fill
-    disp_render(0);
-
-    utils_wait_for_seconds(3);
-
-    disp_advance_state();
-}
-
 /**
  * The main loop of the program.
  * Responsible for initialising all the modules, responding to input and rendering text on the screen.
@@ -100,7 +90,10 @@ int main(void)
     // Enable interrupts to the processor.
     IntMasterEnable();
 
-    startup_sequence();
+    // Render splash screen
+    disp_render(0);
+    utils_wait_for_seconds(3);
+    disp_advance_state();
 
     while (true)
     {
