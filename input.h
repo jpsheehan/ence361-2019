@@ -21,6 +21,8 @@
 
 #include <stdint.h>
 
+#include "kernel.h"
+
 /**
  * Initialises the input module.
  */
@@ -31,6 +33,6 @@ void input_init(void);
  * Updates the internal input state and may cause changes to the flight mode
  * state machine, setpoint data or PWM, etc...
  */
-void input_update(uint32_t t_time_diff_micro);
+void input_update(uint32_t t_time_diff_micro, KernelTask* t_task);
 
 #endif /* INPUT_H_ */

@@ -24,6 +24,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "kernel.h"
+
 /**
  * Initialises the altitude module.
  * This must be called before any other functions in the altitude module.
@@ -33,7 +35,7 @@ void alt_init(void);
 /**
  * Calculates the mean value of the altitude, both the raw resolution and the percentage values. This should be called before one wants to use the altitude values in any other calculations.
  */
-void alt_update(uint32_t t_time_diff_micro);
+void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task);
 
 /**
  * Calibrates the altitude to the current mean value.
@@ -59,7 +61,7 @@ bool alt_get_is_buffer_full(void);
 /**
  * Performs an ADC conversion.
  */
-void alt_process_adc(uint32_t t_time_diff_micro);
+void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task);
 
 /**
  * Resets the calibration state of the altitude.

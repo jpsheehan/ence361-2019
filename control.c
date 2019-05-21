@@ -39,7 +39,7 @@ void control_init(ControlGains t_altitude_gains, ControlGains t_yaw_gains)
     g_control_yaw = control_get_state_from_gains(t_yaw_gains);
 }
 
-void control_update_altitude(uint32_t t_time_diff_micro)
+void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
 {
     if (!g_enable_altitude)
     {
@@ -79,7 +79,7 @@ void control_update_altitude(uint32_t t_time_diff_micro)
 
 }
 
-void control_update_yaw(uint32_t t_time_diff_micro)
+void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
 {
     if (!g_enable_yaw)
     {

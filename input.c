@@ -32,7 +32,7 @@ void input_init(void)
     slider_init();
 }
 
-void input_update(uint32_t t_time_diff_micro)
+void input_update(uint32_t t_time_diff_micro, KernelTask* t_task)
 {
     // Button state
     butStates_t butState;

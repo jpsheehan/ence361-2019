@@ -89,7 +89,7 @@ void uart_send(const char *t_buffer)
     }
 }
 
-void uart_update(uint32_t t_time_diff_micro)
+void uart_update(uint32_t t_time_diff_micro, KernelTask* t_task)
 {
     uint16_t target_yaw = setpoint_get_yaw();
     uint16_t actual_yaw = yaw_get();

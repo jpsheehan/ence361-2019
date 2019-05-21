@@ -25,6 +25,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "kernel.h"
+
 /**
  * Defines the possible states for the operating mode (a.k.a. flight status), state machine.
  * Finding yaw reference is part of take off, Setting altitude occurs at start-up up so CAL start may not be needed. 
@@ -54,6 +56,6 @@ void flight_mode_advance_state(void);
  * KERNEL TASK.
  * Called by the kernel. Checks conditions and advances state.
  */
-void flight_mode_update(uint32_t t_time_diff_micro);
+void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task);
 
 #endif /* OPSTATUSFSM_H_ */

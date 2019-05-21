@@ -20,10 +20,11 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
+
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 #include "driverlib/adc.h"
-//#include "driverlib/pwm.h"
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/systick.h"
@@ -81,7 +82,7 @@ void initialise(void)
     IntMasterEnable();
 
     // Render splash screen
-    disp_render(0);
+    disp_render(0, NULL);
     utils_wait_for_seconds(3);
     disp_advance_state();
 }

@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "kernel.h"
+
 struct control_state_s
 {
   /**
@@ -45,12 +47,12 @@ void control_init(ControlGains t_altitude_gains, ControlGains t_yaw_gains);
 /**
  * Updates the altitude control system based on the any new data.
  */
-void control_update_altitude(uint32_t t_time_diff_micro);
+void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task);
 
 /**
  * Updates the yaw control system based on any new data.
  */
-void control_update_yaw(uint32_t t_time_diff_micro);
+void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task);
 
 /**
  * Enables or disables the altitude controller.

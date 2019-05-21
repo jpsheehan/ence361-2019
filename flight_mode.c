@@ -76,7 +76,7 @@ void flight_mode_advance_state(void)
     }
 }
 
-void flight_mode_update(uint32_t t_time_diff_micro)
+void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
 {
     if (g_mode == TAKE_OFF)
     {

@@ -26,40 +26,6 @@
 #include "kernel.h"
 #include "utils.h"
 
-struct kernel_task_s
-{
-    /**
-     * A function pointer. The function must return void and accept one parameter
-     * of type uint32_t that describes how many microseconds have passed since the
-     * task was last run.
-     */
-    void* function;
-
-    /**
-     * The frequency of the task in HZ. This must be less than or equal to the
-     * kernel frequency.
-     */
-    uint16_t frequency;
-
-    /**
-     * The priority of the task. By default all tasks will have a priority of 0,
-     * which is the highest.
-     */
-    uint8_t priority;
-
-    /**
-     * Used internally to store the amount of ticks that had elapsed last time
-     * the task was run.
-     * DO NOT MODIFY OUTSIDE THE KERNEL MODULE!!!!
-     */
-    uint32_t int_count;
-};
-
-/**
- * Stores information about a schedulable task.
- */
-typedef struct kernel_task_s KernelTask;
-
 
 /**
  * The maximum amount of tasks that can be scheduled.
@@ -207,7 +173,7 @@ void kernel_run(void)
                 if (task.frequency == 0 || (((float)count_delta / g_kernel_frequency) > (1.0f / task.frequency)))
                 {
                     uint32_t elapsed_micros = ((count_delta - 1) * 1000000) / g_kernel_frequency;
-                    ((void(*)(uint32_t))(task.function))(elapsed_micros);
+                    ((void(*)(uint32_t, KernelTask*))(task.function))(elapsed_micros, &task);
                     g_tasks[i].int_count = this_count;
                 }
             }
