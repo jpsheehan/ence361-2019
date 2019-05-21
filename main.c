@@ -74,7 +74,7 @@ int main(void)
     flight_mode_init();
     // Main rotor and yaw rotor gains, respectively
     // GOOD I GAINS FOR 20HZ: .6, .03 and .1
-    control_init((ControlGains ) { 0.3f, 0.03f, 0.15f }, // P, I and D gains for main rotor
+    control_init((ControlGains ) { 0.2f, 0.02f, 0.8f }, // P, I and D gains for main rotor
                  (ControlGains ) { 0.6f, 0.03f, 0.1f }); // P, I and D gains for tail rotor
 
     // add tasks to the kernel
