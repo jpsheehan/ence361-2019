@@ -9,7 +9,7 @@
 #include "utils.h"
 
 // Min speed of main rotor, allows for proper anti-clockwise yaw control
-#define MINMOTORDUTY 25
+#define MINMOTORDUTY 28
 #define COUPLEFACTOR .9
 
 ControlState g_control_altitude;
@@ -113,7 +113,7 @@ void control_update_yaw(uint32_t t_time_diff_micro)
 
     // P control
      Pgain = error*g_control_yaw.kp;
-     Pgain = clamp(newGain, -20, 20);
+     Pgain = clamp(Pgain, -20, 20);
     //Pgain = g_control_altitude.duty;
 
     // I control
@@ -135,7 +135,7 @@ void control_update_yaw(uint32_t t_time_diff_micro)
         g_control_yaw.duty = COUPLEFACTOR*newGain;
     }
 
-    g_control_yaw.duty = clamp(newGain, 10, 90);
+    g_control_yaw.duty = clamp(newGain, 5, 80);
 
     pwm_set_tail_duty(g_control_yaw.duty);
 
