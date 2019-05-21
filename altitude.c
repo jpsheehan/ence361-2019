@@ -49,6 +49,18 @@ static const int ALT_BUF_SIZE = 32;
 static const int ALT_SAMPLE_RATE_HZ = 256;
 
 /**
+ * We are using ADC0 so we set up the base and peripheral
+ */
+static const int ADC_BASE = ADC0_BASE;
+static const int ADC_PERIPH = SYSCTL_PERIPH_ADC0;
+
+/**
+ * We want sequence 3, step 0 of ADC0
+ */
+static const int ADC_SEQUENCE = 3;
+static const int ADC_STEP = 0;
+
+/**
  * The ideal resolution delta for a helicopter rig. This value may change depending on which helicopter rig is used. The ideal value is calculated as follows:
  * 
  * When the helicopter changes its height from landed (0% altitude) to full height (100% altitude) there is a voltage drop of 0.8 V. 
@@ -96,13 +108,13 @@ void alt_adc_int_handler(void)
     //
     // Get the single sample from ADC0.  ADC_BASE is defined in
     // inc/hw_memmap.h
-    ADCSequenceDataGet(ADC0_BASE, 3, &value);
+    ADCSequenceDataGet(ADC_BASE, ADC_SEQUENCE, &value);
     //
     // Place it in the circular buffer (advancing write index)
     writeCircBuf(&g_circ_buffer, value);
     //
     // Clean up, clearing the interrupt
-    ADCIntClear(ADC0_BASE, 3);
+    ADCIntClear(ADC_BASE, ADC_SEQUENCE);
 }
 
 /**
@@ -114,12 +126,12 @@ void alt_init_adc(void)
 {
     //
     // The ADC0 peripheral must be enabled for configuration and use.
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC0);
+    SysCtlPeripheralEnable(ADC_PERIPH);
 
     // Enable sample sequence 3 with a processor signal trigger.  Sequence 3
     // will do a single sample when the processor sends a signal to start the
     // conversion.
-    ADCSequenceConfigure(ADC0_BASE, 3, ADC_TRIGGER_PROCESSOR, 0);
+    ADCSequenceConfigure(ADC_BASE, ADC_SEQUENCE, ADC_TRIGGER_PROCESSOR, ADC_STEP);
 
     //
     // Configure step 0 on sequence 3.  Sample channel 0 (ADC_CTL_CH0) in
@@ -130,19 +142,19 @@ void alt_init_adc(void)
     // sequence 0 has 8 programmable steps.  Since we are only doing a single
     // conversion using sequence 3 we will only configure step 0.  For more
     // on the ADC sequences and steps, refer to the LM3S1968 datasheet.
-    ADCSequenceStepConfigure(ADC0_BASE, 3, 0, ADC_CTL_CH9 | ADC_CTL_IE | ADC_CTL_END);
+    ADCSequenceStepConfigure(ADC_BASE, ADC_SEQUENCE, ADC_STEP, ADC_CTL_CH9 | ADC_CTL_IE | ADC_CTL_END);
 
     //
     // Since sample sequence 3 is now configured, it must be enabled.
-    ADCSequenceEnable(ADC0_BASE, 3);
+    ADCSequenceEnable(ADC_BASE, ADC_SEQUENCE);
 
     //
     // Register the interrupt handler
-    ADCIntRegister(ADC0_BASE, 3, alt_adc_int_handler);
+    ADCIntRegister(ADC_BASE, ADC_SEQUENCE, alt_adc_int_handler);
 
     //
     // Enable interrupts for ADC0 sequence 3 (clears any outstanding interrupts)
-    ADCIntEnable(ADC0_BASE, 3);
+    ADCIntEnable(ADC_BASE, ADC_SEQUENCE);
 }
 
 /**
@@ -154,7 +166,7 @@ void alt_process_adc(uint32_t t_time_diff_micro)
     //
     // Initiate a conversion
     //
-    ADCProcessorTrigger(ADC0_BASE, 3);
+    ADCProcessorTrigger(ADC_BASE, ADC_SEQUENCE);
 }
 
 void alt_init(void)
