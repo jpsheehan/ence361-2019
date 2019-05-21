@@ -57,7 +57,7 @@ void control_update_altitude(uint32_t t_time_diff_micro)
 
     // P control
     Pgain = error*g_control_altitude.kp;
-    Pgain = clamp(Pgain, -5, 5);
+    Pgain = clamp(Pgain, -15, 15);
 
     // I control
     g_control_altitude.cumulative += error;
