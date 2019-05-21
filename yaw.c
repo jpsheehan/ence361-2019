@@ -160,10 +160,8 @@ void yaw_reference_int_handler(void)
 
     if (!g_has_been_calibrated)
     {
-        GPIOIntDisable(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
-        g_has_been_calibrated = true;
         g_slot_count = 0;
-        GPIOIntEnable(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
+        g_has_been_calibrated = true;
     }
 
 }
@@ -233,17 +231,20 @@ uint16_t yaw_get(void)
  */
 void yaw_int_handler(void)
 {
-    // read signal A
-    bool signal_a = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_0);
-
-    // read signal B
-    bool signal_b = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_1);
-
-    // update the quadrature stuff
-    yaw_update_state(signal_a, signal_b);
-
-	// clear the interrupt flag
+    // clear the interrupt flag first as it takes some cycles to actually be cleared
     GPIOIntClear(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1);
+
+    if (g_has_been_calibrated)
+    {
+        // read signal A
+        bool signal_a = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_0);
+
+        // read signal B
+        bool signal_b = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_1);
+
+        // update the quadrature stuff
+        yaw_update_state(signal_a, signal_b);
+    }
 }
 
 void yaw_reset_calibration_state(void)
