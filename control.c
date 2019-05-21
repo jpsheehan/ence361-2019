@@ -113,6 +113,7 @@ void control_update_yaw(uint32_t t_time_diff_micro)
 
     // P control
      Pgain = error*g_control_yaw.kp;
+     Pgain = clamp(newGain, -20, 20);
     //Pgain = g_control_altitude.duty;
 
     // I control
@@ -134,7 +135,7 @@ void control_update_yaw(uint32_t t_time_diff_micro)
         g_control_yaw.duty = COUPLEFACTOR*newGain;
     }
 
-    g_control_yaw.duty = clamp(newGain, 0, 95);
+    g_control_yaw.duty = clamp(newGain, 10, 90);
 
     pwm_set_tail_duty(g_control_yaw.duty);
 
