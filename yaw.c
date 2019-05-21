@@ -155,14 +155,18 @@ void yaw_init(void)
  */
 void yaw_reference_int_handler(void)
 {
+
     if (!g_has_been_calibrated)
     {
+        GPIOIntDisable(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
         g_has_been_calibrated = true;
         g_slot_count = 0;
+        GPIOIntEnable(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
     }
 
     // clear the interrupt flag
-    GPIOIntClear(GPIO_PORTC_BASE, GPIO_PIN_4);
+    GPIOIntClear(YAW_REF_BASE, YAW_REF_INT_PIN);
+
 }
 
 /**
