@@ -91,7 +91,7 @@ static const uint8_t UART_PRIORITY = 100;
 /**
  * The amount of time to display the splash screen (in seconds)
  */
-static const SPLASH_SCREEN_WAIT_TIME = 3;
+static const uint32_t SPLASH_SCREEN_WAIT_TIME = 3;
 
 void initialise(void)
 {
