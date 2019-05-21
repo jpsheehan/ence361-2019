@@ -64,18 +64,18 @@ void initialise(void)
     flight_mode_init();
     // Main rotor and yaw rotor gains, respectively
     // GOOD I GAINS FOR 20HZ: .6, .03 and .1
-    control_init((ControlGains ) { 0.7f, 0.008f, 2.1f }, // P, I and D gains for main rotor
-                 (ControlGains ) { 0.5f, 0.006f, 1.5f }); // P, I and D gains for tail rotor
+    control_init((ControlGains){0.7f, 0.008f, 2.1f},  // P, I and D gains for main rotor
+                 (ControlGains){0.5f, 0.006f, 1.5f}); // P, I and D gains for tail rotor
 
     // add tasks to the kernel
-    kernel_add_task(&alt_process_adc, 256, 1);        // process ADC stuff 256 times per second
-    kernel_add_task(&alt_update, 0, 1);               // always update the altitude
-    kernel_add_task(&input_update, 0, 2);             // always process input
+    kernel_add_task(&alt_process_adc, 256, 1);         // process ADC stuff 256 times per second
+    kernel_add_task(&alt_update, 0, 1);                // always update the altitude
+    kernel_add_task(&input_update, 0, 2);              // always process input
     kernel_add_task(&control_update_altitude, 30, 10); // perform control stuff 10 times per second
     kernel_add_task(&control_update_yaw, 30, 10);
     kernel_add_task(&flight_mode_update, 20, 10); // run state checking 20 times per sec
-    kernel_add_task(&disp_render, 1, 100);              // update the screen once per second
-    kernel_add_task(&uart_update, 4, 100);              // update the UART four times per second
+    kernel_add_task(&disp_render, 1, 100);        // update the screen once per second
+    kernel_add_task(&uart_update, 4, 100);        // update the UART four times per second
 
     // Enable interrupts to the processor.
     IntMasterEnable();
@@ -94,7 +94,7 @@ int main(void)
 {
     initialise();
 
-    while (ENCE361_TEST_RESULTS_STILL_NOT_OUT)
+    while (MORE_THAN_HALF_THE_HELI_RIGS_ARE_BROKEN)
     {
         kernel_run();
     }

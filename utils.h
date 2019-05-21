@@ -26,7 +26,7 @@
 #define max(a, b) (a > b ? a : b)
 #define clamp(val, mn, mx) (max(min(val, mx), mn))
 #define range(val, mn, mx) (val >= mn && val <= mx)
-#define ENCE361_TEST_RESULTS_STILL_NOT_OUT true
+#define MORE_THAN_HALF_THE_HELI_RIGS_ARE_BROKEN true
 
 /**
  * Waits for `t_delay` seconds before returning. Note that this is
