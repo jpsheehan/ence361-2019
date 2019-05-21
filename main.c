@@ -94,7 +94,7 @@ int main(void)
 {
     initialise();
 
-    while (true)
+    while (ENCE361_TEST_RESULTS_STILL_NOT_OUT)
     {
         kernel_run();
     }

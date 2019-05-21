@@ -20,11 +20,13 @@
 #define UTILS_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define min(a, b) (a < b ? a : b)
 #define max(a, b) (a > b ? a : b)
 #define clamp(val, mn, mx) (max(min(val, mx), mn))
 #define range(val, mn, mx) (val >= mn && val <= mx)
+#define ENCE361_TEST_RESULTS_STILL_NOT_OUT true
 
 /**
  * Waits for `t_delay` seconds before returning. Note that this is
