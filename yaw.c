@@ -232,15 +232,15 @@ uint16_t yaw_get(void)
 void yaw_int_handler(void)
 {
     // clear the interrupt flag first as it takes some cycles to actually be cleared
-    GPIOIntClear(GPIO_PORTB_BASE, GPIO_PIN_0|GPIO_PIN_1);
+    GPIOIntClear(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
 
     if (g_has_been_calibrated)
     {
         // read signal A
-        bool signal_a = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_0);
+        bool signal_a = GPIOPinRead(YAW_QUAD_BASE, YAW_QUAD_PIN_1);
 
         // read signal B
-        bool signal_b = GPIOPinRead(GPIO_PORTB_BASE, GPIO_INT_PIN_1);
+        bool signal_b = GPIOPinRead(YAW_QUAD_BASE, YAW_QUAD_PIN_2);
 
         // update the quadrature stuff
         yaw_update_state(signal_a, signal_b);
