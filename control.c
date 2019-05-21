@@ -124,16 +124,7 @@ void control_update_yaw(uint32_t t_time_diff_micro)
     Dgain = (error - g_control_yaw.lastError); // Control is called with fixed frequency so time delta can be ignored.
     g_control_yaw.lastError = error;
 
-    newGain = g_control_altitude.duty + (Pgain + Igain + Dgain);
-
-    //newGain = clamp(newGain, 0, 100);
-
-    if (abs(error) <= 3) {
-        g_control_yaw.duty = g_control_yaw.duty + error;
-    }
-    else {
-        g_control_yaw.duty = COUPLEFACTOR*newGain;
-    }
+    newGain = g_control_yaw.duty + (Pgain + Igain + Dgain);
 
     g_control_yaw.duty = clamp(newGain, 5, 80);
 
