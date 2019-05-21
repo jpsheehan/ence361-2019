@@ -155,6 +155,8 @@ void yaw_init(void)
  */
 void yaw_reference_int_handler(void)
 {
+    // clear the interrupt flag first, so that it has time to actually be cleared
+    GPIOIntClear(YAW_REF_BASE, YAW_REF_INT_PIN);
 
     if (!g_has_been_calibrated)
     {
@@ -163,9 +165,6 @@ void yaw_reference_int_handler(void)
         g_slot_count = 0;
         GPIOIntEnable(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
     }
-
-    // clear the interrupt flag
-    GPIOIntClear(YAW_REF_BASE, YAW_REF_INT_PIN);
 
 }
 
