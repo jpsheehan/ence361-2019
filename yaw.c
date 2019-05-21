@@ -90,7 +90,7 @@ static const int YAW_REF_INT_PIN = GPIO_INT_PIN_4;
 static const int YAW_REF_PIN = GPIO_PIN_4;
 static const int YAW_REF_SIG_STRENGTH = GPIO_STRENGTH_2MA;
 static const int YAW_REF_PIN_TYPE = GPIO_PIN_TYPE_STD_WPD;
-static const int YAW_REF_EDGE_TYPE = GPIO_FALLING_EDGE;
+static const int YAW_REF_EDGE_TYPE = GPIO_RISING_EDGE;
 
 
 // prototypes for functions local to the yaw module
