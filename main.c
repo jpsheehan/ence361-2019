@@ -38,6 +38,20 @@
 #include "yaw.h"
 
 /**
+ * The altitude gains.
+ */
+static const float ALT_KP = 0.7f;
+static const float ALT_KI = 0.008f;
+static const float ALT_KD = 2.1f;
+
+/**
+ * The yaw gains.
+ */
+static const float YAW_KP = 0.5f;
+static const float YAW_KI = 0.006f;
+static const float YAW_KD = 1.5f;
+
+/**
  * The "frequency" that the kernel runs at in Hz.
  */
 static const int KERNEL_FREQUENCY = 1024;
@@ -74,6 +88,10 @@ static const uint8_t DISPLAY_PRIORITY = 100;
 static const uint16_t UART_FREQUENCY = 4;
 static const uint8_t UART_PRIORITY = 100;
 
+/**
+ * The amount of time to display the splash screen (in seconds)
+ */
+static const SPLASH_SCREEN_WAIT_TIME = 3;
 
 void initialise(void)
 {
@@ -92,10 +110,8 @@ void initialise(void)
     kernel_init(KERNEL_FREQUENCY);
     setpoint_init();
     flight_mode_init();
-    // Main rotor and yaw rotor gains, respectively
-    // GOOD I GAINS FOR 20HZ: .6, .03 and .1
-    control_init((ControlGains){0.7f, 0.008f, 2.1f},  // P, I and D gains for main rotor
-                 (ControlGains){0.5f, 0.006f, 1.5f}); // P, I and D gains for tail rotor
+    control_init((ControlGains){ALT_KP, ALT_KI, ALT_KD},
+                 (ControlGains){YAW_KP, YAW_KI, YAW_KD});
 
     // add tasks to the kernel
     kernel_add_task(&alt_process_adc, ALT_ADC_FREQUENCY, ALT_ADC_PRIORITY);
@@ -110,15 +126,15 @@ void initialise(void)
     // Enable interrupts to the processor.
     IntMasterEnable();
 
-    // Render splash screen
+    // Render splash screen for a couple of seconds
     disp_render(0, NULL);
-    utils_wait_for_seconds(3);
+    utils_wait_for_seconds(SPLASH_SCREEN_WAIT_TIME);
     disp_advance_state();
 }
 
 /**
  * The main loop of the program.
- * Responsible for initialising all the modules, responding to input and rendering text on the screen.
+ * Initialises the modules and runs the kernel forever.
  */
 int main(void)
 {
