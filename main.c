@@ -41,26 +41,16 @@
 #include "flight_mode.h"
 #include "control.h"
 #include "input.h"
+#include "clock.h"
 
 static const int KERNEL_FREQUENCY = 1024;
 
-/**
- * (Original Code by P.J. Bones)
- * Initialisation functions for the clock (incl. SysTick), ADC, display
- */
-void clock_init(void)
+void initialise(void)
 {
-    // Set the clock rate to 40 MHz
-    SysCtlClockSet(SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
-                   SYSCTL_XTAL_16MHZ);
-}
 
-/**
- * The main loop of the program.
- * Responsible for initialising all the modules, responding to input and rendering text on the screen.
- */
-int main(void)
-{
+    // disable all interrupts
+    IntMasterDisable();
+
     // Setup all required modules
     clock_init();
     alt_init();
@@ -94,8 +84,17 @@ int main(void)
     disp_render(0);
     utils_wait_for_seconds(3);
     disp_advance_state();
+}
 
-    while (true)
+/**
+ * The main loop of the program.
+ * Responsible for initialising all the modules, responding to input and rendering text on the screen.
+ */
+int main(void)
+{
+    initialise();
+
+    while (ENCE361_TEST_RESULTS_STILL_NOT_OUT)
     {
         kernel_run();
     }
