@@ -19,7 +19,7 @@ typedef struct {
 	uint32_t size;		// Number of entries in buffer
 	uint32_t windex;	// index for writing, mod(size)
 	uint32_t rindex;	// index for reading, mod(size)
-	uint32_t *data;		// pointer to the data
+	int32_t *data;		// pointer to the data
 } circBuf_t;
 
 // *******************************************************
@@ -27,20 +27,20 @@ typedef struct {
 // the start of the buffer.  Dynamically allocate and clear the the 
 // memory and return a pointer for the data.  Return NULL if 
 // allocation fails.
-uint32_t *
+int32_t *
 initCircBuf (circBuf_t *buffer, uint32_t size);
 
 // *******************************************************
 // writeCircBuf: insert entry at the current windex location,
 // advance windex, modulo (buffer size).
 void
-writeCircBuf (circBuf_t *buffer, uint32_t entry);
+writeCircBuf (circBuf_t *buffer, int32_t entry);
 
 // *******************************************************
 // readCircBuf: return entry at the current rindex location,
 // advance rindex, modulo (buffer size). The function deos not check
 // if reading has advanced ahead of writing.
-uint32_t
+int32_t
 readCircBuf (circBuf_t *buffer);
 
 // *******************************************************
@@ -49,5 +49,10 @@ readCircBuf (circBuf_t *buffer);
 // re initialised by another call to initCircBuf().
 void
 freeCircBuf (circBuf_t *buffer);
+
+/**
+ * Returns the range that the values inside the buffer span.
+ */
+int32_t getRangeCircBuf(circBuf_t* buffer);
 
 #endif /*CIRCBUFT_H_*/
