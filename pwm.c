@@ -32,16 +32,16 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
-#include "driverlib/pin_map.h" //Needed for pin configure
-#include "driverlib/debug.h"
+#include "driverlib/pin_map.h"
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/pwm.h"
 
-#include "utils.h"
 #include "pwm.h"
+#include "utils.h"
 
 /**********************************************************
  * Generates a single PWM signal on Tiva board pin J4-05 =

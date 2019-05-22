@@ -18,13 +18,14 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+
 #include "driverlib/sysctl.h"
 
 #include "button.h"
-#include "slider.h"
 #include "flight_mode.h"
-#include "setpoint.h"
 #include "input.h"
+#include "setpoint.h"
+#include "slider.h"
 
 void input_init(void)
 {

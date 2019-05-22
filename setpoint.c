@@ -17,8 +17,8 @@
  *
  ******************************************************************************/
 
-#include "utils.h"
 #include "setpoint.h"
+#include "utils.h"
 
 /**
  * The amount the yaw will change by for each increment/decrement (in degrees).

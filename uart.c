@@ -20,26 +20,24 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 #include "inc/hw_ints.h"
 #include "driverlib/gpio.h"
 #include "driverlib/uart.h"
 #include "driverlib/sysctl.h"
-#include "driverlib/systick.h"
-#include "driverlib/debug.h"
 #include "driverlib/pin_map.h"
 #include "utils/ustdlib.h"
-#include "stdio.h"
-#include "stdlib.h"
-#include <string.h>
 
-#include "yaw.h"
-#include "uart.h"
 #include "altitude.h"
-#include "setpoint.h"
-#include "pwm.h"
 #include "flight_mode.h"
+#include "pwm.h"
+#include "setpoint.h"
+#include "uart.h"
+#include "yaw.h"
 
 static const int UART_BAUD_RATE = 9600;
 static const int UART_USB_BASE = UART0_BASE;
@@ -49,7 +47,7 @@ static const int UART_USB_GPIO_BASE = GPIO_PORTA_BASE;
 static const int UART_USB_GPIO_PIN_RX = GPIO_PIN_0;
 static const int UART_USB_GPIO_PIN_TX = GPIO_PIN_1;
 
-static const int  UART_INPUT_BUFFER_SIZE = 40;
+static const int UART_INPUT_BUFFER_SIZE = 40;
 static char *g_buffer;
 
 void uart_init(void)

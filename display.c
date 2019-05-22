@@ -18,14 +18,15 @@
  ******************************************************************************/
 
 #include <stdint.h>
-#include "utils/ustdlib.h"
 
 #include "OrbitOLED/OrbitOLEDInterface.h"
-#include "display.h"
+#include "utils/ustdlib.h"
+
 #include "altitude.h"
+#include "display.h"
+#include "pwm.h"
 #include "utils.h"
 #include "yaw.h"
-#include "pwm.h"
 
 /**
  * Bytecode for rendering degree symbol on the display

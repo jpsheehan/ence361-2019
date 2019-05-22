@@ -22,13 +22,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "yaw.h"
-#include "control.h"
-#include "setpoint.h"
-#include "pwm.h"
 #include "altitude.h"
+#include "control.h"
 #include "flight_mode.h"
+#include "pwm.h"
+#include "setpoint.h"
 #include "utils.h"
+#include "yaw.h"
 
 #define PWM_TAIL_DUTY_YAW_REF 35 ///Duty cycle % to apply to Tail while finding reference
 
