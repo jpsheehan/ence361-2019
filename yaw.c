@@ -53,7 +53,7 @@ static const int YAW_SETTLING_BUF_SIZE = 10;
  * The maximum difference between the minimum and maximum values (in degrees)
  * of the settling buffer for the yaw_is_settled() to return true.
  */
-static const int YAW_SETTLING_RANGE = 2;
+static const int YAW_SETTLING_MARGIN = 2;
 
 /**
  * Holds the previous state of the Quadrature FSM
@@ -282,5 +282,5 @@ bool yaw_has_been_calibrated(void)
 
 bool yaw_is_settled(void)
 {
-    return getRangeCircBuf(&g_settling_buffer) <= YAW_SETTLING_RANGE;
+    return getRangeCircBuf(&g_settling_buffer) <= YAW_SETTLING_MARGIN * 2;
 }
