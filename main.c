@@ -40,16 +40,16 @@
 /**
  * The altitude gains.
  */
-static const float ALT_KP = 0.7f;
+static const float ALT_KP = 0.9f;
 static const float ALT_KI = 0.008f;
-static const float ALT_KD = 2.1f;
+static const float ALT_KD = 0.7f;
 
 /**
  * The yaw gains.
  */
-static const float YAW_KP = 0.5f;
-static const float YAW_KI = 0.006f;
-static const float YAW_KD = 1.5f;
+static const float YAW_KP = 0.95f;
+static const float YAW_KI = 0.004f;
+static const float YAW_KD = 0.9f;
 
 /**
  * The "frequency" that the kernel runs at in Hz.
