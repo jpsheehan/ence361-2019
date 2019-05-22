@@ -55,4 +55,14 @@ freeCircBuf (circBuf_t *buffer);
  */
 int32_t getRangeCircBuf(circBuf_t* buffer);
 
+/**
+ * Returns the largest value in the buffer.
+ */
+int32_t getLargestCircBuf(circBuf_t* buffer);
+
+/**
+ * Returns the smallest value in the buffer.
+ */
+int32_t getSmallestCircBuf(circBuf_t* buffer);
+
 #endif /*CIRCBUFT_H_*/
