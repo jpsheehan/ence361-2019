@@ -66,8 +66,8 @@ static const int ALT_DELTA = 993;
 static const int ALT_SETTLING_BUF_SIZE = 10;
 
 /**
- * The maximum difference between the minimum and maximum values of the settling buffer for
- * the alt_is_settled() to return true.
+ * The maximum difference between the minimum and maximum values (as a percentage)
+ * of the settling buffer for the alt_is_settled() to return true.
  */
 static const int ALT_SETTLING_RANGE = 2;
 

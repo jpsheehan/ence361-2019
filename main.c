@@ -68,6 +68,10 @@ static const uint8_t ALT_CALC_PRIORITY = 1;
 static const uint16_t ALT_SETTLING_FREQUENCY = 10;
 static const uint8_t ALT_SETTLING_PRIORITY = 10;
 
+// update the yaw setting 10 times per second
+static const uint16_t YAW_SETTLING_FREQUENCY = 10;
+static const uint8_t YAW_SETTLING_PRIORITY = 10;
+
 // always process input
 static const uint16_t INPUT_FREQUENCY = 0;
 static const uint8_t INPUT_PRIORITY = 2;
@@ -121,6 +125,7 @@ void initialise(void)
     kernel_add_task(&alt_process_adc, ALT_ADC_FREQUENCY, ALT_ADC_PRIORITY);
     kernel_add_task(&alt_update, ALT_CALC_FREQUENCY, ALT_CALC_PRIORITY);
     kernel_add_task(&alt_update_settling, ALT_SETTLING_FREQUENCY, ALT_SETTLING_PRIORITY);
+    kernel_add_task(&yaw_update_settling, YAW_SETTLING_FREQUENCY, YAW_SETTLING_PRIORITY);
     kernel_add_task(&input_update, INPUT_FREQUENCY, INPUT_PRIORITY);
     kernel_add_task(&control_update_altitude, CONTROL_ALT_FREQUENCY, CONTROL_ALT_PRIORITY);
     kernel_add_task(&control_update_yaw, CONTROL_YAW_FREQUENCY, CONTROL_YAW_PRIORITY);

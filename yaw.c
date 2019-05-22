@@ -29,6 +29,7 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/interrupt.h"
 
+#include "circBufT.h"
 #include "yaw.h"
 
 /**
@@ -36,6 +37,23 @@
  */
 enum quadrature_state { QUAD_STATE_CLOCKWISE, QUAD_STATE_ANTICLOCKWISE, QUAD_STATE_NOCHANGE, QUAD_STATE_INVALID };
 typedef enum quadrature_state QuadratureState;
+
+/**
+ * For calculating the yaw in degrees.
+ * 112 teeth over 4 phases gives 448
+ */
+static const int YAW_MAX_SLOT_COUNT = 448;
+
+/**
+ * The size of the settling buffer.
+ */
+static const int YAW_SETTLING_BUF_SIZE = 10;
+
+/**
+ * The maximum difference between the minimum and maximum values (in degrees)
+ * of the settling buffer for the yaw_is_settled() to return true.
+ */
+static const int YAW_SETTLING_RANGE = 2;
 
 /**
  * Holds the previous state of the Quadrature FSM
@@ -58,10 +76,9 @@ static volatile uint16_t g_slot_count;
 static volatile bool g_has_been_calibrated;
 
 /**
- * For calculating the yaw in degrees.
- * 112 teeth over 4 phases gives 448
+ * The buffer that holds the degree values for settling calculations.
  */
-static const int YAW_MAX_SLOT_COUNT = 448;
+static circBuf_t g_settling_buffer;
 
 /**
  * Yaw Quadrature Encoding:
@@ -103,6 +120,7 @@ void yaw_init(void)
     g_quadrature_state = QUAD_STATE_NOCHANGE;
     g_has_been_calibrated = false;
     g_slot_count = 0;
+    initCircBuf(&g_settling_buffer, YAW_SETTLING_BUF_SIZE);
     
     // setup the pins (PB0 is A, PB1 is B)
     SysCtlPeripheralEnable(YAW_QUAD_PERIPH);
@@ -209,6 +227,13 @@ void yaw_update_state(bool t_signal_a, bool t_signal_b)
     g_previous_state = this_state;
 }
 
+void yaw_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
+{
+    // we add 180 degrees because we only care about the settling
+    // around 0 degrees and because of underflows this is difficult
+    writeCircBuf(&g_settling_buffer, (yaw_get() + 180) % 360);
+}
+
 /**
 * Returns the current state of the Quadrature FSM.
 */
@@ -253,4 +278,9 @@ void yaw_reset_calibration_state(void)
 bool yaw_has_been_calibrated(void)
 {
     return g_has_been_calibrated;
+}
+
+bool yaw_is_settled(void)
+{
+    return getRangeCircBuf(&g_settling_buffer) <= YAW_SETTLING_RANGE;
 }

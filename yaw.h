@@ -25,6 +25,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "kernel.h"
+
 /**
  * Initialises the quadrature module.
  * This must be called before any other functions in the quadrature module.
@@ -46,5 +48,16 @@ void yaw_reset_calibration_state(void);
  * Returns true if the yaw has been calibrated to its reference.
  */
 bool yaw_has_been_calibrated(void);
+
+/**
+ * Kernel Task
+ * Updates the settling buffer.
+ */
+void yaw_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task);
+
+/*
+ * Returns true if the yaw value is settled.
+ */
+bool yaw_is_settled(void);
 
 #endif /* YAW_H_ */
