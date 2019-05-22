@@ -22,6 +22,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <limits.h>
 
 // TODO: See which includes can be safely removed
 #include "inc/hw_memmap.h"
@@ -42,11 +43,6 @@
  * The size of the buffer used to store the raw ADC values. This needs to be big enough that outliers in the data cannot affect the calculated mean in an adverse way.
  */
 static const int ALT_BUF_SIZE = 32;
-
-/**
- * Figure out a way to have this but also not repeat it in main.c!!! This is the frequency of the adc stuff
- */
-static const int ALT_SAMPLE_RATE_HZ = 256;
 
 /**
  * We are using ADC0 so we set up the base and peripheral
@@ -95,6 +91,11 @@ static int16_t g_alt_percent;
  * Indicates if the altitude has been calibrated yet. This is set when calling the `void alt_calibrate()` function and returned when calling the `bool alt_getIsCalibrated()` function.
  */
 static bool g_has_been_calibrated = false;
+
+/**
+ * Stores the frequency of the kernel task. We need this to determine if the buffer is full.
+ */
+static uint16_t g_kernel_task_frequency = USHRT_MAX;
 
 /**
  * (Original Code by P.J. Bones)
@@ -163,6 +164,11 @@ void alt_init_adc(void)
  */
 void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task)
 {
+    if (g_kernel_task_frequency == USHRT_MAX)
+    {
+        g_kernel_task_frequency = t_task->frequency;
+    }
+
     //
     // Initiate a conversion
     //
@@ -210,7 +216,7 @@ bool alt_has_been_calibrated(void)
 
 bool alt_get_is_buffer_full(void)
 {
-    return (kernel_get_systick_count() > ALT_SAMPLE_RATE_HZ);
+    return (kernel_get_systick_count() > g_kernel_task_frequency);
 }
 
 void alt_reset_calibration_state(void)
