@@ -61,9 +61,25 @@ static const int ADC_STEP = 0;
 static const int ALT_DELTA = 993;
 
 /**
+ * The size of the settling buffer.
+ */
+static const int ALT_SETTLING_BUF_SIZE = 10;
+
+/**
+ * The maximum difference between the minimum and maximum values of the settling buffer for
+ * the alt_is_settled() to return true.
+ */
+static const int ALT_SETTLING_RANGE = 2;
+
+/**
  * The circular buffer used to store the raw ADC values for calculating the mean.
  */
 static circBuf_t g_circ_buffer;
+
+/**
+ * The circular buffer used to store ALT_SETTLING_BUF_SIZE percentage values.
+ */
+static circBuf_t g_settling_buffer;
 
 /**
  * The reference altitude. This is updated when calling the alt_calibrate function. This is required for calculating the altitude as a percentage.
@@ -114,7 +130,6 @@ void alt_adc_int_handler(void)
 /**
  * (Original code by P.J. Bones)
  * Initialises the ADC module on the Tivaboard.
- * TODO: Give more information about the ADC we are using to perform the conversion.
  */
 void alt_init_adc(void)
 {
@@ -172,6 +187,7 @@ void alt_init(void)
 {
     alt_init_adc();
     initCircBuf(&g_circ_buffer, ALT_BUF_SIZE);
+    initCircBuf(&g_settling_buffer, ALT_SETTLING_BUF_SIZE);
 }
 
 void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task)
@@ -191,6 +207,11 @@ void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     g_alt_percent = (int16_t)((((int32_t)g_alt_ref - (int32_t)g_alt_raw) * (int32_t)100) / (int32_t)ALT_DELTA);
 }
 
+void alt_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
+{
+    writeCircBuf(&g_settling_buffer, g_alt_percent);
+}
+
 void alt_calibrate(void)
 {
     g_alt_ref = g_alt_raw;
@@ -207,7 +228,7 @@ bool alt_has_been_calibrated(void)
     return g_has_been_calibrated;
 }
 
-bool alt_get_is_buffer_full(void)
+bool alt_is_buffer_full(void)
 {
     return (kernel_get_systick_count() > g_kernel_task_frequency);
 }
@@ -215,4 +236,9 @@ bool alt_get_is_buffer_full(void)
 void alt_reset_calibration_state(void)
 {
     g_has_been_calibrated = false;
+}
+
+bool alt_is_settled(void)
+{
+    return getRangeCircBuf(&g_settling_buffer) <= ALT_SETTLING_RANGE;
 }

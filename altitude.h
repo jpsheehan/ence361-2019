@@ -56,7 +56,7 @@ bool alt_has_been_calibrated(void);
 /**
  * Returns `true` if the circular buffer is full and ready to be calculated.
  */
-bool alt_get_is_buffer_full(void);
+bool alt_is_buffer_full(void);
 
 /**
  * Performs an ADC conversion.
@@ -67,5 +67,16 @@ void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task);
  * Resets the calibration state of the altitude.
  */
 void alt_reset_calibration_state(void);
+
+/**
+ * Returns true if the yaw has "settled".
+ */
+bool alt_is_settled(void);
+
+/**
+ * Kernel Task
+ * Updates the settling buffer.
+ */
+void alt_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task);
 
 #endif

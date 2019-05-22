@@ -92,7 +92,7 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
             pwm_set_main_duty(0);
             pwm_set_tail_duty(PWM_TAIL_DUTY_YAW_REF);
 
-            if (alt_get_is_buffer_full())
+            if (alt_is_buffer_full())
             {
                 alt_calibrate();
             }
