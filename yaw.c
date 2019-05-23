@@ -94,6 +94,8 @@ static const int YAW_QUAD_PIN_2 = GPIO_PIN_1;
 static const int YAW_QUAD_SIG_STRENGTH = GPIO_STRENGTH_4MA;
 static const int YAW_QUAD_PIN_TYPE = GPIO_PIN_TYPE_STD_WPD;
 static const int YAW_QUAD_EDGE_TYPE = GPIO_BOTH_EDGES;
+//
+static const int YAW_QUAD_DDR = GPIO_DIR_MODE_IN;
 
 /**
  * Yaw Reference:
@@ -106,8 +108,8 @@ static const int YAW_REF_PIN = GPIO_PIN_4;
 static const int YAW_REF_SIG_STRENGTH = GPIO_STRENGTH_2MA;
 //changed to WPU mfb
 static const int YAW_REF_PIN_TYPE = GPIO_PIN_TYPE_STD_WPU;
-// changed to falling mfb
-static const int YAW_REF_EDGE_TYPE = GPIO_FALLING_EDGE;
+// changed to falling mfb, sort of works, now trying rising
+static const int YAW_REF_EDGE_TYPE = GPIO_RISING_EDGE;
 
 
 // prototypes for functions local to the yaw module
@@ -146,6 +148,7 @@ void yaw_init(void)
 	// (clears any outstanding interrupts)
     GPIOIntEnable(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
 
+
     // enable the peripheral
     SysCtlPeripheralEnable(YAW_REF_PERIPH);
 
@@ -154,6 +157,9 @@ void yaw_init(void)
 
     // set it up as an input
     GPIOPinTypeGPIOInput(YAW_REF_BASE, YAW_REF_PIN);
+
+    // set data direction register as input mfb
+    GPIODirModeSet(YAW_REF_BASE, YAW_REF_PIN, YAW_QUAD_DDR);
 
     // configure it to be a weak pull down
     // try WPU

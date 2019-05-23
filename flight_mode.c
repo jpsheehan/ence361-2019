@@ -82,6 +82,7 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     {
         if (yaw_has_been_calibrated() && alt_has_been_calibrated())
         {
+            //GPIOIntEnable ?? if not enabled in yaw_init must enabvle here.
             flight_mode_advance_state();
             control_enable_yaw(true);
             control_enable_altitude(true);
