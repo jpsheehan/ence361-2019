@@ -133,7 +133,7 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
         {
             setpoint_set_yaw(0);
 
-            if (yaw_is_settled())
+            if (yaw_is_settled() && yaw_get() == 0)
             {
                 setpoint_set_altitude(HOVER_ALTITUDE);
             }
