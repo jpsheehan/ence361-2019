@@ -9,7 +9,7 @@
 #include "utils.h"
 
 // Min speed of main rotor, allows for proper anti-clockwise yaw control
-#define MINMOTORDUTY 20
+#define MINMOTORDUTY 25
 #define COUPLEFACTOR .9
 
 ControlState g_control_altitude;

@@ -307,7 +307,7 @@ bool yaw_is_settled_around(int32_t t_value)
 {
     if (yaw_is_settled())
     {
-        return range(yaw_get_settled() + 180, t_value - YAW_SETTLING_MARGIN + 180, t_value + YAW_SETTLING_MARGIN + 180);
+        return range(180 + yaw_get_settled(), 180 + t_value - YAW_SETTLING_MARGIN, 180 + t_value + YAW_SETTLING_MARGIN);
     }
     else
     {
