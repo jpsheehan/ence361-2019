@@ -60,4 +60,14 @@ void yaw_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task);
  */
 bool yaw_is_settled(void);
 
+/**
+ * Returns the settled value of the yaw (in degrees) if it has settled, -1 otherwise.
+ */
+int32_t yaw_get_settled(void);
+
+/**
+ * Returns true if the yaw is settled around the specific angle.
+ */
+bool yaw_is_settled_around(int32_t t_value);
+
 #endif /* YAW_H_ */

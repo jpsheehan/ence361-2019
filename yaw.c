@@ -30,6 +30,7 @@
 #include "driverlib/interrupt.h"
 
 #include "circBufT.h"
+#include "utils.h"
 #include "yaw.h"
 
 /**
@@ -293,3 +294,24 @@ bool yaw_is_settled(void)
 {
     return getRangeCircBuf(&g_settling_buffer) <= YAW_SETTLING_MARGIN * 2;
 }
+
+int32_t yaw_get_settled(void)
+{
+    if (yaw_is_settled()) {
+        return (getSmallestCircBuf(&g_settling_buffer) + YAW_SETTLING_MARGIN - 180);
+    }
+    return -1;
+}
+
+bool yaw_is_settled_around(int32_t t_value)
+{
+    if (yaw_is_settled())
+    {
+        return range(yaw_get_settled() + 180, t_value - YAW_SETTLING_MARGIN + 180, t_value + YAW_SETTLING_MARGIN + 180);
+    }
+    else
+    {
+        return false;
+    }
+}
+

@@ -31,6 +31,7 @@
 #include "altitude.h"
 #include "circBufT.h"
 #include "kernel.h"
+#include "utils.h"
 
 /**
  * The size of the buffer used to store the raw ADC values. This needs to be big enough that outliers in the data cannot affect the calculated mean in an adverse way.
@@ -241,4 +242,24 @@ void alt_reset_calibration_state(void)
 bool alt_is_settled(void)
 {
     return getRangeCircBuf(&g_settling_buffer) <= ALT_SETTLING_MARGIN * 2;
+}
+
+int32_t alt_get_settled(void)
+{
+    if (alt_is_settled()) {
+        return getSmallestCircBuf(&g_settling_buffer) + ALT_SETTLING_MARGIN;
+    }
+    return -1;
+}
+
+bool alt_is_settled_around(int32_t t_value)
+{
+    if (alt_is_settled())
+    {
+        return range(alt_get_settled(), t_value - ALT_SETTLING_MARGIN, t_value + ALT_SETTLING_MARGIN);
+    }
+    else
+    {
+        return false;
+    }
 }
