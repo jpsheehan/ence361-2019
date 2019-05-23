@@ -28,12 +28,12 @@
 #include "slider.h"
 
 // SW1: J1-10 PA7
-static const int SW1_PERIPH = SYSCTL_PERIPH_GPIOA;
+static const uint32_t SW1_PERIPH = SYSCTL_PERIPH_GPIOA;
 static const int SW1_PORT_BASE = GPIO_PORTA_BASE;
 static const int SW1_PORT_PIN = GPIO_PIN_7;
 
 // SW2: J1-09 PA6
-static const int SW2_PERIPH = SYSCTL_PERIPH_GPIOA;
+static const uint32_t SW2_PERIPH = SYSCTL_PERIPH_GPIOA;
 static const int SW2_PORT_BASE = GPIO_PORTA_BASE;
 static const int SW2_PORT_PIN = GPIO_PIN_6;
 

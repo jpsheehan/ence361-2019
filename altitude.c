@@ -41,7 +41,7 @@ static const int ALT_BUF_SIZE = 32;
  * We are using ADC0 so we set up the base and peripheral
  */
 static const int ADC_BASE = ADC0_BASE;
-static const int ADC_PERIPH = SYSCTL_PERIPH_ADC0;
+static const uint32_t ADC_PERIPH = SYSCTL_PERIPH_ADC0;
 
 /**
  * We want sequence 3, step 0 of ADC0

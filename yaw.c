@@ -85,7 +85,7 @@ static circBuf_t g_settling_buffer;
  * PB0 is the Phase A pin
  * PB1 is the Phase B pin
  */
-static const int YAW_QUAD_PERIPH = SYSCTL_PERIPH_GPIOB;
+static const uint32_t YAW_QUAD_PERIPH = SYSCTL_PERIPH_GPIOB;
 static const int YAW_QUAD_BASE = GPIO_PORTB_BASE;
 static const int YAW_QUAD_INT_PIN_1 = GPIO_INT_PIN_0;
 static const int YAW_QUAD_INT_PIN_2 = GPIO_INT_PIN_1;
@@ -99,7 +99,7 @@ static const int YAW_QUAD_EDGE_TYPE = GPIO_BOTH_EDGES;
  * Yaw Reference:
  * PC4 is the reference pin
  */
-static const int YAW_REF_PERIPH = SYSCTL_PERIPH_GPIOC;
+static const uint32_t YAW_REF_PERIPH = SYSCTL_PERIPH_GPIOC;
 static const int YAW_REF_BASE = GPIO_PORTC_BASE;
 static const int YAW_REF_INT_PIN = GPIO_INT_PIN_4;
 static const int YAW_REF_PIN = GPIO_PIN_4;

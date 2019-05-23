@@ -41,8 +41,8 @@
 
 static const int UART_BAUD_RATE = 9600;
 static const int UART_USB_BASE = UART0_BASE;
-static const int UART_USB_PERIPH_UART = SYSCTL_PERIPH_UART0;
-static const int UART_USB_PERIPH_GPIO = SYSCTL_PERIPH_GPIOA;
+static const uint32_t UART_USB_PERIPH_UART = SYSCTL_PERIPH_UART0;
+static const uint32_t UART_USB_PERIPH_GPIO = SYSCTL_PERIPH_GPIOA;
 static const int UART_USB_GPIO_BASE = GPIO_PORTA_BASE;
 static const int UART_USB_GPIO_PIN_RX = GPIO_PIN_0;
 static const int UART_USB_GPIO_PIN_TX = GPIO_PIN_1;
