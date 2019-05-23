@@ -91,7 +91,7 @@ static const int YAW_QUAD_INT_PIN_1 = GPIO_INT_PIN_0;
 static const int YAW_QUAD_INT_PIN_2 = GPIO_INT_PIN_1;
 static const int YAW_QUAD_PIN_1 = GPIO_PIN_0;
 static const int YAW_QUAD_PIN_2 = GPIO_PIN_1;
-static const int YAW_QUAD_SIG_STRENGTH = GPIO_STRENGTH_2MA;
+static const int YAW_QUAD_SIG_STRENGTH = GPIO_STRENGTH_4MA;
 static const int YAW_QUAD_PIN_TYPE = GPIO_PIN_TYPE_STD_WPD;
 static const int YAW_QUAD_EDGE_TYPE = GPIO_BOTH_EDGES;
 
@@ -104,8 +104,10 @@ static const int YAW_REF_BASE = GPIO_PORTC_BASE;
 static const int YAW_REF_INT_PIN = GPIO_INT_PIN_4;
 static const int YAW_REF_PIN = GPIO_PIN_4;
 static const int YAW_REF_SIG_STRENGTH = GPIO_STRENGTH_2MA;
-static const int YAW_REF_PIN_TYPE = GPIO_PIN_TYPE_STD_WPD;
-static const int YAW_REF_EDGE_TYPE = GPIO_RISING_EDGE;
+//changed to WPU mfb
+static const int YAW_REF_PIN_TYPE = GPIO_PIN_TYPE_STD_WPU;
+// changed to falling mfb
+static const int YAW_REF_EDGE_TYPE = GPIO_FALLING_EDGE;
 
 
 // prototypes for functions local to the yaw module
@@ -154,6 +156,7 @@ void yaw_init(void)
     GPIOPinTypeGPIOInput(YAW_REF_BASE, YAW_REF_PIN);
 
     // configure it to be a weak pull down
+    // try WPU
     GPIOPadConfigSet(YAW_REF_BASE, YAW_REF_PIN, YAW_REF_SIG_STRENGTH, YAW_REF_PIN_TYPE);
 
     // configure the interrupt to be falling edge only
