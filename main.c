@@ -40,8 +40,8 @@
 /**
  * The altitude gains.
  */
-static const float ALT_KP = 0.65f;
-static const float ALT_KI = 0.008f;
+static const float ALT_KP = 0.55f;
+static const float ALT_KI = 0.006f;
 static const float ALT_KD = .9f;
 
 /**
