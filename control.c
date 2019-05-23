@@ -62,6 +62,7 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     // I control
     g_control_altitude.cumulative += error;
     Igain = g_control_altitude.cumulative * g_control_altitude.ki;
+    Igain = clamp(Igain, -10, 10);
     //Igain = 0;
 
     // D control
@@ -71,7 +72,7 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
 
     // Calculate new motor duty
     newGain = MINMOTORDUTY + Pgain + Igain + Dgain;
-    newGain = clamp(newGain, MINMOTORDUTY, 100);
+    newGain = clamp(newGain, MINMOTORDUTY, 70);
 
     g_control_altitude.duty = newGain;
 
