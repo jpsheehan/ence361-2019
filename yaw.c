@@ -241,7 +241,7 @@ void yaw_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
 {
     // we add 180 degrees because we only care about the settling
     // around 0 degrees and because of underflows this is difficult
-    writeCircBuf(&g_settling_buffer, (yaw_get() + 180) % 360);
+    writeCircBuf(&g_settling_buffer, yaw_get() + 180);
 }
 
 /**
