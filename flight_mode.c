@@ -119,7 +119,7 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
             }
             else
             {
-                if (alt_get() <= HOVER_ALTITUDE && alt_is_settled())
+                if (alt_get() <= HOVER_ALTITUDE && alt_is_settled() && (yaw_get() == 0) )
                 {
                     setpoint_set_altitude(0);
                 }
