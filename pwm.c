@@ -54,7 +54,7 @@
  **********************************************************/
 
 // PWM configuration
-static const int PWM_RATE = 300;
+static const int PWM_RATE = 200;
 static const int PWM_DIVIDER_CODE = SYSCTL_PWMDIV_8; //40MHz system clk
 static const int PWM_DIVIDER = 8;
 

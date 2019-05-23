@@ -48,8 +48,8 @@ static const float ALT_KD = .85f;
  * The yaw gains.
  */
 static const float YAW_KP = 0.9f;
-static const float YAW_KI = 0.0045f;
-static const float YAW_KD = 0.9f;
+static const float YAW_KI = 0.0055f;
+static const float YAW_KD = 0.6f;
 
 /**
  * The "frequency" that the kernel runs at in Hz.

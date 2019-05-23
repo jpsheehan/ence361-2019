@@ -30,7 +30,7 @@
 #include "utils.h"
 #include "yaw.h"
 
-#define PWM_TAIL_DUTY_YAW_REF 15 ///Duty cycle % to apply to Tail while finding reference
+#define PWM_TAIL_DUTY_YAW_REF 20 ///Duty cycle % to apply to Tail while finding reference
 
 /**
  * The percentage altitude to hover on take-off and landing before finding the reference.
@@ -120,7 +120,7 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
             }
             else
             {
-                if (alt_get() <= HOVER_ALTITUDE && alt_is_settled() && (yaw_get() == 0) )
+                if (alt_get() <= HOVER_ALTITUDE && alt_is_settled() && yaw_is_settled())
                 {
                     setpoint_set_altitude(0);
                 }
@@ -134,7 +134,7 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
         {
             setpoint_set_yaw(0);
 
-            if (yaw_is_settled() && yaw_get() == 0)
+            if (yaw_is_settled())
             {
                 setpoint_set_altitude(HOVER_ALTITUDE);
             }
