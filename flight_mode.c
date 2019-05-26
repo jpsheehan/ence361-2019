@@ -30,7 +30,7 @@
 #include "utils.h"
 #include "yaw.h"
 
-#define PWM_TAIL_DUTY_YAW_REF 20 ///Duty cycle % to apply to Tail while finding reference
+#define PWM_TAIL_DUTY_YAW_REF 18 ///Duty cycle % to apply to Tail while finding reference
 
 /**
  * The percentage altitude to hover on take-off and landing before finding the reference.
