@@ -30,7 +30,10 @@
 #include "utils.h"
 #include "yaw.h"
 
-#define PWM_TAIL_DUTY_YAW_REF 20 ///Duty cycle % to apply to Tail while finding reference
+/**
+ * Duty cycle % to apply to Tail while finding reference
+ */
+static const int PWM_TAIL_DUTY_YAW_REF = 20;
 
 /**
  * The percentage altitude to hover on take-off and landing before finding the reference.
@@ -82,17 +85,22 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     {
         if (yaw_has_been_calibrated() && alt_has_been_calibrated())
         {
-            //GPIOIntEnable ?? if not enabled in yaw_init must enabvle here.
+            // if we are in TAKE_OFF mode and both the yaw and altitude have been calibrated,
+            // then we enable the PID control systems and advance to IN_FLIGHT mode
             flight_mode_advance_state();
             control_enable_yaw(true);
             control_enable_altitude(true);
         }
         else
         {
-            // find the 0 calibration point for yaw
+            // if we are in TAKE_OFF mode and both of the yaw and altitude have not been calibrated,
+            // then we turn off the main rotor and turn on the tail rotor
             pwm_set_main_duty(0);
             pwm_set_tail_duty(PWM_TAIL_DUTY_YAW_REF);
 
+            // the yaw reference will be calibrated via an interrupt
+
+            // we also calibrate the altitude if it is ready
             if (alt_is_buffer_full())
             {
                 alt_calibrate();
@@ -107,6 +115,8 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
         {
             if (alt_get() <= 0)
             {
+                // if the angle is +/- 3 degrees of zero and our altitude is zero or lower,
+                // then we reset the entire helicopter state and put it back in LANDED mode
                 control_enable_yaw(false);
                 control_enable_altitude(false);
 
@@ -122,16 +132,22 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
             {
                 if (alt_is_settled_around(HOVER_ALTITUDE) && yaw_is_settled_around(0))
                 {
+                    // if the angle is +/- 3 degrees of zero and our altitude is around 5%,
+                    // then we set the desired altitude to 0%
                     setpoint_set_altitude(0);
                 }
                 else
                 {
+                    // if the angle is +/- 3 degrees of zero and our altitude is not around 5%,
+                    // then we set our desired altitude to be 5%
                     setpoint_set_altitude(HOVER_ALTITUDE);
                 }
             }
         }
         else
         {
+            // if the angle is not +/- 3 degrees of zero
+            // then we set our desired angle to be 0 degrees
             setpoint_set_yaw(0);
 
             if (yaw_is_settled_around(0))
