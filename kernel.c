@@ -121,6 +121,7 @@ int kernel_task_compare(const void * t_task_a, const void * t_task_b)
 
 void kernel_add_task(void* t_func_ptr, uint16_t t_frequency, uint8_t t_priority)
 {
+    // only add tasks if enough memory has been allocated and everything is ok
     if (g_task_total < MAX_TASKS && g_init_ok)
     {
         KernelTask task = (KernelTask){
@@ -148,8 +149,9 @@ void kernel_run(void)
 {
     if (g_task_total > 0)
     {
+        // sort the tasks in place if we need to, this ensures that the higher priority tasks
+        // are run first
         if (!g_tasks_are_sorted) {
-            // sort the tasks in place
             qsort(g_tasks, g_task_total, sizeof(KernelTask), kernel_task_compare);
             g_tasks_are_sorted = true;
         }
@@ -191,6 +193,7 @@ void kernel_run(void)
 //            {
 //                task_duration = end_count - this_count;
 //            }
+//            uint32_t duration_micros = ((task_duration - 1) * 1000000) / g_kernel_frequency;
         }
     }
 }
