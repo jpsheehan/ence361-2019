@@ -186,7 +186,10 @@ void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task)
 
 void alt_init(void)
 {
+    // initialise the ADC for the altitude
     alt_init_adc();
+
+    // initialise the circular buffers
     initCircBuf(&g_circ_buffer, ALT_BUF_SIZE);
     initCircBuf(&g_settling_buffer, ALT_SETTLING_BUF_SIZE);
 }
@@ -210,6 +213,7 @@ void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task)
 
 void alt_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
 {
+    // write the current altitude (as a percentage) to the settling buffer.
     writeCircBuf(&g_settling_buffer, g_alt_percent);
 }
 
@@ -231,6 +235,8 @@ bool alt_has_been_calibrated(void)
 
 bool alt_is_buffer_full(void)
 {
+    // the buffer is full if the number of ticks performed is greater than the frequency of the
+    // altitude's kernel task
     return (kernel_get_systick_count() > g_kernel_task_frequency);
 }
 
@@ -239,11 +245,17 @@ void alt_reset_calibration_state(void)
     g_has_been_calibrated = false;
 }
 
+/**
+ * Returns true if the yaw has "settled".
+ */
 bool alt_is_settled(void)
 {
     return getRangeCircBuf(&g_settling_buffer) <= ALT_SETTLING_MARGIN * 2;
 }
 
+/**
+ * Returns the value that the altitude has settled around
+ */
 int32_t alt_get_settled(void)
 {
     if (alt_is_settled()) {

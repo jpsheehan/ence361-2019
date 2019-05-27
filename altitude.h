@@ -69,11 +69,6 @@ void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task);
 void alt_reset_calibration_state(void);
 
 /**
- * Returns true if the yaw has "settled".
- */
-bool alt_is_settled(void);
-
-/**
  * Kernel Task
  * Updates the settling buffer.
  */
@@ -83,10 +78,5 @@ void alt_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task);
  * Returns true if the altitude is settled around a particular value.
  */
 bool alt_is_settled_around(int32_t t_value);
-
-/**
- * Returns the value that the altitude has settled around
- */
-int32_t alt_get_settled(void);
 
 #endif
