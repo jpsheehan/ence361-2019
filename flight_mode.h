@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * opStatus.c
+ * flight_mode.h
  *
  * ENEL361 Helicopter Project
  * Friday Morning, Group 7
@@ -12,12 +12,11 @@
  *  - Will Cowper   <wgc22@uclive.ac.nz>    81163265
  *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
  *
- * This file contains portions of code that written by P.J. Bones. These portions are noted in the comments.
- *
  * Description:
- * This module contains the definitions for the Operating mode (or FLight Status) Finite Sate Machine
+ * This module contains the definitions for the Operating Mode (or FLight Status)
+ * of the helicopter under control of a Finite Sate Machine
  *
- *********************************************************************************************/
+ *********************************************************************************/
 
 #ifndef FLIGHT_MODE_H_
 #define FLIGHT_MODE_H_
@@ -28,8 +27,10 @@
 #include "kernel.h"
 
 /**
- * Defines the possible states for the operating mode (a.k.a. flight status), state machine.
- * Finding yaw reference is part of take off, Setting altitude occurs at start-up up so CAL start may not be needed. 
+ * Defines the possible states for the operating mode (a.k.a. flight status),
+ * state machine.
+ * Finding yaw reference is part of take off,
+ * Setting altitude occurs at start-up up so CAL start may not be needed.
  */
 enum flight_mode_state_e { LANDED,
                                   TAKE_OFF,

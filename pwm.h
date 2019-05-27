@@ -13,10 +13,20 @@
  *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
  * 
  * Description:
- * This module contains functions for initialising PWM, changing duty cycle and
- * frequency. Min / Max / Start values are also defined.
+ * This module contains prototypes for initialising PWM, changing duty cycle and
+ * returning current duty cycle, for Main and Tail rotors.
  * 
- ******************************************************************************/
+ * This module reuses code from pwmGen.c by P.J. Bones as
+ * used in Lab3 ENCE361-19S1 =>
+ * pwmGen.c - Example code which generates a single PWM
+ *    output on J4-05 (M0PWM7) with duty cycle fixed and
+ *    the frequency controlled by UP and DOWN buttons in
+ *    the range 50 Hz to 400 Hz.
+ *
+ * P.J. Bones   UCECE
+ * Last modified:  7.2.2018
+ *
+ **********************************************************/
 
 #ifndef PWM_H_
 #define PWM_H_
