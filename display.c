@@ -64,7 +64,7 @@ void disp_clear(void)
  */
 void disp_calibration(void)
 {
-    OLEDStringDraw("Fri AM Group 17", 0, 0);
+    OLEDStringDraw("Fri AM Group 7", 0, 0);
     OLEDStringDraw("mfb31", 0, 1);
     OLEDStringDraw("wgc22", 0, 2);
     OLEDStringDraw("jps111", 0, 3);
