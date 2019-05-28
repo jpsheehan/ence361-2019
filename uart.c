@@ -31,7 +31,6 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/pin_map.h"
 #include "utils/ustdlib.h"
-
 #include "altitude.h"
 #include "flight_mode.h"
 #include "pwm.h"
@@ -39,6 +38,9 @@
 #include "uart.h"
 #include "yaw.h"
 
+/**
+ * Define hardware settings for the UART
+ */
 static const int UART_BAUD_RATE = 9600;
 static const int UART_USB_BASE = UART0_BASE;
 static const uint32_t UART_USB_PERIPH_UART = SYSCTL_PERIPH_UART0;
@@ -47,6 +49,7 @@ static const int UART_USB_GPIO_BASE = GPIO_PORTA_BASE;
 static const int UART_USB_GPIO_PIN_RX = GPIO_PIN_0;
 static const int UART_USB_GPIO_PIN_TX = GPIO_PIN_1;
 
+// buffer settings
 static const int UART_INPUT_BUFFER_SIZE = 40;
 static char *g_buffer;
 
@@ -54,14 +57,11 @@ void uart_init(void)
 {
     g_buffer = malloc(UART_INPUT_BUFFER_SIZE);
 
-    //
     // Enable GPIO port A which is used for UART0 pins.
-    //
     SysCtlPeripheralEnable(UART_USB_PERIPH_UART);
     SysCtlPeripheralEnable(UART_USB_PERIPH_GPIO);
-    //
+
     // Select the alternate (UART) function for these pins.
-    //
     GPIOPinTypeUART(UART_USB_GPIO_BASE, UART_USB_GPIO_PIN_RX | UART_USB_GPIO_PIN_TX);
     GPIOPinConfigure(GPIO_PA0_U0RX);
     GPIOPinConfigure(GPIO_PA1_U0TX);

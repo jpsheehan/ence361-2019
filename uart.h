@@ -10,8 +10,11 @@
  *  - Will Cowper   <wgc22@uclive.ac.nz>    81163265
  *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
  *
+ * This file reference portions of code that written by P.J. Bones.
+ * These portions are noted in the comments.
+ *
  * Description:
- * This module contains functions and constants that facilitate sending data via
+ * This module contains prototypes that facilitate sending data via
  * USB UART to the host computer.
  *
  ******************************************************************************/
