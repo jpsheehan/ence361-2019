@@ -13,9 +13,10 @@
  * Created on: 10/04/2019
  * 
  * Description:
- * This module contains function prototypes required for calculating the slot
+ * This module contains functions required for calculating the slot
  *  count, yaw values, and initialising the quadrature state machine.
  * The states for the quadrature state machine are also defined.
+ * A settling function is also provided in this module.
  * 
  ******************************************************************************/
 
@@ -28,7 +29,6 @@
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/interrupt.h"
-
 #include "circBufT.h"
 #include "utils.h"
 #include "yaw.h"
@@ -95,7 +95,6 @@ static const int YAW_QUAD_PIN_2 = GPIO_PIN_1;
 static const int YAW_QUAD_SIG_STRENGTH = GPIO_STRENGTH_4MA;
 static const int YAW_QUAD_PIN_TYPE = GPIO_PIN_TYPE_STD_WPD;
 static const int YAW_QUAD_EDGE_TYPE = GPIO_BOTH_EDGES;
-//
 static const int YAW_QUAD_DDR = GPIO_DIR_MODE_IN;
 
 /**
@@ -107,11 +106,10 @@ static const int YAW_REF_BASE = GPIO_PORTC_BASE;
 static const int YAW_REF_INT_PIN = GPIO_INT_PIN_4;
 static const int YAW_REF_PIN = GPIO_PIN_4;
 static const int YAW_REF_SIG_STRENGTH = GPIO_STRENGTH_2MA;
-//changed to WPU mfb
-static const int YAW_REF_PIN_TYPE = GPIO_PIN_TYPE_STD_WPU;
-// changed to falling mfb, sort of works, now trying rising
-static const int YAW_REF_EDGE_TYPE = GPIO_RISING_EDGE;
 
+// specification conflict: pull up and rising edge are reliable
+static const int YAW_REF_PIN_TYPE = GPIO_PIN_TYPE_STD_WPU;
+static const int YAW_REF_EDGE_TYPE = GPIO_RISING_EDGE;
 
 // prototypes for functions local to the yaw module
 void yaw_update_state(bool t_signal_a, bool t_signal_b);
@@ -119,6 +117,12 @@ void yaw_int_handler(void);
 void yaw_reference_int_handler(void);
 QuadratureState yaw_get_state(void);
 
+/**
+ * Initialise yaw including:
+ * state machine (previous and current states), calibration,
+ * slot count, circular buffer for settling,
+ * set up input pins, interrupts etc.
+ */
 void yaw_init(void)
 {
     g_previous_state = 0b00;
@@ -153,7 +157,7 @@ void yaw_init(void)
     // enable the peripheral
     SysCtlPeripheralEnable(YAW_REF_PERIPH);
 
-    // disable interrups
+    // disable interrupts
     GPIOIntDisable(YAW_REF_BASE, YAW_REF_INT_PIN);
 
     // set it up as an input
