@@ -49,6 +49,12 @@ struct kernel_task_s
      * DO NOT MODIFY OUTSIDE THE KERNEL MODULE!!!!
      */
     uint32_t int_count;
+
+    /**
+     * Used internally to store the latest running time of this task (in microseconds).
+     * DO NOT MODIFY OUTSIDE THE KERNEL MODULE!!!
+     */
+    uint32_t duration_micros;
 };
 
 /**

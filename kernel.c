@@ -128,6 +128,7 @@ void kernel_add_task(void* t_func_ptr, uint16_t t_frequency, uint8_t t_priority)
             t_func_ptr,
             t_frequency,
             t_priority,
+            0,
             0
         };
 
@@ -174,26 +175,28 @@ void kernel_run(void)
 
                 if (task.frequency == 0 || (((float)count_delta / g_kernel_frequency) > (1.0f / task.frequency)))
                 {
+                    uint32_t start_count = g_systick_count;
                     uint32_t elapsed_micros = ((count_delta - 1) * 1000000) / g_kernel_frequency;
                     ((void(*)(uint32_t, KernelTask*))(task.function))(elapsed_micros, &task);
                     g_tasks[i].int_count = this_count;
+
+                    // we can also keep track of the time taken to perform a task
+                    uint32_t end_count = g_systick_count;
+                    uint32_t task_ticks;
+                    if (end_count < start_count)
+                    {
+                        task_ticks = UINT_MAX - start_count + end_count;
+                    }
+                    else
+                    {
+                        task_ticks = end_count - start_count;
+                    }
+                    task.duration_micros = ((task_ticks - 1) * 1000000) / g_kernel_frequency;
                 }
+
             }
 
             g_last_count = this_count;
-
-            // we can also keep track of the time taken to perform a task
-//            uint32_t end_count = g_systick_count;
-//            uint32_t task_duration;
-//            if (end_count < this_count)
-//            {
-//                task_duration = UINT_MAX - this_count + end_count;
-//            }
-//            else
-//            {
-//                task_duration = end_count - this_count;
-//            }
-//            uint32_t duration_micros = ((task_duration - 1) * 1000000) / g_kernel_frequency;
         }
     }
 }

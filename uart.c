@@ -47,7 +47,7 @@ static const int UART_USB_GPIO_BASE = GPIO_PORTA_BASE;
 static const int UART_USB_GPIO_PIN_RX = GPIO_PIN_0;
 static const int UART_USB_GPIO_PIN_TX = GPIO_PIN_1;
 
-static const int UART_INPUT_BUFFER_SIZE = 40;
+static const int UART_INPUT_BUFFER_SIZE = 80;
 static char *g_buffer;
 
 void uart_init(void)
@@ -99,7 +99,7 @@ void uart_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     uint8_t operating_mode = flight_mode_get();
 
     // format the outgoing data
-    usprintf(g_buffer, "Y%d\ty%d\tA%d\ta%d\tm%d\tt%d\to%d\r\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
+    usprintf(g_buffer, "Y%d\ty%d\tA%d\ta%d\tm%d\tt%d\to%d\t%d\r\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode, t_task->duration_micros);
 
     // send it
     uart_send(g_buffer);
