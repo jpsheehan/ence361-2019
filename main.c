@@ -97,8 +97,8 @@ static const uint16_t UART_FLIGHT_DATA_FREQUENCY = 4;
 static const uint8_t UART_FLIGHT_DATA_PRIORITY = 100;
 
 // send kernel timing data once per second via UART
-static const uint16_t UART_KERNEL_DATA_FREQUENCY = 1;
-static const uint8_t UART_KERNEL_DATA_PRIORITY = 100;
+//static const uint16_t UART_KERNEL_DATA_FREQUENCY = 1;
+//static const uint8_t UART_KERNEL_DATA_PRIORITY = 100;
 
 /**
  * The amount of time to display the splash screen (in seconds)
