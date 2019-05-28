@@ -165,18 +165,5 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
                 }
             }
         }
-        // NO, get to zero yaw
-        else
-        {
-            // if the angle is not +/- 3 degrees of zero
-            // then we set our desired angle to be 0 degrees
-            setpoint_set_yaw(0);
-
-            // If yaw has settled, get to HOVER_ALTITUDE
-            if (yaw_is_settled_around(0))
-            {
-                setpoint_set_altitude(HOVER_ALTITUDE);
-            }
-        }
     }
 }
