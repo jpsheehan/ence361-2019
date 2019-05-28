@@ -133,24 +133,24 @@ void yaw_init(void)
     
     // setup the pins (PB0 is A, PB1 is B)
     SysCtlPeripheralEnable(YAW_QUAD_PERIPH);
-	
-	// disable interrupts for safety
+
+    // disable interrupts for safety
     GPIOIntDisable(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
-	
-	// Set the GPIO pins as inputs
+
+    // Set the GPIO pins as inputs
     GPIOPinTypeGPIOInput(YAW_QUAD_BASE, YAW_QUAD_PIN_1 | YAW_QUAD_PIN_2);
-	
-	// Set the GPIO pins Weak Pull Down, 2mA
+
+    // Set the GPIO pins Weak Pull Down, 2mA
     GPIOPadConfigSet(YAW_QUAD_BASE, YAW_QUAD_PIN_1 | YAW_QUAD_PIN_2, YAW_QUAD_SIG_STRENGTH, YAW_QUAD_PIN_TYPE);
-	   
-	// Set the GPIO pins to generate interrupts on both rising and falling edges
+
+    // Set the GPIO pins to generate interrupts on both rising and falling edges
     GPIOIntTypeSet(YAW_QUAD_BASE, YAW_QUAD_PIN_1 | YAW_QUAD_PIN_2, YAW_QUAD_EDGE_TYPE);
 
-	// Register the interrupt handler
+    // Register the interrupt handler
     GPIOIntRegister(YAW_QUAD_BASE, yaw_int_handler);
-	
-	// Enable interrupts on GPIO Port B Pins 0,1 for Yaw channels A and B
-	// (clears any outstanding interrupts)
+
+    // Enable interrupts on GPIO Port B Pins 0,1 for Yaw channels A and B
+    // (clears any outstanding interrupts)
     GPIOIntEnable(YAW_QUAD_BASE, YAW_QUAD_INT_PIN_1 | YAW_QUAD_INT_PIN_2);
 
 
