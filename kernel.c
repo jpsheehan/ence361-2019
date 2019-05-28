@@ -119,12 +119,13 @@ int kernel_task_compare(const void * t_task_a, const void * t_task_b)
     return ((KernelTask*)t_task_a)->priority - ((KernelTask*)t_task_b)->priority;
 }
 
-void kernel_add_task(void* t_func_ptr, uint16_t t_frequency, uint8_t t_priority)
+void kernel_add_task(char* t_name, void* t_func_ptr, uint16_t t_frequency, uint8_t t_priority)
 {
     // only add tasks if enough memory has been allocated and everything is ok
     if (g_task_total < MAX_TASKS && g_init_ok)
     {
         KernelTask task = (KernelTask){
+            t_name,
             t_func_ptr,
             t_frequency,
             t_priority,
@@ -173,15 +174,20 @@ void kernel_run(void)
                 // huge problem right now.
                 count_delta = this_count - task.int_count;
 
+                // check if the task must be run
                 if (task.frequency == 0 || (((float)count_delta / g_kernel_frequency) > (1.0f / task.frequency)))
                 {
                     uint32_t start_count = g_systick_count;
                     uint32_t elapsed_micros = ((count_delta - 1) * 1000000) / g_kernel_frequency;
+
+                    // execute the task
                     ((void(*)(uint32_t, KernelTask*))(task.function))(elapsed_micros, &task);
+
+                    // update the last time it was run
                     g_tasks[i].int_count = this_count;
 
                     // we can also keep track of the time taken to perform a task
-                    g_tasks[i].duration_micros = ((g_systick_count - start_count - 1) * 1000000) / g_kernel_frequency;
+                    g_tasks[i].duration_micros = (g_systick_count - start_count) * 1000000 / g_kernel_frequency;
                 }
 
             }
@@ -204,4 +210,10 @@ uint32_t kernel_get_frequency(void)
 bool kernel_ready(void)
 {
     return g_init_ok;
+}
+
+KernelTask* kernel_get_tasks(uint8_t* t_size)
+{
+    *t_size = g_task_total;
+    return g_tasks;
 }

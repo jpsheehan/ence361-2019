@@ -25,6 +25,11 @@
 struct kernel_task_s
 {
     /**
+     * The friendly name for the task.
+     */
+    char* name;
+
+    /**
      * A function pointer. The function must return void and accept one parameter
      * of type uint32_t that describes how many microseconds have passed since the
      * task was last run.
@@ -70,7 +75,7 @@ void kernel_init(uint32_t t_frequency);
 /**
  * Adds a task with a priority level (higher is lower priority) to the kernel.
  */
-void kernel_add_task(void* t_func_ptr, uint16_t t_frequency, uint8_t t_priority);
+void kernel_add_task(char* t_name, void* t_func_ptr, uint16_t t_frequency, uint8_t t_priority);
 
 /**
  * Runs the next kernel task.
@@ -91,5 +96,10 @@ uint32_t kernel_get_systick_count(void);
  * Returns the frequency the kernel was initialised with.
  */
 uint32_t kernel_get_frequency(void);
+
+/**
+ * Returns all of the kernel tasks as an array.
+ */
+KernelTask* kernel_get_tasks(uint8_t* t_size);
 
 #endif /* KERNEL_H_ */

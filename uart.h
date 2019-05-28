@@ -35,6 +35,11 @@ void uart_init(void);
 /**
  * Transmits the helicopter status via UART.
  */
-void uart_update(uint32_t t_time_diff_micro, KernelTask* t_task);
+void uart_flight_data_update(uint32_t t_time_diff_micro, KernelTask* t_task);
+
+/**
+ * Transmits the kernel duration statuses via UART.
+ */
+void uart_kernel_data_update(uint32_t t_time_diff_micro, KernelTask* t_task);
 
 #endif /* UART_H_ */
