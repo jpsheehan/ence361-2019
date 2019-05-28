@@ -9,9 +9,9 @@
 #include "utils.h"
 
 // Min speed of main rotor, allows for proper anti-clockwise yaw control
-#define MINMOTORDUTY 25
+static const int MINMOTORDUTY 20
 // Maximum accumulated I error expressed as a duty cycle
-#define MAXIERROR 20
+static const int MAXIERROR 50
 
 ControlState g_control_altitude;
 ControlState g_control_yaw;
@@ -30,7 +30,7 @@ ControlState control_get_state_from_gains(ControlGains t_gains)
         t_gains.kd, // Kd
         0, // lastError
         0, // cumulative error
-        MAXIERROR/t_gains.ki, // Limit cumulative error to maximum of +- 20%
+        MAXIERROR/t_gains.ki, // Limit cumulative error to maximum of +- 50%
         0, // previous gain that was applied
         0}; // current duty% of motor
 }
@@ -61,7 +61,7 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
 
     // P control, clamped to 7%
     Pgain = error*g_control_altitude.kp;
-    Pgain = clamp(Pgain, -7, 7);
+    Pgain = clamp(Pgain, -10, 10);
 
     // I control
     g_control_altitude.cumulative += error;
@@ -72,7 +72,7 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     // D control
     Dgain = (error - g_control_altitude.lastError)*g_control_altitude.kd;
     g_control_altitude.lastError = error;
-    Dgain = clamp(Dgain, -5, 5);
+    Dgain = clamp(Dgain, -10, 10);
 
     // Calculate new motor duty
     newGain = (Pgain + Igain + Dgain);
@@ -136,7 +136,7 @@ void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
     // D control
     Dgain = (error - g_control_yaw.lastError)*g_control_yaw.kd; // Control is called with fixed frequency so time delta can be ignored.
     g_control_yaw.lastError = error;
-    Dgain = clamp(Dgain, -5, 5);
+    Dgain = clamp(Dgain, -10, 10);
 
     // Calculate new motor duty
     newGain = (Pgain + Igain + Dgain);

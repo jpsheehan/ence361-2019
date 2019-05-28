@@ -41,8 +41,8 @@
  * The altitude gains.
  */
 static const float ALT_KP = 0.4f;
-static const float ALT_KI = 0.0095f;
-static const float ALT_KD = .9f;
+static const float ALT_KI = 0.009f;
+static const float ALT_KD = .8f;
 
 /**
  * The yaw gains.
