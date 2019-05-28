@@ -11,7 +11,7 @@
  *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
  *
  * Description:
- * This module contains functions for initialising, setting and getting desired
+ * This module contains prototypes for initialising, setting and getting desired
  * yaw angles and altitude percentages. This will be used by the main loop (buttons)
  * and the control module.
  *

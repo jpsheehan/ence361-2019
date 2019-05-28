@@ -83,7 +83,6 @@ int16_t setpoint_get_yaw(void)
     return g_desired_yaw;
 }
 
-
 void setpoint_set_yaw(int16_t t_yaw)
 {
     g_desired_yaw = clamp(t_yaw, 0, 359);

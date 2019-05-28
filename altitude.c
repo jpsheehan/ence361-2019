@@ -116,14 +116,13 @@ void alt_adc_int_handler(void)
 {
     uint32_t value;
 
-    //
     // Get the single sample from ADC0.  ADC_BASE is defined in
     // inc/hw_memmap.h
     ADCSequenceDataGet(ADC_BASE, ADC_SEQUENCE, &value);
-    //
+
     // Place it in the circular buffer (advancing write index)
     writeCircBuf(&g_circ_buffer, value);
-    //
+
     // Clean up, clearing the interrupt
     ADCIntClear(ADC_BASE, ADC_SEQUENCE);
 }
@@ -134,7 +133,6 @@ void alt_adc_int_handler(void)
  */
 void alt_init_adc(void)
 {
-    //
     // The ADC0 peripheral must be enabled for configuration and use.
     SysCtlPeripheralEnable(ADC_PERIPH);
 
@@ -143,7 +141,6 @@ void alt_init_adc(void)
     // conversion.
     ADCSequenceConfigure(ADC_BASE, ADC_SEQUENCE, ADC_TRIGGER_PROCESSOR, ADC_STEP);
 
-    //
     // Configure step 0 on sequence 3.  Sample channel 0 (ADC_CTL_CH0) in
     // single-ended mode (default) and configure the interrupt flag
     // (ADC_CTL_IE) to be set when the sample is done.  Tell the ADC logic
@@ -154,15 +151,12 @@ void alt_init_adc(void)
     // on the ADC sequences and steps, refer to the LM3S1968 datasheet.
     ADCSequenceStepConfigure(ADC_BASE, ADC_SEQUENCE, ADC_STEP, ADC_CTL_CH9 | ADC_CTL_IE | ADC_CTL_END);
 
-    //
     // Since sample sequence 3 is now configured, it must be enabled.
     ADCSequenceEnable(ADC_BASE, ADC_SEQUENCE);
 
-    //
     // Register the interrupt handler
     ADCIntRegister(ADC_BASE, ADC_SEQUENCE, alt_adc_int_handler);
 
-    //
     // Enable interrupts for ADC0 sequence 3 (clears any outstanding interrupts)
     ADCIntEnable(ADC_BASE, ADC_SEQUENCE);
 }
@@ -178,9 +172,7 @@ void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task)
         g_kernel_task_frequency = t_task->frequency;
     }
 
-    //
     // Initiate a conversion
-    //
     ADCProcessorTrigger(ADC_BASE, ADC_SEQUENCE);
 }
 
@@ -264,6 +256,9 @@ int32_t alt_get_settled(void)
     return -1;
 }
 
+/**
+ * Returns true if the altitude is settled around a particular value.
+ */
 bool alt_is_settled_around(int32_t t_value)
 {
     if (alt_is_settled())
