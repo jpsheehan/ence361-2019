@@ -18,7 +18,7 @@ struct control_state_s
   int16_t cumulative;
   int16_t cumulative_max;
   int16_t lastGain;
-  int16_t duty;
+  int8_t duty;
 
 
 };
