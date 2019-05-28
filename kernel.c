@@ -181,17 +181,7 @@ void kernel_run(void)
                     g_tasks[i].int_count = this_count;
 
                     // we can also keep track of the time taken to perform a task
-                    uint32_t end_count = g_systick_count;
-                    uint32_t task_ticks;
-                    if (end_count < start_count)
-                    {
-                        task_ticks = UINT_MAX - start_count + end_count;
-                    }
-                    else
-                    {
-                        task_ticks = end_count - start_count;
-                    }
-                    task.duration_micros = ((task_ticks - 1) * 1000000) / g_kernel_frequency;
+                    g_tasks[i].duration_micros = ((g_systick_count - start_count - 1) * 1000000) / g_kernel_frequency;
                 }
 
             }
