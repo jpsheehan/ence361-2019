@@ -8,6 +8,26 @@
 #include "flight_mode.h"
 #include "utils.h"
 
+struct control_state_s
+{
+  /**
+   * Gains, errors and duty for the associated motor
+   */
+  float kp;
+  float ki;
+  float kd;
+  int16_t lastError;
+  int16_t cumulative;
+  int16_t cumulative_max;
+  int16_t lastGain;
+  int8_t duty;
+};
+
+/**
+ * Represents the internal state of the control system.
+ */
+typedef struct control_state_s ControlState;
+
 // Min speed of main rotor, allows for proper anti-clockwise yaw control (duty cycle %)
 static const int MIN_MAIN_DUTY = 20;
 // Max speed of main motor to stay within spec (duty cycle %)

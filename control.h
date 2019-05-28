@@ -6,28 +6,6 @@
 
 #include "kernel.h"
 
-struct control_state_s
-{
-  /**
-   * Gains.
-   */
-  float kp;
-  float ki;
-  float kd;
-  int16_t lastError;
-  int16_t cumulative;
-  int16_t cumulative_max;
-  int16_t lastGain;
-  int8_t duty;
-
-
-};
-
-/**
- * Represents the internal state of the control system.
- */
-typedef struct control_state_s ControlState;
-
 struct control_gains_s
 {
   float kp;
