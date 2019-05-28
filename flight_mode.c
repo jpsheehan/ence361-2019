@@ -41,11 +41,6 @@ static const int PWM_TAIL_DUTY_YAW_REF = 20;
 static const int HOVER_ALTITUDE = 5;
 
 /**
- * The angle of acceptable error in degrees for detecting zero degrees when landing.
- */
-static const int YAW_TOLERANCE = 3;
-
-/**
  * Holds the current state of the Operating mode (or FLight Status) Finite Sate Machine
  */
 volatile static FlightModeState g_mode;
@@ -122,7 +117,7 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
         // Is current yaw within tolerance?
         if (yaw_is_settled_around(0))
         {
-            if (alt_get_is_settled_around(0))
+            if (alt_is_settled_around(0))
             {
 
                 // if the angle is +/- 3 degrees of zero and our altitude is zero or lower,

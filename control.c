@@ -9,9 +9,9 @@
 #include "utils.h"
 
 // Min speed of main rotor, allows for proper anti-clockwise yaw control
-static const int MINMOTORDUTY 20
+static const int MINMOTORDUTY = 20;
 // Maximum accumulated I error expressed as a duty cycle
-static const int MAXIERROR 50
+static const int MAXIERROR = 50;
 
 ControlState g_control_altitude;
 ControlState g_control_yaw;
@@ -59,7 +59,7 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     // the difference between what we want and what we have (as a percentage)
     int16_t error = setpoint_get_altitude() - alt_get();
 
-    // P control, clamped to 7%
+    // P control, clamped to 10%
     Pgain = error*g_control_altitude.kp;
     Pgain = clamp(Pgain, -10, 10);
 
