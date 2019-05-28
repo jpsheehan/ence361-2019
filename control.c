@@ -9,8 +9,9 @@
 #include "utils.h"
 
 // Min speed of main rotor, allows for proper anti-clockwise yaw control
-#define MINMOTORDUTY 25
-#define COUPLEFACTOR .9
+static const int MINMOTORDUTY = 20;
+// Maximum accumulated I error expressed as a duty cycle
+static const int MAXIERROR = 50;
 
 ControlState g_control_altitude;
 ControlState g_control_yaw;
@@ -24,12 +25,14 @@ static bool g_enable_yaw;
 ControlState control_get_state_from_gains(ControlGains t_gains)
 {
     return (ControlState){
-        t_gains.kp,
-        t_gains.ki,
-        t_gains.kd,
-        0,
-        0,
-        0};
+        t_gains.kp, // Kp
+        t_gains.ki, // Ki
+        t_gains.kd, // Kd
+        0, // lastError
+        0, // cumulative error
+        MAXIERROR/t_gains.ki, // Limit cumulative error to maximum of +- 50%
+        0, // previous gain that was applied
+        0}; // current duty% of motor
 }
 
 void control_init(ControlGains t_altitude_gains, ControlGains t_yaw_gains)
@@ -46,6 +49,7 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
         return;
     }
 
+    // setup temp variables for new gains
     float Pgain = 0;
     float Igain = 0;
     float Dgain = 0;
@@ -55,26 +59,33 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     // the difference between what we want and what we have (as a percentage)
     int16_t error = setpoint_get_altitude() - alt_get();
 
-    // P control
+    // P control, clamped to 10%
     Pgain = error*g_control_altitude.kp;
-    Pgain = clamp(Pgain, -13, 13);
+    Pgain = clamp(Pgain, -10, 10);
 
     // I control
     g_control_altitude.cumulative += error;
+    // fail-safe the cumulative error by clamping its bounds
+    g_control_altitude.cumulative = clamp(g_control_altitude.cumulative, -g_control_altitude.cumulative_max, g_control_altitude.cumulative_max);
     Igain = g_control_altitude.cumulative * g_control_altitude.ki;
-    Igain = clamp(Igain, -25, 25);
-    //Igain = 0;
 
     // D control
     Dgain = (error - g_control_altitude.lastError)*g_control_altitude.kd;
-    //Dgain = 0;
     g_control_altitude.lastError = error;
+    Dgain = clamp(Dgain, -10, 10);
 
     // Calculate new motor duty
-    newGain = MINMOTORDUTY + Pgain + Igain + Dgain;
-    newGain = clamp(newGain, MINMOTORDUTY, 70);
+    newGain = (Pgain + Igain + Dgain);
 
-    g_control_altitude.duty = newGain;
+    // apply new gain and subtract the previously applied one
+    g_control_altitude.duty += newGain - g_control_altitude.lastGain;
+
+    // clamp motor to be within spec
+    g_control_altitude.duty = clamp(g_control_altitude.duty, MINMOTORDUTY, 70);
+
+    // update the last gain applied to the new gain
+    g_control_altitude.lastGain = newGain;
+
 
     pwm_set_main_duty(g_control_altitude.duty);
 
@@ -113,32 +124,33 @@ void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
     }
 
     // P control
-     Pgain = error*g_control_yaw.kp;
-     Pgain = clamp(Pgain, -10, 10);
-    //Pgain = g_control_altitude.duty;
+    Pgain = error*g_control_yaw.kp;
+    Pgain = clamp(Pgain, -10, 10);
 
     // I control
     g_control_yaw.cumulative += error; // Control is called with fixed frequency so time delta can be ignored.
+    // fail-safe the cumulative error by clamping its bounds
+    g_control_yaw.cumulative = clamp(g_control_yaw.cumulative, -g_control_yaw.cumulative_max, g_control_yaw.cumulative_max);
     Igain = g_control_yaw.cumulative*g_control_yaw.ki;
-    Igain = clamp(Igain, -15, 15);
 
     // D control
     Dgain = (error - g_control_yaw.lastError)*g_control_yaw.kd; // Control is called with fixed frequency so time delta can be ignored.
     g_control_yaw.lastError = error;
+    Dgain = clamp(Dgain, -10, 10);
 
-    newGain = g_control_altitude.duty + (Pgain + Igain + Dgain);
+    // Calculate new motor duty
+    newGain = (Pgain + Igain + Dgain);
 
-    //newGain = clamp(newGain, 0, 100);
+    // apply new gain and subtract the previously applied one
+    g_control_yaw.duty += (newGain - g_control_yaw.lastGain);
 
-    if (abs(error) <= 3) {
-        g_control_yaw.duty = g_control_yaw.duty + error;
-    }
-    else {
-        g_control_yaw.duty = COUPLEFACTOR*newGain;
-    }
+    // clamp motor to be within spec
+    g_control_yaw.duty = clamp(g_control_yaw.duty, 5, 70);
 
-    g_control_yaw.duty = clamp(newGain, 5, 80);
+    // update the last gain applied to the new gain
+    g_control_yaw.lastGain = newGain;
 
+    // Set the new yaw motor duty
     pwm_set_tail_duty(g_control_yaw.duty);
 
 }
@@ -155,7 +167,7 @@ void control_enable_yaw(bool t_enabled)
     }
     else
     {
-        pwm_set_tail_duty(g_control_altitude.duty);
+        pwm_set_tail_duty(g_control_yaw.duty);
     }
 }
 
@@ -171,6 +183,6 @@ void control_enable_altitude(bool t_enabled)
     }
     else
     {
-        pwm_set_main_duty(g_control_yaw.duty);
+        pwm_set_main_duty(g_control_altitude.duty);
     }
 }

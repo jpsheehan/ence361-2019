@@ -13,8 +13,8 @@
  *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
  *
  * Description:
- * This module contains functions for initialising PWM,
- * changing duty cycle and frequency. Min / Max / Start values are also defined.
+ * This module contains prototypes for initialising PWM, changing duty cycle and
+ * returning current duty cycle, for Main and Tail rotors.
  *
  * This module reuses code from pwmGen.c by P.J. Bones as
  * used in Lab3 ENCE361-19S1 =>
@@ -22,8 +22,6 @@
  *    output on J4-05 (M0PWM7) with duty cycle fixed and
  *    the frequency controlled by UP and DOWN buttons in
  *    the range 50 Hz to 400 Hz.
- * 2017: Modified for Tiva and using straightforward, polled
- *    button debouncing implemented in 'buttons4' module.
  *
  * P.J. Bones   UCECE
  * Last modified:  7.2.2018
@@ -194,9 +192,19 @@ void pwm_init(void)
     SysCtlPeripheralEnable(PWM_TAIL_PERIPH_GPIO);
     GPIOPinConfigure(PWM_TAIL_GPIO_CONFIG);
     GPIOPinTypePWM(PWM_TAIL_GPIO_BASE, PWM_TAIL_GPIO_PIN);
+    <<<<<<< HEAD
     PWMGenConfigure(PWM_TAIL_BASE, PWM_TAIL_GEN, PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
     PWMGenPeriodSet(PWM_TAIL_BASE, PWM_TAIL_GEN, g_pwm_period);
     pwm_set_tail_duty(0);
+    =======
+        PWMGenConfigure(PWM_TAIL_BASE, PWM_TAIL_GEN,
+                        PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
+
+    // Set the initial PWM parameters
+    PWMGenPeriodSet(PWM_TAIL_BASE, PWM_TAIL_GEN, g_pwm_period);
+    pwm_set_tail_duty(0);       //Tail rotor zero duty at start up
+
+    >>>>>>> 49f9efcebb2bf8422fa40c2831c1949d4f1fadd7
     PWMGenEnable(PWM_TAIL_BASE, PWM_TAIL_GEN);
     PWMOutputState(PWM_TAIL_BASE, PWM_TAIL_OUTBIT, true);
 }

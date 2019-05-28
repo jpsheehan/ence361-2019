@@ -16,10 +16,11 @@ struct control_state_s
   float kd;
   int16_t lastError;
   int16_t cumulative;
-  uint8_t duty;
+  int16_t cumulative_max;
+  int16_t lastGain;
+  int16_t duty;
 
 
-  // add other things that will be required for control stuff
 };
 
 /**
