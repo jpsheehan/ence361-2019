@@ -22,10 +22,32 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+/**
+ * A macro that expands to an expression that evaluates to the minimum of two values.
+ */
 #define min(a, b) (a < b ? a : b)
+
+/**
+ * A macro that expands to an expression that evaluates to the maximum of two values.
+ */
 #define max(a, b) (a > b ? a : b)
+
+/**
+ * A macro that expands to an expression that evaluates to a value clamped between some
+ * minimum and maximum values.
+ */
 #define clamp(val, mn, mx) (max(min(val, mx), mn))
+
+/**
+ * A macro that expands to an expression that evaluates to true if the value is between
+ * two other values.
+ */
 #define range(val, mn, mx) (val >= mn && val <= mx)
+
+/**
+ * A macro that expands to an expression that evaluates to true. Nothing more to say
+ * about this one...
+ */
 #define MORE_THAN_HALF_THE_HELI_RIGS_ARE_BROKEN true
 
 /**
