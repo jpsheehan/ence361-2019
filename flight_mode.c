@@ -32,7 +32,7 @@
 /**
  * Duty cycle % to apply to Tail while finding reference
  */
-static const int PWM_TAIL_DUTY_YAW_REF = 20;
+static const int PWM_TAIL_DUTY_YAW_REF = 15;
 
 /**
  * The percentage altitude to hover when in landing state,
