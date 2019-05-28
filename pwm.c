@@ -192,19 +192,9 @@ void pwm_init(void)
     SysCtlPeripheralEnable(PWM_TAIL_PERIPH_GPIO);
     GPIOPinConfigure(PWM_TAIL_GPIO_CONFIG);
     GPIOPinTypePWM(PWM_TAIL_GPIO_BASE, PWM_TAIL_GPIO_PIN);
-    <<<<<<< HEAD
     PWMGenConfigure(PWM_TAIL_BASE, PWM_TAIL_GEN, PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
     PWMGenPeriodSet(PWM_TAIL_BASE, PWM_TAIL_GEN, g_pwm_period);
     pwm_set_tail_duty(0);
-    =======
-        PWMGenConfigure(PWM_TAIL_BASE, PWM_TAIL_GEN,
-                        PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
-
-    // Set the initial PWM parameters
-    PWMGenPeriodSet(PWM_TAIL_BASE, PWM_TAIL_GEN, g_pwm_period);
-    pwm_set_tail_duty(0);       //Tail rotor zero duty at start up
-
-    >>>>>>> 49f9efcebb2bf8422fa40c2831c1949d4f1fadd7
     PWMGenEnable(PWM_TAIL_BASE, PWM_TAIL_GEN);
     PWMOutputState(PWM_TAIL_BASE, PWM_TAIL_OUTBIT, true);
 }
