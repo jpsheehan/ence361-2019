@@ -119,15 +119,10 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     //  calibration, set yaw and altitude setpoints to zero, advance state
     if (g_mode == LANDING)
     {
-        uint16_t angle = (yaw_get() + 180) % 360;       // Get current yaw
-
         // Is current yaw within tolerance?
-        if (range(angle, 180 - YAW_TOLERANCE, 180 + YAW_TOLERANCE))
+        if (yaw_is_settled_around(0))
         {
-            // YES, do landing sequence
-
-            // Is altitude at zero?
-            if (alt_get() <= 0)
+            if (alt_get_is_settled_around(0))
             {
 
                 // if the angle is +/- 3 degrees of zero and our altitude is zero or lower,
@@ -145,23 +140,23 @@ void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
                 flight_mode_advance_state();
             }
             else
-            // NO, controlled descent, use settling functions to
-            //  get to zero yaw and desired altitude
             {
                 // Is yaw and altitude settled for HOVER_ALTITUDE?
                 if (alt_is_settled_around(HOVER_ALTITUDE) && yaw_is_settled_around(0))
                 {
-                // if the angle is +/- 3 degrees of zero and our altitude is around 5%,
-                // then we set the desired altitude to 0%
-
+                    // if the angle is +/- 3 degrees of zero and our altitude is around 5%,
+                    // then we set the desired altitude to 0%
                     setpoint_set_altitude(0);
                 }
                 else
                 {
-                    // if the angle is +/- 3 degrees of zero and our altitude is not around 5%,
-                    // then we set our desired altitude to be 5%
-
-                    setpoint_set_altitude(HOVER_ALTITUDE);
+                    if (setpoint_get_altitude() != 0)
+                    {
+                        // if the angle is +/- 3 degrees of zero and our altitude is not around 0% and
+                        // our desired altitude has not been set to 0%,
+                        // then we set our desired altitude to be 5%
+                        setpoint_set_altitude(HOVER_ALTITUDE);
+                    }
                 }
             }
         }
