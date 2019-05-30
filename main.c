@@ -42,13 +42,13 @@
  */
 static const float ALT_KP = 0.65f;
 static const float ALT_KI = 0.01f;
-static const float ALT_KD = .8f;
+static const float ALT_KD = 0.8f;
 
 /**
  * The yaw gains.
  */
-static const float YAW_KP = 0.25f;
-static const float YAW_KI = 0.009f;
+static const float YAW_KP = 0.8f;
+static const float YAW_KI = 0.007f;
 static const float YAW_KD = 0.8f;
 
 /**

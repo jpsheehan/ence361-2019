@@ -32,13 +32,13 @@
 /**
  * Duty cycle % to apply to Tail while finding reference
  */
-static const int PWM_TAIL_DUTY_YAW_REF = 15;
+static const int PWM_TAIL_DUTY_YAW_REF = 18;
 
 /**
  * The percentage altitude to hover when in landing state,
  * before finding the reference and zero yaw.
  */
-static const int HOVER_ALTITUDE = 5;
+static const int HOVER_ALTITUDE = 10;
 
 /**
  * Holds the current state of the Operating mode (or FLight Status) Finite Sate Machine

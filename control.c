@@ -18,8 +18,6 @@ struct control_state_s
   float kd;
   int16_t lastError;
   int16_t cumulative;
-  int16_t cumulative_max;
-  int16_t lastGain;
   int8_t duty;
 };
 
@@ -28,22 +26,22 @@ struct control_state_s
  */
 typedef struct control_state_s ControlState;
 
-// Min speed of main rotor, allows for proper anti-clockwise yaw control (duty cycle %)
+// Idle main duty %, allows for faster take off, reducing dependence on integral error.
+static const int IDLE_MAIN_DUTY = 20;
+
+// Min speed of main rotor, allows for proper anti-clockwise yaw control and clamps descent speed (duty cycle %)
 static const int MIN_MAIN_DUTY = 20;
 // Max speed of main motor to stay within spec (duty cycle %)
 static const int MAX_MAIN_DUTY = 70;
 
 // Min speed of tail rotor, prevents wear on motor by idling it instead of completely powering off during large C-CW movements (duty cycle %)
-static const int MIN_TAIL_DUTY = 5;
+static const int MIN_TAIL_DUTY = 1;
 // Max speed of tail motor to stay within spec (duty cycle %)
 static const int MAX_TAIL_DUTY = 70;
 
 // Clamps for Kp and Kd gains for each rotor (duty cycle %)
 static const int MAIN_GAIN_CLAMP = 10;
-static const int TAIL_GAIN_CLAMP = 12;
-
-// Maximum accumulated I error (duty cycle %)
-static const int MAXIERROR = 35;
+static const int TAIL_GAIN_CLAMP = 10;
 
 ControlState g_control_altitude;
 ControlState g_control_yaw;
@@ -62,8 +60,6 @@ ControlState control_get_state_from_gains(ControlGains t_gains)
         t_gains.kd, // Kd
         0, // lastError
         0, // cumulative error
-        MAXIERROR/t_gains.ki, // Limit cumulative error to maximum of +- 50%
-        0, // previous gain that was applied
         0}; // current duty% of motor
 }
 
@@ -85,7 +81,6 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     float Pgain = 0;
     float Igain = 0;
     float Dgain = 0;
-    int16_t newGain = 0;
     int16_t newDuty = 0;
 
 
@@ -97,9 +92,12 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     Pgain = clamp(Pgain, -MAIN_GAIN_CLAMP, MAIN_GAIN_CLAMP);
 
     // I control
-    g_control_altitude.cumulative += error;
+    // only accumulate erorr if we are not motor duty limited (limits overshoot)
+    if (g_control_altitude.duty > MIN_MAIN_DUTY && g_control_altitude.duty < MAX_MAIN_DUTY) {
+        g_control_altitude.cumulative += error;
+    }
     // fail-safe the cumulative error by clamping its bounds
-    g_control_altitude.cumulative = clamp(g_control_altitude.cumulative, -g_control_altitude.cumulative_max, g_control_altitude.cumulative_max);
+    // g_control_altitude.cumulative = clamp(g_control_altitude.cumulative, -g_control_altitude.cumulative_max, g_control_altitude.cumulative_max);
     Igain = g_control_altitude.cumulative * g_control_altitude.ki;
 
     // D control
@@ -108,16 +106,12 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     Dgain = clamp(Dgain, -MAIN_GAIN_CLAMP, MAIN_GAIN_CLAMP);
 
     // Calculate new motor duty percentage gain
-    newGain = Pgain + Igain + Dgain;
-
-    // new motor duty is the current duty plus the difference between old and new gain
-    newDuty = g_control_altitude.duty + newGain - g_control_altitude.lastGain;
+    newDuty = IDLE_MAIN_DUTY + Pgain + Igain + Dgain;
 
     // clamp motor to be within spec
     newDuty = clamp(newDuty, MIN_MAIN_DUTY, MAX_MAIN_DUTY);
 
-    // update the duty and the last gain applied
-    g_control_altitude.lastGain = newGain;
+    // update the duty
     g_control_altitude.duty = newDuty;
 
     pwm_set_main_duty(g_control_altitude.duty);
@@ -135,7 +129,6 @@ void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
     float Igain = 0;
     float Dgain = 0;
     bool clockWise = true;
-    int16_t newGain = 0;
     int16_t newDuty = 0;
 
     // the difference between what we want and what we have (in degrees)
@@ -162,9 +155,14 @@ void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
     Pgain = clamp(Pgain, -TAIL_GAIN_CLAMP, TAIL_GAIN_CLAMP);
 
     // I control
-    g_control_yaw.cumulative += error; // Control is called with fixed frequency so time delta can be ignored.
+
+    // only accumulate error if we are not motor duty limited (limits overshoot)
+    if (g_control_yaw.duty > MIN_TAIL_DUTY && g_control_yaw.duty < MAX_TAIL_DUTY)
+    {
+        g_control_yaw.cumulative += error; // Control is called with fixed frequency so time delta can be ignored.
+    }
     // fail-safe the cumulative error by clamping its bounds
-    g_control_yaw.cumulative = clamp(g_control_yaw.cumulative, -g_control_yaw.cumulative_max, g_control_yaw.cumulative_max);
+    //g_control_yaw.cumulative = clamp(g_control_yaw.cumulative, -g_control_yaw.cumulative_max, g_control_yaw.cumulative_max);
     Igain = g_control_yaw.cumulative*g_control_yaw.ki;
 
     // D control
@@ -173,16 +171,12 @@ void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
     Dgain = clamp(Dgain, -TAIL_GAIN_CLAMP, TAIL_GAIN_CLAMP);
 
     // Calculate new motor duty percentage gain
-    newGain = Pgain + Igain + Dgain;
-
-    // new motor duty is the current duty plus the difference between old and new gain
-    newDuty = g_control_yaw.duty + newGain - g_control_yaw.lastGain;
+    newDuty = Pgain + Igain + Dgain;
 
     // clamp motor to be within spec
     newDuty = clamp(newDuty, MIN_TAIL_DUTY, MAX_TAIL_DUTY);
 
-    // update the duty and the last gain applied
-    g_control_yaw.lastGain = newGain;
+    // update the duty
     g_control_yaw.duty = newDuty;
 
     pwm_set_tail_duty(g_control_yaw.duty);
