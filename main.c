@@ -61,8 +61,8 @@ static const uint16_t ALT_ADC_FREQUENCY = 256;
 static const uint8_t ALT_ADC_PRIORITY = 1;
 
 // always update the altitude
-static const uint16_t ALT_CALC_FREQUENCY = 0;
-static const uint8_t ALT_CALC_PRIORITY = 1;
+static const uint16_t ALT_CALC_FREQUENCY = 256;
+static const uint8_t ALT_CALC_PRIORITY = 2;
 
 // update the altitude settling 10 times per second
 static const uint16_t ALT_SETTLING_FREQUENCY = 10;
@@ -74,15 +74,15 @@ static const uint8_t YAW_SETTLING_PRIORITY = 10;
 
 // always process input
 static const uint16_t INPUT_FREQUENCY = 0;
-static const uint8_t INPUT_PRIORITY = 2;
+static const uint8_t INPUT_PRIORITY = 50;
 
 // perform altitude control stuff 30 times per second
 static const uint16_t CONTROL_ALT_FREQUENCY = 30;
-static const uint8_t CONTROL_ALT_PRIORITY = 10;
+static const uint8_t CONTROL_ALT_PRIORITY = 5;
 
 // perform yaw control stuff 30 times per second
 static const uint16_t CONTROL_YAW_FREQUENCY = 30;
-static const uint8_t CONTROL_YAW_PRIORITY = 10;
+static const uint8_t CONTROL_YAW_PRIORITY = 5;
 
 // run state checking 20 times per sec
 static const uint16_t FLIGHT_MODE_FREQUENCY = 20;
