@@ -207,12 +207,13 @@ void yaw_reference_int_handler(void)
 
     if (!g_has_been_calibrated)
     {
-        mutex_lock(g_slot_count_mutex);
-        g_slot_count = 0;
-        mutex_unlock(g_slot_count_mutex);
-
         mutex_lock(g_has_been_calibrated_mutex);
+        mutex_lock(g_slot_count_mutex);
+
+        g_slot_count = 0;
         g_has_been_calibrated = true;
+
+        mutex_unlock(g_slot_count_mutex);
         mutex_unlock(g_has_been_calibrated_mutex);
     }
 
