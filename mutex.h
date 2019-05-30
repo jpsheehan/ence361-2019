@@ -15,6 +15,17 @@
  * For more information about general mutual exclusion principles see the wiki:
  * https://en.wikipedia.org/wiki/Mutual_exclusion
  *
+ * The rules that we are following for mutexes so that we don't run into deadlocks
+ * are as follows:
+ *
+ * - All variables that are written to from ISRs require a mutex companion.
+ * - All mutexes must be static within their own modules.
+ * - Only ISRs should call mutex_lock and mutex_unlock.
+ * - Only non-ISRs should call mutex_wait.
+ *
+ * If these rules are followed, we will greatly reduce the risk of accessing
+ * a variable while it is being changed.
+ *
  ******************************************************************************/
 
 #ifndef MUTEX_H_
@@ -33,11 +44,11 @@
 /**
  * Waits for a mutex to become unlocked.
  */
-#define mutex_wait(mutex) (while (mutex) continue;)
+#define mutex_wait(mutex) while (mutex) continue
 
 /**
  * Define a mutex type.
  */
-typedef volatile static bool Mutex;
+typedef volatile bool Mutex;
 
 #endif /* MUTEX_H_ */
