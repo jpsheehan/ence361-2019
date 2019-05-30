@@ -31,6 +31,7 @@
 #include "altitude.h"
 #include "circBufT.h"
 #include "kernel.h"
+#include "mutex.h"
 #include "utils.h"
 
 /**
@@ -78,6 +79,11 @@ static const int ALT_SETTLING_MARGIN = 2;
 static circBuf_t g_circ_buffer;
 
 /**
+ * The mutex for the circular buffer.
+ */
+static Mutex g_circ_buffer_mutex;
+
+/**
  * The circular buffer used to store ALT_SETTLING_BUF_SIZE percentage values.
  */
 static circBuf_t g_settling_buffer;
@@ -121,7 +127,9 @@ void alt_adc_int_handler(void)
     ADCSequenceDataGet(ADC_BASE, ADC_SEQUENCE, &value);
 
     // Place it in the circular buffer (advancing write index)
+    mutex_lock(g_circ_buffer_mutex);
     writeCircBuf(&g_circ_buffer, value);
+    mutex_unlock(g_circ_buffer_mutex);
 
     // Clean up, clearing the interrupt
     ADCIntClear(ADC_BASE, ADC_SEQUENCE);
@@ -193,8 +201,12 @@ void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task)
 
     // add up all the values in the circular buffer
     sum = 0;
+
+    mutex_wait(g_circ_buffer_mutex);
     for (i = 0; i < ALT_BUF_SIZE; i++)
+    {
         sum = sum + readCircBuf(&g_circ_buffer);
+    }
 
     // calculate the mean of the data in the circular buffer
     g_alt_raw = (2 * sum + ALT_BUF_SIZE) / (2 * ALT_BUF_SIZE);
