@@ -54,7 +54,7 @@ static const float YAW_KD = 0.8f;
 /**
  * The "frequency" that the kernel runs at in Hz.
  */
-static const int KERNEL_FREQUENCY = 1024;
+static const int KERNEL_FREQUENCY = 400000;
 
 // process ADC stuff 256 times per second
 static const uint16_t ALT_ADC_FREQUENCY = 256;
@@ -97,8 +97,8 @@ static const uint16_t UART_FLIGHT_DATA_FREQUENCY = 4;
 static const uint8_t UART_FLIGHT_DATA_PRIORITY = 100;
 
 // send kernel timing data once per second via UART
-//static const uint16_t UART_KERNEL_DATA_FREQUENCY = 1;
-//static const uint8_t UART_KERNEL_DATA_PRIORITY = 100;
+static const uint16_t UART_KERNEL_DATA_FREQUENCY = 1;
+static const uint8_t UART_KERNEL_DATA_PRIORITY = 100;
 
 /**
  * The amount of time to display the splash screen (in seconds)
@@ -136,7 +136,7 @@ void initialise(void)
     kernel_add_task("flight_mode", &flight_mode_update, FLIGHT_MODE_FREQUENCY, FLIGHT_MODE_PRIORITY);
     kernel_add_task("display", &disp_render, DISPLAY_FREQUENCY, DISPLAY_PRIORITY);
     kernel_add_task("uart_flight_data", &uart_flight_data_update, UART_FLIGHT_DATA_FREQUENCY, UART_FLIGHT_DATA_PRIORITY);
-//    kernel_add_task("uart_kernel_data", &uart_kernel_data_update, UART_KERNEL_DATA_FREQUENCY, UART_KERNEL_DATA_PRIORITY); // ONLY WORKS WHEN KERNEL FREQUENCY IS >= 1MHz
+    kernel_add_task("uart_kernel_data", &uart_kernel_data_update, UART_KERNEL_DATA_FREQUENCY, UART_KERNEL_DATA_PRIORITY);
 
 
     // Enable interrupts to the processor.

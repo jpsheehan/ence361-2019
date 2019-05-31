@@ -82,6 +82,14 @@ void kernel_systick_int_handler(void)
 }
 
 /**
+ * Converts kernel ticks into microseconds.
+ */
+uint32_t kernel_convert_ticks_to_microseconds(uint32_t t_ticks)
+{
+    return t_ticks * 1000000.0f / g_kernel_frequency;
+}
+
+/**
  * (Original code by P.J. Bones)
  * Intialises the system tick interrupt handler.
  */
@@ -185,17 +193,25 @@ void kernel_run(void)
                 {
                     mutex_wait(g_systick_count_mutex);
                     uint32_t start_count = g_systick_count;
-                    uint32_t elapsed_micros = ((count_delta - 1) * 1000000) / g_kernel_frequency;
+                    uint32_t elapsed_micros = kernel_convert_ticks_to_microseconds(count_delta - 1);
 
                     // execute the task
                     ((void(*)(uint32_t, KernelTask*))(task.function))(elapsed_micros, &task);
 
+                    mutex_wait(g_systick_count_mutex);
+                    uint32_t end_count = g_systick_count;
+
+                    uint32_t duration_count = end_count - start_count;
+                    if (end_count < start_count)
+                    {
+                        duration_count = UINT_MAX - start_count + end_count;
+                    }
+
+                    // we keep track of the time taken to perform a task
+                    g_tasks[i].duration_micros = kernel_convert_ticks_to_microseconds(duration_count);
+
                     // update the last time it was run
                     g_tasks[i].int_count = this_count;
-
-                    // we can also keep track of the time taken to perform a task
-                    mutex_wait(g_systick_count_mutex);
-                    g_tasks[i].duration_micros = (g_systick_count - start_count) * 1000000 / g_kernel_frequency;
                 }
 
             }
@@ -226,3 +242,4 @@ KernelTask* kernel_get_tasks(uint8_t* t_size)
     *t_size = g_task_total;
     return g_tasks;
 }
+

@@ -183,8 +183,7 @@ void yaw_init(void)
     // set data direction register as input mfb
     GPIODirModeSet(YAW_REF_BASE, YAW_REF_PIN, YAW_QUAD_DDR);
 
-    // configure it to be a weak pull down
-    // try WPU
+    // configure it to be a weak pull up
     GPIOPadConfigSet(YAW_REF_BASE, YAW_REF_PIN, YAW_REF_SIG_STRENGTH, YAW_REF_PIN_TYPE);
 
     // configure the interrupt to be falling edge only
