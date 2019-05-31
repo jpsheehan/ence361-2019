@@ -43,8 +43,8 @@ static const int MAX_TAIL_DUTY = 70;
 static const int MAIN_GAIN_CLAMP = 10;
 static const int TAIL_GAIN_CLAMP = 10;
 
-ControlState g_control_altitude;
-ControlState g_control_yaw;
+static ControlState g_control_altitude;
+static ControlState g_control_yaw;
 
 static bool g_enable_altitude;
 static bool g_enable_yaw;
@@ -92,7 +92,7 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     Pgain = clamp(Pgain, -MAIN_GAIN_CLAMP, MAIN_GAIN_CLAMP);
 
     // I control
-    // only accumulate erorr if we are not motor duty limited (limits overshoot)
+    // only accumulate error if we are not motor duty limited (limits overshoot)
     if (g_control_altitude.duty > MIN_MAIN_DUTY && g_control_altitude.duty < MAX_MAIN_DUTY) {
         g_control_altitude.cumulative += error;
     }
