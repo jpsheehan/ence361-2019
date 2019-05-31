@@ -183,20 +183,23 @@ void kernel_run(void)
                 KernelTask task = g_tasks[i];
                 uint32_t count_delta;
 
-                // NOTE: There is a case when this_count overflows and becomes less than task.int_count
-                // which causes the count_delta to be off by around 1%. TODO: Fix in future, not a
-                // huge problem right now.
+                // fix the possible overflow
                 count_delta = this_count - task.int_count;
+                if (this_count < task.int_count)
+                {
+                    count_delta = UINT_MAX - task.int_count + this_count;
+                }
 
                 // check if the task must be run
                 if (task.frequency == 0 || (((float)count_delta / g_kernel_frequency) > (1.0f / task.frequency)))
                 {
                     mutex_wait(g_systick_count_mutex);
                     uint32_t start_count = g_systick_count;
-                    uint32_t elapsed_micros = kernel_convert_ticks_to_microseconds(count_delta - 1);
+
+                    g_tasks[i].period_micros = kernel_convert_ticks_to_microseconds(count_delta - 1);
 
                     // execute the task
-                    ((void(*)(uint32_t, KernelTask*))(task.function))(elapsed_micros, &task);
+                    ((void(*)(KernelTask*))(task.function))(&task);
 
                     mutex_wait(g_systick_count_mutex);
                     uint32_t end_count = g_systick_count;
@@ -212,6 +215,7 @@ void kernel_run(void)
 
                     // update the last time it was run
                     g_tasks[i].int_count = this_count;
+
                 }
 
             }

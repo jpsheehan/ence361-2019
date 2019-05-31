@@ -87,7 +87,7 @@ void uart_send(const char *t_buffer)
     }
 }
 
-void uart_flight_data_update(uint32_t t_time_diff_micro, KernelTask* t_task)
+void uart_flight_data_update(KernelTask* t_task)
 {
     uint16_t target_yaw = setpoint_get_yaw();
     uint16_t actual_yaw = yaw_get();
@@ -106,7 +106,7 @@ void uart_flight_data_update(uint32_t t_time_diff_micro, KernelTask* t_task)
 }
 
 
-void uart_kernel_data_update(uint32_t t_time_diff_micro, KernelTask* t_task)
+void uart_kernel_data_update(KernelTask* t_task)
 {
     uint8_t num_tasks;
     KernelTask* kernel_tasks = kernel_get_tasks(&num_tasks);
@@ -115,11 +115,10 @@ void uart_kernel_data_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     for (i = 0; i < num_tasks; i++)
     {
         KernelTask task = kernel_tasks[i];
-        usprintf(g_buffer, "%s=%u\t", task.name, task.duration_micros);
+        usprintf(g_buffer, "%s,%u,%u,%u\t", task.name, task.duration_micros, task.period_micros, task.frequency);
         uart_send(g_buffer);
 
     }
-    usprintf(g_buffer, "%u\t", t_time_diff_micro);
-    uart_send(g_buffer);
+
     uart_send("\r\n");
 }

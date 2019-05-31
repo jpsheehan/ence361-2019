@@ -74,7 +74,7 @@ void flight_mode_advance_state(void)
     }
 }
 
-void flight_mode_update(uint32_t t_time_diff_micro, KernelTask* t_task)
+void flight_mode_update(KernelTask* t_task)
 {
     // If state is TAKE_OFF, find yaw reference, advance state,
     //  then enable PID controls

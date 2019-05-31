@@ -143,7 +143,7 @@ void initialise(void)
     IntMasterEnable();
 
     // Render splash screen for a couple of seconds
-    disp_render(0, NULL);
+    disp_render(NULL);
     utils_wait_for_seconds(SPLASH_SCREEN_WAIT_TIME);
     disp_advance_state();
 }
