@@ -35,7 +35,7 @@ void alt_init(void);
 /**
  * Calculates the mean value of the altitude, both the raw resolution and the percentage values. This should be called before one wants to use the altitude values in any other calculations.
  */
-void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task);
+void alt_update(KernelTask* t_task);
 
 /**
  * Calibrates the altitude to the current mean value.
@@ -61,7 +61,7 @@ bool alt_is_buffer_full(void);
 /**
  * Performs an ADC conversion.
  */
-void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task);
+void alt_process_adc(KernelTask* t_task);
 
 /**
  * Resets the calibration state of the altitude.
@@ -72,7 +72,7 @@ void alt_reset_calibration_state(void);
  * Kernel Task
  * Updates the settling buffer.
  */
-void alt_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task);
+void alt_update_settling(KernelTask* t_task);
 
 /**
  * Returns true if the altitude is settled around a particular value.

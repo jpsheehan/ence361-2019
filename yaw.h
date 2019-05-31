@@ -53,7 +53,7 @@ bool yaw_has_been_calibrated(void);
  * Kernel Task
  * Updates the settling buffer.
  */
-void yaw_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task);
+void yaw_update_settling(KernelTask* t_task);
 
 /*
  * Returns true if the yaw value is settled.

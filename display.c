@@ -110,7 +110,7 @@ void disp_unknown(void)
     OLEDStringDraw("state!", 0, 3);
 }
 
-void disp_render(uint32_t t_time_diff_micro, KernelTask* t_task)
+void disp_render(KernelTask* t_task)
 {
     switch (g_displayState)
     {

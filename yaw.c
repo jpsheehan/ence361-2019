@@ -183,8 +183,7 @@ void yaw_init(void)
     // set data direction register as input mfb
     GPIODirModeSet(YAW_REF_BASE, YAW_REF_PIN, YAW_QUAD_DDR);
 
-    // configure it to be a weak pull down
-    // try WPU
+    // configure it to be a weak pull up
     GPIOPadConfigSet(YAW_REF_BASE, YAW_REF_PIN, YAW_REF_SIG_STRENGTH, YAW_REF_PIN_TYPE);
 
     // configure the interrupt to be falling edge only
@@ -273,7 +272,7 @@ void yaw_update_state(bool t_signal_a, bool t_signal_b)
     mutex_unlock(g_slot_count_mutex);
 }
 
-void yaw_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
+void yaw_update_settling(KernelTask* t_task)
 {
     // we add 180 degrees because we only care about the settling
     // around 0 degrees and because of underflows this is difficult

@@ -41,6 +41,6 @@ void disp_advance_state(void);
  * Clears the display if g_displayState differs from the previous time disp_render() was called
  * Then renders to the display based on the value of g_displayState
  */
-void disp_render(uint32_t t_time_diff_micro, KernelTask* t_task);
+void disp_render(KernelTask* t_task);
 
 #endif

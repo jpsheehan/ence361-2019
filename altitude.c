@@ -173,7 +173,7 @@ void alt_init_adc(void)
  * (Original code by P.J. Bones)
  * The interrupt handler for the for SysTick interrupt.
  */
-void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task)
+void alt_process_adc(KernelTask* t_task)
 {
     if (g_kernel_task_frequency == USHRT_MAX)
     {
@@ -194,7 +194,7 @@ void alt_init(void)
     initCircBuf(&g_settling_buffer, ALT_SETTLING_BUF_SIZE);
 }
 
-void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task)
+void alt_update(KernelTask* t_task)
 {
     int32_t sum;
     uint16_t i;
@@ -215,7 +215,7 @@ void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     g_alt_percent = (int16_t)((((int32_t)g_alt_ref - (int32_t)g_alt_raw) * (int32_t)100) / (int32_t)ALT_DELTA);
 }
 
-void alt_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
+void alt_update_settling(KernelTask* t_task)
 {
     // write the current altitude (as a percentage) to the settling buffer.
     writeCircBuf(&g_settling_buffer, g_alt_percent);
