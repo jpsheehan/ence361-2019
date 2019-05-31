@@ -48,7 +48,7 @@ static const float ALT_KD = 0.8f;
  * The yaw gains.
  */
 static const float YAW_KP = 0.8f;
-static const float YAW_KI = 0.007f;
+static const float YAW_KI = 0.008f;
 static const float YAW_KD = 0.8f;
 
 /**

@@ -159,7 +159,7 @@ void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
     // only accumulate error if we are not motor duty limited (limits overshoot)
     if (g_control_yaw.duty > MIN_TAIL_DUTY && g_control_yaw.duty < MAX_TAIL_DUTY)
     {
-        g_control_yaw.cumulative += error; // Control is called with fixed frequency so time delta can be ignored.
+        g_control_yaw.cumulative += clamp(error, -15, 15);; // Control is called with fixed frequency so time delta can be ignored.
     }
     // fail-safe the cumulative error by clamping its bounds
     //g_control_yaw.cumulative = clamp(g_control_yaw.cumulative, -g_control_yaw.cumulative_max, g_control_yaw.cumulative_max);
