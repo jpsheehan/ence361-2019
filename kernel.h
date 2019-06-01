@@ -21,6 +21,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#define Task(name) void name(KernelTask* this)
 
 struct kernel_task_s
 {
@@ -106,5 +107,11 @@ uint32_t kernel_get_frequency(void);
  * Returns all of the kernel tasks as an array.
  */
 KernelTask* kernel_get_tasks(uint8_t* t_size);
+
+/**
+ * A task that does nothing but busy-waits for a period of time.
+ * Used to examine the effects of kernel task time saturation.
+ */
+void kernel_saturation_task(KernelTask* t_task);
 
 #endif /* KERNEL_H_ */

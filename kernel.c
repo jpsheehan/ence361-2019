@@ -247,3 +247,8 @@ KernelTask* kernel_get_tasks(uint8_t* t_size)
     return g_tasks;
 }
 
+void kernel_saturation_task(KernelTask* t_task)
+{
+    utils_wait_for_seconds(1);
+}
+

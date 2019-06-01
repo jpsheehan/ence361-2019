@@ -1,0 +1,1165 @@
+altitude_adc,5,2333977,256 altitude_calc,72,2333977,256 altitude_control,5,2333977,30 yaw_control,2,2333977,30 altitude_settling,5,2333977,10 flight_mode,2,2333977,20 yaw_settling,5,2333977,10 input,25,2333977,0 uart_flight_data,6260,2333977,4 display,9002,2333977,1 uart_kernel_data,0,2333977,1
+
+Y0 y0 A0 a-15 m0 t0 o0
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,2,33380,30 yaw_control,2,33380,30 altitude_settling,5,100067,10 flight_mode,5,50052,20 yaw_settling,5,100067,10 input,25,70,0 uart_flight_data,8360,250015,4 display,9010,1000022,1 uart_kernel_data,301405,1000022,1
+
+Y0 y0 A0 a-246 m0 t0 o0
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,2,33372,30 yaw_control,2,33372,30 altitude_settling,5,100047,10 flight_mode,2,50065,20 yaw_settling,5,100047,10 input,25,70,0 uart_flight_data,8355,250010,4 display,9010,1000032,1 uart_kernel_data,277100,1000032,1
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+Y0 y0 A0 a-246 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,2,33372,30 yaw_control,2,33372,30 altitude_settling,5,100047,10 flight_mode,2,50065,20 yaw_settling,5,100047,10 input,25,70,0 uart_flight_data,8360,250012,4 display,9010,1000045,1 uart_kernel_data,277102,1000045,1
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+Y0 y0 A0 a-246 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,8360,250020,4 display,9012,1000067,1 uart_kernel_data,277102,1000067,1
+
+Y0 y0 A0 a-246 m0 t0 o0
+
+Y0 y0 A0 a-247 m0 t0 o0
+
+Y0 y0 A0 a-246 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,2,33372,30 yaw_control,2,33372,30 altitude_settling,5,100057,10 flight_mode,12,50072,20 yaw_settling,5,100057,10 input,25,70,0 uart_flight_data,8360,250020,4 display,9007,1000012,1 uart_kernel_data,277102,1000012,1
+
+Y0 y0 A0 a0 m0 t18 o1
+
+Y0 y0 A0 a0 m0 t18 o1
+
+Y0 y7 A0 a0 m25 t1 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33410,30 yaw_control,17,33410,30 altitude_settling,5,100015,10 flight_mode,5,50065,20 yaw_settling,5,100015,10 input,25,70,0 uart_flight_data,6262,250002,4 display,9005,1000050,1 uart_kernel_data,278147,1000050,1
+
+Y0 y323 A0 a0 m25 t20 o2
+
+Y0 y278 A0 a0 m25 t15 o2
+
+Y0 y258 A0 a0 m25 t15 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,2,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,9407,250042,4 display,9022,1000007,1 uart_kernel_data,279087,1000007,1
+
+Y0 y257 A0 a0 m25 t15 o2
+
+Y0 y255 A0 a0 m25 t17 o2
+
+Y0 y255 A0 a0 m25 t19 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,2,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9022,1000005,1 uart_kernel_data,279187,1000005,1
+
+Y0 y255 A0 a0 m25 t21 o2
+
+Y0 y255 A0 a0 m25 t23 o2
+
+Y0 y255 A0 a0 m25 t25 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,2,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9415,250062,4 display,9022,1000012,1 uart_kernel_data,279187,1000012,1
+
+Y0 y255 A0 a0 m25 t27 o2
+
+Y0 y256 A0 a0 m25 t29 o2
+
+Y0 y257 A0 a0 m25 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100005,10 flight_mode,2,50057,20 yaw_settling,5,100005,10 input,25,70,0 uart_flight_data,9410,250065,4 display,9022,1000019,1 uart_kernel_data,279187,1000019,1
+
+Y0 y260 A0 a0 m25 t32 o2
+
+Y0 y262 A0 a0 m25 t34 o2
+
+Y0 y266 A0 a0 m25 t37 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33335,30 yaw_control,20,33335,30 altitude_settling,5,100010,10 flight_mode,2,50062,20 yaw_settling,5,100010,10 input,25,70,0 uart_flight_data,9410,250000,4 display,9022,1000029,1 uart_kernel_data,279182,1000029,1
+
+Y0 y287 A0 a0 m25 t29 o2
+
+Y0 y307 A0 a0 m25 t39 o2
+
+Y0 y342 A0 a0 m25 t39 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33347,30 yaw_control,20,33347,30 altitude_settling,5,100047,10 flight_mode,5,50007,20 yaw_settling,5,100047,10 input,25,70,0 uart_flight_data,9402,250010,4 display,9020,1000050,1 uart_kernel_data,279130,1000050,1
+
+Y0 y32 A0 a0 m25 t13 o2
+
+Y0 y32 A0 a0 m25 t21 o2
+
+Y0 y32 A0 a0 m25 t19 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,8362,250025,4 display,9020,1000005,1 uart_kernel_data,279140,1000005,1
+
+Y0 y31 A0 a0 m25 t17 o2
+
+Y0 y30 A0 a0 m25 t15 o2
+
+Y0 y30 A0 a0 m25 t13 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100002,10 flight_mode,5,50057,20 yaw_settling,5,100002,10 input,25,70,0 uart_flight_data,8362,250027,4 display,9020,1000057,1 uart_kernel_data,279182,1000057,1
+
+Y0 y25 A0 a0 m25 t13 o2
+
+Y0 y22 A0 a0 m25 t10 o2
+
+Y0 y16 A0 a0 m25 t9 o2
+
+altitude_adc,5,3920,256 altitude_calc,72,3920,256 altitude_control,17,33335,30 yaw_control,20,33335,30 altitude_settling,5,100012,10 flight_mode,5,50007,20 yaw_settling,5,100012,10 input,25,70,0 uart_flight_data,7315,250042,4 display,9012,1000060,1 uart_kernel_data,279177,1000060,1
+
+Y0 y1 A0 a0 m25 t24 o2
+
+Y0 y358 A0 a0 m25 t19 o2
+
+Y0 y358 A0 a0 m25 t19 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9415,250060,4 display,9027,1000017,1 uart_kernel_data,279160,1000017,1
+
+Y0 y356 A0 a0 m25 t22 o2
+
+Y0 y356 A0 a0 m25 t21 o2
+
+Y0 y356 A0 a0 m25 t21 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9415,250062,4 display,9027,1000010,1 uart_kernel_data,279180,1000010,1
+
+Y0 y355 A0 a0 m25 t23 o2
+
+Y0 y355 A0 a0 m25 t23 o2
+
+Y0 y355 A0 a0 m25 t23 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9412,250065,4 display,9027,1000007,1 uart_kernel_data,279180,1000007,1
+
+Y0 y355 A0 a0 m25 t23 o2
+
+Y0 y355 A0 a0 m25 t24 o2
+
+Y0 y355 A0 a0 m25 t24 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9415,250062,4 display,9027,1000012,1 uart_kernel_data,279182,1000012,1
+
+Y0 y356 A0 a0 m25 t23 o2
+
+Y0 y356 A0 a0 m25 t24 o2
+
+Y0 y356 A0 a0 m25 t24 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9415,250062,4 display,9027,1000017,1 uart_kernel_data,279185,1000017,1
+
+Y0 y355 A10 a0 m31 t26 o2
+
+Y0 y354 A20 a0 m35 t26 o2
+
+Y0 y352 A30 a1 m36 t29 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,10460,250017,4 display,9027,1000032,1 uart_kernel_data,279180,1000032,1
+
+Y0 y351 A30 a4 m36 t30 o2
+
+Y0 y351 A30 a14 m36 t30 o2
+
+Y0 y351 A30 a19 m33 t31 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100000,10 flight_mode,5,50012,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,11507,250032,4 display,9030,1000027,1 uart_kernel_data,280225,1000027,1
+
+Y0 y351 A30 a23 m31 t31 o2
+
+Y0 y352 A30 a24 m32 t31 o2
+
+Y0 y353 A30 a24 m32 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250037,4 display,9030,1000047,1 uart_kernel_data,280225,1000047,1
+
+Y0 y353 A30 a23 m34 t31 o2
+
+Y0 y353 A30 a23 m34 t32 o2
+
+Y0 y354 A30 a23 m34 t33 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100020,10 flight_mode,5,50002,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11505,250050,4 display,9030,1000065,1 uart_kernel_data,280230,1000065,1
+
+Y0 y355 A30 a24 m34 t30 o2
+
+Y0 y355 A30 a24 m34 t31 o2
+
+Y0 y355 A30 a23 m35 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11505,250037,4 display,9030,1000040,1 uart_kernel_data,280220,1000040,1
+
+Y0 y355 A30 a24 m35 t32 o2
+
+Y0 y355 A30 a25 m35 t32 o2
+
+Y0 y355 A30 a25 m35 t33 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250037,4 display,9030,1000050,1 uart_kernel_data,280230,1000050,1
+
+Y0 y355 A30 a26 m35 t33 o2
+
+Y0 y355 A30 a27 m35 t33 o2
+
+Y0 y355 A30 a28 m34 t34 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11505,250040,4 display,9030,1000050,1 uart_kernel_data,280230,1000050,1
+
+Y0 y357 A30 a28 m34 t31 o2
+
+Y0 y357 A30 a28 m34 t32 o2
+
+Y0 y357 A30 a28 m35 t33 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250037,4 display,9030,1000042,1 uart_kernel_data,280222,1000042,1
+
+Y0 y358 A30 a28 m35 t31 o2
+
+Y0 y358 A30 a29 m34 t32 o2
+
+Y0 y358 A30 a29 m34 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250037,4 display,9030,1000047,1 uart_kernel_data,280227,1000047,1
+
+Y0 y358 A30 a29 m34 t32 o2
+
+Y0 y358 A30 a29 m35 t32 o2
+
+Y0 y358 A30 a30 m33 t33 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250037,4 display,9030,1000050,1 uart_kernel_data,280230,1000050,1
+
+Y0 y359 A30 a30 m34 t31 o2
+
+Y0 y0 A30 a30 m34 t31 o2
+
+Y0 y0 A30 a29 m35 t31 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,9410,250057,4 display,9015,1000019,1 uart_kernel_data,280227,1000019,1
+
+Y0 y0 A30 a30 m34 t31 o2
+
+Y0 y0 A30 a31 m33 t31 o2
+
+Y0 y0 A30 a30 m34 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33337,30 yaw_control,20,33337,30 altitude_settling,5,100020,10 flight_mode,5,50062,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,9415,250057,4 display,9015,1000060,1 uart_kernel_data,279172,1000060,1
+
+Y0 y0 A30 a30 m34 t31 o2
+
+Y0 y0 A30 a30 m34 t31 o2
+
+Y0 y1 A20 a29 m28 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250070,4 display,9015,1000067,1 uart_kernel_data,279177,1000067,1
+
+Y0 y2 A20 a28 m28 t29 o2
+
+Y0 y2 A20 a20 m32 t29 o2
+
+Y0 y3 A10 a18 m28 t28 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9412,250062,4 display,9017,1000010,1 uart_kernel_data,279185,1000010,1
+
+Y0 y4 A10 a16 m28 t26 o2
+
+Y0 y4 A10 a13 m31 t27 o2
+
+Y0 y4 A10 a11 m32 t27 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250055,4 display,9017,1000062,1 uart_kernel_data,279182,1000062,1
+
+Y0 y3 A10 a11 m31 t27 o2
+
+Y0 y3 A10 a10 m32 t27 o2
+
+Y0 y3 A10 a10 m32 t27 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9015,1000067,1 uart_kernel_data,279187,1000067,1
+
+Y0 y4 A0 a10 m25 t25 o2
+
+Y0 y4 A0 a5 m29 t26 o2
+
+Y0 y4 A0 a1 m31 t25 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,7315,250070,4 display,9012,1000052,1 uart_kernel_data,279180,1000052,1
+
+Y0 y4 A0 a0 m31 t25 o2
+
+Y0 y3 A0 a0 m31 t25 o2
+
+Y0 y3 A0 a1 m30 t26 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,7312,250065,4 display,9012,1000040,1 uart_kernel_data,279185,1000040,1
+
+Y0 y2 A0 a0 m31 t27 o2
+
+Y0 y1 A0 a1 m29 t27 o2
+
+Y0 y1 A0 a1 m30 t27 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,7317,250067,4 display,9012,1000045,1 uart_kernel_data,279182,1000045,1
+
+Y0 y1 A0 a0 m31 t27 o2
+
+Y0 y1 A0 a0 m31 t27 o2
+
+Y0 y1 A0 a0 m31 t27 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100002,10 flight_mode,5,50057,20 yaw_settling,5,100002,10 input,25,70,0 uart_flight_data,7315,250067,4 display,9012,1000047,1 uart_kernel_data,279185,1000047,1
+
+Y0 y1 A0 a1 m30 t26 o2
+
+Y0 y0 A0 a0 m30 t27 o2
+
+Y0 y0 A0 a0 m30 t27 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,7317,250067,4 display,9012,1000042,1 uart_kernel_data,279180,1000042,1
+
+Y0 y0 A0 a0 m30 t27 o2
+
+Y0 y0 A0 a0 m30 t27 o2
+
+Y0 y0 A0 a0 m30 t27 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,7317,250067,4 display,9012,1000045,1 uart_kernel_data,279185,1000045,1
+
+Y0 y0 A0 a0 m30 t27 o2
+
+Y0 y0 A10 a0 m37 t27 o2
+
+Y0 y358 A10 a1 m36 t29 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,2,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,10457,250030,4 display,9027,1000037,1 uart_kernel_data,279182,1000037,1
+
+Y0 y357 A10 a3 m36 t31 o2
+
+Y0 y357 A10 a13 m29 t30 o2
+
+Y0 y358 A10 a16 m28 t29 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100002,10 flight_mode,5,50012,20 yaw_settling,5,100002,10 input,25,70,0 uart_flight_data,11507,250032,4 display,9032,1000032,1 uart_kernel_data,280225,1000032,1
+
+Y0 y0 A10 a15 m28 t26 o2
+
+Y0 y0 A10 a11 m30 t28 o2
+
+Y0 y0 A10 a9 m31 t28 o2
+
+altitude_adc,5,3920,256 altitude_calc,72,3920,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50002,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,8360,250002,4 display,9012,1000017,1 uart_kernel_data,280222,1000017,1
+
+Y0 y0 A10 a8 m32 t28 o2
+
+Y0 y0 A10 a9 m32 t28 o2
+
+Y0 y0 A10 a9 m32 t28 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,8362,250025,4 display,9012,1000042,1 uart_kernel_data,279182,1000042,1
+
+Y0 y359 A10 a8 m33 t30 o2
+
+Y0 y358 A10 a9 m32 t30 o2
+
+Y0 y358 A10 a9 m32 t30 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,10457,250007,4 display,9027,1000070,1 uart_kernel_data,279182,1000070,1
+
+Y0 y359 A10 a9 m32 t28 o2
+
+Y0 y359 A10 a9 m32 t29 o2
+
+Y0 y358 A10 a9 m32 t30 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100002,10 flight_mode,5,50015,20 yaw_settling,5,100002,10 input,25,87,0 uart_flight_data,10457,250010,4 display,9030,1000042,1 uart_kernel_data,280222,1000042,1
+
+Y0 y358 A10 a10 m32 t31 o2
+
+Y0 y358 A10 a9 m32 t30 o2
+
+Y0 y358 A10 a10 m32 t30 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100020,10 flight_mode,5,50002,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11502,250012,4 display,9030,1000012,1 uart_kernel_data,280220,1000012,1
+
+Y0 y359 A10 a10 m32 t30 o2
+
+Y0 y359 A10 a10 m32 t30 o2
+
+Y0 y359 A10 a10 m32 t30 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100057,10 flight_mode,5,50015,20 yaw_settling,5,100057,10 input,25,70,0 uart_flight_data,11507,250057,4 display,9030,1000034,1 uart_kernel_data,280225,1000034,1
+
+Y0 y0 A10 a10 m32 t28 o2
+
+Y0 y0 A10 a10 m32 t29 o2
+
+Y0 y0 A10 a10 m32 t29 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33335,30 yaw_control,20,33335,30 altitude_settling,5,100024,10 flight_mode,2,50017,20 yaw_settling,5,100024,10 input,25,70,0 uart_flight_data,9410,250062,4 display,9027,1000060,1 uart_kernel_data,280225,1000060,1
+
+Y0 y0 A10 a9 m32 t28 o2
+
+Y0 y0 A10 a10 m32 t29 o2
+
+Y0 y359 A10 a10 m32 t30 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100000,10 flight_mode,5,50085,20 yaw_settling,5,100000,10 input,25,87,0 uart_flight_data,11502,250060,4 display,9015,1000050,1 uart_kernel_data,279185,1000050,1
+
+Y0 y359 A10 a10 m32 t31 o2
+
+Y0 y0 A10 a10 m32 t29 o2
+
+Y0 y359 A10 a10 m32 t30 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33345,30 yaw_control,20,33345,30 altitude_settling,5,100024,10 flight_mode,5,50007,20 yaw_settling,5,100024,10 input,25,70,0 uart_flight_data,11505,250065,4 display,9015,1000005,1 uart_kernel_data,280220,1000005,1
+
+Y0 y0 A10 a10 m32 t29 o2
+
+Y0 y0 A10 a10 m32 t29 o2
+
+Y0 y0 A10 a10 m32 t29 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50057,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,9410,250002,4 display,9015,1000027,1 uart_kernel_data,280215,1000027,1
+
+Y0 y0 A10 a10 m32 t29 o2
+
+Y0 y359 A10 a10 m32 t30 o2
+
+Y0 y359 A10 a10 m32 t30 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100000,10 flight_mode,5,50012,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,11507,250070,4 display,9030,1000012,1 uart_kernel_data,279187,1000012,1
+
+Y0 y359 A10 a10 m32 t30 o2
+
+Y0 y358 A10 a10 m32 t31 o2
+
+Y0 y359 A10 a10 m31 t30 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250037,4 display,9030,1000047,1 uart_kernel_data,280225,1000047,1
+
+Y0 y359 A10 a10 m32 t31 o2
+
+Y0 y359 A10 a10 m32 t31 o2
+
+Y0 y0 A10 a10 m32 t30 o2
+
+altitude_adc,5,3920,256 altitude_calc,72,3920,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100005,10 flight_mode,5,50017,20 yaw_settling,5,100005,10 input,25,70,0 uart_flight_data,9405,250045,4 display,9030,1000005,1 uart_kernel_data,280230,1000005,1
+
+Y0 y0 A10 a10 m32 t29 o2
+
+Y0 y0 A10 a10 m32 t30 o2
+
+Y0 y0 A10 a11 m31 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9405,250057,4 display,9015,1000000,1 uart_kernel_data,279182,1000000,1
+
+Y0 y0 A10 a10 m32 t30 o2
+
+Y0 y0 A10 a11 m31 t30 o2
+
+Y0 y0 A10 a10 m32 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250060,4 display,9017,1000065,1 uart_kernel_data,279182,1000065,1
+
+Y0 y0 A10 a11 m31 t30 o2
+
+Y0 y358 A20 a10 m38 t32 o2
+
+Y0 y358 A20 a12 m38 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100000,10 flight_mode,5,50012,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,11505,250037,4 display,9032,1000052,1 uart_kernel_data,279187,1000052,1
+
+Y0 y357 A20 a14 m37 t33 o2
+
+Y0 y357 A20 a21 m33 t33 o2
+
+Y0 y358 A20 a22 m31 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250037,4 display,9030,1000052,1 uart_kernel_data,280230,1000052,1
+
+Y0 y358 A20 a22 m31 t32 o2
+
+Y0 y359 A20 a20 m33 t32 o2
+
+Y0 y359 A20 a19 m33 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11505,250035,4 display,9032,1000042,1 uart_kernel_data,280225,1000042,1
+
+Y0 y359 A20 a19 m33 t32 o2
+
+Y0 y359 A20 a19 m33 t32 o2
+
+Y0 y359 A20 a19 m33 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11505,250040,4 display,9032,1000052,1 uart_kernel_data,280227,1000052,1
+
+Y0 y359 A20 a19 m34 t32 o2
+
+Y0 y359 A20 a20 m33 t32 o2
+
+Y0 y0 A20 a20 m33 t30 o2
+
+altitude_adc,5,3920,256 altitude_calc,72,3920,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100000,10 flight_mode,5,50012,20 yaw_settling,5,100000,10 input,25,70,0 uart_flight_data,9412,250040,4 display,9017,1000017,1 uart_kernel_data,280225,1000017,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9017,1000065,1 uart_kernel_data,279187,1000065,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250055,4 display,9017,1000062,1 uart_kernel_data,279185,1000062,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9405,250057,4 display,9017,1000062,1 uart_kernel_data,279185,1000062,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9017,1000065,1 uart_kernel_data,279185,1000065,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3912,256 altitude_calc,72,3912,256 altitude_control,17,33337,30 yaw_control,20,33337,30 altitude_settling,5,100022,10 flight_mode,5,50062,20 yaw_settling,5,100022,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9017,1000070,1 uart_kernel_data,279185,1000070,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250055,4 display,9017,1000050,1 uart_kernel_data,279172,1000050,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250055,4 display,9017,1000065,1 uart_kernel_data,279185,1000065,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9017,1000062,1 uart_kernel_data,279182,1000062,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9017,1000062,1 uart_kernel_data,279185,1000062,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250055,4 display,9017,1000062,1 uart_kernel_data,279185,1000062,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33335,30 yaw_control,20,33335,30 altitude_settling,5,100017,10 flight_mode,5,50060,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9405,250057,4 display,9017,1000065,1 uart_kernel_data,279185,1000065,1
+
+Y0 y1 A20 a20 m33 t30 o2
+
+Y0 y1 A20 a20 m33 t30 o2
+
+Y0 y1 A20 a20 m33 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250055,4 display,9017,1000045,1 uart_kernel_data,279172,1000045,1
+
+Y0 y1 A20 a20 m33 t30 o2
+
+Y0 y0 A20 a20 m33 t29 o2
+
+Y0 y1 A20 a20 m33 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9410,250070,4 display,9017,1000015,1 uart_kernel_data,279185,1000015,1
+
+Y0 y0 A20 a20 m33 t32 o2
+
+Y0 y1 A20 a20 m33 t30 o2
+
+Y0 y0 A20 a20 m33 t32 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,2,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9412,250070,4 display,9017,1000007,1 uart_kernel_data,279180,1000007,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y1 A20 a20 m33 t31 o2
+
+Y0 y0 A20 a20 m33 t31 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250060,4 display,9017,1000010,1 uart_kernel_data,279182,1000010,1
+
+Y0 y0 A20 a20 m33 t31 o2
+
+Y0 y1 A20 a20 m33 t29 o2
+
+Y0 y1 A20 a20 m33 t29 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100020,10 flight_mode,5,50057,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,9410,250060,4 display,9017,1000000,1 uart_kernel_data,279180,1000000,1
+
+Y0 y1 A20 a20 m33 t29 o2
+
+Y0 y0 A20 a20 m33 t30 o2
+
+Y0 y0 A20 a20 m33 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9017,1000062,1 uart_kernel_data,279177,1000062,1
+
+Y0 y1 A20 a20 m33 t30 o2
+
+Y0 y0 A20 a19 m34 t30 o2
+
+Y0 y0 A20 a20 m33 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100020,10 flight_mode,5,50057,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,9405,250060,4 display,9017,1000070,1 uart_kernel_data,279185,1000070,1
+
+Y0 y1 A20 a20 m33 t30 o2
+
+Y0 y1 A20 a20 m33 t29 o2
+
+Y0 y1 A20 a20 m33 t29 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250055,4 display,9017,1000065,1 uart_kernel_data,279187,1000065,1
+
+Y0 y1 A20 a20 m33 t29 o2
+
+Y0 y0 A20 a20 m33 t30 o2
+
+Y0 y0 A20 a20 m33 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9405,250057,4 display,9017,1000052,1 uart_kernel_data,279177,1000052,1
+
+Y0 y0 A20 a20 m33 t30 o2
+
+Y0 y0 A20 a20 m33 t30 o2
+
+Y0 y0 A20 a20 m33 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9407,250057,4 display,9017,1000067,1 uart_kernel_data,279185,1000067,1
+
+Y0 y358 A30 a20 m40 t33 o2
+
+Y0 y358 A30 a27 m36 t32 o2
+
+Y0 y358 A30 a32 m33 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100002,10 flight_mode,5,50012,20 yaw_settling,5,100002,10 input,25,90,0 uart_flight_data,11505,250037,4 display,9030,1000024,1 uart_kernel_data,279180,1000024,1
+
+Y0 y0 A30 a34 m31 t29 o2
+
+Y0 y0 A30 a33 m31 t31 o2
+
+Y0 y1 A30 a32 m31 t29 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9410,250060,4 display,9015,1000034,1 uart_kernel_data,280222,1000034,1
+
+Y0 y0 A30 a31 m33 t31 o2
+
+Y0 y0 A30 a29 m34 t30 o2
+
+Y0 y0 A30 a29 m34 t30 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9410,250060,4 display,9015,1000065,1 uart_kernel_data,279185,1000065,1
+
+Y0 y0 A30 a29 m34 t30 o2
+
+Y0 y358 A40 a30 m40 t32 o2
+
+Y0 y357 A40 a32 m38 t33 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33342,30 yaw_control,20,33342,30 altitude_settling,5,100022,10 flight_mode,5,50020,20 yaw_settling,5,100022,10 input,25,70,0 uart_flight_data,11507,250040,4 display,9030,1000005,1 uart_kernel_data,279187,1000005,1
+
+Y0 y356 A40 a36 m36 t35 o2
+
+Y0 y357 A40 a43 m32 t34 o2
+
+Y0 y358 A40 a43 m32 t33 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100020,10 flight_mode,5,50012,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11507,250042,4 display,9032,1000052,1 uart_kernel_data,280222,1000052,1
+
+Y0 y357 A50 a42 m39 t35 o2
+
+Y0 y356 A50 a44 m39 t35 o2
+
+Y0 y356 A60 a46 m44 t35 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11510,250040,4 display,9032,1000055,1 uart_kernel_data,280225,1000055,1
+
+Y0 y355 A60 a49 m42 t37 o2
+
+Y0 y355 A60 a63 m32 t37 o2
+
+Y0 y357 A60 a67 m31 t35 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11502,250040,4 display,9032,1000045,1 uart_kernel_data,280225,1000045,1
+
+Y0 y0 A60 a67 m30 t31 o2
+
+Y0 y0 A60 a60 m35 t33 o2
+
+Y0 y0 A60 a55 m37 t33 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100024,10 flight_mode,5,50057,20 yaw_settling,5,100024,10 input,25,70,0 uart_flight_data,9412,250062,4 display,9017,1000045,1 uart_kernel_data,280220,1000045,1
+
+Y0 y0 A60 a54 m39 t33 o2
+
+Y0 y0 A60 a58 m38 t33 o2
+
+Y0 y0 A60 a59 m36 t33 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9415,250057,4 display,9017,1000067,1 uart_kernel_data,279182,1000067,1
+
+Y0 y0 A60 a60 m36 t33 o2
+
+Y0 y0 A60 a60 m36 t33 o2
+
+Y0 y0 A60 a60 m36 t33 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9412,250057,4 display,9017,1000070,1 uart_kernel_data,279185,1000070,1
+
+Y0 y0 A60 a60 m36 t33 o2
+
+Y0 y0 A60 a60 m36 t33 o2
+
+Y0 y0 A60 a60 m36 t33 o2
+
+altitude_adc,5,3910,256 altitude_calc,72,3910,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100017,10 flight_mode,5,50057,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,9412,250065,4 display,9017,1000002,1 uart_kernel_data,279182,1000002,1
+
+Y0 y0 A60 a60 m36 t33 o2
+
+Y0 y0 A60 a60 m36 t33 o2
+
+Y15 y0 A60 a60 m36 t43 o2
+
+altitude_adc,5,3927,256 altitude_calc,72,3927,256 altitude_control,17,33342,30 yaw_control,20,33342,30 altitude_settling,5,100007,10 flight_mode,5,50087,20 yaw_settling,5,100007,10 input,25,70,0 uart_flight_data,10462,250007,4 display,9015,1000065,1 uart_kernel_data,279185,1000065,1
+
+Y30 y9 A60 a60 m36 t40 o2
+
+Y45 y16 A60 a60 m36 t45 o2
+
+Y45 y25 A60 a60 m36 t46 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33347,30 yaw_control,20,33347,30 altitude_settling,5,100020,10 flight_mode,5,50065,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11505,250057,4 display,9027,1000062,1 uart_kernel_data,280202,1000062,1
+
+Y45 y60 A60 a60 m36 t19 o2
+
+Y45 y70 A60 a59 m36 t27 o2
+
+Y45 y69 A60 a59 m37 t26 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50017,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11510,250040,4 display,9025,1000060,1 uart_kernel_data,280150,1000060,1
+
+Y45 y65 A60 a59 m37 t27 o2
+
+Y45 y62 A60 a60 m36 t23 o2
+
+Y45 y60 A60 a60 m36 t23 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33342,30 yaw_control,20,33342,30 altitude_settling,5,100017,10 flight_mode,5,50015,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250042,4 display,9022,1000047,1 uart_kernel_data,280220,1000047,1
+
+Y45 y53 A60 a60 m36 t28 o2
+
+Y45 y51 A60 a60 m36 t25 o2
+
+Y45 y50 A60 a60 m36 t26 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100020,10 flight_mode,5,50012,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11505,250042,4 display,9022,1000034,1 uart_kernel_data,280217,1000034,1
+
+Y45 y49 A60 a61 m35 t27 o2
+
+Y45 y49 A60 a60 m36 t27 o2
+
+Y45 y48 A60 a60 m36 t27 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250045,4 display,9022,1000052,1 uart_kernel_data,280227,1000052,1
+
+Y45 y46 A60 a60 m36 t30 o2
+
+Y45 y46 A60 a61 m35 t29 o2
+
+Y45 y46 A60 a60 m36 t29 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100020,10 flight_mode,5,50012,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11505,250040,4 display,9022,1000037,1 uart_kernel_data,280222,1000037,1
+
+Y45 y46 A60 a60 m36 t28 o2
+
+Y45 y45 A60 a60 m36 t29 o2
+
+Y60 y46 A60 a61 m35 t40 o2
+
+altitude_adc,5,3932,256 altitude_calc,72,3932,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100022,10 flight_mode,5,50015,20 yaw_settling,5,100022,10 input,25,70,0 uart_flight_data,11510,250042,4 display,9020,1000000,1 uart_kernel_data,280230,1000000,1
+
+Y75 y56 A60 a61 m36 t35 o2
+
+Y75 y60 A60 a60 m36 t42 o2
+
+Y90 y64 A60 a60 m36 t43 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33342,30 yaw_control,20,33342,30 altitude_settling,5,100022,10 flight_mode,5,50017,20 yaw_settling,5,100022,10 input,25,70,0 uart_flight_data,11510,250050,4 display,9020,1000047,1 uart_kernel_data,280202,1000047,1
+
+Y90 y72 A60 a60 m36 t41 o2
+
+Y90 y74 A60 a60 m36 t45 o2
+
+Y90 y77 A60 a60 m36 t47 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50017,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11512,250040,4 display,9020,1000042,1 uart_kernel_data,280210,1000042,1
+
+Y90 y85 A60 a60 m36 t38 o2
+
+Y90 y88 A60 a60 m36 t39 o2
+
+Y90 y90 A60 a60 m36 t38 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100020,10 flight_mode,5,50012,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11507,250042,4 display,9022,1000027,1 uart_kernel_data,280207,1000027,1
+
+Y90 y91 A60 a60 m36 t36 o2
+
+Y90 y93 A60 a60 m36 t35 o2
+
+Y90 y94 A60 a60 m36 t34 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50015,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250042,4 display,9022,1000045,1 uart_kernel_data,280225,1000045,1
+
+Y90 y94 A60 a60 m36 t34 o2
+
+Y90 y95 A60 a60 m36 t33 o2
+
+Y90 y96 A60 a60 m36 t32 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100020,10 flight_mode,5,50012,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11505,250045,4 display,9022,1000047,1 uart_kernel_data,280225,1000047,1
+
+Y90 y97 A60 a60 m36 t30 o2
+
+Y90 y98 A60 a60 m36 t29 o2
+
+Y90 y98 A60 a60 m36 t29 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100020,10 flight_mode,5,50012,20 yaw_settling,5,100020,10 input,25,70,0 uart_flight_data,11505,250040,4 display,9022,1000040,1 uart_kernel_data,280222,1000040,1
+
+Y90 y98 A60 a60 m36 t28 o2
+
+Y90 y98 A60 a60 m36 t28 o2
+
+Y90 y98 A60 a60 m36 t27 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250037,4 display,9022,1000042,1 uart_kernel_data,280230,1000042,1
+
+Y90 y98 A60 a60 m36 t27 o2
+
+Y90 y97 A60 a60 m36 t28 o2
+
+Y90 y97 A60 a60 m36 t27 o2
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33340,30 yaw_control,20,33340,30 altitude_settling,5,100017,10 flight_mode,5,50012,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,11507,250035,4 display,9022,1000042,1 uart_kernel_data,280225,1000042,1
+
+Y90 y97 A60 a60 m36 t26 o2
+
+Y90 y96 A60 a60 m36 t27 o2
+
+Y0 y96 A60 a60 m36 t21 o3
+
+altitude_adc,5,3932,256 altitude_calc,75,3932,256 altitude_control,17,33335,30 yaw_control,20,33335,30 altitude_settling,5,100037,10 flight_mode,202,50067,20 yaw_settling,5,100037,10 input,25,87,0 uart_flight_data,10460,250004,4 display,9022,1000067,1 uart_kernel_data,280225,1000067,1
+
+Y0 y94 A60 a61 m35 t18 o3
+
+Y0 y91 A60 a60 m36 t17 o3
+
+Y0 y90 A60 a60 m35 t15 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,20,33395,30 yaw_control,17,33395,30 altitude_settling,5,100055,10 flight_mode,55,50067,20 yaw_settling,5,100055,10 input,25,70,0 uart_flight_data,10457,250050,4 display,9022,1000032,1 uart_kernel_data,282312,1000032,1
+
+Y0 y81 A60 a60 m36 t18 o3
+
+Y0 y75 A60 a61 m35 t12 o3
+
+Y0 y60 A60 a61 m35 t11 o3
+
+altitude_adc,5,3932,256 altitude_calc,75,3932,256 altitude_control,17,33402,30 yaw_control,20,33402,30 altitude_settling,5,100017,10 flight_mode,55,50015,20 yaw_settling,5,100017,10 input,25,70,0 uart_flight_data,10457,250017,4 display,9027,1000057,1 uart_kernel_data,281252,1000057,1
+
+Y0 y335 A60 a60 m35 t38 o3
+
+Y0 y295 A60 a60 m36 t31 o3
+
+Y0 y295 A60 a61 m35 t31 o3
+
+altitude_adc,5,3930,256 altitude_calc,72,3930,256 altitude_control,17,33392,30 yaw_control,20,33392,30 altitude_settling,5,100050,10 flight_mode,55,50065,20 yaw_settling,7,100050,10 input,27,70,0 uart_flight_data,11510,250020,4 display,9030,1000050,1 uart_kernel_data,281105,1000050,1
+
+Y0 y297 A60 a60 m36 t32 o3
+
+Y0 y298 A60 a60 m35 t35 o3
+
+Y0 y300 A60 a61 m35 t37 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,17,33392,30 yaw_control,20,33392,30 altitude_settling,5,100055,10 flight_mode,55,50065,20 yaw_settling,5,100055,10 input,25,70,0 uart_flight_data,11507,250022,4 display,9027,1000062,1 uart_kernel_data,281262,1000062,1
+
+Y0 y306 A60 a61 m34 t36 o3
+
+Y0 y310 A60 a61 m34 t40 o3
+
+Y0 y315 A60 a61 m34 t42 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,20,33397,30 yaw_control,20,33397,30 altitude_settling,5,100067,10 flight_mode,55,50000,20 yaw_settling,5,100067,10 input,25,70,0 uart_flight_data,11505,250035,4 display,9032,1000022,1 uart_kernel_data,281257,1000022,1
+
+Y0 y339 A60 a60 m35 t35 o3
+
+Y0 y346 A60 a60 m35 t46 o3
+
+Y0 y355 A60 a60 m35 t39 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,17,33395,30 yaw_control,20,33395,30 altitude_settling,5,100065,10 flight_mode,55,50070,20 yaw_settling,5,100065,10 input,25,70,0 uart_flight_data,11507,250052,4 display,9017,1000070,1 uart_kernel_data,281225,1000070,1
+
+Y0 y2 A60 a59 m36 t34 o3
+
+Y0 y3 A60 a59 m36 t34 o3
+
+Y0 y4 A60 a59 m36 t33 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,17,33335,30 yaw_control,20,33335,30 altitude_settling,5,100032,10 flight_mode,55,50065,20 yaw_settling,5,100032,10 input,25,87,0 uart_flight_data,9412,250040,4 display,9017,1000085,1 uart_kernel_data,281262,1000085,1
+
+Y0 y4 A60 a59 m36 t32 o3
+
+Y0 y8 A10 a59 m25 t29 o3
+
+Y0 y11 A10 a56 m24 t25 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,17,33390,30 yaw_control,20,33390,30 altitude_settling,5,100027,10 flight_mode,55,50062,20 yaw_settling,5,100027,10 input,25,70,0 uart_flight_data,10457,250035,4 display,9025,1000040,1 uart_kernel_data,280225,1000040,1
+
+Y0 y12 A10 a49 m26 t24 o3
+
+Y0 y13 A10 a18 m30 t23 o3
+
+Y0 y12 A10 a2 m39 t23 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,20,33395,30 yaw_control,20,33395,30 altitude_settling,5,100040,10 flight_mode,202,50070,20 yaw_settling,5,100040,10 input,25,70,0 uart_flight_data,9410,250040,4 display,9012,1000067,1 uart_kernel_data,281267,1000067,1
+
+Y0 y8 A10 a6 m35 t26 o3
+
+Y0 y8 A10 a28 m22 t25 o3
+
+Y0 y9 A10 a30 m23 t23 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,17,33390,30 yaw_control,20,33390,30 altitude_settling,5,100027,10 flight_mode,55,50062,20 yaw_settling,5,100027,10 input,25,70,0 uart_flight_data,9405,250025,4 display,9015,1000022,1 uart_kernel_data,281262,1000022,1
+
+Y0 y10 A10 a26 m24 t21 o3
+
+Y0 y9 A10 a0 m40 t22 o3
+
+Y0 y6 A10 a9 m33 t25 o3
+
+altitude_adc,5,3920,256 altitude_calc,75,3920,256 altitude_control,17,33337,30 yaw_control,20,33337,30 altitude_settling,5,100035,10 flight_mode,55,50130,20 yaw_settling,5,100035,10 input,27,70,0 uart_flight_data,8360,250012,4 display,9020,1000027,1 uart_kernel_data,280225,1000027,1
+
+Y0 y5 A10 a16 m28 t25 o3
+
+Y0 y5 A10 a17 m28 t24 o3
+
+Y0 y5 A10 a15 m29 t24 o3
+
+altitude_adc,5,4052,256 altitude_calc,72,4052,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100035,10 flight_mode,202,50037,20 yaw_settling,5,100035,10 input,27,70,0 uart_flight_data,9410,250040,4 display,9020,1000042,1 uart_kernel_data,280225,1000042,1
+
+Y0 y4 A10 a12 m31 t24 o3
+
+Y0 y4 A10 a9 m32 t24 o3
+
+Y0 y3 A10 a9 m33 t25 o3
+
+altitude_adc,5,3920,256 altitude_calc,75,3920,256 altitude_control,17,33337,30 yaw_control,20,33337,30 altitude_settling,5,100040,10 flight_mode,202,50132,20 yaw_settling,5,100040,10 input,27,70,0 uart_flight_data,8360,250010,4 display,9015,1000022,1 uart_kernel_data,281270,1000022,1
+
+Y0 y1 A10 a9 m33 t27 o3
+
+Y0 y1 A10 a10 m32 t26 o3
+
+Y0 y1 A10 a10 m32 t26 o3
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,17,33392,30 yaw_control,20,33392,30 altitude_settling,5,100032,10 flight_mode,202,50065,20 yaw_settling,5,100032,10 input,25,70,0 uart_flight_data,9412,250030,4 display,9015,1000032,1 uart_kernel_data,281262,1000032,1
+
+Y0 y0 A10 a10 m32 t28 o3
+
+Y0 y1 A0 a10 m25 t26 o3
+
+Y0 y2 A0 a9 m26 t26 o3
+
+altitude_adc,5,3920,256 altitude_calc,72,3920,256 altitude_control,17,33335,30 yaw_control,20,33335,30 altitude_settling,5,100060,10 flight_mode,302,50070,20 yaw_settling,5,100060,10 input,25,70,0 uart_flight_data,7317,250062,4 display,9012,1000040,1 uart_kernel_data,281270,1000040,1
+
+Y0 y2 A0 a5 m28 t26 o3
+
+Y0 y1 A0 a0 m31 t26 o3
+
+Y0 y1 A0 a0 m31 t26 o3
+
+altitude_adc,5,3980,256 altitude_calc,75,3980,256 altitude_control,17,33332,30 yaw_control,20,33332,30 altitude_settling,5,100032,10 flight_mode,202,50037,20 yaw_settling,5,100032,10 input,25,70,0 uart_flight_data,7312,250070,4 display,9012,1000027,1 uart_kernel_data,281265,1000027,1
+
+Y0 y1 A0 a0 m31 t26 o3
+
+Y0 y1 A0 a0 m31 t25 o3
+
+Y0 y0 A0 a0 m31 t27 o3
+
+altitude_adc,5,3970,256 altitude_calc,75,3970,256 altitude_control,2,33377,30 yaw_control,2,33377,30 altitude_settling,5,100057,10 flight_mode,2,50000,20 yaw_settling,5,100057,10 input,25,70,0 uart_flight_data,7315,250047,4 display,9002,1000017,1 uart_kernel_data,281270,1000017,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000037,1 uart_kernel_data,277097,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000042,1 uart_kernel_data,277105,1000042,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000037,1 uart_kernel_data,277100,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000037,1 uart_kernel_data,277100,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000042,1 uart_kernel_data,277105,1000042,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000037,1 uart_kernel_data,277100,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5220,250015,4 display,9002,1000037,1 uart_kernel_data,277100,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000042,1 uart_kernel_data,277105,1000042,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000037,1 uart_kernel_data,277100,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000037,1 uart_kernel_data,277100,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250020,4 display,9002,1000037,1 uart_kernel_data,277097,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000042,1 uart_kernel_data,277105,1000042,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000037,1 uart_kernel_data,277100,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250020,4 display,9002,1000037,1 uart_kernel_data,277097,1000037,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
+
+altitude_adc,5,3930,256 altitude_calc,75,3930,256 altitude_control,2,33375,30 yaw_control,2,33375,30 altitude_settling,5,100050,10 flight_mode,2,50067,20 yaw_settling,5,100050,10 input,25,70,0 uart_flight_data,5217,250017,4 display,9002,1000042,1 uart_kernel_data,277105,1000042,1
+
+Y0 y0 A0 a0 m0 t0 o0
+
+Y0 y0 A0 a0 m0 t0 o0
