@@ -1,0 +1,451 @@
+Y0 y0 A10 a0 m25 t20 o2
+
+Y0 y355 A10 a0 m31 t25 o2
+
+Y0 y354 A10 a0 m32 t26 o2
+
+Y0 y353 A10 a0 m32 t27 o2
+
+Y0 y355 A10 a0 m33 t26 o2
+
+Y0 y354 A10 a0 m33 t27 o2
+
+Y0 y354 A10 a0 m34 t27 o2
+
+Y0 y353 A10 a0 m34 t29 o2
+
+Y0 y355 A10 a0 m35 t27 o2
+
+Y0 y353 A10 a0 m35 t30 o2
+
+Y0 y354 A10 a0 m36 t30 o2
+
+Y0 y355 A10 a0 m36 t30 o2
+
+Y0 y354 A10 a0 m36 t30 o2
+
+Y0 y354 A10 a0 m37 t30 o2
+
+Y0 y354 A10 a0 m37 t31 o2
+
+Y0 y355 A10 a0 m38 t30 o2
+
+Y0 y355 A10 a0 m38 t30 o2
+
+Y0 y355 A10 a0 m39 t31 o2
+
+Y0 y355 A10 a0 m39 t31 o2
+
+Y0 y354 A10 a0 m40 t32 o2
+
+Y0 y353 A10 a0 m40 t34 o2
+
+Y0 y353 A10 a0 m40 t34 o2
+
+Y0 y353 A10 a0 m41 t34 o2
+
+Y0 y351 A10 a0 m41 t37 o2
+
+Y0 y350 A10 a0 m42 t38 o2
+
+Y0 y351 A10 a0 m42 t38 o2
+
+Y0 y351 A10 a0 m43 t39 o2
+
+Y0 y353 A10 a0 m43 t37 o2
+
+Y0 y355 A10 a0 m44 t36 o2
+
+Y0 y356 A10 a1 m43 t37 o2
+
+Y0 y356 A10 a1 m44 t36 o2
+
+Y0 y357 A10 a2 m43 t34 o2
+
+Y0 y356 A10 a3 m43 t36 o2
+
+Y0 y355 A10 a4 m43 t36 o2
+
+Y0 y358 A10 a5 m43 t35 o2
+
+Y0 y0 A10 a6 m43 t34 o2
+
+Y0 y0 A10 a6 m43 t34 o2
+
+Y0 y0 A10 a7 m43 t34 o2
+
+Y0 y0 A10 a7 m43 t34 o2
+
+Y0 y0 A10 a8 m43 t34 o2
+
+Y0 y0 A10 a8 m43 t34 o2
+
+Y0 y356 A10 a9 m42 t37 o2
+
+Y0 y358 A10 a9 m42 t36 o2
+
+Y0 y0 A10 a10 m42 t34 o2
+
+Y0 y1 A10 a10 m42 t33 o2
+
+Y0 y0 A10 a10 m42 t34 o2
+
+Y0 y359 A10 a11 m41 t34 o2
+
+Y0 y0 A10 a11 m41 t34 o2
+
+Y0 y359 A10 a11 m41 t35 o2
+
+Y0 y0 A10 a11 m41 t34 o2
+
+Y0 y0 A10 a11 m41 t34 o2
+
+Y0 y0 A10 a11 m41 t34 o2
+
+Y0 y0 A10 a11 m40 t34 o2
+
+Y0 y0 A10 a11 m40 t34 o2
+
+Y0 y0 A10 a11 m40 t34 o2
+
+Y0 y0 A10 a11 m40 t35 o2
+
+Y0 y1 A10 a11 m40 t34 o2
+
+Y0 y3 A10 a11 m40 t32 o2
+
+Y0 y3 A10 a11 m40 t31 o2
+
+Y0 y3 A10 a11 m40 t31 o2
+
+Y0 y0 A10 a11 m40 t34 o2
+
+Y0 y0 A10 a11 m40 t34 o2
+
+Y0 y1 A10 a11 m40 t33 o2
+
+Y0 y0 A10 a11 m39 t34 o2
+
+Y0 y0 A10 a11 m39 t34 o2
+
+Y0 y1 A10 a11 m39 t33 o2
+
+Y0 y1 A10 a11 m39 t33 o2
+
+Y0 y1 A10 a11 m39 t33 o2
+
+Y0 y2 A10 a11 m39 t32 o2
+
+Y0 y1 A10 a11 m39 t31 o2
+
+Y0 y1 A10 a11 m39 t32 o2
+
+Y0 y0 A10 a11 m39 t33 o2
+
+Y0 y0 A10 a11 m39 t32 o2
+
+Y0 y0 A10 a11 m39 t33 o2
+
+Y0 y358 A10 a11 m38 t35 o2
+
+Y0 y0 A10 a11 m38 t32 o2
+
+Y0 y0 A10 a11 m38 t34 o2
+
+Y0 y0 A10 a11 m38 t33 o2
+
+Y0 y0 A10 a11 m38 t33 o2
+
+Y0 y0 A10 a11 m38 t33 o2
+
+Y0 y1 A10 a11 m38 t33 o2
+
+Y0 y2 A10 a11 m38 t32 o2
+
+Y0 y0 A10 a11 m38 t32 o2
+
+Y0 y0 A10 a11 m38 t33 o2
+
+Y0 y0 A10 a11 m38 t31 o2
+
+Y0 y0 A10 a11 m37 t33 o2
+
+Y0 y0 A10 a11 m37 t33 o2
+
+Y0 y0 A10 a11 m37 t33 o2
+
+Y0 y0 A10 a11 m37 t33 o2
+
+Y0 y1 A10 a11 m37 t32 o2
+
+Y0 y1 A10 a11 m37 t32 o2
+
+Y0 y1 A10 a10 m38 t31 o2
+
+Y0 y1 A10 a10 m38 t32 o2
+
+Y0 y1 A10 a10 m38 t31 o2
+
+Y0 y1 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t34 o2
+
+Y0 y0 A10 a10 m38 t33 o2
+
+Y0 y1 A10 a10 m38 t33 o2
+
+Y0 y2 A10 a10 m38 t31 o2
+
+Y0 y1 A10 a10 m38 t33 o2
+
+Y0 y1 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y359 A10 a10 m38 t34 o2
+
+Y0 y358 A10 a10 m38 t34 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y1 A10 a10 m38 t32 o2
+
+Y0 y3 A10 a10 m38 t32 o2
+
+Y0 y2 A10 a10 m38 t30 o2
+
+Y0 y1 A10 a10 m38 t31 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t33 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y1 A10 a10 m38 t31 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y1 A10 a10 m38 t32 o2
+
+Y0 y1 A10 a10 m38 t31 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y358 A10 a10 m38 t34 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y1 A10 a10 m38 t32 o2
+
+Y0 y3 A10 a10 m38 t30 o2
+
+Y0 y1 A10 a10 m38 t32 o2
+
+Y0 y0 A10 a9 m38 t32 o2
+
+Y0 y0 A10 a10 m38 t32 o2
+
+Y0 y0 A20 a10 m44 t32 o2
+
+Y0 y355 A20 a10 m45 t36 o2
+
+Y0 y353 A20 a10 m45 t38 o2
+
+Y0 y354 A20 a11 m45 t37 o2
+
+Y0 y356 A20 a11 m46 t37 o2
+
+Y0 y356 A20 a12 m45 t37 o2
+
+Y0 y355 A20 a12 m46 t38 o2
+
+Y0 y358 A20 a12 m46 t35 o2
+
+Y0 y357 A20 a13 m46 t37 o2
+
+Y0 y356 A20 a13 m47 t38 o2
+
+Y0 y355 A20 a14 m46 t39 o2
+
+Y0 y357 A20 a14 m47 t37 o2
+
+Y0 y358 A20 a15 m47 t38 o2
+
+Y0 y358 A20 a16 m46 t37 o2
+
+Y0 y358 A20 a17 m47 t37 o2
+
+Y0 y357 A20 a17 m46 t38 o2
+
+Y0 y0 A20 a17 m47 t37 o2
+
+Y0 y0 A20 a18 m46 t36 o2
+
+Y0 y0 A20 a18 m46 t36 o2
+
+Y0 y0 A20 a19 m46 t36 o2
+
+Y0 y0 A20 a20 m45 t36 o2
+
+Y0 y359 A20 a20 m45 t37 o2
+
+Y0 y358 A20 a20 m45 t38 o2
+
+Y0 y0 A20 a20 m45 t37 o2
+
+Y0 y358 A20 a21 m44 t39 o2
+
+Y0 y358 A20 a21 m44 t38 o2
+
+Y0 y0 A20 a22 m44 t36 o2
+
+Y0 y1 A20 a22 m43 t36 o2
+
+Y0 y3 A20 a22 m43 t34 o2
+
+Y0 y1 A20 a22 m43 t35 o2
+
+Y0 y1 A20 a22 m43 t35 o2
+
+Y0 y1 A20 a22 m43 t35 o2
+
+Y0 y1 A20 a22 m42 t35 o2
+
+Y0 y0 A20 a22 m42 t37 o2
+
+Y0 y2 A20 a22 m42 t33 o2
+
+Y0 y3 A20 a22 m42 t33 o2
+
+Y0 y1 A20 a22 m42 t35 o2
+
+Y0 y1 A20 a22 m42 t36 o2
+
+Y0 y0 A20 a22 m41 t35 o2
+
+Y0 y1 A20 a22 m41 t35 o2
+
+Y0 y1 A20 a22 m41 t35 o2
+
+Y0 y3 A20 a22 m41 t34 o2
+
+Y0 y1 A20 a22 m41 t34 o2
+
+Y0 y0 A20 a22 m41 t35 o2
+
+Y0 y0 A20 a22 m40 t35 o2
+
+Y0 y0 A20 a22 m40 t35 o2
+
+Y0 y0 A20 a22 m40 t35 o2
+
+Y0 y0 A20 a22 m40 t35 o2
+
+Y0 y2 A20 a22 m40 t33 o2
+
+Y0 y2 A20 a22 m39 t35 o2
+
+Y0 y2 A20 a22 m39 t34 o2
+
+Y0 y3 A20 a22 m39 t32 o2
+
+Y0 y3 A20 a22 m39 t32 o2
+
+Y0 y1 A20 a22 m39 t34 o2
+
+Y0 y1 A20 a22 m39 t33 o2
+
+Y0 y3 A20 a22 m38 t32 o2
+
+Y0 y3 A20 a22 m40 t32 o2
+
+Y0 y1 A20 a21 m39 t34 o2
+
+Y0 y1 A20 a21 m39 t33 o2
+
+Y0 y1 A20 a21 m39 t33 o2
+
+Y0 y1 A20 a21 m38 t33 o2
+
+Y0 y3 A20 a21 m38 t31 o2
+
+Y0 y1 A20 a21 m38 t32 o2
+
+Y0 y0 A20 a21 m38 t33 o2
+
+Y0 y0 A20 a21 m38 t33 o2
+
+Y0 y0 A20 a21 m38 t33 o2
+
+Y0 y0 A20 a21 m38 t33 o2
+
+Y0 y0 A20 a21 m38 t34 o2
+
+Y0 y0 A20 a21 m38 t33 o2
+
+Y0 y0 A20 a21 m38 t33 o2
+
+Y0 y0 A20 a21 m38 t33 o2
+
+Y0 y1 A20 a20 m38 t33 o2
+
+Y0 y1 A20 a20 m38 t32 o2
+
+Y0 y1 A20 a21 m38 t32 o2
+
+Y0 y1 A20 a20 m38 t32 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y1 A20 a20 m38 t32 o2
+
+Y0 y0 A20 a20 m38 t32 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y0 A20 a20 m38 t33 o2
+
+Y0 y0 A20 a20 m38 t33 o2

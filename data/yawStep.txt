@@ -1,0 +1,716 @@
+Y0 y0 A20 a20 m43 t39 o2
+
+Y0 y0 A20 a20 m43 t40 o2
+
+Y0 y0 A20 a20 m43 t40 o2
+
+Y0 y0 A20 a20 m43 t40 o2
+
+Y0 y0 A20 a20 m43 t40 o2
+
+Y0 y0 A20 a20 m43 t40 o2
+
+Y0 y0 A20 a20 m43 t40 o2
+
+Y15 y1 A20 a20 m43 t60 o2
+
+Y15 y5 A20 a20 m43 t49 o2
+
+Y15 y11 A20 a20 m43 t43 o2
+
+Y15 y13 A20 a20 m43 t44 o2
+
+Y15 y15 A20 a20 m43 t41 o2
+
+Y15 y16 A20 a20 m43 t40 o2
+
+Y15 y16 A20 a20 m43 t40 o2
+
+Y15 y16 A20 a20 m43 t40 o2
+
+Y15 y16 A20 a20 m43 t40 o2
+
+Y15 y17 A20 a20 m43 t39 o2
+
+Y15 y17 A20 a20 m43 t39 o2
+
+Y15 y17 A20 a20 m43 t39 o2
+
+Y15 y17 A20 a20 m43 t39 o2
+
+Y15 y18 A20 a20 m43 t38 o2
+
+Y15 y18 A20 a20 m43 t38 o2
+
+Y15 y17 A20 a20 m43 t39 o2
+
+Y15 y17 A20 a20 m43 t38 o2
+
+Y15 y17 A20 a21 m42 t38 o2
+
+Y15 y17 A20 a21 m42 t38 o2
+
+Y15 y17 A20 a21 m42 t38 o2
+
+Y15 y17 A20 a21 m42 t38 o2
+
+Y15 y17 A20 a21 m42 t38 o2
+
+Y15 y17 A20 a20 m44 t37 o2
+
+Y15 y17 A20 a21 m42 t37 o2
+
+Y15 y17 A20 a21 m42 t37 o2
+
+Y15 y17 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m43 t38 o2
+
+Y15 y16 A20 a21 m42 t38 o2
+
+Y15 y16 A20 a20 m43 t38 o2
+
+Y15 y16 A20 a21 m42 t38 o2
+
+Y15 y16 A20 a21 m42 t37 o2
+
+Y15 y16 A20 a21 m42 t37 o2
+
+Y15 y16 A20 a21 m42 t37 o2
+
+Y15 y16 A20 a21 m41 t37 o2
+
+Y15 y16 A20 a21 m41 t37 o2
+
+Y15 y16 A20 a21 m41 t37 o2
+
+Y15 y16 A20 a21 m41 t37 o2
+
+Y15 y16 A20 a21 m40 t37 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a21 m40 t37 o2
+
+Y15 y16 A20 a21 m41 t37 o2
+
+Y15 y16 A20 a21 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a21 m40 t37 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y15 A20 a21 m41 t37 o2
+
+Y15 y14 A20 a21 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a21 m41 t39 o2
+
+Y15 y14 A20 a21 m41 t39 o2
+
+Y15 y14 A20 a20 m41 t39 o2
+
+Y15 y14 A20 a20 m41 t39 o2
+
+Y15 y14 A20 a20 m41 t39 o2
+
+Y15 y15 A20 a20 m41 t38 o2
+
+Y15 y15 A20 a20 m41 t38 o2
+
+Y15 y15 A20 a20 m41 t38 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t38 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t38 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y15 A20 a20 m41 t36 o2
+
+Y15 y15 A20 a21 m40 t37 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y15 A20 a20 m41 t37 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y14 A20 a20 m41 t38 o2
+
+Y15 y15 A20 a20 m41 t38 o2
+
+Y15 y15 A20 a20 m41 t38 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t37 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y16 A20 a20 m41 t36 o2
+
+Y15 y17 A20 a20 m41 t35 o2
+
+Y15 y17 A20 a20 m41 t35 o2
+
+Y15 y17 A20 a20 m41 t35 o2
+
+Y15 y17 A20 a19 m42 t35 o2
+
+Y15 y17 A20 a20 m41 t35 o2
+
+Y15 y17 A20 a19 m42 t34 o2
+
+Y15 y17 A20 a20 m41 t34 o2
+
+Y15 y16 A20 a20 m41 t35 o2
+
+Y15 y16 A20 a19 m42 t35 o2
+
+Y15 y16 A20 a20 m41 t35 o2
+
+Y15 y16 A20 a20 m41 t35 o2
+
+Y15 y16 A20 a20 m41 t35 o2
+
+Y15 y16 A20 a19 m43 t35 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y14 A20 a20 m42 t36 o2
+
+Y15 y14 A20 a20 m42 t36 o2
+
+Y15 y14 A20 a20 m42 t36 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m41 t37 o2
+
+Y15 y13 A20 a20 m42 t38 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y13 A20 a20 m42 t38 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y13 A20 a20 m42 t38 o2
+
+Y15 y13 A20 a20 m42 t38 o2
+
+Y15 y13 A20 a20 m42 t38 o2
+
+Y15 y12 A20 a20 m42 t40 o2
+
+Y15 y12 A20 a20 m42 t39 o2
+
+Y15 y13 A20 a20 m42 t39 o2
+
+Y15 y13 A20 a20 m42 t39 o2
+
+Y15 y13 A20 a20 m42 t39 o2
+
+Y15 y12 A20 a20 m42 t40 o2
+
+Y15 y13 A20 a20 m42 t39 o2
+
+Y15 y14 A20 a20 m42 t38 o2
+
+Y15 y14 A20 a20 m42 t39 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y17 A20 a20 m42 t36 o2
+
+Y15 y17 A20 a20 m42 t36 o2
+
+Y15 y17 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t38 o2
+
+Y15 y14 A20 a20 m42 t38 o2
+
+Y15 y14 A20 a20 m42 t38 o2
+
+Y15 y14 A20 a20 m42 t38 o2
+
+Y15 y14 A20 a20 m42 t38 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t38 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a19 m43 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t37 o2
+
+Y15 y14 A20 a20 m42 t38 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t37 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t34 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t36 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y15 A20 a20 m42 t35 o2
+
+Y15 y16 A20 a20 m42 t35 o2
+
+Y15 y15 A20 a20 m42 t34 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t34 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
+Y15 y15 A20 a20 m42 t36 o2
+
