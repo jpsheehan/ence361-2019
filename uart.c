@@ -87,7 +87,7 @@ void uart_send(const char *t_buffer)
     }
 }
 
-void uart_flight_data_update(uint32_t t_time_diff_micro, KernelTask* t_task)
+void uart_flight_data_update(KernelTask* t_task)
 {
     uint16_t target_yaw = setpoint_get_yaw();
     uint16_t actual_yaw = yaw_get();
@@ -99,14 +99,14 @@ void uart_flight_data_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     uint8_t operating_mode = flight_mode_get();
 
     // format the outgoing data
-    usprintf(g_buffer, "Y%d\ty%d\tA%d\ta%d\tm%d\tt%d\to%d\r\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
+    usprintf(g_buffer, "Y%u\ty%u\tA%d\ta%d\tm%u\tt%u\to%u\r\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
 
     // send it
     uart_send(g_buffer);
 }
 
 
-void uart_kernel_data_update(uint32_t t_time_diff_micro, KernelTask* t_task)
+void uart_kernel_data_update(KernelTask* t_task)
 {
     uint8_t num_tasks;
     KernelTask* kernel_tasks = kernel_get_tasks(&num_tasks);
@@ -115,9 +115,10 @@ void uart_kernel_data_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     for (i = 0; i < num_tasks; i++)
     {
         KernelTask task = kernel_tasks[i];
-        usprintf(g_buffer, "%s=%d\t", task.name, task.duration_micros);
+        usprintf(g_buffer, "%s,%u,%u,%u\t", task.name, task.duration_micros, task.period_micros, task.frequency);
         uart_send(g_buffer);
 
     }
+
     uart_send("\r\n");
 }

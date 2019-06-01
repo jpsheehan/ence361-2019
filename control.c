@@ -27,7 +27,7 @@ struct control_state_s
 typedef struct control_state_s ControlState;
 
 // Idle main duty %, allows for faster take off, reducing dependence on integral error.
-static const int IDLE_MAIN_DUTY = 20;
+static const int IDLE_MAIN_DUTY = 25;
 
 // Min speed of main rotor, allows for proper anti-clockwise yaw control and clamps descent speed (duty cycle %)
 static const int MIN_MAIN_DUTY = 20;
@@ -43,8 +43,12 @@ static const int MAX_TAIL_DUTY = 70;
 static const int MAIN_GAIN_CLAMP = 10;
 static const int TAIL_GAIN_CLAMP = 10;
 
-ControlState g_control_altitude;
-ControlState g_control_yaw;
+// clamp for integral growth for large errors (error)
+static const int INTEGRAL_TAIL_CLAMP = 30;
+static const int INTEGRAL_MAIN_CLAMP = 5;
+
+static ControlState g_control_altitude;
+static ControlState g_control_yaw;
 
 static bool g_enable_altitude;
 static bool g_enable_yaw;
@@ -70,7 +74,7 @@ void control_init(ControlGains t_altitude_gains, ControlGains t_yaw_gains)
     g_control_yaw = control_get_state_from_gains(t_yaw_gains);
 }
 
-void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
+void control_update_altitude(KernelTask* t_task)
 {
     if (!g_enable_altitude)
     {
@@ -92,9 +96,9 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
     Pgain = clamp(Pgain, -MAIN_GAIN_CLAMP, MAIN_GAIN_CLAMP);
 
     // I control
-    // only accumulate erorr if we are not motor duty limited (limits overshoot)
+    // only accumulate error if we are not motor duty limited (limits overshoot)
     if (g_control_altitude.duty > MIN_MAIN_DUTY && g_control_altitude.duty < MAX_MAIN_DUTY) {
-        g_control_altitude.cumulative += error;
+        g_control_altitude.cumulative += clamp(error, -INTEGRAL_MAIN_CLAMP, INTEGRAL_MAIN_CLAMP);; // Clamp integral growth for large errors
     }
     // fail-safe the cumulative error by clamping its bounds
     // g_control_altitude.cumulative = clamp(g_control_altitude.cumulative, -g_control_altitude.cumulative_max, g_control_altitude.cumulative_max);
@@ -118,7 +122,7 @@ void control_update_altitude(uint32_t t_time_diff_micro, KernelTask* t_task)
 
 }
 
-void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
+void control_update_yaw(KernelTask* t_task)
 {
     if (!g_enable_yaw)
     {
@@ -159,7 +163,7 @@ void control_update_yaw(uint32_t t_time_diff_micro, KernelTask* t_task)
     // only accumulate error if we are not motor duty limited (limits overshoot)
     if (g_control_yaw.duty > MIN_TAIL_DUTY && g_control_yaw.duty < MAX_TAIL_DUTY)
     {
-        g_control_yaw.cumulative += error; // Control is called with fixed frequency so time delta can be ignored.
+        g_control_yaw.cumulative += clamp(error, -INTEGRAL_TAIL_CLAMP, INTEGRAL_TAIL_CLAMP);; // Clamp integral growth for large errors
     }
     // fail-safe the cumulative error by clamping its bounds
     //g_control_yaw.cumulative = clamp(g_control_yaw.cumulative, -g_control_yaw.cumulative_max, g_control_yaw.cumulative_max);

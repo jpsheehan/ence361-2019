@@ -29,7 +29,9 @@
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/interrupt.h"
+
 #include "circBufT.h"
+#include "mutex.h"
 #include "utils.h"
 #include "yaw.h"
 
@@ -59,7 +61,7 @@ static const int YAW_SETTLING_MARGIN = 2;
 /**
  * Holds the previous state of the Quadrature FSM
  */
-static volatile uint8_t g_previous_state;
+static uint8_t g_previous_state;
 
 /**
  * Holds the current state of the Quadrature FSM
@@ -67,14 +69,29 @@ static volatile uint8_t g_previous_state;
 static volatile QuadratureState g_quadrature_state;
 
 /**
+ * The mutex for the current quadrature state.
+ */
+static Mutex g_quadrature_state_mutex;
+
+/**
  * Holds the slot count (i.e. number of teeth moved from reference).
  */
 static volatile uint16_t g_slot_count;
 
 /**
+ * The mutex for the slot count.
+ */
+static Mutex g_slot_count_mutex;
+
+/**
  * Indicates if the yaw has been calibrated.
  */
 static volatile bool g_has_been_calibrated;
+
+/**
+ * The mutex for the has been calibrated variable.
+ */
+static Mutex g_has_been_calibrated_mutex;
 
 /**
  * The buffer that holds the degree values for settling calculations.
@@ -166,8 +183,7 @@ void yaw_init(void)
     // set data direction register as input mfb
     GPIODirModeSet(YAW_REF_BASE, YAW_REF_PIN, YAW_QUAD_DDR);
 
-    // configure it to be a weak pull down
-    // try WPU
+    // configure it to be a weak pull up
     GPIOPadConfigSet(YAW_REF_BASE, YAW_REF_PIN, YAW_REF_SIG_STRENGTH, YAW_REF_PIN_TYPE);
 
     // configure the interrupt to be falling edge only
@@ -190,8 +206,14 @@ void yaw_reference_int_handler(void)
 
     if (!g_has_been_calibrated)
     {
+        mutex_lock(g_has_been_calibrated_mutex);
+        mutex_lock(g_slot_count_mutex);
+
         g_slot_count = 0;
         g_has_been_calibrated = true;
+
+        mutex_unlock(g_slot_count_mutex);
+        mutex_unlock(g_has_been_calibrated_mutex);
     }
 
 }
@@ -203,6 +225,9 @@ void yaw_reference_int_handler(void)
 */
 void yaw_update_state(bool t_signal_a, bool t_signal_b)
 {
+    mutex_lock(g_slot_count_mutex);
+    mutex_lock(g_quadrature_state_mutex);
+
     // compare with previous state
     uint8_t this_state = (t_signal_a << 1) | t_signal_b;
 
@@ -217,6 +242,7 @@ void yaw_update_state(bool t_signal_a, bool t_signal_b)
                 (this_state == 3 && g_previous_state == 2)) {
 
             g_quadrature_state = QUAD_STATE_ANTICLOCKWISE;
+
             if (--g_slot_count > YAW_MAX_SLOT_COUNT - 1) {
                 g_slot_count = YAW_MAX_SLOT_COUNT - 1;
             }
@@ -227,7 +253,9 @@ void yaw_update_state(bool t_signal_a, bool t_signal_b)
                     (this_state == 1 && g_previous_state == 0) ||
                     (this_state == 2 && g_previous_state == 3) ||
                     (this_state == 3 && g_previous_state == 1)) {
+
                 g_quadrature_state = QUAD_STATE_CLOCKWISE;
+
                 if (++g_slot_count > YAW_MAX_SLOT_COUNT - 1) {
                     g_slot_count = 0;
                 }
@@ -239,9 +267,12 @@ void yaw_update_state(bool t_signal_a, bool t_signal_b)
 
     // update g_previous_raw_quadrature_state to this state
     g_previous_state = this_state;
+
+    mutex_unlock(g_quadrature_state_mutex);
+    mutex_unlock(g_slot_count_mutex);
 }
 
-void yaw_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
+void yaw_update_settling(KernelTask* t_task)
 {
     // we add 180 degrees because we only care about the settling
     // around 0 degrees and because of underflows this is difficult
@@ -253,8 +284,12 @@ void yaw_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
 */
 QuadratureState yaw_get_state(void)
 {
+    mutex_wait(g_quadrature_state_mutex);
     QuadratureState temp_state = g_quadrature_state;
+
+    mutex_wait(g_quadrature_state_mutex);
     g_quadrature_state = QUAD_STATE_NOCHANGE;
+
     return temp_state;
 }
 
@@ -286,11 +321,13 @@ void yaw_int_handler(void)
 
 void yaw_reset_calibration_state(void)
 {
+    mutex_wait(g_has_been_calibrated_mutex);
     g_has_been_calibrated = false;
 }
 
 bool yaw_has_been_calibrated(void)
 {
+    mutex_wait(g_has_been_calibrated_mutex);
     return g_has_been_calibrated;
 }
 

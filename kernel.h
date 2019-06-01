@@ -56,6 +56,11 @@ struct kernel_task_s
     uint32_t int_count;
 
     /**
+     * The actual period for this task in microseconds.
+     */
+    uint32_t period_micros;
+
+    /**
      * Used internally to store the latest running time of this task (in microseconds).
      * DO NOT MODIFY OUTSIDE THE KERNEL MODULE!!!
      */

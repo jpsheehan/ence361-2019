@@ -24,6 +24,7 @@
 #include "driverlib/systick.h"
 
 #include "kernel.h"
+#include "mutex.h"
 #include "utils.h"
 
 
@@ -53,6 +54,8 @@ static uint32_t g_last_count;
  */
 static volatile uint32_t g_systick_count;
 
+static Mutex g_systick_count_mutex;
+
 /**
  * The frequency that the kernel runs at.
  */
@@ -73,7 +76,17 @@ static bool g_tasks_are_sorted = true;
  */
 void kernel_systick_int_handler(void)
 {
+    mutex_lock(g_systick_count_mutex);
     g_systick_count++;
+    mutex_unlock(g_systick_count_mutex);
+}
+
+/**
+ * Converts kernel ticks into microseconds.
+ */
+uint32_t kernel_convert_ticks_to_microseconds(uint32_t t_ticks)
+{
+    return t_ticks * 1000000.0f / g_kernel_frequency;
 }
 
 /**
@@ -158,6 +171,7 @@ void kernel_run(void)
             g_tasks_are_sorted = true;
         }
 
+        mutex_wait(g_systick_count_mutex);
         uint32_t this_count = g_systick_count;
         if (g_last_count != this_count)
         {
@@ -169,25 +183,39 @@ void kernel_run(void)
                 KernelTask task = g_tasks[i];
                 uint32_t count_delta;
 
-                // NOTE: There is a case when this_count overflows and becomes less than task.int_count
-                // which causes the count_delta to be off by around 1%. TODO: Fix in future, not a
-                // huge problem right now.
+                // fix the possible overflow
                 count_delta = this_count - task.int_count;
+                if (this_count < task.int_count)
+                {
+                    count_delta = UINT_MAX - task.int_count + this_count;
+                }
 
                 // check if the task must be run
                 if (task.frequency == 0 || (((float)count_delta / g_kernel_frequency) > (1.0f / task.frequency)))
                 {
+                    mutex_wait(g_systick_count_mutex);
                     uint32_t start_count = g_systick_count;
-                    uint32_t elapsed_micros = ((count_delta - 1) * 1000000) / g_kernel_frequency;
+
+                    g_tasks[i].period_micros = kernel_convert_ticks_to_microseconds(count_delta - 1);
 
                     // execute the task
-                    ((void(*)(uint32_t, KernelTask*))(task.function))(elapsed_micros, &task);
+                    ((void(*)(KernelTask*))(task.function))(&task);
+
+                    mutex_wait(g_systick_count_mutex);
+                    uint32_t end_count = g_systick_count;
+
+                    uint32_t duration_count = end_count - start_count;
+                    if (end_count < start_count)
+                    {
+                        duration_count = UINT_MAX - start_count + end_count;
+                    }
+
+                    // we keep track of the time taken to perform a task
+                    g_tasks[i].duration_micros = kernel_convert_ticks_to_microseconds(duration_count);
 
                     // update the last time it was run
                     g_tasks[i].int_count = this_count;
 
-                    // we can also keep track of the time taken to perform a task
-                    g_tasks[i].duration_micros = (g_systick_count - start_count) * 1000000 / g_kernel_frequency;
                 }
 
             }
@@ -199,6 +227,7 @@ void kernel_run(void)
 
 uint32_t kernel_get_systick_count(void)
 {
+    mutex_wait(g_systick_count_mutex);
     return g_systick_count;
 }
 
@@ -217,3 +246,4 @@ KernelTask* kernel_get_tasks(uint8_t* t_size)
     *t_size = g_task_total;
     return g_tasks;
 }
+

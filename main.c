@@ -41,28 +41,28 @@
  * The altitude gains.
  */
 static const float ALT_KP = 0.65f;
-static const float ALT_KI = 0.01f;
+static const float ALT_KI = 0.012f;
 static const float ALT_KD = 0.8f;
 
 /**
  * The yaw gains.
  */
 static const float YAW_KP = 0.8f;
-static const float YAW_KI = 0.007f;
+static const float YAW_KI = 0.009f;
 static const float YAW_KD = 0.8f;
 
 /**
  * The "frequency" that the kernel runs at in Hz.
  */
-static const int KERNEL_FREQUENCY = 1024;
+static const int KERNEL_FREQUENCY = 400000;
 
 // process ADC stuff 256 times per second
 static const uint16_t ALT_ADC_FREQUENCY = 256;
 static const uint8_t ALT_ADC_PRIORITY = 1;
 
 // always update the altitude
-static const uint16_t ALT_CALC_FREQUENCY = 0;
-static const uint8_t ALT_CALC_PRIORITY = 1;
+static const uint16_t ALT_CALC_FREQUENCY = 256;
+static const uint8_t ALT_CALC_PRIORITY = 2;
 
 // update the altitude settling 10 times per second
 static const uint16_t ALT_SETTLING_FREQUENCY = 10;
@@ -74,15 +74,15 @@ static const uint8_t YAW_SETTLING_PRIORITY = 10;
 
 // always process input
 static const uint16_t INPUT_FREQUENCY = 0;
-static const uint8_t INPUT_PRIORITY = 2;
+static const uint8_t INPUT_PRIORITY = 50;
 
 // perform altitude control stuff 30 times per second
 static const uint16_t CONTROL_ALT_FREQUENCY = 30;
-static const uint8_t CONTROL_ALT_PRIORITY = 10;
+static const uint8_t CONTROL_ALT_PRIORITY = 5;
 
 // perform yaw control stuff 30 times per second
 static const uint16_t CONTROL_YAW_FREQUENCY = 30;
-static const uint8_t CONTROL_YAW_PRIORITY = 10;
+static const uint8_t CONTROL_YAW_PRIORITY = 5;
 
 // run state checking 20 times per sec
 static const uint16_t FLIGHT_MODE_FREQUENCY = 20;
@@ -97,8 +97,8 @@ static const uint16_t UART_FLIGHT_DATA_FREQUENCY = 4;
 static const uint8_t UART_FLIGHT_DATA_PRIORITY = 100;
 
 // send kernel timing data once per second via UART
-//static const uint16_t UART_KERNEL_DATA_FREQUENCY = 1;
-//static const uint8_t UART_KERNEL_DATA_PRIORITY = 100;
+static const uint16_t UART_KERNEL_DATA_FREQUENCY = 1;
+static const uint8_t UART_KERNEL_DATA_PRIORITY = 100;
 
 /**
  * The amount of time to display the splash screen (in seconds)
@@ -136,14 +136,14 @@ void initialise(void)
     kernel_add_task("flight_mode", &flight_mode_update, FLIGHT_MODE_FREQUENCY, FLIGHT_MODE_PRIORITY);
     kernel_add_task("display", &disp_render, DISPLAY_FREQUENCY, DISPLAY_PRIORITY);
     kernel_add_task("uart_flight_data", &uart_flight_data_update, UART_FLIGHT_DATA_FREQUENCY, UART_FLIGHT_DATA_PRIORITY);
-//    kernel_add_task("uart_kernel_data", &uart_kernel_data_update, UART_KERNEL_DATA_FREQUENCY, UART_KERNEL_DATA_PRIORITY); // ONLY WORKS WHEN KERNEL FREQUENCY IS >= 1MHz
+    kernel_add_task("uart_kernel_data", &uart_kernel_data_update, UART_KERNEL_DATA_FREQUENCY, UART_KERNEL_DATA_PRIORITY);
 
 
     // Enable interrupts to the processor.
     IntMasterEnable();
 
     // Render splash screen for a couple of seconds
-    disp_render(0, NULL);
+    disp_render(NULL);
     utils_wait_for_seconds(SPLASH_SCREEN_WAIT_TIME);
     disp_advance_state();
 }

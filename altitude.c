@@ -31,6 +31,7 @@
 #include "altitude.h"
 #include "circBufT.h"
 #include "kernel.h"
+#include "mutex.h"
 #include "utils.h"
 
 /**
@@ -78,6 +79,11 @@ static const int ALT_SETTLING_MARGIN = 2;
 static circBuf_t g_circ_buffer;
 
 /**
+ * The mutex for the circular buffer.
+ */
+static Mutex g_circ_buffer_mutex;
+
+/**
  * The circular buffer used to store ALT_SETTLING_BUF_SIZE percentage values.
  */
 static circBuf_t g_settling_buffer;
@@ -121,7 +127,9 @@ void alt_adc_int_handler(void)
     ADCSequenceDataGet(ADC_BASE, ADC_SEQUENCE, &value);
 
     // Place it in the circular buffer (advancing write index)
+    mutex_lock(g_circ_buffer_mutex);
     writeCircBuf(&g_circ_buffer, value);
+    mutex_unlock(g_circ_buffer_mutex);
 
     // Clean up, clearing the interrupt
     ADCIntClear(ADC_BASE, ADC_SEQUENCE);
@@ -165,7 +173,7 @@ void alt_init_adc(void)
  * (Original code by P.J. Bones)
  * The interrupt handler for the for SysTick interrupt.
  */
-void alt_process_adc(uint32_t t_time_diff_micro, KernelTask* t_task)
+void alt_process_adc(KernelTask* t_task)
 {
     if (g_kernel_task_frequency == USHRT_MAX)
     {
@@ -186,15 +194,19 @@ void alt_init(void)
     initCircBuf(&g_settling_buffer, ALT_SETTLING_BUF_SIZE);
 }
 
-void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task)
+void alt_update(KernelTask* t_task)
 {
     int32_t sum;
     uint16_t i;
 
     // add up all the values in the circular buffer
     sum = 0;
+
+    mutex_wait(g_circ_buffer_mutex);
     for (i = 0; i < ALT_BUF_SIZE; i++)
+    {
         sum = sum + readCircBuf(&g_circ_buffer);
+    }
 
     // calculate the mean of the data in the circular buffer
     g_alt_raw = (2 * sum + ALT_BUF_SIZE) / (2 * ALT_BUF_SIZE);
@@ -203,7 +215,7 @@ void alt_update(uint32_t t_time_diff_micro, KernelTask* t_task)
     g_alt_percent = (int16_t)((((int32_t)g_alt_ref - (int32_t)g_alt_raw) * (int32_t)100) / (int32_t)ALT_DELTA);
 }
 
-void alt_update_settling(uint32_t t_time_diff_micro, KernelTask* t_task)
+void alt_update_settling(KernelTask* t_task)
 {
     // write the current altitude (as a percentage) to the settling buffer.
     writeCircBuf(&g_settling_buffer, g_alt_percent);
