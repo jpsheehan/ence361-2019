@@ -100,8 +100,6 @@ void control_update_altitude(KernelTask* t_task)
     if (g_control_altitude.duty > MIN_MAIN_DUTY && g_control_altitude.duty < MAX_MAIN_DUTY) {
         g_control_altitude.cumulative += clamp(error, -INTEGRAL_MAIN_CLAMP, INTEGRAL_MAIN_CLAMP);; // Clamp integral growth for large errors
     }
-    // fail-safe the cumulative error by clamping its bounds
-    // g_control_altitude.cumulative = clamp(g_control_altitude.cumulative, -g_control_altitude.cumulative_max, g_control_altitude.cumulative_max);
     Igain = g_control_altitude.cumulative * g_control_altitude.ki;
 
     // D control
@@ -165,8 +163,6 @@ void control_update_yaw(KernelTask* t_task)
     {
         g_control_yaw.cumulative += clamp(error, -INTEGRAL_TAIL_CLAMP, INTEGRAL_TAIL_CLAMP);; // Clamp integral growth for large errors
     }
-    // fail-safe the cumulative error by clamping its bounds
-    //g_control_yaw.cumulative = clamp(g_control_yaw.cumulative, -g_control_yaw.cumulative_max, g_control_yaw.cumulative_max);
     Igain = g_control_yaw.cumulative*g_control_yaw.ki;
 
     // D control
@@ -183,6 +179,7 @@ void control_update_yaw(KernelTask* t_task)
     // update the duty
     g_control_yaw.duty = newDuty;
 
+    // set the motor duty
     pwm_set_tail_duty(g_control_yaw.duty);
 
 }
