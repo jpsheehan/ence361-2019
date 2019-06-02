@@ -77,22 +77,23 @@ def main():
 
     file.close()
 
-    # print(data)
-
+    # get the number of data points
     n = len(data["uart_flight_data"])
-
-    # plot the data
-    fig = plt.figure()
 
     # replace underscores with spaces, capitalize each word
     pretty_keys = [' '.join([x.capitalize() for x in s.split('_')])
                    for s in data.keys()]
 
+    # plot the data
+    fig = plt.figure()
+
     # CPU Utilization
     total_utilization = extract_utilization(data, n)
-    ymax = round(max(total_utilization) / 10.0) * 10
-    cpu_util = plt.axes(xlim=(0, n), ylim=(0, ymax),
-                        title="Kernel Task Time", xlabel="TIme (s)", ylabel="CPU Time Utilization (%)")
+
+    # make the ylimit be the nearest 10%
+    cpu_util_ymax = round(max(total_utilization) / 10.0) * 10
+    cpu_util = plt.axes(xlim=(0, n), ylim=(0, cpu_util_ymax),
+                        title="Kernel Task Time", xlabel="Time (s)", ylabel="CPU Time Utilization (%)")
     cpu_util.plot(range(n), total_utilization)
 
     for key in data:
