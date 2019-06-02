@@ -19,7 +19,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
   - [x] Calculate yaw in degrees relative to the initial position
   - [x] The yaw (in degrees) should be displayed along with the averaged altitude
 
-- [ ] **Milestone 3**
+- [x] **Milestone 3**
   - [x] Helicopter yaw should be processed by interrupt-driven or polled decoding.
   - [x] At the start of the sortie, the helicopter should rotate to a known reference position, indicated by a HIGH input from the independent yaw reference signal.
   - [x] A reference minimum altitude reading should be taken before take-off.
@@ -27,11 +27,11 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [x] One for the main rotor (module 0, PWM 7).
       - [x] One for the tail rotor (module 1, PWM 5).
       - [x] The duty cycles (as percentages) for each motor should be displayed on the OLED display.
-  - [ ] The SW1 slider switch on the Orbit board should control the mode of the helicopter (DOWN position = landed/in the process of landing, changing from DOWN to UP when the helicopter is landed should cause the helicopter to take off).
-      - [ ] The helicopter should land smoothly, facing the reference orientation. When landing is complete, the rotors should stop.
-      - [ ] At take off the rotors should start and the helicopter should rotate to the reference orientation.
-      - [ ] While the helicopter is landing, any change to the switch position should be ignored until landing is complete.
-      - [ ] When the program is started/restarted/reset, the helicopter should be landed with the motors off regardless of the SW1 position.
+  - [x] The SW1 slider switch on the Orbit board should control the mode of the helicopter (DOWN position = landed/in the process of landing, changing from DOWN to UP when the helicopter is landed should cause the helicopter to take off).
+      - [x] The helicopter should land smoothly, facing the reference orientation. When landing is complete, the rotors should stop.
+      - [x] At take off the rotors should start and the helicopter should rotate to the reference orientation.
+      - [x] While the helicopter is landing, any change to the switch position should be ignored until landing is complete.
+      - [x] When the program is started/restarted/reset, the helicopter should be landed with the motors off regardless of the SW1 position.
   - [x] The four buttons on the Tiva-Orbit board should be programmed to interactively control the altitude and yaw of the helicopter:
       - [x] UP button: Increase altitude by 10% of its total vertical range. If the helicopter is already within 10% of its maximum altitude, pressing the UP button should take it to its maximum altitude. When the helicopter is at its maximum altitude, any UP presses should be ignored.
       - [x] DOWN button: Decrease altitude by 10%. If within 10% of minumum altitude, pushing the DOWN button should take the helicopter to its minimum vertical range. DOWN button presses when already at minumum range should be ignored.
@@ -39,7 +39,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [x] RIGHT button: Rotate the helicopter clockwise 15 degrees.
       - [x] Pressing LEFT/RIGHT buttons should not affect the altitude.
   - [x] The program should have a real-time foreground/background kernel operating on a round-robin basis. Robust behaviour should be maintained at all times.
-  - [ ] A PI (preferred) or PID (acceptable) controller should be used to acheive flight.
+  - [x] A PI (preferred) or PID (acceptable) controller should be used to acheive flight.
   - [x] Information on the status of the helicopter should be transmitted via a serial link from UART0 at 9600 baud, with 1 stop bit and no parity bit in each transmitted byte. The information should be concise but in an easily readable format that is compatible with the scrolling display of the remote lab web page. Updates should be transmitted regularly at least 4 times per second. Status information should include:
       - [x] The desired yaw (degrees).
       - [x] The actual yaw (degrees).
@@ -49,7 +49,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [x] The current operating mode.
   - [x] The program should use the pin-map as outlined [below](#pin-map).
 - [ ] **Report**
-- [ ] **Code**
+- [x] **Code**
 
 ## Deadlines:
 
