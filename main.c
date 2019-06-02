@@ -109,14 +109,6 @@ static const uint16_t UART_KERNEL_DATA_FREQUENCY = 1;
 static const uint8_t UART_KERNEL_DATA_PRIORITY = 100;
 #endif
 
-#if SATURATE_KERNEL
-// purposefully saturate the kernel with a long-running task
-// not recommended. just here to examine the effect of long-
-// running tasks on the overall operation of the helirig
-static const uint16_t KERNEL_SAT_FREQUENCY = 0;
-static const uint8_t KERNEL_SAT_PRIORITY = 0;
-#endif
-
 /**
  * The amount of time to display the splash screen (in seconds)
  */
@@ -159,7 +151,8 @@ void initialise(void)
 #endif
 
 #if SATURATE_KERNEL
-    kernel_add_task("kernel_saturation", &kernel_saturation_task, KERNEL_SAT_FREQUENCY, KERNEL_SAT_PRIORITY);
+    // add a kernel task to hold up the system with the highest priority and frequency
+    kernel_add_task("kernel_saturation", &kernel_saturation_task, 0, 0);
 #endif
 
 
