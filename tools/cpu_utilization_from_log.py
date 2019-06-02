@@ -1,28 +1,27 @@
-"""
-ldr.py
-
-Display analog data from Arduino using Python (matplotlib)
-
-Author: Mahesh Venkitachalam
-Website: electronut.in
-"""
-
 import sys
 import argparse
 import numpy as np
 
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 
 
-def extract_utilization(data, length, t=None):
-    u = np.zeros(length)
-
+def extract_column_i(data, length, x, t=None):
+    cols = np.zeros(length)
     for key in data:
         if t is None or key == t:
             for i, datum in enumerate(data[key]):
-                utilization = datum[3]
-                u[i] += utilization
-    return u
+                col = datum[x]
+                cols[i] += col
+    return cols
+
+
+def extract_utilization(data, length, t=None):
+    return extract_column_i(data, length, 3, t)
+
+
+def extract_time_error(data, length, t=None):
+    return extract_column_i(data, length, 4, t)
 
 
 def main():
@@ -64,13 +63,13 @@ def main():
                     # calculate the % time utilization
                     utilization = duration * frequency / 10000.0
 
-                    # calculate the time error (in micros)
+                    # calculate the time error (in micros and %)
+                    time_error = 0
                     time_error_us = 0
                     if frequency != 0:
                         time_error_us = abs(1.0 / frequency * 1000000 - period)
-
-                    # calculate time error (as a % of period)
-                    time_error = time_error_us / period * 100.0
+                        if period != 0:
+                            time_error = time_error_us / period * 100.0
 
                     data[name].append(
                         (duration, period, frequency, utilization, time_error))
@@ -85,20 +84,34 @@ def main():
                    for s in data.keys()]
 
     # plot the data
-    fig = plt.figure()
-
     # CPU Utilization
     total_utilization = extract_utilization(data, n)
 
     # make the ylimit be the nearest 10%
     cpu_util_ymax = round(max(total_utilization) / 10.0) * 10
-    cpu_util = plt.axes(xlim=(0, n), ylim=(0, cpu_util_ymax),
-                        title="Kernel Task Time", xlabel="Time (s)", ylabel="CPU Time Utilization (%)")
-    cpu_util.plot(range(n), total_utilization)
+    plt.subplot(2, 1, 1)
+    plt.title("Kernel Task Information")
+    plt.ylabel("CPU Time Utilization (%)")
+    plt.xlim((0, n))
+    plt.ylim((0, cpu_util_ymax))
 
+    plt.plot(range(n), total_utilization)
     for key in data:
-        cpu_util.plot(range(n), extract_utilization(data, n, key))
-    cpu_util.legend(labels=["Total"] + pretty_keys, loc="upper left")
+        plt.plot(range(n), extract_utilization(data, n, key))
+
+    # time error graph
+    total_time_error = extract_time_error(data, n)
+    time_error_ymax = min(50, round(max(total_time_error) / 5.0) * 5)
+    plt.subplot(2, 1, 2)
+    plt.xlabel("Time (s)")
+    plt.ylabel("Time Error (%)")
+    plt.xlim((0, n))
+    plt.ylim((0, time_error_ymax))
+    plt.plot(range(n), total_time_error)
+    for key in data:
+        plt.plot(range(n), extract_time_error(data, n, key))
+    plt.legend(labels=["Total"] + pretty_keys,
+               loc="upper center", fontsize="small", ncol=6)
 
     plt.show()
 
