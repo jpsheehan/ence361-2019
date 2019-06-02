@@ -173,7 +173,7 @@ int main(void)
 {
     initialise();
 
-    while (MORE_THAN_HALF_THE_HELI_RIGS_ARE_BROKEN)
+    while (true)
     {
         kernel_run();
     }
