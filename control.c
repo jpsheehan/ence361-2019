@@ -1,3 +1,24 @@
+/*******************************************************************************
+ *
+ * control.c
+ *
+ * ENEL361 Helicopter Project
+ * Friday Morning, Group 7
+ *
+ * Written by:
+ *  - Manu Hamblyn  <mfb31<@uclive.ac.nz>   95140875
+ *  - Will Cowper   <wgc22@uclive.ac.nz>    81163265
+ *  - Jesse Sheehan <jps111@uclive.ac.nz>   53366509
+ *
+ *
+ *
+ * Description:
+ * Contains PID controllers for yaw and altitude
+ *
+ *
+ ******************************************************************************/
+
+
 #include <stdint.h>
 
 #include "control.h"
