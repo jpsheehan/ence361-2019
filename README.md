@@ -2,7 +2,7 @@
 
 Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
 
-Read the (report)[https://eng-git.canterbury.ac.nz/ence361-2019/fri_am_group_7/raw/master/report.pdf].
+Read the [report](https://eng-git.canterbury.ac.nz/ence361-2019/fri_am_group_7/raw/master/report.pdf).
 
 ## Milestone Progress:
 
