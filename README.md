@@ -2,6 +2,8 @@
 
 Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
 
+Read the (report)[https://eng-git.canterbury.ac.nz/ence361-2019/fri_am_group_7/raw/master/report.pdf].
+
 ## Milestone Progress:
 
 - [x] **Milestone 1**
@@ -48,7 +50,7 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
       - [x] The duty cycle of each of the PWM signals controlling the rotors (%, 0 meaning off).
       - [x] The current operating mode.
   - [x] The program should use the pin-map as outlined [below](#pin-map).
-- [ ] **Report**
+- [x] **Report**
 - [x] **Code**
 
 ## Deadlines:
