@@ -114,4 +114,11 @@ KernelTask* kernel_get_tasks(uint8_t* t_size);
  */
 void kernel_saturation_task(KernelTask* t_task);
 
+/**
+ * Prioritisises the kernel tasks. This involves sorting the kernel
+ * task list by priority. This must be called after adding kernel tasks
+ * or changing task priorities.
+ */
+void kernel_prioritise(void);
+
 #endif /* KERNEL_H_ */

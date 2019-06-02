@@ -155,6 +155,8 @@ void initialise(void)
     kernel_add_task("kernel_saturation", &kernel_saturation_task, 4, 0);
 #endif
 
+    // ensure the kernel tasks are in priority order
+    kernel_prioritise();
 
     // Enable interrupts to the processor.
     IntMasterEnable();
