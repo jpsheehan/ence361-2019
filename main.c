@@ -152,7 +152,7 @@ void initialise(void)
 
 #if SATURATE_KERNEL
     // add a kernel task to hold up the system with the highest priority and frequency
-    kernel_add_task("kernel_saturation", &kernel_saturation_task, 0, 0);
+    kernel_add_task("kernel_saturation", &kernel_saturation_task, 4, 0);
 #endif
 
 
