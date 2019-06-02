@@ -31,6 +31,11 @@ def extract_average_utilization(data, length):
     return [sum(u) / len(u) for u in all_utils]
 
 
+def extract_average_duration(data, length):
+    all_durations = [extract_column_i(data, length, 0, key) for key in data]
+    return [sum(d) / len(d) for d in all_durations]
+
+
 def main():
     # create parser
     parser = argparse.ArgumentParser(description="LDR serial")
@@ -90,6 +95,10 @@ def main():
     pretty_keys = [' '.join([x.capitalize() for x in s.split('_')])
                    for s in data.keys()]
 
+    duration_avgs = zip(pretty_keys, extract_average_duration(data, n))
+    for name, avg in duration_avgs:
+        print("{}: {} \u00b5s".format(name, avg))
+
     # plot the data
     # CPU Utilization
     total_utilization = extract_utilization(data, n)
@@ -109,7 +118,7 @@ def main():
                loc="upper center", fontsize="small", ncol=6)
 
     # time error graph
-    time_error_ymax = 120
+    time_error_ymax = 20
     plt.figure(2)
     plt.title("Kernel Task Responsiveness")
     plt.xlabel("Time (s)")
