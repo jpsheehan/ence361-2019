@@ -150,7 +150,7 @@ void control_update_yaw(KernelTask* t_task)
         // flip whatever direction we were going in originally
         clockWise = !clockWise;
     }
-    // C-CW movement requires subtracting duty, so we need a negative erorr.
+    // C-CW movement requires subtracting duty, so we need a negative error.
     if (!clockWise) {
         error = -error;
     }
