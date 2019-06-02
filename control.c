@@ -35,6 +35,7 @@ static const int MIN_MAIN_DUTY = 20;
 static const int MAX_MAIN_DUTY = 70;
 
 // Min speed of tail rotor, prevents wear on motor by idling it instead of completely powering off during large C-CW movements (duty cycle %)
+// also reduces the time taken to spool up motor during sudden large C-CW->CW movements.
 static const int MIN_TAIL_DUTY = 1;
 // Max speed of tail motor to stay within spec (duty cycle %)
 static const int MAX_TAIL_DUTY = 70;
