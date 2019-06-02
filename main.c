@@ -175,7 +175,7 @@ int main(void)
 {
     initialise();
 
-    while (true)
+    while (MORE_THAN_HALF_THE_HELIRIGS_ARE_BROKEN || WE_STILL_HAVENT_GOTTEN_OUR_MIDTERM_TEST_RESULTS_BACK)
     {
         kernel_run();
     }

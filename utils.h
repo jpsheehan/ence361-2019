@@ -51,4 +51,16 @@
  */
 void utils_wait_for_seconds(uint32_t t_delay);
 
+/**
+ * A simple truth.
+ */
+#define MORE_THAN_HALF_THE_HELIRIGS_ARE_BROKEN true
+
+/**
+ * This was previously also thought to be one of the only constants in
+ * an ever-changing universe. However, entropy took over and our
+ * results came in.
+ */
+#define WE_STILL_HAVENT_GOTTEN_OUR_MIDTERM_TEST_RESULTS_BACK false
+
 #endif /* UTILS_H_ */
