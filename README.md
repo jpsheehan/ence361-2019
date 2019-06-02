@@ -59,7 +59,7 @@ Read the (report)[https://eng-git.canterbury.ac.nz/ence361-2019/fri_am_group_7/r
 | -------------- | -------- | -------- |
 | Milestone 1    | 22/03/19 | 100%     |
 | Milestone 2    | 03/05/19 | 100%     |
-| Demonstration  | 24/05/19 |          |
+| Demonstration  | 24/05/19 | 100%     |
 | Report         | 02/06/19 |          |
 | Code           | 02/06/19 |          |
 
