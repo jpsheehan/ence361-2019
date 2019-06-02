@@ -26,7 +26,7 @@ struct control_state_s
  */
 typedef struct control_state_s ControlState;
 
-// Idle main duty %, allows for faster take off, reducing dependence on integral error.
+// Idle main duty, allows for faster take off, reducing dependence on integral error (duty cycle %).
 static const int IDLE_MAIN_DUTY = 25;
 
 // Min speed of main rotor, allows for proper anti-clockwise yaw control and clamps descent speed (duty cycle %)
@@ -102,7 +102,7 @@ void control_update_altitude(KernelTask* t_task)
     }
     Igain = g_control_altitude.cumulative * g_control_altitude.ki;
 
-    // D control
+    // D control, clamped to 10%
     Dgain = (error - g_control_altitude.lastError)*g_control_altitude.kd;
     g_control_altitude.lastError = error;
     Dgain = clamp(Dgain, -MAIN_GAIN_CLAMP, MAIN_GAIN_CLAMP);
@@ -116,6 +116,7 @@ void control_update_altitude(KernelTask* t_task)
     // update the duty
     g_control_altitude.duty = newDuty;
 
+    // set the motor duty
     pwm_set_main_duty(g_control_altitude.duty);
 
 }
@@ -127,6 +128,7 @@ void control_update_yaw(KernelTask* t_task)
         return;
     }
 
+    // temp variables used to calculate new gain and direction
     float Pgain = 0;
     float Igain = 0;
     float Dgain = 0;
@@ -147,25 +149,23 @@ void control_update_yaw(KernelTask* t_task)
         // flip whatever direction we were going in originally
         clockWise = !clockWise;
     }
-    // Add duty to rotate CW, subtract duty to rotate CCW
+    // C-CW movement requires subtracting duty, so we need a negative erorr.
     if (!clockWise) {
         error = -error;
     }
 
-    // P control
+    // P control with +- 10% clamp
     Pgain = error*g_control_yaw.kp;
     Pgain = clamp(Pgain, -TAIL_GAIN_CLAMP, TAIL_GAIN_CLAMP);
 
-    // I control
-
-    // only accumulate error if we are not motor duty limited (limits overshoot)
+    // I control, only accumulate error if we are not motor duty limited (limits overshoot)
     if (g_control_yaw.duty > MIN_TAIL_DUTY && g_control_yaw.duty < MAX_TAIL_DUTY)
     {
         g_control_yaw.cumulative += clamp(error, -INTEGRAL_TAIL_CLAMP, INTEGRAL_TAIL_CLAMP);; // Clamp integral growth for large errors
     }
     Igain = g_control_yaw.cumulative*g_control_yaw.ki;
 
-    // D control
+    // D control with +- 10% clamp
     Dgain = (error - g_control_yaw.lastError)*g_control_yaw.kd; // Control is called with fixed frequency so time delta can be ignored.
     g_control_yaw.lastError = error;
     Dgain = clamp(Dgain, -TAIL_GAIN_CLAMP, TAIL_GAIN_CLAMP);
