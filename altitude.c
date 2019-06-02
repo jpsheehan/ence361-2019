@@ -37,7 +37,7 @@
 /**
  * The size of the buffer used to store the raw ADC values. This needs to be big enough that outliers in the data cannot affect the calculated mean in an adverse way.
  */
-static const int ALT_BUF_SIZE = 32;
+static const int ALT_BUF_SIZE = 16;
 
 /**
  * We are using ADC0 so we set up the base and peripheral
