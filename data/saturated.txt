@@ -1,4 +1,3 @@
-Serial output ...
 kernel_saturation,775202,2334015,0 altitude_adc,2,2334015,256 altitude_calc,72,2334015,256 altitude_control,5,2334015,30 yaw_control,2,2334015,30 flight_mode,2,2334015,20 altitude_settling,5,2334015,10 yaw_settling,5,2334015,10 input,25,2334015,0 uart_kernel_data,0,2334015,1 display,0,0,1 uart_flight_data,0,0,4
 
 Y0 y0 A0 a-7 m0 t0 o0
