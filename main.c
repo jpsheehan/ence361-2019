@@ -63,12 +63,12 @@ static const float YAW_KD = 0.8f;
  */
 static const int KERNEL_FREQUENCY = 400000;
 
-// process ADC stuff 256 times per second
-static const uint16_t ALT_ADC_FREQUENCY = 256;
+// process ADC stuff 512 times per second
+static const uint16_t ALT_ADC_FREQUENCY = 512;
 static const uint8_t ALT_ADC_PRIORITY = 1;
 
-// always update the altitude
-static const uint16_t ALT_CALC_FREQUENCY = 256;
+// update the altitude 512 times a second
+static const uint16_t ALT_CALC_FREQUENCY = 512;
 static const uint8_t ALT_CALC_PRIORITY = 2;
 
 // update the altitude settling 10 times per second
