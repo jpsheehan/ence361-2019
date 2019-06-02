@@ -18,7 +18,7 @@ struct control_state_s
   float kd;
   int16_t lastError;
   int16_t cumulative;
-  int8_t duty;
+  uint8_t duty;
 };
 
 /**
@@ -27,26 +27,26 @@ struct control_state_s
 typedef struct control_state_s ControlState;
 
 // Idle main duty, allows for faster take off, reducing dependence on integral error (duty cycle %).
-static const int IDLE_MAIN_DUTY = 25;
+static const uint8_t IDLE_MAIN_DUTY = 25;
 
 // Min speed of main rotor, allows for proper anti-clockwise yaw control and clamps descent speed (duty cycle %)
-static const int MIN_MAIN_DUTY = 20;
+static const uint8_t MIN_MAIN_DUTY = 20;
 // Max speed of main motor to stay within spec (duty cycle %)
-static const int MAX_MAIN_DUTY = 70;
+static const uint8_t MAX_MAIN_DUTY = 70;
 
 // Min speed of tail rotor, prevents wear on motor by idling it instead of completely powering off during large C-CW movements (duty cycle %)
 // also reduces the time taken to spool up motor during sudden large C-CW->CW movements.
-static const int MIN_TAIL_DUTY = 1;
+static const uint8_t MIN_TAIL_DUTY = 1;
 // Max speed of tail motor to stay within spec (duty cycle %)
-static const int MAX_TAIL_DUTY = 70;
+static const uint8_t MAX_TAIL_DUTY = 70;
 
 // Clamps for Kp and Kd gains for each rotor (duty cycle %)
-static const int MAIN_GAIN_CLAMP = 10;
-static const int TAIL_GAIN_CLAMP = 10;
+static const uint8_t MAIN_GAIN_CLAMP = 10;
+static const uint8_t TAIL_GAIN_CLAMP = 10;
 
 // clamp for integral growth for large errors (error)
-static const int INTEGRAL_TAIL_CLAMP = 30;
-static const int INTEGRAL_MAIN_CLAMP = 5;
+static const uint8_t INTEGRAL_TAIL_CLAMP = 30;
+static const uint8_t INTEGRAL_MAIN_CLAMP = 5;
 
 static ControlState g_control_altitude;
 static ControlState g_control_yaw;
