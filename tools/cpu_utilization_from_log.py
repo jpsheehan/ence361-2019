@@ -1,5 +1,6 @@
 import sys
 import argparse
+import math
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -12,7 +13,8 @@ def extract_column_i(data, length, x, t=None):
         if t is None or key == t:
             for i, datum in enumerate(data[key]):
                 col = datum[x]
-                cols[i] += col
+                if i < len(cols):
+                    cols[i] += col
     return cols
 
 
@@ -93,7 +95,7 @@ def main():
     total_utilization = extract_utilization(data, n)
 
     # make the ylimit be the nearest 10%
-    cpu_util_ymax = round(max(total_utilization) / 10.0) * 10
+    cpu_util_ymax = math.ceil(max(total_utilization) / 10.0) * 10
     plt.figure(1)
     plt.title("Kernel Task (CPU Utilization)")
     plt.xlabel("Time (s)")
@@ -107,18 +109,16 @@ def main():
                loc="upper center", fontsize="small", ncol=6)
 
     # time error graph
-    total_time_error = extract_time_error(data, n)
-    time_error_ymax = min(50, round(max(total_time_error) / 5.0) * 5)
+    time_error_ymax = 120
     plt.figure(2)
     plt.title("Kernel Task Responsiveness")
     plt.xlabel("Time (s)")
     plt.ylabel("Time Error (%)")
     plt.xlim((0, n))
     plt.ylim((0, time_error_ymax))
-    plt.plot(range(n), total_time_error)
     for key in data:
         plt.plot(range(n), extract_time_error(data, n, key))
-    plt.legend(labels=["Total"] + pretty_keys,
+    plt.legend(labels=pretty_keys,
                loc="upper center", fontsize="small", ncol=6)
 
     # pie charts
