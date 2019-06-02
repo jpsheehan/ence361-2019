@@ -1,5 +1,6 @@
 import sys
 import argparse
+import math
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -12,7 +13,8 @@ def extract_column_i(data, length, x, t=None):
         if t is None or key == t:
             for i, datum in enumerate(data[key]):
                 col = datum[x]
-                cols[i] += col
+                if i < len(cols):
+                    cols[i] += col
     return cols
 
 
@@ -22,6 +24,11 @@ def extract_utilization(data, length, t=None):
 
 def extract_time_error(data, length, t=None):
     return extract_column_i(data, length, 4, t)
+
+
+def extract_average_utilization(data, length):
+    all_utils = [extract_utilization(data, length, key) for key in data]
+    return [sum(u) / len(u) for u in all_utils]
 
 
 def main():
@@ -88,30 +95,53 @@ def main():
     total_utilization = extract_utilization(data, n)
 
     # make the ylimit be the nearest 10%
-    cpu_util_ymax = round(max(total_utilization) / 10.0) * 10
-    plt.subplot(2, 1, 1)
-    plt.title("Kernel Task Information")
+    cpu_util_ymax = math.ceil(max(total_utilization) / 10.0) * 10
+    plt.figure(1)
+    plt.title("Kernel Task (CPU Utilization)")
+    plt.xlabel("Time (s)")
     plt.ylabel("CPU Time Utilization (%)")
     plt.xlim((0, n))
     plt.ylim((0, cpu_util_ymax))
-
     plt.plot(range(n), total_utilization)
     for key in data:
         plt.plot(range(n), extract_utilization(data, n, key))
+    plt.legend(labels=["Total"] + pretty_keys,
+               loc="upper center", fontsize="small", ncol=6)
 
     # time error graph
-    total_time_error = extract_time_error(data, n)
-    time_error_ymax = min(50, round(max(total_time_error) / 5.0) * 5)
-    plt.subplot(2, 1, 2)
+    time_error_ymax = 120
+    plt.figure(2)
+    plt.title("Kernel Task Responsiveness")
     plt.xlabel("Time (s)")
     plt.ylabel("Time Error (%)")
     plt.xlim((0, n))
     plt.ylim((0, time_error_ymax))
-    plt.plot(range(n), total_time_error)
     for key in data:
         plt.plot(range(n), extract_time_error(data, n, key))
-    plt.legend(labels=["Total"] + pretty_keys,
+    plt.legend(labels=pretty_keys,
                loc="upper center", fontsize="small", ncol=6)
+
+    # pie charts
+    avg_util = extract_average_utilization(data, n)
+    non_idle_util = sum(avg_util)
+    idle_util = 100 - non_idle_util
+
+    top_4 = sorted(list(zip(pretty_keys, avg_util)),
+                   key=lambda a: a[1], reverse=True)[:4]
+    top_4.append(("Other", non_idle_util - sum([x[1] for x in top_4])))
+
+    top_4_labels = [x[0] for x in top_4]
+    top_4_utils = [x[1] for x in top_4]
+
+    _fig, ax = plt.subplots()
+    ax.pie([idle_util, non_idle_util],
+           labels=['Idle', 'Running Tasks'], autopct='%1.1f%%')
+    ax.set_title("Total Kernel Task Utilization")
+
+    _fig, ax = plt.subplots()
+    ax.pie(top_4_utils, autopct='%1.1f%%', labels=top_4_labels,
+           textprops={'size': 'smaller'})
+    ax.set_title("Individual Kernel Task Utilization")
 
     plt.show()
 

@@ -45,12 +45,6 @@
 #define range(val, mn, mx) (val >= mn && val <= mx)
 
 /**
- * A macro that expands to an expression that evaluates to true. Nothing more to say
- * about this one...
- */
-#define MORE_THAN_HALF_THE_HELI_RIGS_ARE_BROKEN true
-
-/**
  * Waits for `t_delay` seconds before returning. Note that this is
  * approximately correct but will not be exact and should not be used as a 
  * reliable timer.
