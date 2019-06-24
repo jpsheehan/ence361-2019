@@ -31,7 +31,9 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/pin_map.h"
 #include "utils/ustdlib.h"
+
 #include "altitude.h"
+#include "config.h"
 #include "flight_mode.h"
 #include "pwm.h"
 #include "setpoint.h"
@@ -99,7 +101,11 @@ void uart_flight_data_update(KernelTask* t_task)
     uint8_t operating_mode = flight_mode_get();
 
     // format the outgoing data
+#if !CONFIG_DIRECT_CONTROL
     usprintf(g_buffer, "Y%u\ty%u\tA%d\ta%d\tm%u\tt%u\to%u\r\n", target_yaw, actual_yaw, target_altitude, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
+#else
+    usprintf(g_buffer, "y%u\ta%d\tm%u\tt%u\to%u\r\n", actual_yaw, actual_altitude, main_rotor_duty, tail_rotor_duty, operating_mode);
+#endif
 
     // send it
     uart_send(g_buffer);

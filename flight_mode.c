@@ -22,6 +22,7 @@
 #include <stdbool.h>
 
 #include "altitude.h"
+#include "config.h"
 #include "control.h"
 #include "flight_mode.h"
 #include "pwm.h"
@@ -47,7 +48,11 @@ volatile static FlightModeState g_mode;
 
 void flight_mode_init(void)
 {
+#if !CONFIG_DIRECT_CONTROL
     g_mode = LANDED;        //Start in the landed state
+#else
+    g_mode = IN_FLIGHT;     // Start in the in flight state
+#endif
 }
 
 FlightModeState flight_mode_get(void)

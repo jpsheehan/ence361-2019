@@ -22,10 +22,16 @@
 #include "driverlib/sysctl.h"
 
 #include "button.h"
+#include "config.h"
 #include "flight_mode.h"
 #include "input.h"
 #include "setpoint.h"
 #include "slider.h"
+
+#if CONFIG_DIRECT_CONTROL
+#include "altitude.h"
+#include "pwm.h"
+#endif
 
 void input_init(void)
 {
@@ -50,40 +56,56 @@ void input_update(KernelTask* t_task)
     butState = btn_check(LEFT);
     if (butState == PUSHED)
     {
+#if !CONFIG_DIRECT_CONTROL
         if (flight_mode_get() == IN_FLIGHT)
         {
             setpoint_decrement_yaw();
         }
+#else
+        pwm_dec_tail_duty(CONFIG_DIRECT_CONTROL_YAW_DUTY_DELTA);
+#endif
     }
 
     // Check for clockwise rotation button press
     butState = btn_check(RIGHT);
     if (butState == PUSHED)
     {
+#if !CONFIG_DIRECT_CONTROL
         if (flight_mode_get() == IN_FLIGHT)
         {
             setpoint_increment_yaw();
         }
+#else
+        pwm_inc_tail_duty(CONFIG_DIRECT_CONTROL_YAW_DUTY_DELTA);
+#endif
     }
 
     // Check for increase altitude button press
     butState = btn_check(UP);
     if (butState == PUSHED)
     {
+#if !CONFIG_DIRECT_CONTROL
         if (flight_mode_get() == IN_FLIGHT)
         {
             setpoint_increment_altitude();
         }
+#else
+      pwm_inc_main_duty(CONFIG_DIRECT_CONTROL_MAIN_DUTY_DELTA);
+#endif
     }
 
     // Check for decrease altitude button press
     butState = btn_check(DOWN);
     if (butState == PUSHED)
     {
+#if !CONFIG_DIRECT_CONTROL
         if (flight_mode_get() == IN_FLIGHT)
         {
             setpoint_decrement_altitude();
         }
+#else
+      pwm_dec_main_duty(CONFIG_DIRECT_CONTROL_MAIN_DUTY_DELTA);
+#endif
     }
 
     slider_update();
@@ -92,6 +114,7 @@ void input_update(KernelTask* t_task)
     sw_state = slider_check(SLIDER_SW1);
     sw_changed = slider_changed(SLIDER_SW1);
 
+#if !CONFIG_DIRECT_CONTROL
     if (sw_state == SLIDER_DOWN)
     {
         if (flight_mode_get() == IN_FLIGHT)
@@ -110,6 +133,11 @@ void input_update(KernelTask* t_task)
             }
         }
     }
+#else
+    if (sw_changed) {
+        alt_calibrate();
+    }
+#endif
 
     sw_state = slider_check(SLIDER_SW2);
     sw_changed = slider_changed(SLIDER_SW2);

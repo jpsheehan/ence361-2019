@@ -58,4 +58,24 @@ void pwm_set_tail_duty(int8_t t_duty);
  */
 int8_t pwm_get_tail_duty(void);
 
+/**
+ * A macro for incrementing the tail duty by a set amount.
+ */
+#define pwm_inc_tail_duty(amount) pwm_set_tail_duty(pwm_get_tail_duty() + amount)
+
+/**
+ * A macro for decrementing the tail duty by a set amount.
+ */
+#define pwm_dec_tail_duty(amount) pwm_set_tail_duty(pwm_get_tail_duty() - amount)
+
+/**
+ * A macro for incrementing the main duty by a set amount.
+ */
+#define pwm_inc_main_duty(amount) pwm_set_main_duty(pwm_get_main_duty() + amount)
+
+/**
+ * A macro for decrementing the main duty by a set amount.
+ */
+#define pwm_dec_main_duty(amount) pwm_set_main_duty(pwm_get_main_duty() - amount)
+
 #endif
