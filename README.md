@@ -4,6 +4,12 @@ Written by Manu Hamblyn, Will Cowper and Jesse Sheehan.
 
 Read the [report](https://eng-git.canterbury.ac.nz/ence361-2019/fri_am_group_7/raw/master/report.pdf).
 
+## Grades:
+
+Report: 92.86%
+
+Code: 94.44%
+
 ## Milestone Progress:
 
 - [x] **Milestone 1**
